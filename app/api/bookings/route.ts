@@ -10,7 +10,15 @@ export async function POST(request: NextRequest) {
     };
 
     // Basic validation
-    if (!body.email || !body.service_type || !body.bedrooms || !body.bathrooms) {
+    if (
+      !body.email ||
+      !body.service_type ||
+      !body.bedrooms ||
+      !body.bathrooms ||
+      !body.name ||
+      !body.phone ||
+      !body.address
+    ) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -19,23 +27,31 @@ export async function POST(request: NextRequest) {
 
     const supabase = await createClient();
 
-    const { data, error } = await supabase.from("bookings").insert({
-      email: body.email,
-      phone: body.phone || null,
-      name: body.name || null,
-      service_type: body.service_type,
-      bedrooms: body.bedrooms,
-      bathrooms: body.bathrooms,
-      sqft: body.sqft || null,
-      address: body.address || null,
-      city: body.city || "Seattle",
-      zip: body.zip || null,
-      preferred_date: body.preferred_date || null,
-      preferred_time: body.preferred_time || null,
-      estimated_min: body.estimated_min,
-      estimated_max: body.estimated_max,
-      status: "new",
-    }).select().single();
+    const { data, error } = await supabase
+      .from("bookings")
+      .insert({
+        email: body.email,
+        phone: body.phone,
+        name: body.name,
+        service_type: body.service_type,
+        bedrooms: body.bedrooms,
+        bathrooms: body.bathrooms,
+        sqft_range: body.sqft_range || null,
+        condition: body.condition || "average",
+        special_requests: body.special_requests || null,
+        addons: body.addons || [],
+        address: body.address,
+        city: body.city || "Seattle",
+        zip: body.zip || null,
+        access_instructions: body.access_instructions || null,
+        preferred_date: body.preferred_date || null,
+        preferred_time: body.preferred_time || null,
+        estimated_min: body.estimated_min,
+        estimated_max: body.estimated_max,
+        status: "new",
+      })
+      .select()
+      .single();
 
     if (error) {
       console.error("Supabase error:", error);

@@ -9,7 +9,25 @@ import { Card } from "@/components/ui/card";
 import { PriceDisplay } from "./price-display";
 import { SERVICE_TYPES, TIME_SLOTS } from "@/lib/constants";
 import { calculatePrice } from "@/lib/pricing";
-import type { ServiceType, TimeSlot, PriceEstimate, BookingFormData } from "@/types";
+import type {
+  ServiceType,
+  TimeSlot,
+  BedroomCount,
+  BathroomCount,
+  PriceEstimate,
+} from "@/types";
+
+interface LegacyBookingFormData {
+  service_type?: ServiceType;
+  bedrooms?: BedroomCount;
+  bathrooms?: BathroomCount;
+  email?: string;
+  phone?: string;
+  name?: string;
+  address?: string;
+  preferred_date?: string;
+  preferred_time?: TimeSlot;
+}
 
 const serviceOptions: SelectOption[] = Object.entries(SERVICE_TYPES).map(
   ([key, value]) => ({
@@ -19,18 +37,21 @@ const serviceOptions: SelectOption[] = Object.entries(SERVICE_TYPES).map(
 );
 
 const bedroomOptions: SelectOption[] = [
+  { value: "studio", label: "Studio" },
   { value: "1", label: "1 Bedroom" },
   { value: "2", label: "2 Bedrooms" },
   { value: "3", label: "3 Bedrooms" },
   { value: "4", label: "4 Bedrooms" },
-  { value: "5", label: "5+ Bedrooms" },
+  { value: "5+", label: "5+ Bedrooms" },
 ];
 
 const bathroomOptions: SelectOption[] = [
   { value: "1", label: "1 Bathroom" },
+  { value: "1.5", label: "1.5 Bathrooms" },
   { value: "2", label: "2 Bathrooms" },
+  { value: "2.5", label: "2.5 Bathrooms" },
   { value: "3", label: "3 Bathrooms" },
-  { value: "4", label: "4+ Bathrooms" },
+  { value: "3.5+", label: "3.5+ Bathrooms" },
 ];
 
 const timeOptions: SelectOption[] = TIME_SLOTS.map((slot) => ({
@@ -38,14 +59,16 @@ const timeOptions: SelectOption[] = TIME_SLOTS.map((slot) => ({
   label: `${slot.label} (${slot.time})`,
 }));
 
+/**
+ * Legacy single-page booking form.
+ * The new multi-step BookingWizard is preferred.
+ */
 export function BookingForm() {
   const searchParams = useSearchParams();
   const initialService = searchParams.get("service") as ServiceType | null;
 
-  const [formData, setFormData] = useState<Partial<BookingFormData>>({
+  const [formData, setFormData] = useState<LegacyBookingFormData>({
     service_type: initialService || undefined,
-    bedrooms: undefined,
-    bathrooms: undefined,
   });
   const [estimate, setEstimate] = useState<PriceEstimate | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -58,14 +81,13 @@ export function BookingForm() {
       const price = calculatePrice(
         formData.service_type,
         formData.bedrooms,
-        formData.bathrooms,
-        formData.sqft
+        formData.bathrooms
       );
       setEstimate(price);
     } else {
       setEstimate(null);
     }
-  }, [formData.service_type, formData.bedrooms, formData.bathrooms, formData.sqft]);
+  }, [formData.service_type, formData.bedrooms, formData.bathrooms]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -73,14 +95,8 @@ export function BookingForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]:
-        name === "bedrooms" || name === "bathrooms" || name === "sqft"
-          ? value
-            ? parseInt(value, 10)
-            : undefined
-          : value || undefined,
+      [name]: value || undefined,
     }));
-    // Clear error when field changes
     if (errors[name]) {
       setErrors((prev) => {
         const next = { ...prev };
@@ -131,6 +147,11 @@ export function BookingForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          name: formData.name || "Guest",
+          phone: formData.phone || "",
+          address: formData.address || "",
+          condition: "average",
+          addons: [],
           estimated_min: estimate.min,
           estimated_max: estimate.max,
         }),
@@ -207,7 +228,7 @@ export function BookingForm() {
             label="Bedrooms"
             options={bedroomOptions}
             placeholder="Select"
-            value={formData.bedrooms?.toString() || ""}
+            value={formData.bedrooms || ""}
             onChange={handleChange}
             error={errors.bedrooms}
           />
@@ -216,19 +237,11 @@ export function BookingForm() {
             label="Bathrooms"
             options={bathroomOptions}
             placeholder="Select"
-            value={formData.bathrooms?.toString() || ""}
+            value={formData.bathrooms || ""}
             onChange={handleChange}
             error={errors.bathrooms}
           />
         </div>
-        <Input
-          name="sqft"
-          type="number"
-          label="Square footage (optional)"
-          placeholder="e.g., 1500"
-          value={formData.sqft || ""}
-          onChange={handleChange}
-        />
       </div>
 
       {/* Price Estimate */}
