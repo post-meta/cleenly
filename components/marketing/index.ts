@@ -8,5 +8,6 @@ export { PricingChecklists } from "./pricing-checklists";
 export { PricingFAQ } from "./pricing-faq";
 export { WhyUs } from "./why-us";
 export { FAQ } from "./faq";
+export { FAQAccordion, FAQCategory } from "./faq-accordion";
 export { ServiceAreas } from "./service-areas";
 export { CTA } from "./cta";
