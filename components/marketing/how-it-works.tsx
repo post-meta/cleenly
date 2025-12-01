@@ -3,27 +3,27 @@ import { Container } from "@/components/ui/container";
 const steps = [
   {
     number: "1",
-    title: "Enter your details",
+    title: "Tell us about your place",
     description:
-      "Tell us your home type, number of rooms, and what needs cleaning.",
+      "Select bedrooms, bathrooms, and the type of cleaning you need. Add any special requests.",
   },
   {
     number: "2",
-    title: "Get a price",
+    title: "Get your price",
     description:
-      "See the price range right away. Final price after we confirm the details.",
+      "See a price range based on your home. Final price confirmed after quick details.",
   },
   {
     number: "3",
     title: "Pick a time",
     description:
-      "Choose when works for you. Confirmation within 2 hours.",
+      "Choose a date and time slot that works for you. Morning, afternoon, or evening.",
   },
   {
     number: "4",
     title: "Done",
     description:
-      "Your cleaner shows up on time. Not happy? We'll come back and fix it.",
+      "You'll get confirmation and cleaner details. We handle the rest.",
   },
 ];
 
@@ -32,9 +32,10 @@ export function HowItWorks() {
     <section id="how-it-works" className="bg-muted/30 py-20 md:py-28">
       <Container>
         <div className="text-center">
-          <h2>How it works</h2>
+          <h2>How It Works</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Four steps from dirty to clean. No phone calls, no surprises.
+            Booking takes about 2 minutes. No account required to see your
+            price.
           </p>
         </div>
 

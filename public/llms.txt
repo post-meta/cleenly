@@ -1,0 +1,30 @@
+# CLEENLY
+
+> CLEENLY is a house cleaning booking platform serving Seattle and the Greater Eastside (Washington State). Customers can book cleaning services online, see prices before booking, and choose their preferred cleaner.
+
+## Services
+- Regular Cleaning: routine maintenance cleaning for homes
+- Deep Cleaning: thorough cleaning including appliances, baseboards, and hard-to-reach areas
+- Move-Out Cleaning: landlord-ready cleaning to help get security deposits back
+
+## Service Areas
+Seattle, Bellevue, Kirkland, Redmond, Renton, Kent, Tacoma, Everett, and surrounding cities in Washington State.
+
+## Pricing
+- Regular Cleaning: $100-$200 depending on home size
+- Deep Cleaning: $150-$300 depending on home size
+- Move-Out Cleaning: $200-$400 depending on home size
+
+## Key Pages
+- Home: /
+- Pricing: /pricing
+- About: /about
+- Book Now: /book
+- How It Works: /how-it-works
+
+## Contact
+- Website: https://cleenly.com
+- Email: hello@cleenly.com
+
+## Last Updated
+December 2025

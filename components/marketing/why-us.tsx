@@ -2,37 +2,42 @@ import { Container } from "@/components/ui/container";
 
 const reasons = [
   {
-    title: "Clear pricing",
+    title: "Upfront pricing",
     description:
-      "The calculator shows you a range right away. No \"starting from\" asterisks.",
+      "You see the price before you book. The price on screen is the price you pay. No \"starting at\" games.",
   },
   {
     title: "Vetted cleaners",
     description:
-      "Everyone on the platform has reviews and order history. No random strangers.",
+      "Every cleaner on our platform has been background-checked and has reviews from real customers.",
   },
   {
-    title: "We fix mistakes",
+    title: "Easy rescheduling",
     description:
-      "Not happy with the result? Tell us. We'll send someone to make it right.",
+      "Plans change. Reschedule or cancel up to 24 hours before your appointment, no fees.",
+  },
+  {
+    title: "24-hour guarantee",
+    description:
+      "Something not right? Tell us within 24 hours and we'll send someone to fix it. No charge.",
   },
 ];
 
 export function WhyUs() {
   return (
-    <section className="bg-muted/30 py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <Container>
         <div className="text-center">
-          <h2>Why Cleenly</h2>
+          <h2>Why CLEENLY</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            We keep things simple. Here&apos;s what that means.
+            We keep things simple. Here&apos;s what that actually means.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {reasons.map((reason) => (
-            <div key={reason.title} className="text-center md:text-left">
-              <h3 className="text-lg">{reason.title}</h3>
+            <div key={reason.title}>
+              <h3 className="text-lg font-semibold">{reason.title}</h3>
               <p className="mt-2 text-muted-foreground">{reason.description}</p>
             </div>
           ))}
