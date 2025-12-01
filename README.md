@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cleenly
+
+Cleaning services booking platform for Greater Seattle area.
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **Database:** Supabase (PostgreSQL)
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Copy environment variables:
+
+```bash
+cp .env.local.example .env.local
+```
+
+4. Add your Supabase credentials to `.env.local`
+
+5. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+cleenly/
+├── app/
+│   ├── (marketing)/     # Public pages (home, about, pricing)
+│   ├── (booking)/       # Booking flow
+│   └── api/             # API routes
+├── components/
+│   ├── ui/              # Base UI components
+│   ├── marketing/       # Landing page sections
+│   ├── booking/         # Booking form components
+│   └── shared/          # Header, Footer
+├── lib/                 # Utilities, constants, Supabase client
+└── types/               # TypeScript types
+```
 
-## Learn More
+## Database Setup
 
-To learn more about Next.js, take a look at the following resources:
+Create a `bookings` table in Supabase:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sql
+CREATE TABLE bookings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  email TEXT NOT NULL,
+  phone TEXT,
+  name TEXT,
+  service_type TEXT NOT NULL,
+  bedrooms INT NOT NULL,
+  bathrooms INT NOT NULL,
+  sqft INT,
+  address TEXT,
+  city TEXT DEFAULT 'Seattle',
+  zip TEXT,
+  preferred_date DATE,
+  preferred_time TEXT,
+  estimated_min INT,
+  estimated_max INT,
+  status TEXT DEFAULT 'new',
+  notes TEXT
+);
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deploy to Vercel:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+vercel
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Make sure to add environment variables in Vercel dashboard.
