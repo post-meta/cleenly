@@ -11,7 +11,7 @@ const footerLinks = {
     { href: "/about", label: "About" },
     { href: "/pricing", label: "Pricing" },
     { href: "/how-it-works", label: "How It Works" },
-    { href: "/#faq", label: "FAQ" },
+    { href: "/faq", label: "FAQ" },
   ],
   forCleaners: [{ href: "/join", label: "Join as a Cleaner" }],
   legal: [
