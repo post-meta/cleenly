@@ -127,14 +127,20 @@ export function BookingWizard() {
   const handleSubmit = async () => {
     if (!validateStep(5)) return;
 
+    // Validate required fields for price calculation
+    if (!formData.service_type || !formData.bedrooms || !formData.bathrooms) {
+      setErrors({ form: "Missing required details. Please go back and complete all steps." });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Calculate final price
+      // Calculate final price (prices are already in cents from pricing.ts)
       const estimate = calculatePrice(
-        formData.service_type!,
-        formData.bedrooms!,
-        formData.bathrooms!,
+        formData.service_type,
+        formData.bedrooms,
+        formData.bathrooms,
         (formData.condition || "average") as HomeCondition,
         formData.addons || []
       );
@@ -142,18 +148,37 @@ export function BookingWizard() {
       const finalMin = estimate.min + estimate.addonsTotal;
       const finalMax = estimate.max + estimate.addonsTotal;
 
+      // Validate price calculation
+      if (!finalMin || !finalMax || finalMin <= 0 || finalMax <= 0) {
+        setErrors({ form: "Price calculation failed. Please go back to Step 3." });
+        setIsSubmitting(false);
+        return;
+      }
+
+      const bookingData = {
+        ...formData,
+        estimated_min: finalMin,
+        estimated_max: finalMax,
+      };
+
+      // Debug logging (remove in production)
+      console.log("Submitting booking:", {
+        estimated_min: finalMin,
+        estimated_max: finalMax,
+        service_type: formData.service_type,
+        bedrooms: formData.bedrooms,
+        bathrooms: formData.bathrooms,
+      });
+
       const response = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          estimated_min: finalMin,
-          estimated_max: finalMax,
-        }),
+        body: JSON.stringify(bookingData),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit booking");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to submit booking");
       }
 
       const ref = generateBookingRef();
@@ -164,7 +189,7 @@ export function BookingWizard() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error("Booking error:", error);
-      setErrors({ form: "Something went wrong. Please try again." });
+      setErrors({ form: error instanceof Error ? error.message : "Something went wrong. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
