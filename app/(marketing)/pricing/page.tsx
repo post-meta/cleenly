@@ -1,195 +1,230 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { SERVICE_TYPES, PRICE_PER_BEDROOM, PRICE_PER_BATHROOM } from "@/lib/constants";
-import { formatPrice } from "@/lib/utils";
+import { JsonLd } from "@/components/shared/json-ld";
+import { PricingTables } from "@/components/marketing/pricing-tables";
+import { PricingFactors } from "@/components/marketing/pricing-factors";
+import { PricingChecklists } from "@/components/marketing/pricing-checklists";
+import { PricingFAQ } from "@/components/marketing/pricing-faq";
 
-export const metadata = {
-  title: "Pricing — Cleenly",
-  description: "Transparent pricing for house cleaning in Seattle. See rates for regular, deep, and move-out cleaning.",
+export const metadata: Metadata = {
+  title: "House Cleaning Prices Seattle | $100-$350 | CLEENLY",
+  description:
+    "Seattle house cleaning prices: Regular cleaning $100-$200, Deep cleaning $150-$300, Move-out $200-$400. See what's included. Get your exact price in 30 seconds.",
+  keywords: [
+    "house cleaning prices seattle",
+    "cleaning service cost seattle",
+    "how much house cleaning seattle",
+    "deep cleaning cost seattle",
+    "move out cleaning price seattle",
+    "maid service rates seattle",
+  ],
+  openGraph: {
+    title: "House Cleaning Prices Seattle | CLEENLY",
+    description:
+      "Seattle house cleaning prices: Regular $100-$200, Deep $150-$300, Move-out $200-$400. Get your exact price.",
+    type: "website",
+    url: "https://cleenly.com/pricing",
+  },
+  alternates: {
+    canonical: "https://cleenly.com/pricing",
+  },
 };
 
-const serviceDetails = {
-  regular: {
-    included: [
-      "Dust all surfaces",
-      "Vacuum and mop floors",
-      "Clean kitchen surfaces",
-      "Clean bathroom (toilet, sink, shower)",
-      "Make beds",
-      "Take out trash",
-      "General tidying",
-    ],
-    notIncluded: ["Inside appliances", "Inside cabinets", "Windows", "Laundry"],
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "House Cleaning",
+  provider: {
+    "@type": "LocalBusiness",
+    "@id": "https://cleenly.com/#LocalBusiness",
+    name: "CLEENLY",
   },
-  deep: {
-    included: [
-      "Everything in Regular, plus:",
-      "Inside oven and microwave",
-      "Inside refrigerator",
-      "Baseboards and door frames",
-      "Light fixtures and ceiling fans",
-      "Window sills (interior)",
-      "Detailed bathroom scrub",
-    ],
-    notIncluded: ["Inside cabinets", "Exterior windows", "Laundry"],
+  areaServed: {
+    "@type": "City",
+    name: "Seattle",
   },
-  move_out: {
-    included: [
-      "Everything in Deep, plus:",
-      "Inside all cabinets and drawers",
-      "Inside closets",
-      "Wall spot cleaning",
-      "Light switch and outlet cleaning",
-      "Full property walkthrough",
-      "Get-your-deposit-back detail",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Cleaning Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        name: "Regular Cleaning",
+        description:
+          "Routine house cleaning including dusting, vacuuming, mopping, bathroom and kitchen cleaning",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: "100-200",
+          priceCurrency: "USD",
+          unitText: "per cleaning",
+        },
+      },
+      {
+        "@type": "Offer",
+        name: "Deep Cleaning",
+        description:
+          "Thorough cleaning including inside appliances, baseboards, and hard-to-reach areas",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: "150-300",
+          priceCurrency: "USD",
+          unitText: "per cleaning",
+        },
+      },
+      {
+        "@type": "Offer",
+        name: "Move-Out Cleaning",
+        description:
+          "Complete cleaning to landlord standards for security deposit return",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: "200-400",
+          priceCurrency: "USD",
+          unitText: "per cleaning",
+        },
+      },
     ],
-    notIncluded: ["Exterior windows", "Carpet deep cleaning", "Laundry"],
   },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "How much does house cleaning cost in Seattle?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "House cleaning in Seattle costs $100-$400 depending on home size and cleaning type. Regular cleaning: $100-$200. Deep cleaning: $150-$300. Move-out cleaning: $200-$400.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What's included in regular house cleaning?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Regular cleaning includes: dusting all surfaces, vacuuming carpets and floors, mopping hard floors, cleaning bathrooms (toilet, shower, sink, mirrors), wiping kitchen surfaces and appliances (exterior), and emptying trash.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What's included in deep cleaning?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Deep cleaning includes everything in regular cleaning plus: inside oven and refrigerator, inside microwave, baseboards, window sills, ceiling fans, light fixtures, cabinet fronts, door frames, and behind furniture.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What's included in move-out cleaning?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Move-out cleaning includes deep cleaning plus: inside all cabinets and closets, inside all appliances, window tracks, light switch plates, walls spot-cleaned, and garage sweep (if applicable). Designed to meet landlord inspection standards.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you charge hourly or flat rate?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We charge flat rates based on your home size and cleaning type. You see the exact price before booking. No hourly surprises.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Are there any hidden fees?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No hidden fees. The price you see at booking is the price you pay. We may suggest add-ons (like inside fridge or oven) but you decide what's included.",
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://cleenly.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Pricing",
+      item: "https://cleenly.com/pricing",
+    },
+  ],
 };
 
 export default function PricingPage() {
   return (
-    <div className="py-16 md:py-24">
-      <Container>
-        <div className="text-center">
-          <h1>Pricing</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Transparent rates. No hidden fees. Price depends on service type
-            and property size.
-          </p>
-        </div>
+    <>
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={faqSchema} />
+      <JsonLd data={breadcrumbSchema} />
 
-        {/* Pricing Cards */}
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {Object.entries(SERVICE_TYPES).map(([key, service]) => {
-            const details = serviceDetails[key as keyof typeof serviceDetails];
-            return (
-              <Card key={key} className="flex flex-col">
-                <CardHeader>
-                  <CardTitle className="text-xl">{service.name}</CardTitle>
-                  <CardDescription>{service.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <div className="mb-6">
-                    <span className="text-4xl font-semibold">
-                      {formatPrice(service.basePrice)}
-                    </span>
-                    <span className="text-muted-foreground">+ / room</span>
-                  </div>
+      <div className="py-16 md:py-24">
+        <Container>
+          {/* Breadcrumb */}
+          <nav className="mb-8 text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground">
+              Home
+            </Link>
+            <span className="mx-2">/</span>
+            <span>Pricing</span>
+          </nav>
 
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm font-medium">Included:</p>
-                      <ul className="mt-2 space-y-1">
-                        {details.included.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2 text-sm text-muted-foreground"
-                          >
-                            <svg
-                              className="mt-0.5 h-4 w-4 flex-shrink-0 text-success"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-medium">Not included:</p>
-                      <ul className="mt-2 space-y-1">
-                        {details.notIncluded.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2 text-sm text-muted-foreground"
-                          >
-                            <svg
-                              className="mt-0.5 h-4 w-4 flex-shrink-0 text-muted-foreground"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full" asChild>
-                    <Link href={`/book?service=${key}`}>Book Now</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Additional Pricing Info */}
-        <div className="mt-20">
-          <h2 className="text-center">How pricing works</h2>
-          <div className="mx-auto mt-8 max-w-2xl space-y-6 text-muted-foreground">
-            <p>
-              <strong className="text-foreground">Base price</strong> covers a
-              standard-sized home. Prices shown are starting points.
+          {/* Hero / Intro - Optimized for LLM extraction */}
+          <div className="max-w-3xl">
+            <h1>House Cleaning Prices in Seattle</h1>
+            <p className="mt-6 text-lg text-muted-foreground">
+              House cleaning in Seattle costs $100-$400 depending on your home
+              size and cleaning type. Regular cleaning for a 2-3 bedroom home
+              runs $120-$180. Deep cleaning costs $180-$280. Move-out cleaning
+              ranges from $250-$400. Below you&apos;ll find detailed pricing by
+              service type and what&apos;s included in each.
             </p>
-            <p>
-              <strong className="text-foreground">Per bedroom:</strong>{" "}
-              +{formatPrice(PRICE_PER_BEDROOM)} for each bedroom
-            </p>
-            <p>
-              <strong className="text-foreground">Per bathroom:</strong>{" "}
-              +{formatPrice(PRICE_PER_BATHROOM)} for each bathroom
-            </p>
-            <p>
-              <strong className="text-foreground">Large homes:</strong>{" "}
-              Homes over 1,000 sq ft may have additional charges based on actual
-              size.
-            </p>
-            <p>
-              Use our{" "}
-              <Link href="/book" className="text-foreground underline">
-                quote calculator
-              </Link>{" "}
-              to get an accurate estimate for your specific home.
-            </p>
+            <div className="mt-8">
+              <Button size="lg" asChild>
+                <Link href="/book">Get Your Exact Price</Link>
+              </Button>
+            </div>
           </div>
-        </div>
 
-        {/* CTA */}
-        <div className="mt-20 text-center">
-          <Button size="lg" asChild>
-            <Link href="/book">Get Your Quote</Link>
-          </Button>
-        </div>
-      </Container>
-    </div>
+          {/* Pricing Tables */}
+          <PricingTables />
+
+          {/* What Affects Your Price */}
+          <PricingFactors />
+
+          {/* What's Included */}
+          <PricingChecklists />
+
+          {/* Pricing FAQ */}
+          <PricingFAQ />
+
+          {/* CTA Section */}
+          <section className="mt-20 rounded-lg bg-muted/50 p-8 text-center md:p-12">
+            <h2>Get Your Exact Price</h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              Price depends on your specific home. Get your exact quote in about
+              30 seconds — no account required.
+            </p>
+            <div className="mt-8">
+              <Button size="lg" asChild>
+                <Link href="/book">Calculate My Price</Link>
+              </Button>
+            </div>
+          </section>
+        </Container>
+      </div>
+    </>
   );
 }
