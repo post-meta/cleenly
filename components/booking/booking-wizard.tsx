@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import type { Session } from "next-auth";
 import { StepIndicator } from "./step-indicator";
 import {
   StepService,
@@ -30,7 +31,7 @@ function generateBookingRef(): string {
   return result;
 }
 
-export function BookingWizard() {
+export function BookingWizard({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const initialService = searchParams.get("service") as ServiceType | null;
 
@@ -39,6 +40,9 @@ export function BookingWizard() {
     service_type: initialService || undefined,
     condition: "average",
     addons: [],
+    // Pre-fill user data from session if available
+    name: session?.user?.name || "",
+    email: session?.user?.email || "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);

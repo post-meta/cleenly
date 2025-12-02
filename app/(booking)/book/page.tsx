@@ -6,6 +6,7 @@ import { BookingWizard } from "@/components/booking/booking-wizard";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
 import { JsonLd } from "@/components/shared/json-ld";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: "Book House Cleaning Seattle | Get Price in 30 Seconds",
@@ -91,7 +92,9 @@ const breadcrumbSchema = {
   ],
 };
 
-export default function BookPage() {
+export default async function BookPage() {
+  const session = await auth();
+
   return (
     <>
       <JsonLd data={bookingPageSchema} />
@@ -126,7 +129,7 @@ export default function BookPage() {
                 </div>
               }
             >
-              <BookingWizard />
+              <BookingWizard session={session} />
             </Suspense>
           </Container>
         </main>

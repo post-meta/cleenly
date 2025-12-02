@@ -15,11 +15,22 @@ if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY || !proc
 export const { handlers, auth, signIn, signOut } = NextAuth({
     ...authConfig,
     trustHost: true,
+    cookies: {
+        sessionToken: {
+            name: `${process.env.NODE_ENV === 'production' ? '__Secure-' : ''}next-auth.session-token`,
+            options: {
+                httpOnly: true,
+                sameSite: 'lax',
+                path: '/',
+                secure: process.env.NODE_ENV === 'production'
+            }
+        }
+    },
     adapter: SupabaseAdapter({
         url: process.env.SUPABASE_URL,
         secret: process.env.SUPABASE_SERVICE_ROLE_KEY,
     }),
-    session: { strategy: 'jwt' },
+    session: { strategy: 'jwt', maxAge: 30 * 24 * 60 * 60 }, // 30 days
     providers: [
         Email({
             server: {
