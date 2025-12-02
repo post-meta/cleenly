@@ -1,5 +1,3 @@
-import { Container } from "@/components/ui/container";
-
 const steps = [
   {
     number: "1",
@@ -29,28 +27,27 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-muted/30 py-20 md:py-28">
-      <Container>
+    <section id="how-it-works" className="bg-white py-24 md:py-32">
+      <div className="mx-auto max-w-5xl px-6">
         <div className="text-center">
-          <h2>How It Works</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Booking takes about 2 minutes. No account required to see your
-            price.
+          <h2 className="mb-6 text-2xl font-semibold">How It Works</h2>
+          <p className="mx-auto mb-16 max-w-2xl text-center text-gray-600">
+            Booking takes about 2 minutes. No account required to see your price.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-4">
           {steps.map((step) => (
-            <div key={step.number} className="relative">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-xl font-semibold text-background">
+            <div key={step.number} className="space-y-4">
+              <div className="text-4xl font-semibold text-accent">
                 {step.number}
               </div>
-              <h3 className="text-lg">{step.title}</h3>
-              <p className="mt-2 text-muted-foreground">{step.description}</p>
+              <h3 className="text-lg font-semibold text-foreground">{step.title}</h3>
+              <p className="text-sm text-gray-600">{step.description}</p>
             </div>
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

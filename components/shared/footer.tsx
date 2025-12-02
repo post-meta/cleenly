@@ -1,125 +1,59 @@
 import Link from "next/link";
-import { Container } from "@/components/ui/container";
-
-const footerLinks = {
-  services: [
-    { href: "/book?service=regular", label: "Regular Cleaning" },
-    { href: "/book?service=deep", label: "Deep Cleaning" },
-    { href: "/book?service=move_out", label: "Move-out Cleaning" },
-  ],
-  company: [
-    { href: "/about", label: "About" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/how-it-works", label: "How It Works" },
-    { href: "/faq", label: "FAQ" },
-  ],
-  forCleaners: [{ href: "/join", label: "Join as a Cleaner" }],
-  legal: [
-    { href: "/privacy", label: "Privacy Policy" },
-    { href: "/terms", label: "Terms of Service" },
-  ],
-};
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <Container size="wide" className="py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
-          {/* Brand / NAP */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="text-xl font-semibold tracking-tight">
-              CLEENLY
-            </Link>
-            {/* NAP for Local SEO */}
-            <address className="mt-4 not-italic text-sm text-muted-foreground">
-              <p>Seattle, WA</p>
-              <p className="mt-1">
-                <a
-                  href="mailto:hello@cleenly.com"
-                  className="transition-colors hover:text-foreground"
-                >
-                  hello@cleenly.com
-                </a>
-              </p>
-            </address>
-            <p className="mt-4 text-sm text-muted-foreground">
-              House cleaning booking platform serving Seattle and the Greater
-              Eastside.
+    <footer className="border-t border-gray-200 bg-white">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+
+          {/* Company Info */}
+          <div>
+            <h4 className="mb-4 font-semibold text-foreground">CLEENLY</h4>
+            <p className="text-sm text-gray-600">
+              House cleaning in Seattle. Simple, honest, reliable.
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-sm font-semibold">Services</h4>
-            <ul className="mt-4 space-y-3">
-              {footerLinks.services.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="mb-4 font-semibold text-foreground">Services</h4>
+            <ul className="space-y-2">
+              <li><Link href="/book?service=regular" className="text-sm text-gray-600 hover:text-foreground">Regular Cleaning</Link></li>
+              <li><Link href="/book?service=deep" className="text-sm text-gray-600 hover:text-foreground">Deep Cleaning</Link></li>
+              <li><Link href="/book?service=move_out" className="text-sm text-gray-600 hover:text-foreground">Move-Out</Link></li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Company Links */}
           <div>
-            <h4 className="text-sm font-semibold">Company</h4>
-            <ul className="mt-4 space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="mb-4 font-semibold text-foreground">Company</h4>
+            <ul className="space-y-2">
+              <li><Link href="/about" className="text-sm text-gray-600 hover:text-foreground">About</Link></li>
+              <li><Link href="/faq" className="text-sm text-gray-600 hover:text-foreground">FAQ</Link></li>
+              <li><Link href="/contact" className="text-sm text-gray-600 hover:text-foreground">Contact</Link></li>
             </ul>
           </div>
 
-          {/* For Cleaners */}
+          {/* Legal */}
           <div>
-            <h4 className="text-sm font-semibold">For Cleaners</h4>
-            <ul className="mt-4 space-y-3">
-              {footerLinks.forCleaners.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="mb-4 font-semibold text-foreground">Legal</h4>
+            <ul className="space-y-2">
+              <li><Link href="/privacy" className="text-sm text-gray-600 hover:text-foreground">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-sm text-gray-600 hover:text-foreground">Terms of Service</Link></li>
             </ul>
           </div>
+
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
-          <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} CLEENLY. All rights reserved.
+        <div className="mt-16 border-t border-gray-200 pt-8">
+          <p className="text-center text-sm text-gray-600">
+            © {currentYear} CLEENLY. Seattle, WA.
           </p>
-          <div className="flex gap-6">
-            {footerLinks.legal.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

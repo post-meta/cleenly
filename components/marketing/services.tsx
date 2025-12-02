@@ -1,13 +1,4 @@
 import Link from "next/link";
-import { Container } from "@/components/ui/container";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const services = [
@@ -63,76 +54,52 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="py-20 md:py-28">
-      <Container>
+    <section id="services" className="py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
         <div className="text-center">
-          <h2>Our Services</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Three types of cleaning for different situations. Pick what fits
-            your needs.
+          <h2 className="mb-6 text-2xl font-semibold">Our Services</h2>
+          <p className="mx-auto mb-16 max-w-2xl text-center text-gray-600">
+            Three types of cleaning for different situations. Pick what fits your needs.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {services.map((service) => (
-            <Card key={service.id} className="flex flex-col">
-              <CardHeader>
-                <CardTitle className="text-xl">{service.name}</CardTitle>
-                <CardDescription className="mt-2">
-                  {service.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1">
-                <div className="mb-4">
-                  <span className="text-2xl font-semibold">
-                    {service.priceRange}
-                  </span>
-                  <span className="ml-1 text-sm text-muted-foreground">
-                    {service.priceNote}
-                  </span>
+            <div
+              key={service.id}
+              className="flex flex-col border border-gray-200 p-8 transition-shadow duration-300 hover:shadow-card"
+            >
+              <h3 className="mb-4 text-xl font-semibold text-foreground">{service.name}</h3>
+              <p className="mb-6 text-sm text-gray-600">
+                {service.description}
+              </p>
+
+              <div className="mb-6 flex-1 space-y-4">
+                <div className="space-y-1">
+                  <p className="text-xs font-medium text-gray-500">Best for: {service.bestFor}</p>
                 </div>
-                <p className="mb-4 text-sm">
-                  <span className="font-medium">Best for:</span>{" "}
-                  <span className="text-muted-foreground">
-                    {service.bestFor}
-                  </span>
-                </p>
-                <p className="mb-2 text-sm font-medium">Includes:</p>
-                <ul className="space-y-1.5">
-                  {service.includes.map((item, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-2 text-sm text-muted-foreground"
-                    >
-                      <svg
-                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-success"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
+
+                <ul className="space-y-2 text-sm text-gray-600">
+                  {service.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="mt-1 text-accent">—</span>
                       {item}
                     </li>
                   ))}
                 </ul>
-              </CardContent>
-              <CardFooter>
-                <Button variant="secondary" className="w-full" asChild>
+              </div>
+
+              <div className="mt-auto">
+                <Button variant="link" asChild className="p-0 h-auto">
                   <Link href={`/book?service=${service.id}`}>
-                    Book {service.name}
+                    Learn More →
                   </Link>
                 </Button>
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

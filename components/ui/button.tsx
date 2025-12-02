@@ -4,19 +4,22 @@ import { forwardRef } from "react";
 import { Slot } from "@radix-ui/react-slot";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        primary: "bg-foreground text-background hover:bg-foreground/90",
+        primary:
+          "bg-accent text-white hover:bg-accent/90 hover:-translate-y-0.5 focus:translate-y-0 shadow-sm hover:shadow-md",
         secondary:
-          "border border-border bg-background text-foreground hover:bg-muted hover:border-border-hover",
+          "bg-white text-foreground border border-gray-300 hover:border-foreground hover:bg-gray-50",
         ghost: "text-foreground hover:bg-muted",
+        link: "text-foreground hover:text-accent underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {
-        sm: "h-9 px-3 text-sm",
-        md: "h-11 px-6 text-base",
-        lg: "h-14 px-8 text-lg",
+        sm: "h-9 px-6 py-3 text-sm",
+        md: "h-11 px-8 py-4 text-base",
+        lg: "h-14 px-10 py-5 text-lg",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
@@ -28,7 +31,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
