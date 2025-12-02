@@ -139,6 +139,19 @@ export default function LoginPage() {
                         Or sign in with phone number →
                     </a>
                 </p>
+
+                <p className="text-center text-sm">
+                    <span className="text-gray-600">Don't have an account? </span>
+                    <a href="/register" className="text-accent hover:underline font-medium">
+                        Sign up
+                    </a>
+                </p>
+
+                <p className="text-center text-sm">
+                    <a href="/forgot-password" className="text-gray-600 hover:underline">
+                        Forgot your password?
+                    </a>
+                </p>
             </div>
         </div>
     );

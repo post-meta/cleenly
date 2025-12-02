@@ -95,6 +95,44 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             },
         }),
         Credentials({
+            id: 'credentials',
+            name: 'Email and Password',
+            credentials: {
+                email: { label: 'Email', type: 'email' },
+                password: { label: 'Password', type: 'password' },
+            },
+            async authorize(credentials) {
+                if (!credentials?.email || !credentials?.password) return null;
+
+                // Import bcrypt dynamically
+                const bcrypt = await import('bcryptjs');
+
+                // Find user by email
+                const { data: user } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('email', credentials.email)
+                    .single();
+
+                if (!user || !user.password) return null;
+
+                // Verify password
+                const isValid = await bcrypt.compare(
+                    credentials.password as string,
+                    user.password
+                );
+
+                if (!isValid) return null;
+
+                return {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name,
+                    image: user.image,
+                };
+            },
+        }),
+        Credentials({
             id: 'telegram',
             name: 'Telegram',
             credentials: {
