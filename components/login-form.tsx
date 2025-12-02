@@ -73,12 +73,12 @@ export function LoginForm() {
     };
 
     return (
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md mb-6">
-                <h2 className="text-center text-3xl font-extrabold text-gray-900">
+        <>
+            <div className="text-center mb-6">
+                <h2 className="text-3xl font-extrabold text-gray-900">
                     Welcome back
                 </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
+                <p className="mt-2 text-sm text-gray-600">
                     Sign in to your account
                 </p>
             </div>
@@ -158,7 +158,7 @@ export function LoginForm() {
                         <div className="w-full border-t border-gray-300" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                        <span className="px-2 bg-white text-gray-500">
+                        <span className="px-2 bg-gray-50 text-gray-500">
                             Or continue with
                         </span>
                     </div>
@@ -197,6 +197,6 @@ export function LoginForm() {
                     </Link>
                 </p>
             </div>
-        </div>
+        </>
     );
 }
