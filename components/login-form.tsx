@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,34 +17,6 @@ export function LoginForm() {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-
-    useEffect(() => {
-        // Load Telegram Widget script
-        const script = document.createElement('script');
-        script.src = 'https://telegram.org/js/telegram-widget.js?22';
-        script.setAttribute('data-telegram-login', process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME!);
-        script.setAttribute('data-size', 'large');
-        script.setAttribute('data-radius', '2');
-        script.setAttribute('data-request-access', 'write');
-        script.async = true;
-
-        // Callback when user logs in
-        (window as any).onTelegramAuth = async (user: any) => {
-            await signIn('telegram', {
-                ...user,
-                redirect: true,
-                callbackUrl: '/dashboard',
-            });
-        };
-
-        script.setAttribute('data-onauth', 'onTelegramAuth(user)');
-
-        document.getElementById('telegram-login-container')?.appendChild(script);
-
-        return () => {
-            delete (window as any).onTelegramAuth;
-        };
-    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -164,7 +136,7 @@ export function LoginForm() {
                     </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-1 gap-3">
+                <div className="mt-6">
                     <Button
                         variant="secondary"
                         size="lg"
@@ -174,10 +146,6 @@ export function LoginForm() {
                         <FcGoogle className="w-5 h-5" />
                         <span>Continue with Google</span>
                     </Button>
-
-                    <div className="flex justify-center">
-                        <div id="telegram-login-container" />
-                    </div>
                 </div>
             </div>
 
