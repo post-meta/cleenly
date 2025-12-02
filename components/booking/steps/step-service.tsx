@@ -45,8 +45,6 @@ interface StepServiceProps {
 export function StepService({ value, onChange, onNext }: StepServiceProps) {
   const handleSelect = (serviceId: ServiceType) => {
     onChange(serviceId);
-    // Auto-advance after selection
-    setTimeout(onNext, 150);
   };
 
   return (
@@ -114,6 +112,19 @@ export function StepService({ value, onChange, onNext }: StepServiceProps) {
           Regular is great for maintained homes. Deep for first-time or seasonal.
         </span>
       </p>
+
+      {/* Continue Button */}
+      {value && (
+        <div className="flex justify-end pt-4">
+          <button
+            type="button"
+            onClick={onNext}
+            className="rounded-lg bg-foreground px-8 py-3 font-semibold text-background transition-all hover:opacity-90"
+          >
+            Continue
+          </button>
+        </div>
+      )}
     </div>
   );
 }
