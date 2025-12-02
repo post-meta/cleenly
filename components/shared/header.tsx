@@ -4,11 +4,21 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/lib/auth/auth-context";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const { user, profile, signOut, isLoading } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    setIsUserMenuOpen(false);
+  };
+
+  const dashboardLink = profile?.role === "cleaner" ? "/cleaner-dashboard" : "/dashboard";
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
@@ -32,10 +42,63 @@ export function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:block">
-          <Button asChild variant="primary" size="sm">
-            <Link href="/book">Book Now</Link>
-          </Button>
+        <div className="hidden md:flex items-center gap-3">
+          {!isLoading && (
+            <>
+              {user ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                      <User className="w-4 h-4 text-gray-600" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-700">
+                      {profile?.name || "Account"}
+                    </span>
+                  </button>
+
+                  {isUserMenuOpen && (
+                    <>
+                      <div
+                        className="fixed inset-0 z-10"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      />
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
+                        <Link
+                          href={dashboardLink}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          onClick={() => setIsUserMenuOpen(false)}
+                        >
+                          Dashboard
+                        </Link>
+                        <button
+                          onClick={handleSignOut}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          Sign out
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                  >
+                    Sign in
+                  </Link>
+                  <Button asChild variant="primary" size="sm">
+                    <Link href="/book">Book Now</Link>
+                  </Button>
+                </>
+              )}
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -84,6 +147,49 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+
+            {!isLoading && (
+              <>
+                {user ? (
+                  <>
+                    <Link
+                      href={dashboardLink}
+                      className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={() => {
+                        handleSignOut();
+                        setIsMenuOpen(false);
+                      }}
+                      className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground text-left"
+                    >
+                      Sign out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Sign in
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Create account
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
+
             <Button asChild variant="primary" size="lg" className="mt-4 w-full">
               <Link href="/book" onClick={() => setIsMenuOpen(false)}>
                 Book Now
