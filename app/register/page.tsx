@@ -77,8 +77,8 @@ export default function RegisterPage() {
 
     if (success) {
         return (
-            <div className="min-h-screen flex items-center justify-center px-6">
-                <div className="max-w-md w-full space-y-6 text-center">
+            <div className="min-h-screen flex items-center justify-center px-6 bg-gray-50">
+                <div className="max-w-2xl min-w-[400px] w-full space-y-6 text-center bg-white shadow-lg rounded-lg p-8 md:p-10">
                     <div className="text-6xl">🎉</div>
                     <h1 className="text-3xl font-semibold">Account Created!</h1>
                     <p className="text-muted-foreground">
@@ -93,8 +93,8 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-6 py-12">
-            <div className="max-w-md w-full space-y-8">
+        <div className="min-h-screen flex items-center justify-center px-6 py-12 bg-gray-50">
+            <div className="max-w-2xl min-w-[400px] w-full space-y-8 bg-white shadow-lg rounded-lg p-8 md:p-10">
                 <div className="text-center">
                     <h1 className="text-3xl font-semibold">Create your account</h1>
                     <p className="text-muted-foreground mt-2">
