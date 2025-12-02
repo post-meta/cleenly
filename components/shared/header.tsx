@@ -33,7 +33,13 @@ export function Header() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
+            <Link
+              href="/login"
+              className="text-sm font-medium text-gray-600 transition-colors hover:text-foreground"
+            >
+              Sign In
+            </Link>
             <Button asChild variant="primary" size="sm">
               <Link href="/book">Book Now</Link>
             </Button>
