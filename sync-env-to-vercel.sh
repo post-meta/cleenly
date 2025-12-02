@@ -41,10 +41,10 @@ add_env_var "RESEND_API_KEY" "re_dgK9uuc1_GutXC74AVXftnciWrbGHVrjt"
 add_env_var "GOOGLE_CLIENT_ID" "856340560474-jbrgpmhr12n3a5i1t1bmk3d6u4l5mrq2.apps.googleusercontent.com"
 add_env_var "GOOGLE_CLIENT_SECRET" "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"
 
-# Twilio (пропускаем placeholder значения)
-# add_env_var "TWILIO_ACCOUNT_SID" "your_account_sid"
-# add_env_var "TWILIO_AUTH_TOKEN" "your_auth_token"
-# add_env_var "TWILIO_PHONE_NUMBER" "your_twilio_number"
+# Twilio
+add_env_var "TWILIO_ACCOUNT_SID" "AC224bac159a05138c072091f4b0f5a2fe"
+add_env_var "TWILIO_AUTH_TOKEN" "e85808fd3db40a599a9637c23e92f8d0"
+add_env_var "TWILIO_PHONE_NUMBER" "+18557109619"
 
 # Telegram
 add_env_var "TELEGRAM_BOT_TOKEN" "8151881048:AAH6U4W2pgXP46-gjRr2xDgELgObm0kk5_0"

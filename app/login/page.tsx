@@ -3,12 +3,20 @@
 import { useState, useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { FcGoogle } from 'react-icons/fc';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function LoginPage() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const registered = searchParams.get('registered');
+
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [emailSent, setEmailSent] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         // Load Telegram Widget script
@@ -41,56 +49,83 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        setError('');
 
         try {
-            await signIn('email', { email, redirect: false });
-            setEmailSent(true);
+            const result = await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+                callbackUrl: '/dashboard',
+            });
+
+            if (result?.error) {
+                setError('Invalid email or password');
+            } else {
+                router.push('/dashboard');
+            }
         } catch (error) {
             console.error('Error signing in:', error);
+            setError('Something went wrong');
         } finally {
             setLoading(false);
         }
     };
 
-    if (emailSent) {
-        return (
-            <div className="min-h-screen flex items-center justify-center px-6">
-                <div className="max-w-md w-full space-y-6 text-center">
-                    <h1 className="text-3xl font-semibold">Check your email</h1>
-                    <p className="text-gray-600">
-                        We sent a sign-in link to <strong>{email}</strong>
-                    </p>
-                    <p className="text-sm text-gray-600">
-                        Click the link in the email to sign in. The link expires in 24 hours.
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="min-h-screen flex items-center justify-center px-6">
-            <div className="max-w-md w-full space-y-6">
+        <div className="min-h-screen flex items-center justify-center px-6 py-12">
+            <div className="max-w-md w-full space-y-8">
                 <div className="text-center">
-                    <h1 className="text-3xl font-semibold">Sign in to CLEENLY</h1>
+                    <h1 className="text-3xl font-semibold">Welcome back</h1>
                     <p className="text-gray-600 mt-2">
-                        Enter your email to receive a sign-in link
+                        Sign in to your account
                     </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            className="w-full border border-gray-300 px-4 py-3 rounded-sm"
-                            placeholder="you@example.com"
-                        />
+                {registered && (
+                    <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm text-center">
+                        Account created successfully! Please sign in.
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {error && (
+                        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm">
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium mb-2">
+                                Email
+                            </label>
+                            <Input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                placeholder="you@example.com"
+                            />
+                        </div>
+
+                        <div>
+                            <div className="flex items-center justify-between mb-2">
+                                <label className="block text-sm font-medium">
+                                    Password
+                                </label>
+                                <Link href="/forgot-password" className="text-sm text-gray-600 hover:underline">
+                                    Forgot password?
+                                </Link>
+                            </div>
+                            <Input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                placeholder="••••••••"
+                            />
+                        </div>
                     </div>
 
                     <Button
@@ -100,15 +135,9 @@ export default function LoginPage() {
                         disabled={loading}
                         className="w-full"
                     >
-                        {loading ? 'Sending...' : 'Send Sign-In Link'}
+                        {loading ? 'Signing in...' : 'Sign In'}
                     </Button>
                 </form>
-
-                <div className="text-center">
-                    <p className="text-sm text-gray-600">
-                        Or sign in with
-                    </p>
-                </div>
 
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center">
@@ -119,38 +148,34 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                <Button
-                    variant="secondary"
-                    size="lg"
-                    className="w-full"
-                    onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
-                >
-                    <FcGoogle className="w-5 h-5 mr-2" />
-                    Continue with Google
-                </Button>
+                <div className="space-y-3">
+                    <Button
+                        variant="secondary"
+                        size="lg"
+                        className="w-full"
+                        onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+                    >
+                        <FcGoogle className="w-5 h-5 mr-2" />
+                        Continue with Google
+                    </Button>
 
-                {/* Telegram Widget */}
-                <div className="flex justify-center">
-                    <div id="telegram-login-container" />
+                    {/* Telegram Widget */}
+                    <div className="flex justify-center">
+                        <div id="telegram-login-container" />
+                    </div>
                 </div>
 
                 <p className="text-center text-sm text-gray-600">
-                    <a href="/login/sms" className="text-accent hover:underline">
-                        Or sign in with phone number →
-                    </a>
+                    <Link href="/login/sms" className="text-foreground hover:underline">
+                        Sign in with phone number →
+                    </Link>
                 </p>
 
                 <p className="text-center text-sm">
                     <span className="text-gray-600">Don't have an account? </span>
-                    <a href="/register" className="text-accent hover:underline font-medium">
+                    <Link href="/register" className="text-foreground hover:underline font-medium">
                         Sign up
-                    </a>
-                </p>
-
-                <p className="text-center text-sm">
-                    <a href="/forgot-password" className="text-gray-600 hover:underline">
-                        Forgot your password?
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>

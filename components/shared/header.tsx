@@ -11,41 +11,43 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Logo */}
-        <Link href="/" className="text-xl font-semibold text-foreground">
-          {SITE_NAME}
-        </Link>
+    <header className="sticky top-0 z-50">
+      <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          {/* Logo */}
+          <Link href="/" className="text-xl font-semibold text-foreground">
+            {SITE_NAME}
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm text-gray-600 transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-8 md:flex">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-gray-600 transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:block">
-          <Button asChild variant="primary" size="sm">
-            <Link href="/book">Book Now</Link>
-          </Button>
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
+            <Button asChild variant="primary" size="sm">
+              <Link href="/book">Book Now</Link>
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-sm text-foreground md:hidden"
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
         </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="flex h-10 w-10 items-center justify-center rounded-sm text-foreground md:hidden"
-          onClick={() => setIsMenuOpen(true)}
-          aria-label="Open menu"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
       </div>
 
       {/* Mobile Navigation Overlay */}
@@ -84,11 +86,27 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Button asChild variant="primary" size="lg" className="mt-4 w-full">
-              <Link href="/book" onClick={() => setIsMenuOpen(false)}>
-                Book Now
+            <div className="flex flex-col gap-4 mt-4">
+              <Link
+                href="/login"
+                className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sign In
               </Link>
-            </Button>
+              <Link
+                href="/register"
+                className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Create account
+              </Link>
+              <Button asChild variant="primary" size="lg" className="w-full">
+                <Link href="/book" onClick={() => setIsMenuOpen(false)}>
+                  Book Now
+                </Link>
+              </Button>
+            </div>
           </nav>
         </div>
       </div>
