@@ -210,7 +210,7 @@ export default async function SettingsPage() {
                             Once you delete your account, there is no going back. All your data,
                             bookings, and preferences will be permanently deleted.
                         </p>
-                        <Button variant="destructive">
+                        <Button variant="primary" className="bg-red-600 hover:bg-red-700">
                             Delete My Account
                         </Button>
                     </div>
