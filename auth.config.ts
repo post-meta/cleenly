@@ -4,8 +4,6 @@ export const authConfig = {
     pages: {
         signIn: '/login',
         signOut: '/logout',
-        error: '/auth/error',
-        verifyRequest: '/auth/verify-request',
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
@@ -18,6 +16,12 @@ export const authConfig = {
             }
 
             return true;
+        },
+        async redirect({ url, baseUrl }) {
+            // After login, redirect to dashboard
+            if (url.startsWith(baseUrl)) return url;
+            if (url.startsWith('/')) return `${baseUrl}${url}`;
+            return `${baseUrl}/dashboard`;
         },
     },
     providers: [], // Add providers in auth.ts
