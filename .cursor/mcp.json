@@ -1,0 +1,31 @@
+{
+    "mcpServers": {
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+        },
+        "shadcn": {
+            "command": "npx",
+            "args": [
+                "shadcn@latest",
+                "mcp"
+            ]
+        },
+        "supabase": {
+            "url": "https://mcp.supabase.com/mcp?project_ref=hspmtqlnrmomatmzklnh&read_only=true"
+        },
+        "aceternity": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "aceternityui-mcp"
+            ],
+            "env": {
+                "ACETERNITY_API_KEY": "Aceternity_db77f6e7f3f25825a28fc4162be50c236b33679ae275f0b67cc3479d6412c9fa"
+            }
+        }
+    }
+}
