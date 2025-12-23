@@ -1,19 +1,17 @@
 import { MetadataRoute } from 'next';
-import { CITIES } from '@/lib/data/cities';
-import { SERVICES_DATA } from '@/lib/data/services-data';
+import { cities } from '@/lib/data/cities';
+import { services } from '@/lib/data/services';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://cleenly.app';
 
-    // Static pages
-    const staticPages = [
+    // Core pages
+    const routes = [
         '',
-        '/about',
-        '/pricing',
-        '/faq',
-        '/book',
+        '/services',
         '/login',
-        '/register',
+        '/forgot-password',
+        '/book',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
@@ -21,26 +19,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: route === '' ? 1 : 0.8,
     }));
 
-    // City pages (/locations/[city])
-    const cityPages = CITIES.map((city) => ({
-        url: `${baseUrl}/locations/${city.slug}`,
+    // Service Detail pages (/services/[service])
+    const serviceRoutes = services.map((service) => ({
+        url: `${baseUrl}/services/${service.slug}`,
         lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
+        changeFrequency: 'weekly' as const,
         priority: 0.7,
     }));
 
-    // City + Service pages (/locations/[city]/[service])
-    const cityServicePages: MetadataRoute.Sitemap = [];
-    CITIES.forEach((city) => {
-        SERVICES_DATA.forEach((service) => {
-            cityServicePages.push({
-                url: `${baseUrl}/locations/${city.slug}/${service.slug}`,
-                lastModified: new Date(),
-                changeFrequency: 'monthly' as const,
-                priority: 0.6,
-            });
-        });
-    });
+    // City Landing pages (/[city])
+    const cityRoutes = cities.map((city) => ({
+        url: `${baseUrl}/${city.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+    }));
 
-    return [...staticPages, ...cityPages, ...cityServicePages];
+    // City + Service combo pages (/[city]/[service])
+    const comboRoutes = [];
+    for (const city of cities) {
+        for (const service of services) {
+            comboRoutes.push({
+                url: `${baseUrl}/${city.slug}/${service.slug}`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly' as const,
+                priority: 0.5,
+            });
+        }
+    }
+
+    return [...routes, ...serviceRoutes, ...cityRoutes, ...comboRoutes];
 }

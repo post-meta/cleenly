@@ -26,8 +26,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     trustHost: true,
     secret: secret,
     adapter: SupabaseAdapter({
-        url: process.env.SUPABASE_URL!,
-        secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
+        url: process.env.SUPABASE_URL || 'https://placeholder-url.supabase.co',
+        secret: process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-key',
     }),
     session: { strategy: 'jwt' },
     providers: [

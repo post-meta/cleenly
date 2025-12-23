@@ -183,3 +183,13 @@
     padding-right: 1.5rem;
   }
 }
+@layer utilities {
+  .bg-dot-thick-neutral-300 {
+    background-image: radial-gradient(circle, #d4d4d4 2px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .bg-dot-thick-indigo-500 {
+    background-image: radial-gradient(circle, #6366f1 2px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}

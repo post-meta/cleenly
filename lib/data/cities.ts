@@ -1,143 +1,284 @@
-export interface City {
-    name: string;
+export interface CityData {
     slug: string;
+    name: string;
+    county: string;
+    state: 'WA';
+    coordinates: { lat: number; lng: number };
+    zipCodes: string[];
     neighborhoods: string[];
-    landmarks: string[];
-    context: string; // Specific city cleaning tip or fact
+    nearbyAreas: string[]; // slugs соседних городов
+    description: string;
 }
 
-export const CITIES: City[] = [
+export const cities: CityData[] = [
+    // === SEATTLE ===
     {
-        name: 'Seattle',
         slug: 'seattle',
-        neighborhoods: ['Capitol Hill', 'Ballard', 'Fremont', 'Queen Anne', 'West Seattle', 'Green Lake', 'Beacon Hill', 'Columbia City'],
-        landmarks: ['Space Needle', 'Pike Place Market', 'Gas Works Park', 'Alki Beach'],
-        context: 'Homes in Seattle often require extra attention to humidity-related dust and seasonal pollen near the city\'s many parks.',
+        name: 'Seattle',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.6062, lng: -122.3321 },
+        zipCodes: ['98101', '98102', '98103', '98104', '98105', '98106', '98107', '98109', '98112', '98115', '98116', '98117', '98118', '98119', '98121', '98122', '98125', '98126', '98133', '98136', '98144', '98199'],
+        neighborhoods: ['Capitol Hill', 'Ballard', 'Fremont', 'Queen Anne', 'University District', 'Beacon Hill', 'West Seattle', 'Columbia City', 'Ravenna', 'Wallingford', 'Green Lake', 'Northgate', 'South Lake Union', 'Downtown', 'Madison Park', 'Magnolia'],
+        nearbyAreas: ['shoreline', 'burien', 'tukwila', 'bellevue'],
+        description: 'Serving all Seattle neighborhoods from Ballard to Beacon Hill, Capitol Hill to West Seattle.',
     },
+
+    // === EASTSIDE ===
     {
-        name: 'Bellevue',
         slug: 'bellevue',
-        neighborhoods: ['Downtown', 'West Bellevue', 'Factoria', 'Somerset', 'Crossroads', 'Wilburton'],
-        landmarks: ['Bellevue Square', 'Botanical Garden', 'Downtown Park', 'Meydenbauer Bay'],
-        context: 'Bellevue residences frequently include modern high-rises and large estates with specific floor-to-ceiling window care needs.',
+        name: 'Bellevue',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.6101, lng: -122.2015 },
+        zipCodes: ['98004', '98005', '98006', '98007', '98008'],
+        neighborhoods: ['Downtown Bellevue', 'Crossroads', 'Factoria', 'Somerset', 'Newport', 'Eastgate', 'Bridle Trails', 'Wilburton'],
+        nearbyAreas: ['kirkland', 'redmond', 'mercer-island', 'seattle'],
+        description: 'Serving Bellevue from Downtown to Factoria, Crossroads to Somerset.',
     },
     {
-        name: 'Kirkland', slug: 'kirkland',
-        neighborhoods: ['Downtown', 'Juanita', 'Totem Lake', 'Houghton', 'Bridle Trails'],
-        landmarks: ['Marina Park', 'Heritage Hall', 'Juanita Beach'],
-        context: 'Kirkland homes often feature waterfront properties that require specialized exterior-facing surface detailing and window care.',
+        slug: 'kirkland',
+        name: 'Kirkland',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.6769, lng: -122.2060 },
+        zipCodes: ['98033', '98034'],
+        neighborhoods: ['Downtown Kirkland', 'Juanita', 'Houghton', 'Finn Hill', 'Totem Lake', 'Kingsgate', 'Norkirk'],
+        nearbyAreas: ['bellevue', 'redmond', 'bothell', 'woodinville'],
+        description: 'Serving all Kirkland neighborhoods from the waterfront to Totem Lake.',
     },
     {
-        name: 'Redmond', slug: 'redmond',
-        neighborhoods: ['Downtown', 'Overlake', 'Education Hill', 'Grass Lawn', 'Union Hill'],
-        landmarks: ['Marymoor Park', 'Microsoft Campus', 'Town Center'],
-        context: 'Redmond households often prioritize quick, efficient cleaning schedules that fit into busy tech-professional lifestyles.',
+        slug: 'redmond',
+        name: 'Redmond',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.6740, lng: -122.1215 },
+        zipCodes: ['98052', '98053'],
+        neighborhoods: ['Downtown Redmond', 'Education Hill', 'Overlake', 'Idylwood', 'Grass Lawn', 'Willows', 'Bear Creek'],
+        nearbyAreas: ['kirkland', 'bellevue', 'sammamish', 'woodinville'],
+        description: 'Serving Redmond from Downtown to Overlake, Education Hill to Bear Creek.',
     },
     {
-        name: 'Renton', slug: 'renton',
-        neighborhoods: ['The Highlands', 'Cascade', 'Kennydale', 'Benson', 'Fairwood'],
-        landmarks: ['Gene Coulon Park', 'The Landing', 'Boeing Factory'],
-        context: 'Renton homes benefit from our detailed move-in/move-out services as the area continues to see rapid residential growth.',
+        slug: 'sammamish',
+        name: 'Sammamish',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.6163, lng: -122.0356 },
+        zipCodes: ['98074', '98075'],
+        neighborhoods: ['Sammamish Plateau', 'Pine Lake', 'Beaver Lake', 'Klahanie', 'Inglewood'],
+        nearbyAreas: ['redmond', 'issaquah', 'bellevue'],
+        description: 'Serving the Sammamish Plateau and surrounding neighborhoods.',
     },
     {
-        name: 'Issaquah', slug: 'issaquah',
-        neighborhoods: ['Issaquah Highlands', 'Talus', 'Squak Mountain', 'Mirrormont'],
-        landmarks: ['Tiger Mountain', 'Salmon Hatchery', 'Village Theatre'],
-        context: 'Foothill homes in Issaquah often need more frequent dust removal due to mountain winds and nearby hiking trails.'
+        slug: 'issaquah',
+        name: 'Issaquah',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.5301, lng: -122.0326 },
+        zipCodes: ['98027', '98029'],
+        neighborhoods: ['Issaquah Highlands', 'Gilman Village', 'Olde Town', 'Talus', 'Squak Mountain'],
+        nearbyAreas: ['sammamish', 'bellevue', 'renton'],
+        description: 'Serving Issaquah from Olde Town to Issaquah Highlands.',
     },
     {
-        name: 'Sammamish', slug: 'sammamish',
-        neighborhoods: ['Klahanie', 'Pine Lake', 'Sahalee', 'Trossachs'],
-        landmarks: ['Pine Lake Park', 'Beaver Lake', 'Sammamish Commons'],
-        context: 'Large family homes in Sammamish are our specialty, focusing on high-traffic common areas and detailed kitchen sanitization.'
+        slug: 'bothell',
+        name: 'Bothell',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.7623, lng: -122.2054 },
+        zipCodes: ['98011', '98012', '98021'],
+        neighborhoods: ['Downtown Bothell', 'Canyon Park', 'North Creek', 'Queensgate'],
+        nearbyAreas: ['kirkland', 'woodinville', 'kenmore', 'lynnwood'],
+        description: 'Serving Bothell and Canyon Park area.',
     },
     {
-        name: 'Mercer Island', slug: 'mercer-island',
-        neighborhoods: ['North End', 'South End', 'First Hill'],
-        landmarks: ['Luther Burbank Park', 'Aubrey Davis Park'],
-        context: 'Mercer Island properties often require premium care for sensitive high-end finishes, custom cabinetry, and hardwood floors.'
+        slug: 'woodinville',
+        name: 'Woodinville',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.7543, lng: -122.1635 },
+        zipCodes: ['98072', '98077'],
+        neighborhoods: ['Downtown Woodinville', 'Hollywood Hill', 'Wellington', 'Wine Country'],
+        nearbyAreas: ['kirkland', 'redmond', 'bothell'],
+        description: 'Serving Woodinville including the wine country and Hollywood Hill.',
     },
     {
-        name: 'Shoreline', slug: 'shoreline',
-        neighborhoods: ['Richmond Beach', 'Echo Lake', 'Highland Terrace', 'Ridgecrest'],
-        landmarks: ['Shoreview Park', 'Richmond Beach Saltwater Park'],
-        context: 'Shoreline bungalows and Mid-Century Modern homes benefit from our specialized deep cleaning of classic fixtures and vintage tiling.'
+        slug: 'mercer-island',
+        name: 'Mercer Island',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.5707, lng: -122.2221 },
+        zipCodes: ['98040'],
+        neighborhoods: ['North End', 'South End', 'Town Center', 'East Seattle'],
+        nearbyAreas: ['bellevue', 'seattle', 'renton'],
+        description: 'Serving all of Mercer Island.',
     },
     {
-        name: 'Bothell', slug: 'bothell',
-        neighborhoods: ['Canyon Park', 'Downtown', 'North Creek', 'Maywood'],
-        landmarks: ['UW Bothell', 'Anderson School', 'Bothell Landing'],
-        context: 'Bothell\'s mix of modern apartments and established single-family homes trust us for reliable, recurring cleaning services.'
+        slug: 'medina',
+        name: 'Medina',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.6207, lng: -122.2284 },
+        zipCodes: ['98039'],
+        neighborhoods: ['Medina', 'Evergreen Point'],
+        nearbyAreas: ['bellevue', 'kirkland', 'clyde-hill'],
+        description: 'Serving Medina and Evergreen Point.',
     },
     {
-        name: 'Tacoma', slug: 'tacoma',
-        neighborhoods: ['North End', 'South Tacoma', 'Hilltop', 'Point Ruston'],
-        landmarks: ['Point Defiance Park', 'Museum of Glass', 'Union Station'],
-        context: 'Tacoma\'s historic homes often feature unique architectural details that require careful, specialized dusting and floor care.'
+        slug: 'clyde-hill',
+        name: 'Clyde Hill',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.6318, lng: -122.2176 },
+        zipCodes: ['98004'],
+        neighborhoods: ['Clyde Hill'],
+        nearbyAreas: ['bellevue', 'medina', 'kirkland'],
+        description: 'Serving Clyde Hill and surrounding areas.',
+    },
+
+    // === SOUTH KING COUNTY ===
+    {
+        slug: 'renton',
+        name: 'Renton',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.4829, lng: -122.2171 },
+        zipCodes: ['98055', '98056', '98057', '98058', '98059'],
+        neighborhoods: ['Downtown Renton', 'Highlands', 'Fairwood', 'Kennydale', 'Benson Hill', 'Cascade'],
+        nearbyAreas: ['seattle', 'bellevue', 'kent', 'tukwila'],
+        description: 'Serving Renton from the Highlands to Fairwood.',
     },
     {
-        name: 'Everett', slug: 'everett',
-        neighborhoods: ['Northwest', 'Bayside', 'Port Gardner', 'Silver Lake'],
-        landmarks: ['Everett Waterfront', 'Angel of the Winds Arena', 'Naval Station Everett'],
-        context: 'Everett residents appreciate our thorough approach to maritime-related window grime and industrial-area dust management.'
+        slug: 'kent',
+        name: 'Kent',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.3809, lng: -122.2348 },
+        zipCodes: ['98030', '98031', '98032', '98042'],
+        neighborhoods: ['Downtown Kent', 'East Hill', 'West Hill', 'Panther Lake', 'Meridian'],
+        nearbyAreas: ['renton', 'auburn', 'federal-way', 'covington'],
+        description: 'Serving Kent from Downtown to East Hill.',
     },
     {
-        name: 'Woodinville', slug: 'woodinville',
-        neighborhoods: ['Hollywood District', 'Wine Country', 'West Ridge'],
-        landmarks: ['Chateau Ste. Michelle', 'Cottage Lake'],
-        context: 'Woodinville homes, especially in the wine country areas, often need deep cleaning after seasonal entertaining and events.'
+        slug: 'federal-way',
+        name: 'Federal Way',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.3223, lng: -122.3126 },
+        zipCodes: ['98003', '98023'],
+        neighborhoods: ['Downtown Federal Way', 'Twin Lakes', 'Redondo', 'Dash Point', 'Steel Lake'],
+        nearbyAreas: ['kent', 'tacoma', 'auburn', 'des-moines'],
+        description: 'Serving Federal Way from Twin Lakes to Dash Point.',
     },
     {
-        name: 'Burien', slug: 'burien',
-        neighborhoods: ['Seahurst', 'Gregory Heights', 'Lake Burien'],
-        landmarks: ['Seahurst Park', 'Burien Town Square'],
-        context: 'Burien\'s coastal properties benefit from our specialized salt-air window cleaning and high-moisture area maintenance.'
+        slug: 'auburn',
+        name: 'Auburn',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.3073, lng: -122.2285 },
+        zipCodes: ['98001', '98002', '98092'],
+        neighborhoods: ['Downtown Auburn', 'Lea Hill', 'Lake Tapps', 'West Auburn'],
+        nearbyAreas: ['kent', 'federal-way', 'covington', 'puyallup'],
+        description: 'Serving Auburn and Lea Hill area.',
     },
     {
-        name: 'Kent', slug: 'kent',
-        neighborhoods: ['East Hill', 'West Hill', 'Kent Valley', 'Panther Lake'],
-        landmarks: ['ShoWare Center', 'Kent Station'],
-        context: 'Kent\'s diverse residential areas trust us for efficient, high-quality cleaning that meets the needs of active families.'
+        slug: 'burien',
+        name: 'Burien',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.4704, lng: -122.3468 },
+        zipCodes: ['98146', '98148', '98166'],
+        neighborhoods: ['Downtown Burien', 'Boulevard Park', 'White Center', 'Seahurst', 'Gregory Heights'],
+        nearbyAreas: ['seattle', 'tukwila', 'seatac', 'normandy-park'],
+        description: 'Serving Burien, Seahurst, and White Center.',
     },
     {
-        name: 'Federal Way', slug: 'federal-way',
-        neighborhoods: ['Twin Lakes', 'Adelaide', 'Dumas Bay'],
-        landmarks: ['Wild Waves', 'Dash Point State Park'],
-        context: 'Federal Way homes near the water often require more frequent window and exterior surface maintenance.'
+        slug: 'tukwila',
+        name: 'Tukwila',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.4740, lng: -122.2610 },
+        zipCodes: ['98168', '98178', '98188'],
+        neighborhoods: ['Westfield Southcenter', 'Riverton', 'Allentown', 'Tukwila Hill'],
+        nearbyAreas: ['seattle', 'renton', 'burien', 'seatac'],
+        description: 'Serving Tukwila and Southcenter area.',
+    },
+
+    // === NORTH ===
+    {
+        slug: 'shoreline',
+        name: 'Shoreline',
+        county: 'King County',
+        state: 'WA',
+        coordinates: { lat: 47.7557, lng: -122.3415 },
+        zipCodes: ['98133', '98155', '98177'],
+        neighborhoods: ['Richmond Beach', 'Ridgecrest', 'Echo Lake', 'Innis Arden', 'Hillwood'],
+        nearbyAreas: ['seattle', 'edmonds', 'lake-forest-park', 'mountlake-terrace'],
+        description: 'Serving Shoreline from Richmond Beach to Ridgecrest.',
     },
     {
-        name: 'Auburn', slug: 'auburn',
-        neighborhoods: ['Lakeland Hills', 'West Valley', 'Lea Hill'],
-        landmarks: ['Emerald Downs', 'Muckleshoot Casino'],
-        context: 'Auburn property owners, especially in Lakeland Hills, rely on our detailed deep cleaning for large, multi-story residences.'
+        slug: 'edmonds',
+        name: 'Edmonds',
+        county: 'Snohomish County',
+        state: 'WA',
+        coordinates: { lat: 47.8107, lng: -122.3774 },
+        zipCodes: ['98020', '98026'],
+        neighborhoods: ['Downtown Edmonds', 'Perrinville', 'Esperance', 'Meadowdale'],
+        nearbyAreas: ['shoreline', 'lynnwood', 'mountlake-terrace', 'mukilteo'],
+        description: 'Serving Edmonds and the waterfront area.',
     },
     {
-        name: 'Lynnwood', slug: 'lynnwood',
-        neighborhoods: ['Alderwood Manor', 'Meadowdale', 'Martha Lake'],
-        landmarks: ['Alderwood Mall', 'Lynnwood Convention Center'],
-        context: 'Lynnwood households benefit from our flexible scheduling that aligns with the fast-paced lifestyle of the Snohomish County hub.'
+        slug: 'lynnwood',
+        name: 'Lynnwood',
+        county: 'Snohomish County',
+        state: 'WA',
+        coordinates: { lat: 47.8209, lng: -122.3151 },
+        zipCodes: ['98036', '98037', '98087'],
+        neighborhoods: ['Alderwood', 'Martha Lake', 'Meadowdale', 'Lynnwood Bowl'],
+        nearbyAreas: ['edmonds', 'mountlake-terrace', 'bothell', 'everett'],
+        description: 'Serving Lynnwood and Alderwood area.',
     },
     {
-        name: 'Edmonds', slug: 'edmonds',
-        neighborhoods: ['Bowl', 'Woodway', 'Westgate'],
-        landmarks: ['Edmonds Ferry', 'Underwater Park', 'Frances Anderson Center'],
-        context: 'Edmonds\' seaside charm comes with specific maintenance needs for antique fixtures and maritime-exposed windows.'
+        slug: 'everett',
+        name: 'Everett',
+        county: 'Snohomish County',
+        state: 'WA',
+        coordinates: { lat: 47.9790, lng: -122.2021 },
+        zipCodes: ['98201', '98203', '98204', '98208'],
+        neighborhoods: ['Downtown Everett', 'Bayside', 'Delta', 'Riverside', 'Silver Lake', 'Pinehurst'],
+        nearbyAreas: ['mukilteo', 'lynnwood', 'marysville', 'lake-stevens'],
+        description: 'Serving Everett from Downtown to Silver Lake.',
+    },
+
+    // === PIERCE COUNTY ===
+    {
+        slug: 'tacoma',
+        name: 'Tacoma',
+        county: 'Pierce County',
+        state: 'WA',
+        coordinates: { lat: 47.2529, lng: -122.4443 },
+        zipCodes: ['98402', '98403', '98404', '98405', '98406', '98407', '98408', '98409', '98418', '98422', '98465'],
+        neighborhoods: ['Downtown Tacoma', 'Stadium District', 'Proctor', 'North End', 'West End', 'South Tacoma', '6th Avenue', 'Old Town'],
+        nearbyAreas: ['lakewood', 'university-place', 'fircrest', 'federal-way'],
+        description: 'Serving all Tacoma neighborhoods from the North End to South Tacoma.',
     },
     {
-        name: 'Lakewood', slug: 'lakewood',
-        neighborhoods: ['Oakbrook', 'Steilacoom', 'Tillicum'],
-        landmarks: ['Thornewood Castle', 'Lakewold Gardens'],
-        context: 'Lakewood residents trust us for cleaning historic estates and modern lakeside properties with equal precision.'
-    }
+        slug: 'lakewood',
+        name: 'Lakewood',
+        county: 'Pierce County',
+        state: 'WA',
+        coordinates: { lat: 47.1718, lng: -122.5185 },
+        zipCodes: ['98498', '98499'],
+        neighborhoods: ['Lakewood Towne Center', 'Lake City', 'Tillicum', 'American Lake'],
+        nearbyAreas: ['tacoma', 'university-place', 'steilacoom'],
+        description: 'Serving Lakewood and surrounding areas.',
+    },
 ];
 
-export const SEATTLE_NEIGHBORHOODS: City[] = [
-    { name: 'Capitol Hill', slug: 'capitol-hill', neighborhoods: [], landmarks: ['Volunteer Park', 'Cal Anderson Park'], context: 'Capitol Hill apartments and townhomes require efficient cleaning of compact, high-use living spaces.' },
-    { name: 'Ballard', slug: 'ballard', neighborhoods: [], landmarks: ['Ballard Locks', 'Golden Gardens'], context: 'Ballard\'s mix of historic cottages and new builds benefit from our specialized dust and window care.' },
-    { name: 'Fremont', slug: 'fremont', neighborhoods: [], landmarks: ['Fremont Troll', 'Lenin Statue'], context: 'Fremont residents appreciate our attention to detail in artistic, uniquely structured homes and studios.' },
-    { name: 'Queen Anne', slug: 'queen-anne', neighborhoods: [], landmarks: ['Kerry Park', 'Counterbalance'], context: 'Queen Anne estates and historic homes require premium care for sensitive hardwood and classic fixtures.' },
-    { name: 'West Seattle', slug: 'west-seattle', neighborhoods: [], landmarks: ['Alki Beach', 'Lincoln Park'], context: 'West Seattle coastal homes need regular attention to window clarity and moisture-prone areas.' },
-    { name: 'Green Lake', slug: 'green-lake', neighborhoods: [], landmarks: ['Green Lake Park', 'Bathhouse Theatre'], context: 'Homes near Green Lake benefit from frequent allergen removal and floor sanitization for active households.' },
-    { name: 'Downtown', slug: 'downtown', neighborhoods: [], landmarks: ['Pike Place', 'Central Library'], context: 'Downtown high-rises often feature panoramic windows and high-end finishes that require specialized care.' },
-    { name: 'South Lake Union', slug: 'south-lake-union', neighborhoods: [], landmarks: ['Lake Union Park', 'MOHAI'], context: 'SLU professionals value our quick, reliable services for modern apartments and shared living spaces.' },
-];
+export const getCityBySlug = (slug: string): CityData | undefined => {
+    return cities.find(c => c.slug === slug);
+};
+
+export const getAllCitySlugs = (): string[] => {
+    return cities.map(c => c.slug);
+};

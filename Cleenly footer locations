@@ -1,0 +1,626 @@
+# CLEENLY — Footer & Locations Page
+## Техническое задание для Claude Code
+
+---
+
+## ОБЗОР
+
+Компактный футер с контекстной адаптацией + отдельная страница `/locations` с полным каталогом городов.
+
+**Принцип:** Футер чистый и читаемый. Полный список — на отдельной странице.
+
+---
+
+## ЧАСТЬ 1: FOOTER COMPONENT
+
+### Файл
+`components/shared/footer.tsx`
+
+### Props
+
+```typescript
+interface FooterProps {
+  currentCity?: string;      // slug города (если на странице города)
+  currentService?: string;   // slug сервиса (если на странице сервиса)
+}
+```
+
+### Конфигурация
+
+```typescript
+// lib/data/footer-config.ts
+
+import { getCityBySlug } from './cities';
+
+export const footerConfig = {
+  services: [
+    { name: 'Regular Cleaning', slug: 'regular-cleaning' },
+    { name: 'Deep Cleaning', slug: 'deep-cleaning' },
+    { name: 'Move-Out Cleaning', slug: 'move-out-cleaning' },
+  ],
+  
+  // Топ-5 городов для главной и страниц без контекста
+  defaultCities: ['seattle', 'bellevue', 'kirkland', 'redmond', 'tacoma'],
+  
+  company: [
+    { name: 'About', href: '/about' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'For Cleaners', href: '/join' },
+  ],
+  
+  legal: [
+    { name: 'Privacy', href: '/privacy' },
+    { name: 'Terms', href: '/terms' },
+  ],
+  
+  contact: {
+    email: 'hello@cleenly.com',
+  },
+};
+
+/**
+ * Возвращает список городов для футера в зависимости от контекста
+ */
+export function getFooterCities(currentCitySlug?: string): string[] {
+  if (!currentCitySlug) {
+    return footerConfig.defaultCities;
+  }
+  
+  const city = getCityBySlug(currentCitySlug);
+  if (!city) {
+    return footerConfig.defaultCities;
+  }
+  
+  // Текущий город + его nearby areas (максимум 5)
+  const cities = [currentCitySlug, ...city.nearbyAreas].slice(0, 5);
+  return cities;
+}
+```
+
+### Логика отображения городов
+
+| Контекст страницы | Города в футере |
+|-------------------|-----------------|
+| `/` (главная) | Seattle, Bellevue, Kirkland, Redmond, Tacoma |
+| `/pricing`, `/about`, `/faq` | Seattle, Bellevue, Kirkland, Redmond, Tacoma |
+| `/seattle` | Seattle, Shoreline, Burien, Tukwila, Bellevue |
+| `/kirkland` | Kirkland, Bellevue, Redmond, Bothell, Woodinville |
+| `/kirkland/deep-cleaning` | Kirkland, Bellevue, Redmond, Bothell, Woodinville |
+
+### Компонент
+
+```tsx
+// components/shared/footer.tsx
+
+import Link from 'next/link';
+import { footerConfig, getFooterCities } from '@/lib/data/footer-config';
+import { getCityBySlug } from '@/lib/data/cities';
+
+interface FooterProps {
+  currentCity?: string;
+  currentService?: string;
+}
+
+export function Footer({ currentCity, currentService }: FooterProps) {
+  const citySlugs = getFooterCities(currentCity);
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="border-t border-border bg-background">
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        {/* Main Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          
+          {/* Logo & Tagline */}
+          <div className="col-span-2 md:col-span-1">
+            <Link href="/" className="text-xl font-semibold">
+              CLEENLY
+            </Link>
+            <p className="mt-2 text-sm text-muted-foreground">
+              We clean. You live.
+            </p>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="font-medium mb-4">Services</h4>
+            <ul className="space-y-2">
+              {footerConfig.services.map((service) => (
+                <li key={service.slug}>
+                  <Link 
+                    href={`/services/${service.slug}`}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Cities */}
+          <div>
+            <h4 className="font-medium mb-4">Cities</h4>
+            <ul className="space-y-2">
+              {citySlugs.map((slug) => {
+                const city = getCityBySlug(slug);
+                if (!city) return null;
+                
+                // Если есть currentService, линкуем на город+сервис
+                const href = currentService 
+                  ? `/${slug}/${currentService}` 
+                  : `/${slug}`;
+                
+                return (
+                  <li key={slug}>
+                    <Link 
+                      href={href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {city.name}
+                    </Link>
+                  </li>
+                );
+              })}
+              <li>
+                <Link 
+                  href="/locations"
+                  className="text-sm text-foreground hover:underline"
+                >
+                  All locations →
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="font-medium mb-4">Company</h4>
+            <ul className="space-y-2">
+              {footerConfig.company.map((item) => (
+                <li key={item.href}>
+                  <Link 
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-sm text-muted-foreground">
+            <a 
+              href={`mailto:${footerConfig.contact.email}`}
+              className="hover:text-foreground transition-colors"
+            >
+              {footerConfig.contact.email}
+            </a>
+          </div>
+          
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <span>© {currentYear} CLEENLY</span>
+            <span>·</span>
+            {footerConfig.legal.map((item, i) => (
+              <span key={item.href} className="flex items-center gap-4">
+                <Link 
+                  href={item.href}
+                  className="hover:text-foreground transition-colors"
+                >
+                  {item.name}
+                </Link>
+                {i < footerConfig.legal.length - 1 && <span>·</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+```
+
+### Использование в Layout
+
+```tsx
+// app/layout.tsx
+import { Footer } from '@/components/shared/footer';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
+
+### Использование на странице города
+
+```tsx
+// app/[city]/page.tsx
+import { Footer } from '@/components/shared/footer';
+
+export default function CityPage({ params }) {
+  return (
+    <>
+      <main>{/* ... */}</main>
+      <Footer currentCity={params.city} />
+    </>
+  );
+}
+```
+
+### Использование на странице город+сервис
+
+```tsx
+// app/[city]/[service]/page.tsx
+import { Footer } from '@/components/shared/footer';
+
+export default function CityServicePage({ params }) {
+  return (
+    <>
+      <main>{/* ... */}</main>
+      <Footer currentCity={params.city} currentService={params.service} />
+    </>
+  );
+}
+```
+
+---
+
+## ЧАСТЬ 2: LOCATIONS PAGE
+
+### URL
+`/locations`
+
+### Цель
+Полный каталог всех городов. SEO-ценность + удобная навигация.
+
+### SEO
+
+```typescript
+// app/locations/page.tsx
+
+export const metadata: Metadata = {
+  title: 'Service Areas | House Cleaning in 22 Seattle Cities | CLEENLY',
+  description: 'CLEENLY serves 22 cities across Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Tacoma, Everett, and more. Find house cleaning in your area.',
+  alternates: {
+    canonical: 'https://cleenly.com/locations',
+  },
+};
+```
+
+### Конфигурация регионов
+
+```typescript
+// lib/data/regions.ts
+
+export const regions = {
+  'Seattle Area': {
+    description: 'Seattle and surrounding neighborhoods',
+    cities: ['seattle', 'burien', 'tukwila'],
+  },
+  'Eastside': {
+    description: 'Bellevue, Kirkland, Redmond and neighboring cities',
+    cities: ['bellevue', 'kirkland', 'redmond', 'sammamish', 'issaquah', 'bothell', 'woodinville', 'mercer-island', 'medina', 'clyde-hill'],
+  },
+  'South King County': {
+    description: 'Renton, Kent, and south King County',
+    cities: ['renton', 'kent', 'federal-way', 'auburn'],
+  },
+  'North Sound': {
+    description: 'Shoreline to Everett',
+    cities: ['shoreline', 'edmonds', 'lynnwood', 'everett'],
+  },
+  'Pierce County': {
+    description: 'Tacoma and south Sound',
+    cities: ['tacoma', 'lakewood'],
+  },
+};
+
+export const getRegionNames = () => Object.keys(regions);
+```
+
+### Компонент страницы
+
+```tsx
+// app/locations/page.tsx
+
+import Link from 'next/link';
+import { Metadata } from 'next';
+import { regions } from '@/lib/data/regions';
+import { getCityBySlug } from '@/lib/data/cities';
+import { services } from '@/lib/data/services';
+import { JsonLd } from '@/components/shared/json-ld';
+
+export const metadata: Metadata = {
+  title: 'Service Areas | House Cleaning in 22 Seattle Cities | CLEENLY',
+  description: 'CLEENLY serves 22 cities across Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Tacoma, Everett, and more. Find house cleaning in your area.',
+  alternates: {
+    canonical: 'https://cleenly.com/locations',
+  },
+};
+
+export default function LocationsPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.com" },
+      { "@type": "ListItem", "position": 2, "name": "Locations" }
+    ]
+  };
+
+  // Считаем общее количество городов
+  const totalCities = Object.values(regions).reduce(
+    (sum, region) => sum + region.cities.length, 
+    0
+  );
+
+  return (
+    <main>
+      <JsonLd data={breadcrumbSchema} />
+
+      {/* Breadcrumbs */}
+      <nav className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-3 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">Home</Link>
+          <span className="mx-2">/</span>
+          <span className="text-foreground">Locations</span>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            House Cleaning Service Areas
+          </h1>
+          <p className="mt-6 text-xl text-muted-foreground max-w-2xl">
+            We serve {totalCities} cities across Greater Seattle. 
+            Regular cleaning, deep cleaning, and move-out cleaning available in all locations.
+          </p>
+        </div>
+      </section>
+
+      {/* Regions Grid */}
+      <section className="pb-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Object.entries(regions).map(([regionName, regionData]) => (
+              <div key={regionName} className="border border-border rounded-lg p-6">
+                <h2 className="text-xl font-semibold mb-2">{regionName}</h2>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {regionData.description}
+                </p>
+                <ul className="space-y-2">
+                  {regionData.cities.map((slug) => {
+                    const city = getCityBySlug(slug);
+                    if (!city) return null;
+                    return (
+                      <li key={slug}>
+                        <Link 
+                          href={`/${slug}`}
+                          className="text-foreground hover:underline"
+                        >
+                          {city.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-8">Services Available in All Locations</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {services.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="bg-background p-6 rounded-lg border border-border hover:border-foreground/20 transition-colors"
+              >
+                <h3 className="text-lg font-semibold mb-2">{service.name}</h3>
+                <p className="text-sm text-muted-foreground mb-3">
+                  {service.shortDescription}
+                </p>
+                <span className="text-sm font-medium">{service.priceRange}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-2xl font-semibold mb-4">Don't see your city?</h2>
+          <p className="text-muted-foreground mb-6">
+            We're expanding. Enter your ZIP code to check availability or join our waitlist.
+          </p>
+          <Link 
+            href="/book"
+            className="inline-block bg-foreground text-background px-8 py-4 rounded-lg font-medium hover:bg-foreground/90 transition-colors"
+          >
+            Check Availability
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+```
+
+---
+
+## ЧАСТЬ 3: ВИЗУАЛЬНЫЙ МАКЕТ
+
+### Footer (Desktop)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│  CLEENLY              Services              Cities           Company    │
+│  We clean. You live.  Regular Cleaning      Seattle          About      │
+│                       Deep Cleaning         Bellevue         Pricing    │
+│                       Move-Out Cleaning     Kirkland         FAQ        │
+│                                             Redmond          For Cleaners│
+│                                             Tacoma                      │
+│                                             All locations →             │
+│                                                                         │
+│  ───────────────────────────────────────────────────────────────────────│
+│                                                                         │
+│  hello@cleenly.com                          © 2025 CLEENLY · Privacy · Terms │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Footer (Mobile)
+
+```
+┌─────────────────────────────┐
+│                             │
+│  CLEENLY                    │
+│  We clean. You live.        │
+│                             │
+│  Services                   │
+│  Regular Cleaning           │
+│  Deep Cleaning              │
+│  Move-Out Cleaning          │
+│                             │
+│  Cities                     │
+│  Seattle                    │
+│  Bellevue                   │
+│  Kirkland                   │
+│  Redmond                    │
+│  Tacoma                     │
+│  All locations →            │
+│                             │
+│  Company                    │
+│  About                      │
+│  Pricing                    │
+│  FAQ                        │
+│  For Cleaners               │
+│                             │
+│  ───────────────────────────│
+│                             │
+│  hello@cleenly.com          │
+│  © 2025 CLEENLY             │
+│  Privacy · Terms            │
+│                             │
+└─────────────────────────────┘
+```
+
+### Locations Page
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│  Home / Locations                                                       │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  House Cleaning Service Areas                                           │
+│                                                                         │
+│  We serve 22 cities across Greater Seattle.                             │
+│  Regular cleaning, deep cleaning, and move-out cleaning                 │
+│  available in all locations.                                            │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐         │
+│  │ Seattle Area    │  │ Eastside        │  │ South King      │         │
+│  │                 │  │                 │  │ County          │         │
+│  │ Seattle         │  │ Bellevue        │  │                 │         │
+│  │ Burien          │  │ Kirkland        │  │ Renton          │         │
+│  │ Tukwila         │  │ Redmond         │  │ Kent            │         │
+│  │                 │  │ Sammamish       │  │ Federal Way     │         │
+│  │                 │  │ Issaquah        │  │ Auburn          │         │
+│  │                 │  │ Bothell         │  │                 │         │
+│  │                 │  │ Woodinville     │  │                 │         │
+│  │                 │  │ Mercer Island   │  │                 │         │
+│  │                 │  │ Medina          │  │                 │         │
+│  │                 │  │ Clyde Hill      │  │                 │         │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘         │
+│                                                                         │
+│  ┌─────────────────┐  ┌─────────────────┐                              │
+│  │ North Sound     │  │ Pierce County   │                              │
+│  │                 │  │                 │                              │
+│  │ Shoreline       │  │ Tacoma          │                              │
+│  │ Edmonds         │  │ Lakewood        │                              │
+│  │ Lynnwood        │  │                 │                              │
+│  │ Everett         │  │                 │                              │
+│  └─────────────────┘  └─────────────────┘                              │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## CHECKLIST ДЛЯ CLAUDE CODE
+
+```
+FOOTER:
+[ ] Создать lib/data/footer-config.ts
+[ ] Создать lib/data/regions.ts
+[ ] Создать components/shared/footer.tsx
+[ ] Интегрировать Footer в layout.tsx
+[ ] Передавать currentCity/currentService из страниц
+[ ] Проверить мобильную адаптацию
+
+LOCATIONS PAGE:
+[ ] Создать app/locations/page.tsx
+[ ] Meta tags
+[ ] Breadcrumbs
+[ ] Regions grid с городами
+[ ] Services section
+[ ] CTA section
+[ ] JSON-LD BreadcrumbList
+
+ТЕСТИРОВАНИЕ:
+[ ] Footer на главной — топ-5 городов
+[ ] Footer на /seattle — Seattle + nearby
+[ ] Footer на /kirkland/deep-cleaning — Kirkland + nearby, ссылки на deep-cleaning
+[ ] /locations — все 22 города отображаются
+[ ] Мобильная версия футера
+
+→ COMMIT: "feat: add footer component and locations page"
+```
+
+---
+
+## ПРИМЕЧАНИЯ
+
+1. **Контекстная адаптация важна для SEO**
+   - На странице Kirkland в футере должны быть nearby cities
+   - Это создаёт правильную internal linking структуру
+
+2. **Ссылки на город+сервис**
+   - Если пользователь на `/kirkland/deep-cleaning`
+   - Ссылка "Bellevue" в футере ведёт на `/bellevue/deep-cleaning`
+   - Сохраняем контекст сервиса
+
+3. **"All locations" всегда видна**
+   - Даже если показываем nearby cities
+   - Даёт путь к полному каталогу
+
+4. **Мобайл-first**
+   - На мобильном колонки складываются вертикально
+   - Футер остаётся читаемым
+
+---
+
+*Версия 1.0 — Декабрь 2024*
