@@ -4,9 +4,6 @@ import { Button } from "@/components/ui/button";
 export function Hero() {
   return (
     <section className="relative flex min-h-[80vh] items-center overflow-hidden animate-fadeInUp">
-      {/* Decorative Background Pattern - Top Zone */}
-
-
       <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10">
         {/* Left Content - 6 columns */}
         <div className="col-span-12 space-y-8 md:col-span-6">
@@ -32,6 +29,12 @@ export function Hero() {
         <div className="hidden md:flex col-span-6 items-center justify-center">
           <img src="/hero-image.jpg" alt="Bright empty living room with morning light" className="w-full h-auto rounded-[8px] object-cover" />
         </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center w-full px-6">
+        <p className="text-sm font-medium tracking-widest uppercase text-gray-500 opacity-80">
+          We clean. You live.
+        </p>
       </div>
     </section>
   );
