@@ -26,8 +26,12 @@ export function Hero() {
         </div>
 
         {/* Right Content - Hero Image */}
-        <div className="hidden md:flex col-span-6 items-center justify-center">
-          <img src="/hero-image.jpg" alt="Bright empty living room with morning light" className="w-full h-auto rounded-[8px] object-cover" />
+        <div className="col-span-12 md:col-span-6 flex items-center justify-center">
+          <img
+            src="/hero-image.jpg"
+            alt="Bright empty living room with morning light"
+            className="w-full h-auto rounded-[8px] object-cover aspect-[16/9] md:aspect-auto"
+          />
         </div>
       </div>
 

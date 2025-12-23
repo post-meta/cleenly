@@ -36,14 +36,18 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-4">
           {steps.map((step) => (
-            <div key={step.number} className="space-y-4">
-              <div className="text-4xl font-semibold text-accent">
+            <div key={step.number} className="relative space-y-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/5 text-2xl font-bold text-accent">
                 {step.number}
               </div>
-              <h3 className="text-lg font-semibold text-foreground">{step.title}</h3>
-              <p className="text-sm text-gray-600">{step.description}</p>
+              <h3 className="text-xl font-semibold text-foreground">
+                {step.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                {step.description}
+              </p>
             </div>
           ))}
         </div>
