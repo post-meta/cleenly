@@ -1,9 +1,9 @@
-import { City } from '@/lib/data/cities';
-import { ServiceMetadata } from '@/lib/data/services-data';
+import { CityData } from '@/lib/data/cities';
+import { ServiceData } from '@/lib/data/services';
 
 interface LocalFAQProps {
-    city: City;
-    service?: ServiceMetadata;
+    city: CityData;
+    service?: ServiceData;
 }
 
 export function LocalFAQ({ city, service }: LocalFAQProps) {
@@ -23,8 +23,8 @@ export function LocalFAQ({ city, service }: LocalFAQProps) {
             a: `Most ${serviceName.toLowerCase()} appointments in ${city.name} take between ${service?.duration || '2-4 hours'}.`,
         },
         {
-            q: `What is unique about cleaning homes in ${city.name}?`,
-            a: city.context,
+            q: `Are your cleaners insured?`,
+            a: `Yes, all cleaners on the CLEENLY platform are fully insured and background-checked for your peace of mind.`,
         },
     ];
 
