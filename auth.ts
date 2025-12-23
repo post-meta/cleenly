@@ -8,16 +8,26 @@ import { sendMagicLinkEmail } from '@/lib/email';
 import { supabase } from '@/lib/supabase';
 import crypto from 'crypto';
 
-if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.NEXTAUTH_SECRET) {
-    throw new Error('Missing Supabase or NextAuth environment variables in auth.ts');
+const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
+
+if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY || !secret) {
+    const missing = [];
+    if (!process.env.SUPABASE_URL) missing.push('SUPABASE_URL');
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) missing.push('SUPABASE_SERVICE_ROLE_KEY');
+    if (!secret) missing.push('AUTH_SECRET/NEXTAUTH_SECRET');
+
+    console.error('Missing required environment variables:', missing.join(', '));
+    // In production, we don't want to throw and crash the entire edge runtime if possible,
+    // but NextAuth will fail anyway. Let's provide a clear log.
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
     ...authConfig,
     trustHost: true,
+    secret: secret,
     adapter: SupabaseAdapter({
-        url: process.env.SUPABASE_URL,
-        secret: process.env.SUPABASE_SERVICE_ROLE_KEY,
+        url: process.env.SUPABASE_URL!,
+        secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
     }),
     session: { strategy: 'jwt' },
     providers: [

@@ -33,6 +33,7 @@ add_env_var "NEXT_PUBLIC_SUPABASE_ANON_KEY" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ
 # NextAuth
 add_env_var "NEXTAUTH_URL" "https://www.cleenly.app/"
 add_env_var "NEXTAUTH_SECRET" "ozmyR21dpaWvsYYMo6tlxw/PnS--JNBZLd1+q1ZABuhKwrQ="
+add_env_var "AUTH_SECRET" "ozmyR21dpaWvsYYMo6tlxw/PnS--JNBZLd1+q1ZABuhKwrQ="
 
 # Resend
 add_env_var "RESEND_API_KEY" "re_dgK9uuc1_GutXC74AVXftnciWrbGHVrjt"
