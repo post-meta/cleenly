@@ -1,0 +1,370 @@
+# Стратегия локальных landing pages для CLEENLY
+
+## Понял задачу
+
+Ты хочешь построить сетку landing pages для:
+1. **SEO** — Google, местный поиск
+2. **Voice Search** — "find house cleaner in Kirkland"
+3. **AEO (AI Engine Optimization)** — ChatGPT, Gemini, Perplexity, Claude рекомендуют CLEENLY
+
+Максимум релевантных страниц = больше точек входа.
+
+---
+
+## Архитектура страниц
+
+### Уровень 1: Главные сервисы
+```
+/services/regular-cleaning
+/services/deep-cleaning
+/services/move-out-cleaning
+```
+
+### Уровень 2: Города
+```
+/seattle
+/bellevue
+/kirkland
+/redmond
+/renton
+/tacoma
+/everett
+/bothell
+/sammamish
+/issaquah
+/mercer-island
+/woodinville
+/shoreline
+/burien
+/kent
+/federal-way
+/auburn
+/lynnwood
+/edmonds
+/lakewood
+```
+
+### Уровень 3: Город + Сервис (главная ценность)
+```
+/seattle/deep-cleaning
+/seattle/move-out-cleaning
+/seattle/regular-cleaning
+
+/bellevue/deep-cleaning
+/bellevue/move-out-cleaning
+/bellevue/regular-cleaning
+
+/kirkland/deep-cleaning
+... и так далее
+```
+
+### Уровень 4: Районы внутри городов (Seattle особенно)
+```
+/seattle/capitol-hill
+/seattle/ballard
+/seattle/fremont
+/seattle/queen-anne
+/seattle/university-district
+/seattle/beacon-hill
+/seattle/west-seattle
+/seattle/columbia-city
+/seattle/ravenna
+/seattle/wallingford
+/seattle/green-lake
+/seattle/northgate
+/seattle/south-lake-union
+/seattle/downtown
+```
+
+### Уровень 5: Район + Сервис
+```
+/seattle/capitol-hill/deep-cleaning
+/seattle/ballard/move-out-cleaning
+```
+
+---
+
+## Математика страниц
+
+```
+Сервисы:           3 страницы
+Города:           20 страниц
+Город + Сервис:   20 × 3 = 60 страниц
+Районы Seattle:   15 страниц
+Район + Сервис:   15 × 3 = 45 страниц
+
+ИТОГО: ~143 страницы
+```
+
+Это реалистично и управляемо.
+
+---
+
+## Структура URL и контента
+
+### Пример: /bellevue/deep-cleaning
+
+**URL:** `cleenly.com/bellevue/deep-cleaning`
+
+**Title:** `Deep Cleaning Bellevue WA | $150-$300 | Book Online | CLEENLY`
+
+**H1:** `Deep Cleaning in Bellevue`
+
+**Meta Description:** `Book deep cleaning in Bellevue WA. Inside appliances, baseboards, detailed work. $150-$300 for most homes. See your price, pick a time, book in 2 minutes.`
+
+**Первые 100 слов (критично для AI):**
+```
+Deep cleaning in Bellevue, Washington costs $150-$300 for most homes. 
+CLEENLY provides deep cleaning services throughout Bellevue including 
+Downtown Bellevue, Crossroads, Factoria, Newport, Somerset, and Eastgate 
+neighborhoods. Deep cleaning includes inside oven and refrigerator, 
+baseboards, ceiling fans, window sills, and detailed cleaning of all surfaces. 
+Book online in 2 minutes — see your exact price before booking.
+```
+
+---
+
+## Шаблон страницы (город + сервис)
+
+```tsx
+// app/[city]/[service]/page.tsx
+
+Секции:
+1. Hero (H1, intro, CTA)
+2. What's Included (checklist)
+3. Pricing Table (для этого города)
+4. How It Works (3-4 шага)
+5. Service Areas (районы внутри города)
+6. FAQ (5-7 вопросов специфичных для комбинации)
+7. Book CTA
+8. Related Services (links)
+```
+
+---
+
+## FAQ для каждой комбинации
+
+Каждая страница должна отвечать на вопросы которые люди спрашивают голосом:
+
+### /bellevue/deep-cleaning FAQ:
+```
+Q: How much does deep cleaning cost in Bellevue?
+A: Deep cleaning in Bellevue costs $150-$300 for most homes...
+
+Q: What areas of Bellevue do you serve?
+A: We serve all Bellevue neighborhoods including Downtown, Crossroads...
+
+Q: How long does deep cleaning take in Bellevue?
+A: Deep cleaning typically takes 3-5 hours depending on home size...
+
+Q: Do you deep clean apartments in Bellevue?
+A: Yes, we deep clean apartments throughout Bellevue...
+```
+
+---
+
+## Schema для каждой страницы
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Deep Cleaning Bellevue",
+  "description": "Professional deep cleaning service in Bellevue WA",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://cleenly.com/#LocalBusiness",
+    "name": "CLEENLY"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Bellevue",
+    "containedInPlace": {
+      "@type": "State",
+      "name": "Washington"
+    }
+  },
+  "serviceType": "Deep Cleaning",
+  "offers": {
+    "@type": "Offer",
+    "priceRange": "$150-$300",
+    "priceCurrency": "USD"
+  }
+}
+```
+
+---
+
+## Как AI-ассистенты находят информацию
+
+### Что важно для ChatGPT/Gemini/Claude:
+
+1. **Чёткое определение entity в первых предложениях**
+   - Что это (deep cleaning)
+   - Где (Bellevue, WA)
+   - Сколько стоит
+   - Как заказать
+
+2. **FAQ в формате Q&A**
+   - AI отлично парсит structured Q&A
+   - Отвечает на конкретные вопросы
+
+3. **Таблицы с ценами**
+   - AI извлекает данные из таблиц
+
+4. **Списки районов/сервисов**
+   - Помогает понять coverage
+
+5. **llms.txt** (уже есть в твоём плане)
+   - Добавим секцию по городам
+
+---
+
+## Обновление llms.txt
+
+```markdown
+## Service Areas - Detailed
+
+### Seattle
+We serve all Seattle neighborhoods: Capitol Hill, Ballard, Fremont, Queen Anne, 
+University District, Beacon Hill, West Seattle, Columbia City, Ravenna, 
+Wallingford, Green Lake, Northgate, South Lake Union, Downtown.
+
+### Eastside
+Bellevue, Kirkland, Redmond, Bothell, Woodinville, Sammamish, Issaquah, 
+Mercer Island.
+
+### South King County  
+Renton, Kent, Federal Way, Auburn, Burien, Tukwila.
+
+### North Sound
+Shoreline, Edmonds, Lynnwood, Everett.
+
+### South Sound
+Tacoma, Lakewood, University Place.
+
+## Pricing by City
+
+| City | Regular | Deep | Move-Out |
+|------|---------|------|----------|
+| Seattle | $100-200 | $150-300 | $200-400 |
+| Bellevue | $100-200 | $150-300 | $200-400 |
+| Kirkland | $100-200 | $150-300 | $200-400 |
+...
+```
+
+---
+
+## Приоритет реализации
+
+### Фаза 1: Города (20 страниц)
+```
+Неделя 1:
+- /seattle
+- /bellevue  
+- /kirkland
+- /redmond
+- /renton
+
+Неделя 2:
+- Остальные 15 городов
+```
+
+### Фаза 2: Город + Сервис (60 страниц)
+```
+Неделя 3-4:
+- Все комбинации город/сервис
+- Шаблонизированный контент с уникальными элементами
+```
+
+### Фаза 3: Районы Seattle (15 страниц)
+```
+Неделя 5:
+- Все районы Seattle
+```
+
+### Фаза 4: Район + Сервис (45 страниц)
+```
+Неделя 6:
+- Все комбинации район/сервис
+```
+
+---
+
+## Техническая реализация
+
+### Dynamic Routes в Next.js
+
+```
+app/
+├── [city]/
+│   ├── page.tsx              // /bellevue
+│   └── [service]/
+│       └── page.tsx          // /bellevue/deep-cleaning
+├── seattle/
+│   └── [neighborhood]/
+│       ├── page.tsx          // /seattle/capitol-hill
+│       └── [service]/
+│           └── page.tsx      // /seattle/capitol-hill/deep-cleaning
+```
+
+### Data файлы
+
+```tsx
+// lib/data/cities.ts
+export const cities = [
+  {
+    slug: 'seattle',
+    name: 'Seattle',
+    state: 'WA',
+    neighborhoods: ['capitol-hill', 'ballard', 'fremont', ...],
+    coordinates: { lat: 47.6062, lng: -122.3321 },
+  },
+  {
+    slug: 'bellevue',
+    name: 'Bellevue',
+    state: 'WA',
+    neighborhoods: ['downtown', 'crossroads', 'factoria', ...],
+    coordinates: { lat: 47.6101, lng: -122.2015 },
+  },
+  // ...
+];
+
+// lib/data/services.ts
+export const services = [
+  {
+    slug: 'regular-cleaning',
+    name: 'Regular Cleaning',
+    priceRange: '$100-$200',
+    duration: '2-3 hours',
+    includes: [...],
+  },
+  // ...
+];
+```
+
+---
+
+## Уникальность контента
+
+Проблема: Google не любит duplicate content.
+
+Решение: Каждая страница должна иметь уникальные элементы:
+
+1. **Первый параграф** — уникальный для комбинации
+2. **FAQ** — 2-3 уникальных вопроса
+3. **Service areas** — специфичные районы
+4. **Local insights** — что-то про город ("Bellevue apartments often have...")
+5. **Pricing** — может немного отличаться или акцент на типичный размер жилья
+
+---
+
+## Хочешь начнём?
+
+Могу подготовить:
+
+1. **Страница /services** — hub всех сервисов
+2. **Шаблон городской страницы** — /bellevue как пример
+3. **Шаблон город+сервис** — /bellevue/deep-cleaning как пример
+4. **Data structure** — cities.ts, services.ts
+5. **Полный список URL** для sitemap
