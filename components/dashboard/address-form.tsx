@@ -22,7 +22,7 @@ export function AddressForm({ userId, initialData, onSuccess }: AddressFormProps
     const [formData, setFormData] = useState({
         label: initialData?.label || '',
         street_address: initialData?.street_address || '',
-        apartment: initialData?.apartment || '',
+        unit: initialData?.unit || '',
         city: initialData?.city || 'Seattle',
         state: initialData?.state || 'WA',
         zip_code: initialData?.zip_code || '',
@@ -116,10 +116,10 @@ export function AddressForm({ userId, initialData, onSuccess }: AddressFormProps
 
                 <div>
                     <Input
-                        name="apartment"
+                        name="unit"
                         label="Apartment/Unit (optional)"
                         placeholder="Apt 4B"
-                        value={formData.apartment}
+                        value={formData.unit}
                         onChange={handleChange}
                     />
                 </div>

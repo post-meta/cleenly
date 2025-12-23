@@ -76,9 +76,9 @@ export default async function AddressesPage() {
                                     <p className="text-gray-600 text-sm">
                                         {address.street_address}
                                     </p>
-                                    {address.apartment && (
+                                    {address.unit && (
                                         <p className="text-gray-600 text-sm">
-                                            {address.apartment}
+                                            {address.unit}
                                         </p>
                                     )}
                                     <p className="text-gray-600 text-sm">
