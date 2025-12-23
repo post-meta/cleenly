@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client'; // Keep if used elsewhere, but not used now in this component
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader2 } from 'lucide-react';
+
+import { saveAddressAction } from '@/app/dashboard/addresses/actions';
 
 interface AddressFormProps {
     userId: string;
@@ -15,7 +17,6 @@ interface AddressFormProps {
 
 export function AddressForm({ userId, initialData, onSuccess }: AddressFormProps) {
     const router = useRouter();
-    const supabase = createClient();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -42,42 +43,21 @@ export function AddressForm({ userId, initialData, onSuccess }: AddressFormProps
         setError('');
 
         try {
-            if (formData.is_default) {
-                // Reset other default addresses for this user
-                await supabase
-                    .from('addresses')
-                    .update({ is_default: false })
-                    .eq('user_id', userId);
+            const result = await saveAddressAction(userId, formData, initialData?.id);
+
+            if (result.error) {
+                setError(result.error);
+                return;
             }
-
-            const payload = {
-                ...formData,
-                user_id: userId,
-            };
-
-            let result;
-            if (initialData?.id) {
-                result = await supabase
-                    .from('addresses')
-                    .update(payload)
-                    .eq('id', initialData.id);
-            } else {
-                result = await supabase
-                    .from('addresses')
-                    .insert([payload]);
-            }
-
-            if (result.error) throw result.error;
 
             if (onSuccess) {
                 onSuccess();
             } else {
                 router.push('/dashboard/addresses');
-                router.refresh();
             }
         } catch (err: any) {
             console.error('Error saving address:', err);
-            setError(err.message || 'Failed to save address');
+            setError('Failed to save address. Please try again.');
         } finally {
             setLoading(false);
         }
