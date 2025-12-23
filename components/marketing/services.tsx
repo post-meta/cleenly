@@ -71,7 +71,7 @@ export function Services() {
           {services.map((service) => (
             <div
               key={service.id}
-              className="group flex flex-col rounded-[12px] border border-gray-200 bg-white p-8 transition-all duration-300 hover:border-accent hover:shadow-xl"
+              className="group flex flex-col rounded-[12px] border border-gray-200 bg-white p-8 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-gray-300"
             >
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-[8px] bg-accent/5 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                 <service.icon className="h-6 w-6" />

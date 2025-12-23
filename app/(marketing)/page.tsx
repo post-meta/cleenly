@@ -63,6 +63,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { FadeIn } from "@/components/ui/fade-in";
+
 export default function HomePage() {
   const seattle = cities.find(c => c.slug === 'seattle')!;
   const localBusinessSchema = generateLocalBusinessSchema(seattle);
@@ -77,13 +79,27 @@ export default function HomePage() {
       <JsonLd data={faqSchema} />
       <Hero />
       <ImpactBar />
-      <HowItWorks />
-      <Services />
-      <PricingPreview />
-      <WhyUs />
-      <FAQ />
-      <ServiceAreas />
-      <CTA />
+      <FadeIn>
+        <HowItWorks />
+      </FadeIn>
+      <FadeIn>
+        <Services />
+      </FadeIn>
+      <FadeIn>
+        <PricingPreview />
+      </FadeIn>
+      <FadeIn>
+        <WhyUs />
+      </FadeIn>
+      <FadeIn>
+        <FAQ />
+      </FadeIn>
+      <FadeIn>
+        <ServiceAreas />
+      </FadeIn>
+      <FadeIn>
+        <CTA />
+      </FadeIn>
     </>
   );
 }

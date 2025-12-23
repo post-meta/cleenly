@@ -37,6 +37,8 @@
   /* sage */
   --color-ring: #3D5A4C;
   /* forest */
+  --color-muted: #F5F5F5;
+  --color-muted-foreground: #737373;
 
   /* Spacing */
   --spacing-xs: 24px;
