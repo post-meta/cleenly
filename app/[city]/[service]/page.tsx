@@ -9,15 +9,11 @@ import {
     generateFAQSchema,
     generateBreadcrumbSchema
 } from '@/lib/utils/schema-generators';
-import {
-    generateIntroText,
-    generateWhyChooseText,
-    generateLocalFAQs
-} from '@/lib/utils/content-generator';
 import { ServiceHero } from '@/components/shared/city-hero';
 import { Button } from '@/components/ui/button';
 import { AccordionFAQ } from '@/components/shared/accordion-faq';
 import { Footer } from '@/components/shared/footer';
+import { getCityContent, getServiceIntro } from '@/lib/utils/content-parser';
 
 interface PageProps {
     params: Promise<{ city: string; service: string }>;
@@ -56,12 +52,13 @@ export default async function CityServicePage({ params }: PageProps) {
 
     if (!city || !service) notFound();
 
-    const introText = generateIntroText(city, service);
-    const whyChooseText = generateWhyChooseText(city, service);
-    const localFaqs = generateLocalFAQs(city, service);
+    const content = getCityContent(citySlug);
+    const serviceIntro = getServiceIntro(citySlug, serviceSlug);
 
     const serviceSchema = generateServiceSchema(city, service);
-    const faqSchema = generateFAQSchema(localFaqs);
+    const localFaqs = content?.localFAQs || [];
+    const allFaqs = [...localFaqs, ...service.faqs];
+    const faqSchema = generateFAQSchema(allFaqs);
     const breadcrumbSchema = generateBreadcrumbSchema([
         { name: 'Home', url: 'https://cleenly.app' },
         { name: city.name, url: `https://cleenly.app/${city.slug}` },
@@ -88,7 +85,7 @@ export default async function CityServicePage({ params }: PageProps) {
             <ServiceHero
                 cityName={city.name}
                 serviceName={service.name}
-                introText={introText}
+                introText={serviceIntro || `Expert ${service.name.toLowerCase()} in ${city.name}.`}
                 priceRange={service.priceRange}
                 citySlug={city.slug}
             />
@@ -144,7 +141,7 @@ export default async function CityServicePage({ params }: PageProps) {
                             </p>
                             <div className="bg-accent/5 p-8 rounded-[12px] border-l-4 border-accent">
                                 <p className="text-gray-700 font-medium">
-                                    {whyChooseText}
+                                    {content?.whyChoose || `Professional ${service.name.toLowerCase()} tailored for your homes in ${city.name}. Our background-checked cleaners ensure local quality you can trust.`}
                                 </p>
                             </div>
                         </div>
@@ -153,7 +150,7 @@ export default async function CityServicePage({ params }: PageProps) {
             </section>
 
             {/* Local FAQs */}
-            <AccordionFAQ faqs={localFaqs} title={`${service.name} FAQ for ${city.name}`} />
+            <AccordionFAQ faqs={allFaqs} title={`${service.name} FAQ for ${city.name}`} />
 
             {/* Service Coverage */}
             <section className="py-24 border-t border-gray-100 bg-gray-50">
@@ -161,9 +158,13 @@ export default async function CityServicePage({ params }: PageProps) {
                     <h2 className="text-xl font-semibold mb-6">Service Coverage in {city.name}</h2>
                     <div className="flex flex-wrap justify-center gap-2">
                         {city.neighborhoods.map(hood => (
-                            <span key={hood} className="px-3 py-1 bg-white border border-gray-200 rounded-[4px] text-xs text-gray-500">
+                            <Link
+                                key={hood}
+                                href={`/book?city=${city.slug}&service=${service.slug}&neighborhood=${encodeURIComponent(hood)}`}
+                                className="px-3 py-1 bg-white border border-gray-200 rounded-[4px] text-xs text-gray-500 hover:border-accent/40 hover:text-accent transition-all"
+                            >
                                 {hood}
-                            </span>
+                            </Link>
                         ))}
                     </div>
                 </div>

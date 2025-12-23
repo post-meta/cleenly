@@ -33,10 +33,13 @@ function generateBookingRef(): string {
 export function BookingWizard() {
   const searchParams = useSearchParams();
   const initialService = searchParams.get("service") as ServiceType | null;
+  const initialNeighborhood = searchParams.get("neighborhood");
+  const initialCity = searchParams.get("city");
 
   const [step, setStep] = useState(initialService ? 2 : 1);
   const [formData, setFormData] = useState<Partial<BookingFormData>>({
     service_type: initialService || undefined,
+    address: initialNeighborhood ? `${initialNeighborhood}, ${initialCity || ''}` : undefined,
     condition: "average",
     addons: [],
   });

@@ -9,6 +9,7 @@ import { CityHero } from '@/components/shared/city-hero';
 import { Button } from '@/components/ui/button';
 import { AccordionFAQ } from '@/components/shared/accordion-faq';
 import { Footer } from '@/components/shared/footer';
+import { getCityContent } from '@/lib/utils/content-parser';
 
 interface PageProps {
     params: Promise<{ city: string }>;
@@ -35,7 +36,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CityPage({ params }: PageProps) {
     const { city: citySlug } = await params;
     const city = getCityBySlug(citySlug);
-    if (!city) notFound();
+    const content = getCityContent(citySlug);
+    if (!city || !content) notFound();
 
     const localBusinessSchema = generateLocalBusinessSchema(city);
     const breadcrumbSchema = generateBreadcrumbSchema([
@@ -43,7 +45,7 @@ export default async function CityPage({ params }: PageProps) {
         { name: city.name }
     ]);
 
-    const faqs = [
+    const faqs = content.localFAQs.length > 0 ? content.localFAQs : [
         {
             question: `How much does house cleaning cost in ${city.name}?`,
             answer: `Local rates in ${city.name} vary by home size. Regular cleaning typically starts at $100, deep cleaning at $150, and move-out cleaning at $200. We offer instant upfront pricing during booking.`
@@ -73,7 +75,7 @@ export default async function CityPage({ params }: PageProps) {
             </nav>
 
             {/* Hero */}
-            <CityHero cityName={city.name} description={city.description} />
+            <CityHero cityName={city.name} description={content.cityIntro || city.description} />
 
             {/* Services Grid */}
             <section className="py-24 bg-gray-50 border-y border-gray-100">
@@ -121,12 +123,13 @@ export default async function CityPage({ params }: PageProps) {
                             <h2 className="text-2xl font-semibold mb-6 text-foreground">Neighborhoods Served</h2>
                             <div className="flex flex-wrap gap-2">
                                 {city.neighborhoods.map(hood => (
-                                    <span
+                                    <Link
                                         key={hood}
-                                        className="px-4 py-2 bg-gray-50 rounded-[4px] text-sm text-gray-600 border border-gray-200/50"
+                                        href={`/book?city=${city.slug}&neighborhood=${encodeURIComponent(hood)}`}
+                                        className="px-4 py-2 bg-gray-50 rounded-[4px] text-sm text-gray-600 border border-gray-200/50 hover:border-accent/40 hover:bg-white hover:text-accent transition-all"
                                     >
                                         {hood}
-                                    </span>
+                                    </Link>
                                 ))}
                             </div>
                             <p className="mt-8 text-xs text-gray-400 tracking-wider uppercase">
@@ -135,22 +138,10 @@ export default async function CityPage({ params }: PageProps) {
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-semibold mb-6 text-foreground">Also Serving Nearby</h2>
-                            <div className="grid grid-cols-2 gap-3">
-                                {city.nearbyAreas.map(areaSlug => {
-                                    const nearbyCity = getCityBySlug(areaSlug);
-                                    if (!nearbyCity) return null;
-                                    return (
-                                        <Link
-                                            key={areaSlug}
-                                            href={`/${areaSlug}`}
-                                            className="px-4 py-3 border border-gray-200 rounded-[4px] bg-white hover:border-accent/40 hover:bg-gray-50 transition-all text-sm text-gray-600"
-                                        >
-                                            {nearbyCity.name}
-                                        </Link>
-                                    );
-                                })}
-                            </div>
+                            <h2 className="text-2xl font-semibold mb-6 text-foreground">Why {city.name} Homeowners Choose CLEENLY</h2>
+                            <p className="text-gray-600 leading-relaxed">
+                                {content.whyChoose || "Our professional cleaners are background-checked, insured, and dedicated to making your home shine. We understand the local needs of our community and provide tailored cleaning services that fit your schedule and lifestyle."}
+                            </p>
                         </div>
                     </div>
                 </div>
