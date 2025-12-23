@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/marketing/hero";
-import { ImpactBar } from "@/components/marketing/impact-bar";
 import { HowItWorks } from "@/components/marketing/how-it-works";
 import { Services } from "@/components/marketing/services";
 import { PricingPreview } from "@/components/marketing/pricing-preview";
@@ -13,9 +12,9 @@ import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/utils/sche
 import { cities } from "@/lib/data/cities";
 
 export const metadata: Metadata = {
-  title: "Conscious Cleaning for Modern Homes | CLEENLY Seattle",
+  title: "House Cleaning Seattle | Book Online Today | CLEENLY",
   description:
-    "Eco-friendly house cleaning in Seattle. 0% toxic chemicals, 100% recyclable packaging. Book thoughtful home care that's good for you and the planet.",
+    "Book house cleaning in Seattle online. See prices upfront, choose your cleaner, schedule in minutes. Regular, deep clean, and move-out services available.",
   keywords: [
     "house cleaning seattle",
     "cleaning service seattle",
@@ -63,8 +62,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { FadeIn } from "@/components/ui/fade-in";
-
 export default function HomePage() {
   const seattle = cities.find(c => c.slug === 'seattle')!;
   const localBusinessSchema = generateLocalBusinessSchema(seattle);
@@ -78,28 +75,13 @@ export default function HomePage() {
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={faqSchema} />
       <Hero />
-      <ImpactBar />
-      <FadeIn>
-        <HowItWorks />
-      </FadeIn>
-      <FadeIn>
-        <Services />
-      </FadeIn>
-      <FadeIn>
-        <PricingPreview />
-      </FadeIn>
-      <FadeIn>
-        <WhyUs />
-      </FadeIn>
-      <FadeIn>
-        <FAQ />
-      </FadeIn>
-      <FadeIn>
-        <ServiceAreas />
-      </FadeIn>
-      <FadeIn>
-        <CTA />
-      </FadeIn>
+      <HowItWorks />
+      <Services />
+      <PricingPreview />
+      <WhyUs />
+      <FAQ />
+      <ServiceAreas />
+      <CTA />
     </>
   );
 }
