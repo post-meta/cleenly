@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/marketing/hero";
+import { ImpactBar } from "@/components/marketing/impact-bar";
 import { HowItWorks } from "@/components/marketing/how-it-works";
 import { Services } from "@/components/marketing/services";
 import { PricingPreview } from "@/components/marketing/pricing-preview";
@@ -12,9 +13,9 @@ import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/utils/sche
 import { cities } from "@/lib/data/cities";
 
 export const metadata: Metadata = {
-  title: "House Cleaning Seattle | Book Online Today | CLEENLY",
+  title: "Conscious Cleaning for Modern Homes | CLEENLY Seattle",
   description:
-    "Book house cleaning in Seattle online. See prices upfront, choose your cleaner, schedule in minutes. Regular, deep clean, and move-out services available.",
+    "Eco-friendly house cleaning in Seattle. 0% toxic chemicals, 100% recyclable packaging. Book thoughtful home care that's good for you and the planet.",
   keywords: [
     "house cleaning seattle",
     "cleaning service seattle",
@@ -75,6 +76,7 @@ export default function HomePage() {
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={faqSchema} />
       <Hero />
+      <ImpactBar />
       <HowItWorks />
       <Services />
       <PricingPreview />

@@ -7,20 +7,26 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10">
         {/* Left Content - 6 columns */}
         <div className="col-span-12 space-y-8 md:col-span-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight tracking-tight">
-            House Cleaning in Seattle — Book Online in Minutes
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-foreground leading-tight">
+            Cleaning — done{' '}
+            <span className="relative inline-block">
+              consciously
+              <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 10" preserveAspectRatio="none">
+                <path d="M0,5 Q100,0 200,5" stroke="currentColor" strokeWidth="3" fill="none" className="text-sage" />
+              </svg>
+            </span>
           </h1>
 
-          <p className="text-xl text-gray-600 leading-relaxed">
-            See your price upfront. Choose your cleaner. Schedule when it works for you.
+          <p className="text-xl text-charcoal/70 leading-relaxed max-w-xl">
+            We don't just clean homes. We create healthy, sustainable spaces where you can truly live.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Button variant="primary" size="lg" asChild>
-              <Link href="/book">Get Your Price →</Link>
+              <Link href="/book">Choose Your Plan →</Link>
             </Button>
-            <Button variant="link" asChild>
-              <Link href="#how-it-works">See How It Works</Link>
+            <Button variant="link" asChild className="text-forest">
+              <Link href="#impact">See Our Impact</Link>
             </Button>
           </div>
         </div>
