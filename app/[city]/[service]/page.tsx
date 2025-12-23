@@ -185,6 +185,9 @@ export default async function CityServicePage({ params }: PageProps) {
                 </div>
             </section>
 
+            {content?.isLoaded && (
+                <div className="hidden">Localized content loaded for {city.slug}/{service.slug}</div>
+            )}
             <Footer currentCity={city.slug} currentService={service.slug} />
         </main>
     );
