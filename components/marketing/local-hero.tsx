@@ -1,11 +1,11 @@
-import { City } from '@/lib/data/cities';
-import { ServiceMetadata } from '@/lib/data/services-data';
+import { CityData } from '@/lib/data/cities';
+import { ServiceData } from '@/lib/data/services';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 interface LocalHeroProps {
-    city: City;
-    service?: ServiceMetadata;
+    city: CityData;
+    service?: ServiceData;
 }
 
 export function LocalHero({ city, service }: LocalHeroProps) {
@@ -22,8 +22,7 @@ export function LocalHero({ city, service }: LocalHeroProps) {
                     </h1>
                     <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                         Top-rated professional cleaning for homes and apartments in {city.name}.
-                        Serving homeowners near {city.landmarks.slice(0, 2).join(' and ')}.
-                        {city.context}
+                        Serving all neighborhoods including {city.neighborhoods.slice(0, 2).join(' and ')}.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Link href="/book">
@@ -51,12 +50,22 @@ export function LocalHero({ city, service }: LocalHeroProps) {
                             </div>
                         </div>
                         <ul className="space-y-4">
-                            {service?.features.slice(0, 4).map((feature, i) => (
-                                <li key={i} className="flex items-center gap-3 text-gray-700">
-                                    <div className="w-2 h-2 rounded-full bg-accent" />
-                                    {feature}
-                                </li>
-                            ))}
+                            <li className="flex items-center gap-3 text-gray-700">
+                                <div className="w-2 h-2 rounded-full bg-accent" />
+                                Background-checked professionals
+                            </li>
+                            <li className="flex items-center gap-3 text-gray-700">
+                                <div className="w-2 h-2 rounded-full bg-accent" />
+                                100% satisfaction guarantee
+                            </li>
+                            <li className="flex items-center gap-3 text-gray-700">
+                                <div className="w-2 h-2 rounded-full bg-accent" />
+                                Book online in 2 minutes
+                            </li>
+                            <li className="flex items-center gap-3 text-gray-700">
+                                <div className="w-2 h-2 rounded-full bg-accent" />
+                                Fully insured cleaners
+                            </li>
                         </ul>
                     </div>
                 </div>
