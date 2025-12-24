@@ -158,13 +158,12 @@ export default async function CityServicePage({ params }: PageProps) {
                     <h2 className="text-xl font-semibold mb-6">Service Coverage in {city.name}</h2>
                     <div className="flex flex-wrap justify-center gap-2">
                         {city.neighborhoods.map(hood => (
-                            <Link
+                            <span
                                 key={hood}
-                                href={`/book?city=${city.slug}&service=${service.slug}&neighborhood=${encodeURIComponent(hood)}`}
-                                className="px-3 py-1 bg-white border border-gray-200 rounded-[4px] text-xs text-gray-500 hover:border-accent/40 hover:text-accent transition-all"
+                                className="px-3 py-1 bg-white border border-gray-200 rounded-[4px] text-xs text-gray-500"
                             >
                                 {hood}
-                            </Link>
+                            </span>
                         ))}
                     </div>
                 </div>
