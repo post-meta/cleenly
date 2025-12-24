@@ -5,11 +5,50 @@ interface ServiceCardProps {
     service: ServiceData;
     citySlug: string;
     cityName: string;
+    cityWikipediaUrl?: string;
 }
 
-export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
+export function ServiceCard({ service, citySlug, cityName, cityWikipediaUrl }: ServiceCardProps) {
     return (
         <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-foreground/20 min-w-[280px] max-w-[320px] snap-center">
+
+            {/* Schema.org Service Markup */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        "name": `${service.name} in ${cityName}`,
+                        "description": service.shortDescription,
+                        "provider": {
+                            "@type": "LocalBusiness",
+                            "name": "CLEENLY"
+                        },
+                        "areaServed": {
+                            "@type": "City",
+                            "name": cityName,
+                            "sameAs": cityWikipediaUrl
+                        },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": service.rating,
+                            "reviewCount": service.reviews
+                        },
+                        "offers": {
+                            "@type": "Offer",
+                            "priceCurrency": "USD",
+                            "price": service.priceMin,
+                            "priceSpecification": {
+                                "@type": "PriceSpecification",
+                                "minPrice": service.priceMin,
+                                "maxPrice": service.priceMax,
+                                "priceCurrency": "USD"
+                            }
+                        }
+                    })
+                }}
+            />
 
             {/* Availability Badge */}
             <div className="absolute top-4 right-4">

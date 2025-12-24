@@ -57,6 +57,12 @@ export default async function CityPage({ params }: PageProps) {
         }
     ];
 
+    // AI-Enhanced Content Generation
+    const enhancedDescription = content.cityIntro || (
+        city.description +
+        (city.landmarks?.length ? ` Proudly serving ${city.professions?.[0] || 'homes'} near ${city.landmarks.slice(0, 2).join(' and ')}.` : '')
+    );
+
     return (
         <main className="bg-background">
 
@@ -70,7 +76,7 @@ export default async function CityPage({ params }: PageProps) {
             </nav>
 
             {/* Hero */}
-            <CityHero cityName={city.name} description={content.cityIntro || city.description} />
+            <CityHero cityName={city.name} description={enhancedDescription} />
 
             {/* How It Works */}
             <section className="py-12 border-b border-gray-100">
@@ -131,6 +137,7 @@ export default async function CityPage({ params }: PageProps) {
                                 service={service}
                                 citySlug={city.slug}
                                 cityName={city.name}
+                                cityWikipediaUrl={city.wikipediaUrl}
                             />
                         ))}
                     </ServiceCarousel>
@@ -228,9 +235,21 @@ export default async function CityPage({ params }: PageProps) {
                                 },
                                 "areaServed": {
                                     "@type": "City",
-                                    "name": city.name
+                                    "name": city.name,
+                                    "sameAs": city.wikipediaUrl
                                 },
-                                "priceRange": "$$"
+                                "priceRange": "$$",
+                                "hasOfferCatalog": {
+                                    "@type": "OfferCatalog",
+                                    "name": "Cleaning Services",
+                                    "itemListElement": services.map(service => ({
+                                        "@type": "Offer",
+                                        "itemOffered": {
+                                            "@type": "Service",
+                                            "name": service.name
+                                        }
+                                    }))
+                                }
                             },
                             {
                                 "@type": "BreadcrumbList",

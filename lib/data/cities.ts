@@ -8,6 +8,9 @@ export interface CityData {
     neighborhoods: string[];
     nearbyAreas: string[]; // slugs соседних городов
     description: string;
+    wikipediaUrl?: string;
+    landmarks?: string[];
+    professions?: string[];
 }
 
 export const cities: CityData[] = [
@@ -22,6 +25,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Capitol Hill', 'Ballard', 'Fremont', 'Queen Anne', 'University District', 'Beacon Hill', 'West Seattle', 'Columbia City', 'Ravenna', 'Wallingford', 'Green Lake', 'Northgate', 'South Lake Union', 'Downtown', 'Madison Park', 'Magnolia'],
         nearbyAreas: ['shoreline', 'burien', 'tukwila', 'bellevue'],
         description: 'Serving all Seattle neighborhoods from Ballard to Beacon Hill, Capitol Hill to West Seattle.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Seattle',
+        landmarks: ['Space Needle', 'Pike Place Market', 'University of Washington', 'Amazon Spheres'],
+        professions: ['tech workers', 'healthcare professionals', 'busy families']
     },
 
     // === EASTSIDE ===
@@ -35,6 +41,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Bellevue', 'Crossroads', 'Factoria', 'Somerset', 'Newport', 'Eastgate', 'Bridle Trails', 'Wilburton'],
         nearbyAreas: ['kirkland', 'redmond', 'mercer-island', 'seattle'],
         description: 'Serving Bellevue from Downtown to Factoria, Crossroads to Somerset.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Bellevue,_Washington',
+        landmarks: ['Bellevue Square', 'Downtown Park', 'Meydenbauer Bay Park'],
+        professions: ['tech executives', 'families', 'professionals']
     },
     {
         slug: 'kirkland',
@@ -46,6 +55,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Kirkland', 'Juanita', 'Houghton', 'Finn Hill', 'Totem Lake', 'Kingsgate', 'Norkirk'],
         nearbyAreas: ['bellevue', 'redmond', 'bothell', 'woodinville'],
         description: 'Serving all Kirkland neighborhoods from the waterfront to Totem Lake.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Kirkland,_Washington',
+        landmarks: ['Kirkland Waterfront', 'Marina Park', 'The Village at Totem Lake'],
+        professions: ['Google employees', 'families', 'remote workers']
     },
     {
         slug: 'redmond',
@@ -57,6 +69,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Redmond', 'Education Hill', 'Overlake', 'Idylwood', 'Grass Lawn', 'Willows', 'Bear Creek'],
         nearbyAreas: ['kirkland', 'bellevue', 'sammamish', 'woodinville'],
         description: 'Serving Redmond from Downtown to Overlake, Education Hill to Bear Creek.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Redmond,_Washington',
+        landmarks: ['Microsoft Campus', 'Marymoor Park', 'Redmond Town Center'],
+        professions: ['Microsoft employees', 'engineers', 'families']
     },
     {
         slug: 'sammamish',
@@ -68,6 +83,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Sammamish Plateau', 'Pine Lake', 'Beaver Lake', 'Klahanie', 'Inglewood'],
         nearbyAreas: ['redmond', 'issaquah', 'bellevue'],
         description: 'Serving the Sammamish Plateau and surrounding neighborhoods.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Sammamish,_Washington',
+        landmarks: ['Pine Lake Park', 'Beaver Lake Park', 'Soaring Eagle Park'],
+        professions: ['families', 'commuters', 'homeowners']
     },
     {
         slug: 'issaquah',
@@ -79,6 +97,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Issaquah Highlands', 'Gilman Village', 'Olde Town', 'Talus', 'Squak Mountain'],
         nearbyAreas: ['sammamish', 'bellevue', 'renton'],
         description: 'Serving Issaquah from Olde Town to Issaquah Highlands.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Issaquah,_Washington',
+        landmarks: ['Issaquah Alps', 'Cougar Mountain Zoo', 'Gilman Village'],
+        professions: ['Costco employees', 'outdoor enthusiasts', 'families']
     },
     {
         slug: 'bothell',
@@ -90,6 +111,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Bothell', 'Canyon Park', 'North Creek', 'Queensgate'],
         nearbyAreas: ['kirkland', 'woodinville', 'kenmore', 'lynnwood'],
         description: 'Serving Bothell and Canyon Park area.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Bothell,_Washington',
+        landmarks: ['UW Bothell', 'Bothell Landing', 'McMenamins Anderson School'],
+        professions: ['biotech workers', 'students', 'families']
     },
     {
         slug: 'woodinville',
@@ -101,6 +125,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Woodinville', 'Hollywood Hill', 'Wellington', 'Wine Country'],
         nearbyAreas: ['kirkland', 'redmond', 'bothell'],
         description: 'Serving Woodinville including the wine country and Hollywood Hill.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Woodinville,_Washington',
+        landmarks: ['Chateau Ste. Michelle', 'Hollywood Schoolhouse', 'Sammamish River Trail'],
+        professions: ['winery staff', 'commuters', 'homeowners']
     },
     {
         slug: 'mercer-island',
@@ -112,6 +139,9 @@ export const cities: CityData[] = [
         neighborhoods: ['North End', 'South End', 'Town Center', 'East Seattle'],
         nearbyAreas: ['bellevue', 'seattle', 'renton'],
         description: 'Serving all of Mercer Island.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Mercer_Island,_Washington',
+        landmarks: ['Luther Burbank Park', 'Mercer Island Community Center'],
+        professions: ['executives', 'professionals', 'families']
     },
     {
         slug: 'medina',
@@ -123,6 +153,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Medina', 'Evergreen Point'],
         nearbyAreas: ['bellevue', 'kirkland', 'clyde-hill'],
         description: 'Serving Medina and Evergreen Point.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Medina,_Washington',
+        landmarks: ['Medina Park', 'Evergreen Point Floating Bridge'],
+        professions: ['executives', 'tech leaders']
     },
     {
         slug: 'clyde-hill',
@@ -134,6 +167,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Clyde Hill'],
         nearbyAreas: ['bellevue', 'medina', 'kirkland'],
         description: 'Serving Clyde Hill and surrounding areas.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Clyde_Hill,_Washington',
+        landmarks: ['Clyde Hill view points'],
+        professions: ['professionals', 'families']
     },
 
     // === SOUTH KING COUNTY ===
@@ -147,6 +183,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Renton', 'Highlands', 'Fairwood', 'Kennydale', 'Benson Hill', 'Cascade'],
         nearbyAreas: ['seattle', 'bellevue', 'kent', 'tukwila'],
         description: 'Serving Renton from the Highlands to Fairwood.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Renton,_Washington',
+        landmarks: ['The Landing', 'Gene Coulon Memorial Beach Park', 'Boeing Renton Factory'],
+        professions: ['Boeing employees', 'families', 'commuters']
     },
     {
         slug: 'kent',
@@ -158,6 +197,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Kent', 'East Hill', 'West Hill', 'Panther Lake', 'Meridian'],
         nearbyAreas: ['renton', 'auburn', 'federal-way', 'covington'],
         description: 'Serving Kent from Downtown to East Hill.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Kent,_Washington',
+        landmarks: ['Kent Station', 'ShoWare Center', 'Lake Meridian Park'],
+        professions: ['families', 'industrial workers', 'commuters']
     },
     {
         slug: 'federal-way',
@@ -169,6 +211,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Federal Way', 'Twin Lakes', 'Redondo', 'Dash Point', 'Steel Lake'],
         nearbyAreas: ['kent', 'tacoma', 'auburn', 'des-moines'],
         description: 'Serving Federal Way from Twin Lakes to Dash Point.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Federal_Way,_Washington',
+        landmarks: ['Wild Waves', 'The Commons at Federal Way', 'Dash Point State Park'],
+        professions: ['families', 'commuters']
     },
     {
         slug: 'auburn',
@@ -180,6 +225,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Auburn', 'Lea Hill', 'Lake Tapps', 'West Auburn'],
         nearbyAreas: ['kent', 'federal-way', 'covington', 'puyallup'],
         description: 'Serving Auburn and Lea Hill area.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Auburn,_Washington',
+        landmarks: ['Emerald Downs', 'The Outlet Collection Seattle', 'Auburn Game Farm Park'],
+        professions: ['families', 'industrial workers']
     },
     {
         slug: 'burien',
@@ -191,6 +239,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Burien', 'Boulevard Park', 'White Center', 'Seahurst', 'Gregory Heights'],
         nearbyAreas: ['seattle', 'tukwila', 'seatac', 'normandy-park'],
         description: 'Serving Burien, Seahurst, and White Center.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Burien,_Washington',
+        landmarks: ['Seahurst Park', 'Olde Burien', 'Burien Town Square'],
+        professions: ['families', 'commuters']
     },
     {
         slug: 'tukwila',
@@ -202,6 +253,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Westfield Southcenter', 'Riverton', 'Allentown', 'Tukwila Hill'],
         nearbyAreas: ['seattle', 'renton', 'burien', 'seatac'],
         description: 'Serving Tukwila and Southcenter area.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Tukwila,_Washington',
+        landmarks: ['Westfield Southcenter', 'Museum of Flight (nearby)', 'Starfire Sports'],
+        professions: ['retail workers', 'families', 'commuters']
     },
 
     // === NORTH ===
@@ -215,6 +269,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Richmond Beach', 'Ridgecrest', 'Echo Lake', 'Innis Arden', 'Hillwood'],
         nearbyAreas: ['seattle', 'edmonds', 'lake-forest-park', 'mountlake-terrace'],
         description: 'Serving Shoreline from Richmond Beach to Ridgecrest.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Shoreline,_Washington',
+        landmarks: ['Shoreline Community College', 'Richmond Beach Saltwater Park'],
+        professions: ['educators', 'families', 'commuters']
     },
     {
         slug: 'edmonds',
@@ -226,6 +283,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Edmonds', 'Perrinville', 'Esperance', 'Meadowdale'],
         nearbyAreas: ['shoreline', 'lynnwood', 'mountlake-terrace', 'mukilteo'],
         description: 'Serving Edmonds and the waterfront area.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Edmonds,_Washington',
+        landmarks: ['Edmonds Ferry Terminal', 'Edmonds Center for the Arts', 'Marina Beach Park'],
+        professions: ['retirees', 'families', 'artists']
     },
     {
         slug: 'lynnwood',
@@ -237,6 +297,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Alderwood', 'Martha Lake', 'Meadowdale', 'Lynnwood Bowl'],
         nearbyAreas: ['edmonds', 'mountlake-terrace', 'bothell', 'everett'],
         description: 'Serving Lynnwood and Alderwood area.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Lynnwood,_Washington',
+        landmarks: ['Alderwood Mall', 'Lynnwood Convention Center'],
+        professions: ['families', 'retail workers', 'commuters']
     },
     {
         slug: 'everett',
@@ -248,6 +311,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Everett', 'Bayside', 'Delta', 'Riverside', 'Silver Lake', 'Pinehurst'],
         nearbyAreas: ['mukilteo', 'lynnwood', 'marysville', 'lake-stevens'],
         description: 'Serving Everett from Downtown to Silver Lake.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Everett,_Washington',
+        landmarks: ['Boeing Everett Factory', 'Angel of the Winds Arena', 'Naval Station Everett'],
+        professions: ['Boeing employees', 'naval personnel', 'families']
     },
 
     // === PIERCE COUNTY ===
@@ -261,6 +327,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Downtown Tacoma', 'Stadium District', 'Proctor', 'North End', 'West End', 'South Tacoma', '6th Avenue', 'Old Town'],
         nearbyAreas: ['lakewood', 'university-place', 'fircrest', 'federal-way'],
         description: 'Serving all Tacoma neighborhoods from the North End to South Tacoma.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Tacoma,_Washington',
+        landmarks: ['Museum of Glass', 'Point Defiance Park', 'Tacoma Dome'],
+        professions: ['artists', 'doctors', 'families']
     },
     {
         slug: 'lakewood',
@@ -272,6 +341,9 @@ export const cities: CityData[] = [
         neighborhoods: ['Lakewood Towne Center', 'Lake City', 'Tillicum', 'American Lake'],
         nearbyAreas: ['tacoma', 'university-place', 'steilacoom'],
         description: 'Serving Lakewood and surrounding areas.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Lakewood,_Washington',
+        landmarks: ['Lakewold Gardens', 'Thornewood Castle', 'American Lake'],
+        professions: ['military personnel', 'families']
     },
 ];
 
