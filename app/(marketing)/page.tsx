@@ -7,11 +7,9 @@ import { WhyUs } from "@/components/marketing/why-us";
 import { FAQ } from "@/components/marketing/faq";
 import { ServiceAreas } from "@/components/marketing/service-areas";
 import { CTA } from "@/components/marketing/cta";
-import {
-  JsonLd,
-  localBusinessSchema,
-  faqSchema,
-} from "@/components/shared/json-ld";
+import { JsonLd } from "@/components/shared/json-ld";
+import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/utils/schema-generators";
+import { cities } from "@/lib/data/cities";
 
 export const metadata: Metadata = {
   title: "House Cleaning Seattle | Book Online Today | CLEENLY",
@@ -65,6 +63,13 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const seattle = cities.find(c => c.slug === 'seattle')!;
+  const localBusinessSchema = generateLocalBusinessSchema(seattle);
+  const faqSchema = generateFAQSchema([
+    { question: "How much does house cleaning cost in Seattle?", answer: "Our regular cleaning starts at $100, deep cleaning at $150, and move-out cleaning at $200. Prices vary based on home size and condition." },
+    { question: "Are your cleaners insured?", answer: "Yes, all cleaners on the CLEENLY platform are fully insured and background-checked for your peace of mind." }
+  ]);
+
   return (
     <>
       <JsonLd data={localBusinessSchema} />

@@ -21,51 +21,60 @@ const pricingData = [
 
 export function PricingPreview() {
   return (
-    <section id="pricing" className="py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6">
+    <section id="pricing" className="bg-gray-50 py-24 md:py-32">
+      <div className="mx-auto max-w-5xl px-6">
         <div className="text-center">
-          <h2 className="mb-6 text-2xl font-semibold">Pricing</h2>
+          <h2 className="mb-6 text-2xl font-semibold">Simple, Flat Pricing</h2>
           <p className="mx-auto mb-16 max-w-2xl text-center text-gray-600">
-            Prices depend on home size and cleaning type. Here&apos;s what to
-            expect for a 3 bedroom / 2 bathroom home in Seattle:
+            No hourly rates or hidden fees. Here&apos;s what to
+            expect for a typical 3 bedroom / 2 bathroom home in Seattle:
           </p>
         </div>
 
-        <div className="overflow-hidden">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-300">
-                <th className="py-4 text-left font-semibold text-foreground">Service</th>
-                <th className="py-4 text-left font-semibold text-foreground">Price Range</th>
-                <th className="hidden py-4 text-left font-semibold text-foreground sm:table-cell">Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pricingData.map((row) => (
-                <tr
-                  key={row.service}
-                  className="border-b border-gray-200 transition-colors hover:bg-gray-50"
-                >
-                  <td className="py-4 text-sm font-medium text-foreground">
-                    {row.service}
-                  </td>
-                  <td className="py-4 text-sm text-gray-600">{row.priceRange}</td>
-                  <td className="hidden py-4 text-sm text-gray-600 sm:table-cell">
-                    {row.time}
-                  </td>
+        <div className="overflow-hidden rounded-[16px] border border-gray-200 bg-white shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-gray-100 bg-gray-50/50">
+                  <th className="px-8 py-5 text-sm font-semibold text-foreground">Service</th>
+                  <th className="px-8 py-5 text-sm font-semibold text-foreground">Price Range</th>
+                  <th className="hidden px-8 py-5 text-sm font-semibold text-foreground sm:table-cell">Estimated Time</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {pricingData.map((row) => (
+                  <tr
+                    key={row.service}
+                    className="transition-colors hover:bg-gray-50/30"
+                  >
+                    <td className="px-8 py-6">
+                      <span className="text-base font-medium text-foreground">
+                        {row.service}
+                      </span>
+                    </td>
+                    <td className="px-8 py-6">
+                      <span className="text-base font-semibold text-accent">
+                        {row.priceRange}
+                      </span>
+                    </td>
+                    <td className="hidden px-8 py-6 sm:table-cell">
+                      <span className="text-sm text-gray-500">
+                        {row.time}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Final price shown before you book. No surprises.
-        </p>
-
-        <div className="mt-12 text-center">
-          <Button asChild variant="primary" size="lg">
-            <Link href="/book">Calculate Your Exact Price</Link>
+        <div className="mt-12 space-y-8 text-center">
+          <p className="text-sm text-gray-500">
+            * Final price depends on your specific home condition and selected add-ons.
+          </p>
+          <Button asChild variant="primary" size="lg" className="h-16 px-10 text-lg">
+            <Link href="/book">Calculate Your Exact Price →</Link>
           </Button>
         </div>
       </div>

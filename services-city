@@ -1,0 +1,1518 @@
+# CLEENLY — Services & City Landing Pages Implementation
+## Полное техническое задание для Claude Code
+
+---
+
+## ЦЕЛЬ
+
+Создать сетку landing pages для SEO, Voice Search и AI-оптимизации:
+- `/services` — хаб всех услуг
+- `/services/[service]` — страница услуги
+- `/[city]` — страница города
+- `/[city]/[service]` — город + услуга (главная ценность)
+
+**Итого: 92 страницы** (3 сервиса + 22 города + 66 комбинаций + 1 хаб)
+
+---
+
+## СТРУКТУРА ФАЙЛОВ
+
+```
+lib/
+  data/
+    cities.ts
+    services.ts
+  utils/
+    content-generator.ts
+    
+app/
+  services/
+    page.tsx                      # /services (хаб)
+    [service]/
+      page.tsx                    # /services/deep-cleaning
+      
+  [city]/
+    page.tsx                      # /bellevue
+    [service]/
+      page.tsx                    # /bellevue/deep-cleaning
+      
+components/
+  shared/
+    json-ld.tsx
+    breadcrumbs.tsx
+    service-card.tsx
+    city-service-hero.tsx
+    faq-section.tsx
+    checklist.tsx
+    areas-served.tsx
+```
+
+---
+
+## ЧАСТЬ 1: DATA LAYER
+
+### `lib/data/services.ts`
+
+```typescript
+export interface ServiceData {
+  slug: string;
+  name: string;
+  shortDescription: string;
+  longDescription: string;
+  priceRange: string;
+  priceMin: number; // для schema, в долларах
+  priceMax: number;
+  duration: string;
+  checklist: string[];
+  notIncluded: string[];
+  bestFor: string[];
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+}
+
+export const services: ServiceData[] = [
+  {
+    slug: 'regular-cleaning',
+    name: 'Regular Cleaning',
+    shortDescription: 'Routine maintenance cleaning for homes that get cleaned regularly.',
+    longDescription: 'Regular cleaning covers all the essentials: dusting, vacuuming, mopping, bathroom and kitchen cleaning. Best for homes that are already in good shape and need weekly or bi-weekly maintenance.',
+    priceRange: '$100-$200',
+    priceMin: 100,
+    priceMax: 200,
+    duration: '2-3 hours',
+    checklist: [
+      'Dust all reachable surfaces',
+      'Vacuum carpets and rugs',
+      'Vacuum and mop hard floors',
+      'Clean bathrooms (toilet, shower, sink, mirrors)',
+      'Wipe kitchen counters and appliance exteriors',
+      'Wipe cabinet fronts',
+      'Empty trash cans',
+      'Make beds (linens changed if left out)',
+    ],
+    notIncluded: [
+      'Inside oven or refrigerator',
+      'Inside cabinets',
+      'Baseboards',
+      'Windows',
+      'Laundry',
+    ],
+    bestFor: [
+      'Weekly or bi-weekly maintenance',
+      'Homes already in good condition',
+      'Busy households needing regular help',
+    ],
+    faqs: [
+      {
+        question: 'How often should I book regular cleaning?',
+        answer: 'Most customers book every 1-2 weeks. Weekly cleaning keeps your home consistently fresh. Bi-weekly works well for smaller households or homes with less traffic.',
+      },
+      {
+        question: 'What if my home hasn\'t been cleaned in a while?',
+        answer: 'We recommend starting with a deep cleaning first, then switching to regular cleaning for maintenance. This gives us a clean baseline to work from.',
+      },
+      {
+        question: 'Can I customize what\'s included?',
+        answer: 'Yes. You can add extras like inside refrigerator, oven cleaning, or laundry during booking. You can also skip areas you don\'t need cleaned.',
+      },
+    ],
+  },
+  {
+    slug: 'deep-cleaning',
+    name: 'Deep Cleaning',
+    shortDescription: 'Thorough cleaning including spots that usually get skipped.',
+    longDescription: 'Deep cleaning covers everything in regular cleaning plus the areas that build up over time: inside appliances, baseboards, window sills, ceiling fans, and behind furniture. Recommended for first-time cleanings or homes that need extra attention.',
+    priceRange: '$150-$300',
+    priceMin: 150,
+    priceMax: 300,
+    duration: '3-5 hours',
+    checklist: [
+      'Everything in regular cleaning',
+      'Inside oven',
+      'Inside refrigerator',
+      'Inside microwave',
+      'Baseboards throughout',
+      'Window sills and tracks',
+      'Ceiling fans and light fixtures',
+      'Door frames and tops of doors',
+      'Cabinet fronts (detailed)',
+      'Behind and under furniture (accessible areas)',
+    ],
+    notIncluded: [
+      'Inside cabinets and drawers',
+      'Walls (full wash)',
+      'Exterior windows',
+      'Garage',
+      'Laundry (available as add-on)',
+    ],
+    bestFor: [
+      'First-time cleanings',
+      'Seasonal deep clean (spring, fall)',
+      'Homes not cleaned in 1+ months',
+      'Before hosting guests or events',
+    ],
+    faqs: [
+      {
+        question: 'How long does deep cleaning take?',
+        answer: 'Most deep cleanings take 3-5 hours depending on home size. A 3-bedroom home typically takes about 4 hours.',
+      },
+      {
+        question: 'How is deep cleaning different from regular cleaning?',
+        answer: 'Regular cleaning maintains surfaces. Deep cleaning tackles buildup — inside appliances, baseboards, ceiling fans, and areas that get skipped during routine cleaning. It takes about 50% longer and costs more.',
+      },
+      {
+        question: 'How often should I get a deep cleaning?',
+        answer: 'Most homes benefit from a deep cleaning every 3-6 months. If you have regular cleaning service, you may only need deep cleaning 1-2 times per year.',
+      },
+    ],
+  },
+  {
+    slug: 'move-out-cleaning',
+    name: 'Move-Out Cleaning',
+    shortDescription: 'Complete cleaning to landlord standards. Get your deposit back.',
+    longDescription: 'Move-out cleaning is our most thorough service. We clean to property manager inspection standards — inside all cabinets, closets, appliances, and detailed work on every surface. Designed to help you get your security deposit back.',
+    priceRange: '$200-$400',
+    priceMin: 200,
+    priceMax: 400,
+    duration: '4-7 hours',
+    checklist: [
+      'Everything in deep cleaning',
+      'Inside all cabinets and drawers',
+      'Inside all closets (shelves, rods, floors)',
+      'Inside pantry',
+      'All appliances interior (oven, fridge, dishwasher, microwave)',
+      'Window tracks (detailed)',
+      'Light fixtures (detailed)',
+      'Light switch plates and outlets',
+      'Walls spot-cleaned (scuffs, marks)',
+      'Blinds or shutters wiped',
+      'Garage swept (if applicable)',
+      'Patio/balcony swept (if applicable)',
+    ],
+    notIncluded: [
+      'Full wall washing',
+      'Carpet shampooing (available as add-on)',
+      'Exterior windows',
+      'Repairs or painting',
+    ],
+    bestFor: [
+      'End of lease',
+      'Selling your home',
+      'Move-in preparation',
+      'Maximizing security deposit return',
+    ],
+    faqs: [
+      {
+        question: 'Will move-out cleaning help me get my deposit back?',
+        answer: 'That\'s the goal. We clean to the standards property managers check during inspections. Most customers report getting their full deposit back after our move-out cleaning.',
+      },
+      {
+        question: 'Should the home be empty?',
+        answer: 'Ideally yes. Empty homes are faster to clean and we can reach all areas. If furniture remains, we\'ll clean around it but may not be able to reach some spots.',
+      },
+      {
+        question: 'How far in advance should I book?',
+        answer: 'Book 5-7 days ahead if possible. Move-out cleanings take longer than regular services, so availability can be limited. Last-minute bookings may be possible depending on schedule.',
+      },
+    ],
+  },
+];
+
+export const getServiceBySlug = (slug: string): ServiceData | undefined => {
+  return services.find(s => s.slug === slug);
+};
+
+export const getAllServiceSlugs = (): string[] => {
+  return services.map(s => s.slug);
+};
+```
+
+---
+
+### `lib/data/cities.ts`
+
+```typescript
+export interface CityData {
+  slug: string;
+  name: string;
+  county: string;
+  state: 'WA';
+  coordinates: { lat: number; lng: number };
+  zipCodes: string[];
+  neighborhoods: string[];
+  nearbyAreas: string[]; // slugs соседних городов
+  description: string;
+}
+
+export const cities: CityData[] = [
+  // === SEATTLE ===
+  {
+    slug: 'seattle',
+    name: 'Seattle',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.6062, lng: -122.3321 },
+    zipCodes: ['98101', '98102', '98103', '98104', '98105', '98106', '98107', '98109', '98112', '98115', '98116', '98117', '98118', '98119', '98121', '98122', '98125', '98126', '98133', '98136', '98144', '98199'],
+    neighborhoods: ['Capitol Hill', 'Ballard', 'Fremont', 'Queen Anne', 'University District', 'Beacon Hill', 'West Seattle', 'Columbia City', 'Ravenna', 'Wallingford', 'Green Lake', 'Northgate', 'South Lake Union', 'Downtown', 'Madison Park', 'Magnolia'],
+    nearbyAreas: ['shoreline', 'burien', 'tukwila', 'bellevue'],
+    description: 'Serving all Seattle neighborhoods from Ballard to Beacon Hill, Capitol Hill to West Seattle.',
+  },
+  
+  // === EASTSIDE ===
+  {
+    slug: 'bellevue',
+    name: 'Bellevue',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.6101, lng: -122.2015 },
+    zipCodes: ['98004', '98005', '98006', '98007', '98008'],
+    neighborhoods: ['Downtown Bellevue', 'Crossroads', 'Factoria', 'Somerset', 'Newport', 'Eastgate', 'Bridle Trails', 'Wilburton'],
+    nearbyAreas: ['kirkland', 'redmond', 'mercer-island', 'seattle'],
+    description: 'Serving Bellevue from Downtown to Factoria, Crossroads to Somerset.',
+  },
+  {
+    slug: 'kirkland',
+    name: 'Kirkland',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.6769, lng: -122.2060 },
+    zipCodes: ['98033', '98034'],
+    neighborhoods: ['Downtown Kirkland', 'Juanita', 'Houghton', 'Finn Hill', 'Totem Lake', 'Kingsgate', 'Norkirk'],
+    nearbyAreas: ['bellevue', 'redmond', 'bothell', 'woodinville'],
+    description: 'Serving all Kirkland neighborhoods from the waterfront to Totem Lake.',
+  },
+  {
+    slug: 'redmond',
+    name: 'Redmond',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.6740, lng: -122.1215 },
+    zipCodes: ['98052', '98053'],
+    neighborhoods: ['Downtown Redmond', 'Education Hill', 'Overlake', 'Idylwood', 'Grass Lawn', 'Willows', 'Bear Creek'],
+    nearbyAreas: ['kirkland', 'bellevue', 'sammamish', 'woodinville'],
+    description: 'Serving Redmond from Downtown to Overlake, Education Hill to Bear Creek.',
+  },
+  {
+    slug: 'sammamish',
+    name: 'Sammamish',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.6163, lng: -122.0356 },
+    zipCodes: ['98074', '98075'],
+    neighborhoods: ['Sammamish Plateau', 'Pine Lake', 'Beaver Lake', 'Klahanie', 'Inglewood'],
+    nearbyAreas: ['redmond', 'issaquah', 'bellevue'],
+    description: 'Serving the Sammamish Plateau and surrounding neighborhoods.',
+  },
+  {
+    slug: 'issaquah',
+    name: 'Issaquah',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.5301, lng: -122.0326 },
+    zipCodes: ['98027', '98029'],
+    neighborhoods: ['Issaquah Highlands', 'Gilman Village', 'Olde Town', 'Talus', 'Squak Mountain'],
+    nearbyAreas: ['sammamish', 'bellevue', 'renton'],
+    description: 'Serving Issaquah from Olde Town to Issaquah Highlands.',
+  },
+  {
+    slug: 'bothell',
+    name: 'Bothell',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.7623, lng: -122.2054 },
+    zipCodes: ['98011', '98012', '98021'],
+    neighborhoods: ['Downtown Bothell', 'Canyon Park', 'North Creek', 'Queensgate'],
+    nearbyAreas: ['kirkland', 'woodinville', 'kenmore', 'lynnwood'],
+    description: 'Serving Bothell and Canyon Park area.',
+  },
+  {
+    slug: 'woodinville',
+    name: 'Woodinville',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.7543, lng: -122.1635 },
+    zipCodes: ['98072', '98077'],
+    neighborhoods: ['Downtown Woodinville', 'Hollywood Hill', 'Wellington', 'Wine Country'],
+    nearbyAreas: ['kirkland', 'redmond', 'bothell'],
+    description: 'Serving Woodinville including the wine country and Hollywood Hill.',
+  },
+  {
+    slug: 'mercer-island',
+    name: 'Mercer Island',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.5707, lng: -122.2221 },
+    zipCodes: ['98040'],
+    neighborhoods: ['North End', 'South End', 'Town Center', 'East Seattle'],
+    nearbyAreas: ['bellevue', 'seattle', 'renton'],
+    description: 'Serving all of Mercer Island.',
+  },
+  {
+    slug: 'medina',
+    name: 'Medina',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.6207, lng: -122.2284 },
+    zipCodes: ['98039'],
+    neighborhoods: ['Medina', 'Evergreen Point'],
+    nearbyAreas: ['bellevue', 'kirkland', 'clyde-hill'],
+    description: 'Serving Medina and Evergreen Point.',
+  },
+  {
+    slug: 'clyde-hill',
+    name: 'Clyde Hill',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.6318, lng: -122.2176 },
+    zipCodes: ['98004'],
+    neighborhoods: ['Clyde Hill'],
+    nearbyAreas: ['bellevue', 'medina', 'kirkland'],
+    description: 'Serving Clyde Hill and surrounding areas.',
+  },
+  
+  // === SOUTH KING COUNTY ===
+  {
+    slug: 'renton',
+    name: 'Renton',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.4829, lng: -122.2171 },
+    zipCodes: ['98055', '98056', '98057', '98058', '98059'],
+    neighborhoods: ['Downtown Renton', 'Highlands', 'Fairwood', 'Kennydale', 'Benson Hill', 'Cascade'],
+    nearbyAreas: ['seattle', 'bellevue', 'kent', 'tukwila'],
+    description: 'Serving Renton from the Highlands to Fairwood.',
+  },
+  {
+    slug: 'kent',
+    name: 'Kent',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.3809, lng: -122.2348 },
+    zipCodes: ['98030', '98031', '98032', '98042'],
+    neighborhoods: ['Downtown Kent', 'East Hill', 'West Hill', 'Panther Lake', 'Meridian'],
+    nearbyAreas: ['renton', 'auburn', 'federal-way', 'covington'],
+    description: 'Serving Kent from Downtown to East Hill.',
+  },
+  {
+    slug: 'federal-way',
+    name: 'Federal Way',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.3223, lng: -122.3126 },
+    zipCodes: ['98003', '98023'],
+    neighborhoods: ['Downtown Federal Way', 'Twin Lakes', 'Redondo', 'Dash Point', 'Steel Lake'],
+    nearbyAreas: ['kent', 'tacoma', 'auburn', 'des-moines'],
+    description: 'Serving Federal Way from Twin Lakes to Dash Point.',
+  },
+  {
+    slug: 'auburn',
+    name: 'Auburn',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.3073, lng: -122.2285 },
+    zipCodes: ['98001', '98002', '98092'],
+    neighborhoods: ['Downtown Auburn', 'Lea Hill', 'Lake Tapps', 'West Auburn'],
+    nearbyAreas: ['kent', 'federal-way', 'covington', 'puyallup'],
+    description: 'Serving Auburn and Lea Hill area.',
+  },
+  {
+    slug: 'burien',
+    name: 'Burien',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.4704, lng: -122.3468 },
+    zipCodes: ['98146', '98148', '98166'],
+    neighborhoods: ['Downtown Burien', 'Boulevard Park', 'White Center', 'Seahurst', 'Gregory Heights'],
+    nearbyAreas: ['seattle', 'tukwila', 'seatac', 'normandy-park'],
+    description: 'Serving Burien, Seahurst, and White Center.',
+  },
+  {
+    slug: 'tukwila',
+    name: 'Tukwila',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.4740, lng: -122.2610 },
+    zipCodes: ['98168', '98178', '98188'],
+    neighborhoods: ['Westfield Southcenter', 'Riverton', 'Allentown', 'Tukwila Hill'],
+    nearbyAreas: ['seattle', 'renton', 'burien', 'seatac'],
+    description: 'Serving Tukwila and Southcenter area.',
+  },
+  
+  // === NORTH ===
+  {
+    slug: 'shoreline',
+    name: 'Shoreline',
+    county: 'King County',
+    state: 'WA',
+    coordinates: { lat: 47.7557, lng: -122.3415 },
+    zipCodes: ['98133', '98155', '98177'],
+    neighborhoods: ['Richmond Beach', 'Ridgecrest', 'Echo Lake', 'Innis Arden', 'Hillwood'],
+    nearbyAreas: ['seattle', 'edmonds', 'lake-forest-park', 'mountlake-terrace'],
+    description: 'Serving Shoreline from Richmond Beach to Ridgecrest.',
+  },
+  {
+    slug: 'edmonds',
+    name: 'Edmonds',
+    county: 'Snohomish County',
+    state: 'WA',
+    coordinates: { lat: 47.8107, lng: -122.3774 },
+    zipCodes: ['98020', '98026'],
+    neighborhoods: ['Downtown Edmonds', 'Perrinville', 'Esperance', 'Meadowdale'],
+    nearbyAreas: ['shoreline', 'lynnwood', 'mountlake-terrace', 'mukilteo'],
+    description: 'Serving Edmonds and the waterfront area.',
+  },
+  {
+    slug: 'lynnwood',
+    name: 'Lynnwood',
+    county: 'Snohomish County',
+    state: 'WA',
+    coordinates: { lat: 47.8209, lng: -122.3151 },
+    zipCodes: ['98036', '98037', '98087'],
+    neighborhoods: ['Alderwood', 'Martha Lake', 'Meadowdale', 'Lynnwood Bowl'],
+    nearbyAreas: ['edmonds', 'mountlake-terrace', 'bothell', 'everett'],
+    description: 'Serving Lynnwood and Alderwood area.',
+  },
+  {
+    slug: 'everett',
+    name: 'Everett',
+    county: 'Snohomish County',
+    state: 'WA',
+    coordinates: { lat: 47.9790, lng: -122.2021 },
+    zipCodes: ['98201', '98203', '98204', '98208'],
+    neighborhoods: ['Downtown Everett', 'Bayside', 'Delta', 'Riverside', 'Silver Lake', 'Pinehurst'],
+    nearbyAreas: ['mukilteo', 'lynnwood', 'marysville', 'lake-stevens'],
+    description: 'Serving Everett from Downtown to Silver Lake.',
+  },
+  
+  // === PIERCE COUNTY ===
+  {
+    slug: 'tacoma',
+    name: 'Tacoma',
+    county: 'Pierce County',
+    state: 'WA',
+    coordinates: { lat: 47.2529, lng: -122.4443 },
+    zipCodes: ['98402', '98403', '98404', '98405', '98406', '98407', '98408', '98409', '98418', '98422', '98465'],
+    neighborhoods: ['Downtown Tacoma', 'Stadium District', 'Proctor', 'North End', 'West End', 'South Tacoma', '6th Avenue', 'Old Town'],
+    nearbyAreas: ['lakewood', 'university-place', 'fircrest', 'federal-way'],
+    description: 'Serving all Tacoma neighborhoods from the North End to South Tacoma.',
+  },
+  {
+    slug: 'lakewood',
+    name: 'Lakewood',
+    county: 'Pierce County',
+    state: 'WA',
+    coordinates: { lat: 47.1718, lng: -122.5185 },
+    zipCodes: ['98498', '98499'],
+    neighborhoods: ['Lakewood Towne Center', 'Lake City', 'Tillicum', 'American Lake'],
+    nearbyAreas: ['tacoma', 'university-place', 'steilacoom'],
+    description: 'Serving Lakewood and surrounding areas.',
+  },
+];
+
+export const getCityBySlug = (slug: string): CityData | undefined => {
+  return cities.find(c => c.slug === slug);
+};
+
+export const getAllCitySlugs = (): string[] => {
+  return cities.map(c => c.slug);
+};
+```
+
+---
+
+## ЧАСТЬ 2: UTILITIES
+
+### `lib/utils/content-generator.ts`
+
+```typescript
+import { CityData } from '@/lib/data/cities';
+import { ServiceData } from '@/lib/data/services';
+
+/**
+ * Генерирует hash от строки для детерминированного выбора шаблона
+ */
+function hashString(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
+
+/**
+ * Генерирует первый параграф страницы (критично для AI/LLM)
+ * Начинается с фактов: цена, локация, что входит
+ */
+export function generateIntroText(city: CityData, service: ServiceData): string {
+  const neighborhoods = city.neighborhoods.slice(0, 3).join(', ');
+  
+  return `${service.name} in ${city.name}, Washington costs ${service.priceRange} for most homes. CLEENLY serves all ${city.name} neighborhoods including ${neighborhoods}. ${service.shortDescription} Book online in 2 minutes — see your exact price before booking.`;
+}
+
+/**
+ * Генерирует уникальный текст для секции "Why Choose"
+ */
+export function generateWhyChooseText(city: CityData, service: ServiceData): string {
+  const templates = [
+    `Whether you live in ${city.neighborhoods[0]} or ${city.neighborhoods[1]}, our cleaners know ${city.name}. We handle homes across ${city.county}, from apartments to houses.`,
+    `Our ${city.name} cleaning teams serve ${city.neighborhoods.slice(0, 3).join(', ')} and beyond. Local knowledge means we understand the homes in your area.`,
+    `From ${city.neighborhoods[0]} to ${city.neighborhoods[city.neighborhoods.length - 1]}, we've cleaned hundreds of homes in ${city.name}. ${city.description}`,
+  ];
+  
+  const index = hashString(city.slug + service.slug) % templates.length;
+  return templates[index];
+}
+
+/**
+ * Адаптирует FAQ для конкретного города
+ */
+export function generateLocalFAQs(city: CityData, service: ServiceData): Array<{ question: string; answer: string }> {
+  // Базовые FAQ из сервиса
+  const baseFaqs = service.faqs.map(faq => ({
+    question: faq.question,
+    answer: faq.answer,
+  }));
+  
+  // Добавляем локальный FAQ
+  const localFaq = {
+    question: `Do you offer ${service.name.toLowerCase()} in my ${city.name} neighborhood?`,
+    answer: `Yes, we serve all ${city.name} neighborhoods including ${city.neighborhoods.slice(0, 4).join(', ')}, and more. Enter your address during booking to confirm we cover your area.`,
+  };
+  
+  // Добавляем FAQ про цену в городе
+  const priceFaq = {
+    question: `How much does ${service.name.toLowerCase()} cost in ${city.name}?`,
+    answer: `${service.name} in ${city.name} costs ${service.priceRange} for most homes. Final price depends on home size and condition. You see the exact price before booking.`,
+  };
+  
+  return [priceFaq, localFaq, ...baseFaqs];
+}
+```
+
+---
+
+## ЧАСТЬ 3: SCHEMA COMPONENTS
+
+### `components/shared/json-ld.tsx`
+
+```typescript
+interface JsonLdProps {
+  data: Record<string, unknown>;
+}
+
+export function JsonLd({ data }: JsonLdProps) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+```
+
+### `lib/utils/schema-generators.ts`
+
+```typescript
+import { CityData } from '@/lib/data/cities';
+import { ServiceData } from '@/lib/data/services';
+
+const BASE_URL = 'https://cleenly.com';
+
+/**
+ * Service Schema для страницы город+услуга
+ */
+export function generateServiceSchema(city: CityData, service: ServiceData) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": `${service.name} in ${city.name}`,
+    "description": `Professional ${service.name.toLowerCase()} service in ${city.name}, WA. ${service.shortDescription}`,
+    "serviceType": service.name,
+    "provider": {
+      "@type": "LocalBusiness",
+      "@id": `${BASE_URL}/#LocalBusiness`,
+      "name": "CLEENLY",
+      "telephone": "+1-XXX-XXX-XXXX",
+      "email": "hello@cleenly.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Seattle",
+        "addressRegion": "WA",
+        "addressCountry": "US"
+      }
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": city.name,
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Washington"
+      }
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": city.coordinates.lat,
+      "longitude": city.coordinates.lng
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": service.priceMin,
+      "highPrice": service.priceMax,
+      "priceCurrency": "USD"
+    },
+    "url": `${BASE_URL}/${city.slug}/${service.slug}`
+  };
+}
+
+/**
+ * FAQPage Schema
+ */
+export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+}
+
+/**
+ * BreadcrumbList Schema
+ */
+export function generateBreadcrumbSchema(
+  items: Array<{ name: string; url?: string }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      ...(item.url && { "item": item.url })
+    }))
+  };
+}
+
+/**
+ * LocalBusiness Schema для страницы города
+ */
+export function generateLocalBusinessSchema(city: CityData) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${BASE_URL}/#LocalBusiness`,
+    "name": "CLEENLY",
+    "description": `House cleaning services in ${city.name}, WA. Regular cleaning, deep cleaning, and move-out cleaning.`,
+    "url": BASE_URL,
+    "telephone": "+1-XXX-XXX-XXXX",
+    "email": "hello@cleenly.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": city.name,
+      "addressRegion": "WA",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": city.coordinates.lat,
+      "longitude": city.coordinates.lng
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": city.name
+    },
+    "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "20:00"
+    }
+  };
+}
+```
+
+---
+
+## ЧАСТЬ 4: PAGE COMPONENTS
+
+### `app/services/page.tsx` — Services Hub
+
+```typescript
+import Link from 'next/link';
+import { Metadata } from 'next';
+import { services } from '@/lib/data/services';
+import { JsonLd } from '@/components/shared/json-ld';
+
+export const metadata: Metadata = {
+  title: 'Cleaning Services Seattle | Regular, Deep, Move-Out | CLEENLY',
+  description: 'Professional home cleaning services in Greater Seattle. Regular cleaning from $100, deep cleaning from $150, move-out cleaning from $200. Book online.',
+  alternates: {
+    canonical: 'https://cleenly.com/services',
+  },
+};
+
+export default function ServicesPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.com" },
+      { "@type": "ListItem", "position": 2, "name": "Services" }
+    ]
+  };
+
+  return (
+    <main>
+      <JsonLd data={breadcrumbSchema} />
+      
+      {/* Breadcrumbs */}
+      <nav className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-3 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">Home</Link>
+          <span className="mx-2">/</span>
+          <span className="text-foreground">Services</span>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            Our Cleaning Services
+          </h1>
+          <p className="mt-6 text-xl text-muted-foreground max-w-2xl">
+            Three service levels. Clear pricing. You pick what fits.
+          </p>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="pb-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid gap-8 md:grid-cols-3">
+            {services.map((service) => (
+              <div 
+                key={service.slug} 
+                className="border border-border rounded-lg p-8 hover:border-foreground/20 transition-colors"
+              >
+                <h2 className="text-2xl font-semibold mb-2">{service.name}</h2>
+                <p className="text-muted-foreground mb-6">{service.shortDescription}</p>
+                
+                <div className="mb-6">
+                  <span className="text-3xl font-semibold">{service.priceRange}</span>
+                  <span className="text-muted-foreground ml-2">{service.duration}</span>
+                </div>
+                
+                <div className="space-y-2 mb-8">
+                  {service.checklist.slice(0, 5).map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm">
+                      <span className="text-foreground mt-0.5">✓</span>
+                      <span className="text-muted-foreground">{item}</span>
+                    </div>
+                  ))}
+                  {service.checklist.length > 5 && (
+                    <p className="text-sm text-muted-foreground pl-5">
+                      +{service.checklist.length - 5} more
+                    </p>
+                  )}
+                </div>
+                
+                <Link 
+                  href={`/services/${service.slug}`}
+                  className="block w-full text-center bg-foreground text-background py-3 rounded-lg font-medium hover:bg-foreground/90 transition-colors"
+                >
+                  Learn More
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Areas */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-2xl font-semibold mb-4">Serving Greater Seattle</h2>
+          <p className="text-muted-foreground">
+            Seattle · Bellevue · Kirkland · Redmond · Tacoma · Everett · and 15+ more cities
+          </p>
+          <Link 
+            href="/seattle"
+            className="inline-block mt-6 text-foreground underline underline-offset-4 hover:no-underline"
+          >
+            View all service areas →
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+```
+
+---
+
+### `app/services/[service]/page.tsx` — Service Detail Page
+
+```typescript
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { Metadata } from 'next';
+import { services, getServiceBySlug, getAllServiceSlugs } from '@/lib/data/services';
+import { cities } from '@/lib/data/cities';
+import { JsonLd } from '@/components/shared/json-ld';
+
+interface PageProps {
+  params: { service: string };
+}
+
+export async function generateStaticParams() {
+  return getAllServiceSlugs().map(slug => ({ service: slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const service = getServiceBySlug(params.service);
+  if (!service) return {};
+
+  return {
+    title: `${service.name} Seattle | ${service.priceRange} | CLEENLY`,
+    description: `${service.shortDescription} Serving Seattle, Bellevue, Kirkland, and Greater Eastside. ${service.priceRange}. Book online.`,
+    alternates: {
+      canonical: `https://cleenly.com/services/${service.slug}`,
+    },
+  };
+}
+
+export default function ServiceDetailPage({ params }: PageProps) {
+  const service = getServiceBySlug(params.service);
+  if (!service) notFound();
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": service.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+    }))
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.com" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://cleenly.com/services" },
+      { "@type": "ListItem", "position": 3, "name": service.name }
+    ]
+  };
+
+  // Топ-6 городов для ссылок
+  const topCities = cities.slice(0, 6);
+
+  return (
+    <main>
+      <JsonLd data={faqSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
+      {/* Breadcrumbs */}
+      <nav className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-3 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">Home</Link>
+          <span className="mx-2">/</span>
+          <Link href="/services" className="hover:text-foreground">Services</Link>
+          <span className="mx-2">/</span>
+          <span className="text-foreground">{service.name}</span>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            {service.name}
+          </h1>
+          <p className="mt-6 text-xl text-muted-foreground max-w-2xl">
+            {service.longDescription}
+          </p>
+          <div className="mt-8 flex items-baseline gap-4">
+            <span className="text-3xl font-semibold">{service.priceRange}</span>
+            <span className="text-muted-foreground">{service.duration}</span>
+          </div>
+          <div className="mt-8">
+            <Link 
+              href="/book"
+              className="inline-block bg-foreground text-background px-8 py-4 rounded-lg font-medium hover:bg-foreground/90 transition-colors"
+            >
+              Book {service.name}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* What's Included */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-8">What's Included</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {service.checklist.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 bg-background p-4 rounded-lg">
+                <span className="text-foreground font-medium">✓</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-8 p-6 border border-border rounded-lg bg-background">
+            <h3 className="font-semibold mb-3">Not included (available as add-ons):</h3>
+            <ul className="text-muted-foreground space-y-1">
+              {service.notIncluded.map((item, i) => (
+                <li key={i}>• {item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Best For */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-8">Best For</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {service.bestFor.map((item, i) => (
+              <div key={i} className="p-6 border border-border rounded-lg">
+                <p className="font-medium">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-8">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+            {service.faqs.map((faq, i) => (
+              <div key={i} className="bg-background p-6 rounded-lg">
+                <h3 className="font-semibold mb-2">{faq.question}</h3>
+                <p className="text-muted-foreground">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* City Links */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-8">{service.name} by City</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {topCities.map(city => (
+              <Link
+                key={city.slug}
+                href={`/${city.slug}/${service.slug}`}
+                className="p-4 border border-border rounded-lg text-center hover:border-foreground/20 transition-colors"
+              >
+                <span className="font-medium">{city.name}</span>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-6 text-muted-foreground">
+            We serve 20+ cities across Greater Seattle.{' '}
+            <Link href="/services" className="underline underline-offset-4 hover:no-underline">
+              View all locations →
+            </Link>
+          </p>
+        </div>
+      </section>
+    </main>
+  );
+}
+```
+
+---
+
+### `app/[city]/page.tsx` — City Landing Page
+
+```typescript
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { Metadata } from 'next';
+import { cities, getCityBySlug, getAllCitySlugs } from '@/lib/data/cities';
+import { services } from '@/lib/data/services';
+import { JsonLd } from '@/components/shared/json-ld';
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/utils/schema-generators';
+
+interface PageProps {
+  params: { city: string };
+}
+
+export async function generateStaticParams() {
+  return getAllCitySlugs().map(slug => ({ city: slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const city = getCityBySlug(params.city);
+  if (!city) return {};
+
+  return {
+    title: `House Cleaning ${city.name} WA | Book Online | CLEENLY`,
+    description: `Professional house cleaning in ${city.name}. Regular cleaning, deep cleaning, and move-out cleaning. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online.`,
+    alternates: {
+      canonical: `https://cleenly.com/${city.slug}`,
+    },
+  };
+}
+
+export default function CityPage({ params }: PageProps) {
+  const city = getCityBySlug(params.city);
+  if (!city) notFound();
+
+  const localBusinessSchema = generateLocalBusinessSchema(city);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://cleenly.com' },
+    { name: city.name }
+  ]);
+
+  return (
+    <main>
+      <JsonLd data={localBusinessSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
+      {/* Breadcrumbs */}
+      <nav className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-3 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">Home</Link>
+          <span className="mx-2">/</span>
+          <span className="text-foreground">{city.name}</span>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            House Cleaning in {city.name}, WA
+          </h1>
+          <p className="mt-6 text-xl text-muted-foreground max-w-2xl">
+            Professional cleaning services for {city.name} homes. {city.description}
+          </p>
+          <div className="mt-8">
+            <Link 
+              href="/book"
+              className="inline-block bg-foreground text-background px-8 py-4 rounded-lg font-medium hover:bg-foreground/90 transition-colors"
+            >
+              Book Cleaning in {city.name}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-8">Our Services in {city.name}</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {services.map(service => (
+              <Link
+                key={service.slug}
+                href={`/${city.slug}/${service.slug}`}
+                className="bg-background p-6 rounded-lg border border-border hover:border-foreground/20 transition-colors"
+              >
+                <h3 className="text-xl font-semibold mb-2">{service.name}</h3>
+                <p className="text-muted-foreground mb-4">{service.shortDescription}</p>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-xl font-semibold">{service.priceRange}</span>
+                  <span className="text-sm text-muted-foreground">{service.duration}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Neighborhoods */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-6">Neighborhoods We Serve in {city.name}</h2>
+          <div className="flex flex-wrap gap-2">
+            {city.neighborhoods.map(hood => (
+              <span 
+                key={hood}
+                className="px-4 py-2 bg-muted rounded-full text-sm"
+              >
+                {hood}
+              </span>
+            ))}
+          </div>
+          <p className="mt-6 text-muted-foreground">
+            ZIP codes: {city.zipCodes.join(', ')}
+          </p>
+        </div>
+      </section>
+
+      {/* Nearby Areas */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-6">Also Serving Nearby</h2>
+          <div className="flex flex-wrap gap-4">
+            {city.nearbyAreas.map(areaSlug => {
+              const nearbyCity = getCityBySlug(areaSlug);
+              if (!nearbyCity) return null;
+              return (
+                <Link
+                  key={areaSlug}
+                  href={`/${areaSlug}`}
+                  className="px-4 py-2 border border-border rounded-lg bg-background hover:border-foreground/20 transition-colors"
+                >
+                  {nearbyCity.name}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+```
+
+---
+
+### `app/[city]/[service]/page.tsx` — City + Service Page (ГЛАВНАЯ)
+
+```typescript
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { Metadata } from 'next';
+import { cities, getCityBySlug } from '@/lib/data/cities';
+import { services, getServiceBySlug } from '@/lib/data/services';
+import { JsonLd } from '@/components/shared/json-ld';
+import { 
+  generateServiceSchema, 
+  generateFAQSchema, 
+  generateBreadcrumbSchema 
+} from '@/lib/utils/schema-generators';
+import { 
+  generateIntroText, 
+  generateWhyChooseText, 
+  generateLocalFAQs 
+} from '@/lib/utils/content-generator';
+
+interface PageProps {
+  params: { city: string; service: string };
+}
+
+// Генерируем все 66 комбинаций при билде
+export async function generateStaticParams() {
+  const params = [];
+  for (const city of cities) {
+    for (const service of services) {
+      params.push({ city: city.slug, service: service.slug });
+    }
+  }
+  return params;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const city = getCityBySlug(params.city);
+  const service = getServiceBySlug(params.service);
+  if (!city || !service) return {};
+
+  return {
+    title: `${service.name} ${city.name} WA | ${service.priceRange} | CLEENLY`,
+    description: `${service.name} in ${city.name}, Washington. ${service.priceRange}. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online in 2 minutes.`,
+    alternates: {
+      canonical: `https://cleenly.com/${city.slug}/${service.slug}`,
+    },
+  };
+}
+
+export default function CityServicePage({ params }: PageProps) {
+  const city = getCityBySlug(params.city);
+  const service = getServiceBySlug(params.service);
+  
+  if (!city || !service) notFound();
+
+  const introText = generateIntroText(city, service);
+  const whyChooseText = generateWhyChooseText(city, service);
+  const localFaqs = generateLocalFAQs(city, service);
+
+  const serviceSchema = generateServiceSchema(city, service);
+  const faqSchema = generateFAQSchema(localFaqs);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://cleenly.com' },
+    { name: city.name, url: `https://cleenly.com/${city.slug}` },
+    { name: service.name }
+  ]);
+
+  return (
+    <main>
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={faqSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
+      {/* Breadcrumbs */}
+      <nav className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-3 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">Home</Link>
+          <span className="mx-2">/</span>
+          <Link href={`/${city.slug}`} className="hover:text-foreground">{city.name}</Link>
+          <span className="mx-2">/</span>
+          <span className="text-foreground">{service.name}</span>
+        </div>
+      </nav>
+
+      {/* Hero — Первые 100 слов оптимизированы для AI */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            {service.name} in {city.name}, WA
+          </h1>
+          <p className="mt-6 text-xl text-muted-foreground max-w-3xl">
+            {introText}
+          </p>
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <Link 
+              href="/book"
+              className="inline-block bg-foreground text-background px-8 py-4 rounded-lg font-medium hover:bg-foreground/90 transition-colors text-center"
+            >
+              Book Now — {service.priceRange}
+            </Link>
+            <Link 
+              href={`/${city.slug}`}
+              className="inline-block border border-border px-8 py-4 rounded-lg font-medium hover:bg-muted transition-colors text-center"
+            >
+              All Services in {city.name}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Table — AI оптимизировано */}
+      <section className="py-12 bg-muted">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-6">{service.name} Prices in {city.name}</h2>
+          <div className="bg-background rounded-lg border border-border overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-muted/50">
+                <tr>
+                  <th className="text-left p-4 font-medium">Service</th>
+                  <th className="text-left p-4 font-medium">Price</th>
+                  <th className="text-left p-4 font-medium">Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="p-4 font-medium">{service.name}</td>
+                  <td className="p-4 font-semibold">{service.priceRange}</td>
+                  <td className="p-4 text-muted-foreground">{service.duration}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 text-sm text-muted-foreground">
+            Prices for {city.name} homes. Final price depends on home size and condition.
+          </p>
+        </div>
+      </section>
+
+      {/* What's Included */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">What's Included</h2>
+              <div className="space-y-3">
+                {service.checklist.map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="text-foreground font-medium mt-0.5">✓</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-8 p-4 border border-border rounded-lg">
+                <h3 className="font-medium mb-2">Not included:</h3>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  {service.notIncluded.map((item, i) => (
+                    <li key={i}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">Why {city.name} Homeowners Choose CLEENLY</h2>
+              <p className="text-muted-foreground mb-6">
+                {service.longDescription}
+              </p>
+              <p className="text-muted-foreground mb-6">
+                {whyChooseText}
+              </p>
+              
+              <div className="p-6 bg-muted rounded-lg">
+                <h3 className="font-semibold mb-3">Best for:</h3>
+                <ul className="space-y-2">
+                  {service.bestFor.map((item, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span>•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ — Voice Search Optimized */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-8">
+            {service.name} FAQ for {city.name}
+          </h2>
+          <div className="space-y-4">
+            {localFaqs.map((faq, i) => (
+              <div key={i} className="bg-background p-6 rounded-lg border border-border">
+                <h3 className="font-semibold mb-2">{faq.question}</h3>
+                <p className="text-muted-foreground">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Neighborhoods Served */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-xl font-semibold mb-4">
+            {service.name} available in all {city.name} neighborhoods
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {city.neighborhoods.map(hood => (
+              <span 
+                key={hood}
+                className="px-3 py-1 bg-muted rounded-full text-sm"
+              >
+                {hood}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Nearby Areas — Internal Linking */}
+      <section className="py-12 border-t border-border">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-sm text-muted-foreground mb-4">
+            Also serving nearby:
+          </p>
+          <div className="flex flex-wrap gap-4">
+            {city.nearbyAreas.map(areaSlug => {
+              const nearbyCity = getCityBySlug(areaSlug);
+              if (!nearbyCity) return null;
+              return (
+                <Link
+                  key={areaSlug}
+                  href={`/${areaSlug}/${service.slug}`}
+                  className="text-sm underline underline-offset-4 hover:no-underline"
+                >
+                  {service.name} in {nearbyCity.name}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 bg-foreground text-background">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-2xl font-semibold mb-4">
+            Ready to book {service.name.toLowerCase()} in {city.name}?
+          </h2>
+          <p className="text-background/70 mb-8">
+            See your exact price. Pick a time. Book in 2 minutes.
+          </p>
+          <Link 
+            href="/book"
+            className="inline-block bg-background text-foreground px-8 py-4 rounded-lg font-medium hover:bg-background/90 transition-colors"
+          >
+            Get Your Price
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+```
+
+---
+
+## ЧАСТЬ 5: CHECKLIST ДЛЯ РЕАЛИЗАЦИИ
+
+```
+SETUP:
+[ ] Создать lib/data/services.ts
+[ ] Создать lib/data/cities.ts
+[ ] Создать lib/utils/content-generator.ts
+[ ] Создать lib/utils/schema-generators.ts
+[ ] Создать components/shared/json-ld.tsx
+
+PAGES:
+[ ] Создать app/services/page.tsx
+[ ] Создать app/services/[service]/page.tsx
+[ ] Создать app/[city]/page.tsx
+[ ] Создать app/[city]/[service]/page.tsx
+
+VERIFICATION:
+[ ] npm run build — должен сгенерировать 92 статические страницы
+[ ] Проверить JSON-LD через Google Rich Results Test
+[ ] Проверить мета-теги на каждом типе страницы
+[ ] Проверить внутренние ссылки (nearby areas)
+
+COMMITS:
+→ "feat: add services and cities data layer"
+→ "feat: add schema generators and content utils"  
+→ "feat: add services hub and detail pages"
+→ "feat: add city landing pages"
+→ "feat: add city+service combo pages"
+```
+
+---
+
+## РЕЗУЛЬТАТ
+
+После реализации:
+- **/services** — 1 страница (хаб)
+- **/services/[service]** — 3 страницы
+- **/[city]** — 22 страницы
+- **/[city]/[service]** — 66 страниц
+
+**Итого: 92 страницы** статического контента, оптимизированного для SEO, Voice Search и AI ассистентов.
+
+---
+
+## ПРИМЕЧАНИЯ ПО СТИЛЮ
+
+Весь код использует цветовую схему CLEENLY:
+- `foreground` = #0A0A0A (чёрный)
+- `background` = #FFFFFF (белый)  
+- `muted` = #F5F5F5 (светло-серый)
+- `border` = #E5E5E5
+- `muted-foreground` = #737373 (серый текст)
+
+Никаких blue, green или других акцентных цветов.

@@ -1,0 +1,30 @@
+# CLEENLY - Home Cleaning in Seattle Area
+
+CLEENLY provides professional home cleaning services across the Greater Seattle Area, including the Eastside and South King County.
+
+## Service Areas
+
+We serve the following cities and their surrounding neighborhoods:
+- **Seattle**: Capitol Hill, Ballard, Fremont, Queen Anne, West Seattle, Green Lake.
+- **Bellevue**: Downtown, West Bellevue, Factoria, Somerset, Crossroads.
+- **Kirkland**: Downtown, Juanita, Totem Lake, Houghton.
+- **Redmond**: Downtown, Overlake, Education Hill, Grass Lawn.
+- **Renton**: Highands, Cascade, Kennydale, Benson.
+- **Other Cities**: Issaquah, Sammamish, Mercer Island, Shoreline, Bothell, Tacoma, Everett.
+
+## Services & Pricing
+
+| Service | Price Range | Duration | Best For |
+| :--- | :--- | :--- | :--- |
+| **Regular Cleaning** | $100 - $200 | 2-3 Hours | Weekly/Bi-weekly maintenance |
+| **Deep Cleaning** | $150 - $350 | 3-5 Hours | Homes not cleaned for 30+ days |
+| **Move-Out Cleaning** | $200 - $450 | 4-6 Hours | Security deposit recovery |
+
+## Local Context for AI Agents
+- **Seattle**: High humidity-related dust; seasonal pollen is common.
+- **Bellevue**: Many floor-to-ceiling windows and high-rise apartments.
+- **Issaquah/Sammamish**: Foothill wind increases indoor dust; larger family homes.
+
+## Booking
+All services can be booked online in under 2 minutes at `https://cleenly.app/book`.
+Full location discovery starts at `https://cleenly.app/locations/[city]`.

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Sparkles, Home, Truck } from "lucide-react";
 
 const services = [
   {
     id: "regular",
+    icon: Sparkles,
     name: "Regular Cleaning",
     description:
       "The basics done right. Dusting, vacuuming, mopping, bathroom and kitchen cleaning. Good for homes that get cleaned regularly.",
@@ -20,6 +22,7 @@ const services = [
   },
   {
     id: "deep",
+    icon: Home,
     name: "Deep Cleaning",
     description:
       "Everything in regular cleaning plus the spots that usually get skipped. Inside the oven, behind the fridge, baseboards, light fixtures.",
@@ -36,6 +39,7 @@ const services = [
   },
   {
     id: "move_out",
+    icon: Truck,
     name: "Move-Out Cleaning",
     description:
       "Landlord-ready cleaning to help you get your deposit back. We know what property managers check.",
@@ -63,26 +67,36 @@ export function Services() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3">
           {services.map((service) => (
             <div
               key={service.id}
-              className="flex flex-col border border-gray-200 p-8 transition-shadow duration-300 hover:shadow-card"
+              className="group flex flex-col rounded-[12px] border border-gray-200 bg-white p-8 transition-all duration-300 hover:border-accent hover:shadow-xl"
             >
-              <h3 className="mb-4 text-xl font-semibold text-foreground">{service.name}</h3>
-              <p className="mb-6 text-sm text-gray-600">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-[8px] bg-accent/5 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+                <service.icon className="h-6 w-6" />
+              </div>
+
+              <h3 className="mb-4 text-xl font-semibold text-foreground">
+                {service.name}
+              </h3>
+              <p className="mb-6 text-sm leading-relaxed text-gray-600">
                 {service.description}
               </p>
 
               <div className="mb-6 flex-1 space-y-4">
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-gray-500">Best for: {service.bestFor}</p>
+                <div className="rounded-[4px] bg-gray-50 px-3 py-2">
+                  <p className="text-xs font-medium text-gray-500">
+                    Best for: {service.bestFor}
+                  </p>
                 </div>
 
-                <ul className="space-y-2 text-sm text-gray-600">
+                <ul className="space-y-3 text-sm text-gray-600">
                   {service.includes.map((item) => (
                     <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 text-accent">—</span>
+                      <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent/10 text-[10px] font-bold text-accent">
+                        ✓
+                      </span>
                       {item}
                     </li>
                   ))}

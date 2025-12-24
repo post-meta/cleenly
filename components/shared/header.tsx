@@ -4,11 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useSession, signOut } from "next-auth/react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading";
 
   return (
     <header className="sticky top-0 z-50">
@@ -34,12 +37,35 @@ export function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-gray-600 transition-colors hover:text-foreground"
-            >
-              Sign In
-            </Link>
+            {!isLoading && (
+              <>
+                {session ? (
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className="text-sm font-medium text-gray-600 transition-colors hover:text-foreground flex items-center gap-1"
+                    >
+                      <LayoutDashboard className="w-4 h-4" />
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={() => signOut({ callbackUrl: '/' })}
+                      className="text-sm font-medium text-gray-600 transition-colors hover:text-foreground flex items-center gap-1"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="text-sm font-medium text-gray-600 transition-colors hover:text-foreground"
+                  >
+                    Sign In
+                  </Link>
+                )}
+              </>
+            )}
             <Button asChild variant="primary" size="sm">
               <Link href="/book">Book Now</Link>
             </Button>
@@ -93,20 +119,49 @@ export function Header() {
               </Link>
             ))}
             <div className="flex flex-col gap-4 mt-4">
-              <Link
-                href="/login"
-                className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/register"
-                className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Create account
-              </Link>
+              {!isLoading && (
+                <>
+                  {session ? (
+                    <>
+                      <Link
+                        href="/dashboard"
+                        className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground flex items-center gap-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <LayoutDashboard className="w-5 h-5 text-accent" />
+                        Dashboard
+                      </Link>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          signOut({ callbackUrl: '/' });
+                        }}
+                        className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground flex items-center gap-2 text-left"
+                      >
+                        <LogOut className="w-5 h-5 text-red-500" />
+                        Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/login"
+                        className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        href="/register"
+                        className="text-lg font-medium text-gray-600 transition-colors hover:text-foreground"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Create account
+                      </Link>
+                    </>
+                  )}
+                </>
+              )}
               <Button asChild variant="primary" size="lg" className="w-full">
                 <Link href="/book" onClick={() => setIsMenuOpen(false)}>
                   Book Now
