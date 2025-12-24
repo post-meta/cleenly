@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+/* Custom Font - OPTIUniversSixtySeven */
+@font-face {
+  font-family: 'OPTIUniversSixtySeven';
+  src: url('/fonts/OPTIUniversSixtySeven.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Colors */
   --color-background: #FAFAF8;
@@ -39,6 +48,7 @@
 
   /* Fonts */
   --font-sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "OPTIUniversSixtySeven", "IBM Plex Sans", system-ui, sans-serif;
 
   /* Animations */
   --animate-fadeInUp: fadeInUp 0.8s ease-out;
@@ -63,19 +73,25 @@
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0px);
     }
+
     50% {
       transform: translateY(-20px);
     }
   }
 
   @keyframes pulse-slow {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: scale(1);
       opacity: 0.6;
     }
+
     50% {
       transform: scale(1.05);
       opacity: 0.4;
@@ -83,10 +99,13 @@
   }
 
   @keyframes sparkle {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0;
       transform: scale(0);
     }
+
     50% {
       opacity: 1;
       transform: scale(1);
@@ -181,5 +200,16 @@
     margin-right: auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  /* Display Font Utilities */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-logo {
+    font-family: var(--font-display);
+    font-weight: normal;
+    letter-spacing: -0.02em;
   }
 }

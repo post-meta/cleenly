@@ -10,7 +10,7 @@ export function Footer() {
 
           {/* Company Info */}
           <div>
-            <h4 className="mb-4 font-semibold text-foreground">CLEENLY</h4>
+            <h4 className="mb-4 text-logo text-foreground">CLEENLY</h4>
             <p className="text-sm text-gray-600">
               House cleaning in Seattle. Simple, honest, reliable.
             </p>

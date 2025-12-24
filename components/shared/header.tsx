@@ -15,7 +15,7 @@ export function Header() {
       <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           {/* Logo */}
-          <Link href="/" className="text-xl font-semibold text-foreground">
+          <Link href="/" className="text-xl text-logo text-foreground">
             {SITE_NAME}
           </Link>
 
@@ -67,7 +67,7 @@ export function Header() {
           <div className="flex items-center justify-between mb-8">
             <Link
               href="/"
-              className="text-xl font-semibold text-foreground"
+              className="text-xl text-logo text-foreground"
               onClick={() => setIsMenuOpen(false)}
             >
               {SITE_NAME}

@@ -7,7 +7,7 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10">
         {/* Left Content - 6 columns */}
         <div className="col-span-12 space-y-8 md:col-span-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-foreground leading-tight tracking-tight">
             House Cleaning in Seattle — Book Online in Minutes
           </h1>
 
