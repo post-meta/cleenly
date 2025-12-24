@@ -29,7 +29,3 @@ Yes. We cover all Tukwila residential areas — Riverton, Allentown, Tukwila Hil
 ### Can you clean my apartment before my lease ends?
 
 Yes. Move-out cleaning is our specialty. We clean to pass landlord inspection and help you get your deposit back.
-
-### Do you speak languages other than English?
-
-Our booking is in English, but many of our cleaners are bilingual. If you need specific language accommodation, note it when booking and we'll try to match you.
