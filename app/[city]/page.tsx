@@ -117,40 +117,27 @@ export default async function CityPage({ params }: PageProps) {
                 </div>
             </section>
 
-            {/* NEW: Services Carousel Section */}
-            <section className="py-16 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex items-center justify-between mb-8">
-                        <h2 className="text-2xl font-semibold text-foreground">Our Services in {city.name}</h2>
-                        <Link
-                            href="/services"
-                            className="hidden md:block text-sm text-gray-500 hover:text-foreground transition-colors"
-                        >
-                            View all services →
-                        </Link>
+            {/* Services Section */}
+            <section className="py-24 container mx-auto px-6">
+                <div className="flex items-end justify-between mb-12">
+                    <div className="max-w-xl">
+                        <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">
+                            Curated Cleaning Services
+                        </h2>
+                        <p className="text-gray-500 text-lg">
+                            Choose the perfect service level for your home in {city.name}.
+                        </p>
                     </div>
 
-                    <ServiceCarousel>
-                        {services.map(service => (
-                            <ServiceCard
-                                key={service.slug}
-                                service={service}
-                                citySlug={city.slug}
-                                cityName={city.name}
-                                cityWikipediaUrl={city.wikipediaUrl}
-                            />
-                        ))}
-                    </ServiceCarousel>
-
-                    {/* Mobile "View all" link */}
-                    <div className="mt-8 text-center md:hidden">
-                        <Link
-                            href="/services"
-                            className="text-sm font-medium text-foreground underline underline-offset-4"
-                        >
-                            See all cleaning options →
-                        </Link>
+                    {/* Swipe hint for mobile */}
+                    <div className="md:hidden text-sm text-gray-400 font-medium">
+                        Swipe to explore →
                     </div>
+                </div>
+
+                {/* Carousel */}
+                <div className="relative px-0 md:px-12">
+                    <ServiceCarousel services={services} city={city} />
                 </div>
             </section>
 

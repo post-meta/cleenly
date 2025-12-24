@@ -1,22 +1,51 @@
-"use client";
+'use client';
 
-import React from 'react';
+import * as React from "react";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
+import { ServiceCard } from "./service-card";
+import { ServiceData } from "@/lib/data/services";
+import { CityData } from "@/lib/data/cities";
 
 interface ServiceCarouselProps {
-    children: React.ReactNode;
+    services: ServiceData[];
+    city: CityData;
 }
 
-export function ServiceCarousel({ children }: ServiceCarouselProps) {
+export function ServiceCarousel({ services, city }: ServiceCarouselProps) {
     return (
-        <div className="relative w-full overflow-hidden">
-            {/* Gradient hints for scrollability */}
-            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent z-10 md:hidden" />
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent z-10 md:hidden" />
+        <Carousel
+            opts={{
+                align: "start",
+                loop: true,
+            }}
+            className="w-full"
+        >
+            <CarouselContent className="-ml-4 pb-4">
+                {services.map((service) => (
+                    <CarouselItem key={service.slug} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                        <div className="h-full">
+                            <ServiceCard
+                                service={service}
+                                citySlug={city.slug}
+                                cityName={city.name}
+                                cityWikipediaUrl={city.wikipediaUrl}
+                            />
+                        </div>
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
 
-            {/* Scrollable container */}
-            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 pt-2 px-4 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:overflow-visible hide-scrollbar">
-                {children}
+            {/* Navigation buttons (hidden on mobile for cleanliness, visible on desktop) */}
+            <div className="hidden md:block">
+                <CarouselPrevious className="-left-12 h-12 w-12 border-none bg-stone-100 hover:bg-stone-200 text-gray-600" />
+                <CarouselNext className="-right-12 h-12 w-12 border-none bg-stone-100 hover:bg-stone-200 text-gray-600" />
             </div>
-        </div>
+        </Carousel>
     );
 }

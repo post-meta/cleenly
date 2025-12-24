@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { ServiceData } from '@/lib/data/services';
 
 interface ServiceCardProps {
@@ -10,9 +11,39 @@ interface ServiceCardProps {
 
 export function ServiceCard({ service, citySlug, cityName, cityWikipediaUrl }: ServiceCardProps) {
     return (
-        <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-foreground/20 min-w-[280px] max-w-[320px] snap-center">
+        <Link
+            href={`/${citySlug}/${service.slug}`}
+            className="group relative flex flex-col h-full justify-between p-6 bg-stone-50/50 hover:bg-stone-100 rounded-xl transition-all duration-300"
+        >
+            {/* Upper part: Title and Price */}
+            <div>
+                <div className="flex justify-between items-start gap-4 mb-3">
+                    <h3 className="text-xl font-medium text-gray-900 group-hover:text-accent transition-colors">
+                        {service.name}
+                    </h3>
+                </div>
 
-            {/* Schema.org Service Markup */}
+                <div className="text-sm font-medium text-gray-500 mb-4">
+                    {service.priceRange}
+                </div>
+
+                {/* Description: strictly 3 lines */}
+                <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-6">
+                    {service.shortDescription}
+                </p>
+            </div>
+
+            {/* Lower part: Interactive element */}
+            <div className="flex items-center justify-between mt-auto pt-6 border-t border-gray-100">
+                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider group-hover:text-gray-600 transition-colors">
+                    View Details
+                </span>
+                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-900 shadow-sm group-hover:scale-110 transition-transform">
+                    <ArrowRight className="w-4 h-4" />
+                </div>
+            </div>
+
+            {/* SEO Schema (Hidden) */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -21,91 +52,20 @@ export function ServiceCard({ service, citySlug, cityName, cityWikipediaUrl }: S
                         "@type": "Service",
                         "name": `${service.name} in ${cityName}`,
                         "description": service.shortDescription,
-                        "provider": {
-                            "@type": "LocalBusiness",
-                            "name": "CLEENLY"
-                        },
                         "areaServed": {
                             "@type": "City",
                             "name": cityName,
                             "sameAs": cityWikipediaUrl
                         },
-                        "aggregateRating": {
-                            "@type": "AggregateRating",
-                            "ratingValue": service.rating,
-                            "reviewCount": service.reviews
-                        },
                         "offers": {
                             "@type": "Offer",
-                            "priceCurrency": "USD",
-                            "price": service.priceMin,
-                            "priceSpecification": {
-                                "@type": "PriceSpecification",
-                                "minPrice": service.priceMin,
-                                "maxPrice": service.priceMax,
-                                "priceCurrency": "USD"
-                            }
+                            "price": service.priceRange.replace(/[^0-9-]/g, '').split('-')[0],
+                            "priceCurrency": "USD"
                         }
                     })
                 }}
             />
-
-            {/* Availability Badge */}
-            <div className="absolute top-4 right-4">
-                <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    Available Today
-                </span>
-            </div>
-
-            <div className="mb-4">
-                <h3 className="text-xl font-semibold text-foreground group-hover:text-foreground/80 transition-colors">
-                    {service.name}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed min-h-[60px]">
-                    {service.shortDescription}
-                </p>
-            </div>
-
-            <div className="space-y-4">
-                {/* Price & Duration */}
-                <div className="flex items-center justify-between border-t border-border pt-4">
-                    <div className="flex flex-col">
-                        <span className="text-lg font-semibold text-foreground">{service.priceRange}</span>
-                        <span className="text-xs text-muted-foreground">Est. Price</span>
-                    </div>
-                    <div className="flex flex-col items-end">
-                        <span className="text-sm font-medium text-foreground">{service.duration}</span>
-                        <span className="text-xs text-muted-foreground">Duration</span>
-                    </div>
-                </div>
-
-                {/* Trust Signals */}
-                <div className="flex items-center gap-3 text-xs text-muted-foreground bg-muted p-2 rounded-lg">
-                    <div className="flex items-center gap-1">
-                        <span className="text-yellow-500">★</span>
-                        <span className="font-semibold text-foreground">{service.rating}</span>
-                        <span className="text-muted-foreground">({service.reviews})</span>
-                    </div>
-                    <span className="h-3 w-[1px] bg-border"></span>
-                    <div className="flex items-center gap-1">
-                        <span>🔒</span>
-                        <span>Insured</span>
-                    </div>
-                </div>
-
-                {/* Smart SEO Link with sr-only context */}
-                <Link
-                    href={`/${citySlug}/${service.slug}`}
-                    title={`${service.name} in ${cityName}`}
-                    className="flex w-full items-center justify-center rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
-                >
-                    Book {service.name}
-                    {/* Hidden text for SEO and screen readers */}
-                    <span className="sr-only"> in {cityName}</span>
-                    <span className="ml-2">→</span>
-                </Link>
-            </div>
-        </div>
+            <span className="sr-only">Book {service.name} in {cityName}</span>
+        </Link>
     );
 }
