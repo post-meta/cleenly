@@ -4,12 +4,12 @@ import { Metadata } from 'next';
 import { cities, getCityBySlug, getAllCitySlugs } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 import { JsonLd } from '@/components/shared/json-ld';
-import { generateLocalBusinessSchema, generateBreadcrumbSchema } from '@/lib/utils/schema-generators';
 import { CityHero } from '@/components/shared/city-hero';
 import { Button } from '@/components/ui/button';
 import { AccordionFAQ } from '@/components/shared/accordion-faq';
 import { Footer } from '@/components/shared/footer';
 import { getCityContent } from '@/lib/utils/content-parser';
+import { ServiceCard } from '@/components/shared/service-card';
 
 interface PageProps {
     params: Promise<{ city: string }>;
@@ -39,11 +39,7 @@ export default async function CityPage({ params }: PageProps) {
     const content = getCityContent(citySlug);
     if (!city || !content) notFound();
 
-    const localBusinessSchema = generateLocalBusinessSchema(city);
-    const breadcrumbSchema = generateBreadcrumbSchema([
-        { name: 'Home', url: 'https://cleenly.app' },
-        { name: city.name }
-    ]);
+    if (!city || !content) notFound();
 
     const faqs = content.localFAQs.length > 0 ? content.localFAQs : [
         {
@@ -62,8 +58,6 @@ export default async function CityPage({ params }: PageProps) {
 
     return (
         <main className="bg-background">
-            <JsonLd data={localBusinessSchema} />
-            <JsonLd data={breadcrumbSchema} />
 
             {/* Breadcrumbs */}
             <nav className="border-b border-gray-200">
@@ -77,6 +71,45 @@ export default async function CityPage({ params }: PageProps) {
             {/* Hero */}
             <CityHero cityName={city.name} description={content.cityIntro || city.description} />
 
+            {/* How It Works */}
+            <section className="py-12 border-b border-gray-100">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="grid md:grid-cols-4 gap-6 text-center">
+                        <div>
+                            <div className="w-12 h-12 bg-foreground text-background rounded-full flex items-center justify-center text-xl font-semibold mx-auto mb-3">
+                                1
+                            </div>
+                            <h3 className="font-medium mb-1">Pick your service</h3>
+                            <p className="text-sm text-gray-500">Regular, Deep, or Move-Out</p>
+                        </div>
+
+                        <div>
+                            <div className="w-12 h-12 bg-foreground text-background rounded-full flex items-center justify-center text-xl font-semibold mx-auto mb-3">
+                                2
+                            </div>
+                            <h3 className="font-medium mb-1">See your price</h3>
+                            <p className="text-sm text-gray-500">$100-$400 based on home size</p>
+                        </div>
+
+                        <div>
+                            <div className="w-12 h-12 bg-foreground text-background rounded-full flex items-center justify-center text-xl font-semibold mx-auto mb-3">
+                                3
+                            </div>
+                            <h3 className="font-medium mb-1">Book online</h3>
+                            <p className="text-sm text-gray-500">Choose date and time</p>
+                        </div>
+
+                        <div>
+                            <div className="w-12 h-12 bg-foreground text-background rounded-full flex items-center justify-center text-xl font-semibold mx-auto mb-3">
+                                4
+                            </div>
+                            <h3 className="font-medium mb-1">We clean</h3>
+                            <p className="text-sm text-gray-500">Show up on time, guaranteed</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Services Grid */}
             <section className="py-24 bg-gray-50 border-y border-gray-100">
                 <div className="mx-auto max-w-7xl px-6">
@@ -89,24 +122,7 @@ export default async function CityPage({ params }: PageProps) {
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {services.map(service => (
-                            <div
-                                key={service.slug}
-                                className="bg-white p-8 rounded-[12px] border border-gray-100 hover:border-accent/40 transition-all shadow-sm hover:shadow-md flex flex-col"
-                            >
-                                <h3 className="text-xl font-semibold mb-3 text-foreground">{service.name}</h3>
-                                <p className="text-gray-600 mb-6 text-sm flex-1">{service.shortDescription}</p>
-
-                                <div className="flex items-baseline gap-2 mb-8">
-                                    <span className="text-2xl font-semibold text-foreground">{service.priceRange}</span>
-                                    <span className="text-xs text-gray-400 uppercase tracking-widest">{service.duration}</span>
-                                </div>
-
-                                <Button variant="secondary" asChild className="w-full">
-                                    <Link href={`/${city.slug}/${service.slug}`}>
-                                        View Details →
-                                    </Link>
-                                </Button>
-                            </div>
+                            <ServiceCard key={service.slug} service={service} city={city} />
                         ))}
                     </div>
                 </div>
@@ -165,6 +181,69 @@ export default async function CityPage({ params }: PageProps) {
             {content.isLoaded && (
                 <div className="hidden">Localized content loaded for {city.slug}</div>
             )}
+
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@graph": [
+                            {
+                                "@type": "LocalBusiness",
+                                "@id": `https://cleenly.app/${city.slug}/#LocalBusiness`,
+                                "name": "CLEENLY",
+                                "description": `House cleaning services in ${city.name}, WA`,
+                                "url": `https://cleenly.app/${city.slug}`,
+                                "telephone": "+1-206-555-0199",
+                                "email": "hello@cleenly.app",
+                                "address": {
+                                    "@type": "PostalAddress",
+                                    "addressLocality": city.name,
+                                    "addressRegion": "WA",
+                                    "addressCountry": "US"
+                                },
+                                "geo": {
+                                    "@type": "GeoCoordinates",
+                                    "latitude": city.coordinates.lat,
+                                    "longitude": city.coordinates.lng
+                                },
+                                "areaServed": {
+                                    "@type": "City",
+                                    "name": city.name
+                                },
+                                "priceRange": "$$"
+                            },
+                            {
+                                "@type": "BreadcrumbList",
+                                "itemListElement": [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Home",
+                                        "item": "https://cleenly.app"
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": city.name
+                                    }
+                                ]
+                            },
+                            {
+                                "@type": "FAQPage",
+                                "mainEntity": faqs.map(faq => ({
+                                    "@type": "Question",
+                                    "name": faq.question,
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": faq.answer
+                                    }
+                                }))
+                            }
+                        ]
+                    })
+                }}
+            />
             <Footer currentCity={city.slug} />
         </main>
     );

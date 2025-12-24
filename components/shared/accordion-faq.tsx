@@ -31,13 +31,22 @@ export function AccordionFAQ({ faqs, title }: AccordionFAQProps) {
 
                 <div className="space-y-0">
                     {faqs.map((faq, index) => (
-                        <div key={index} className="border-b border-gray-200 py-6">
+                        <div
+                            key={index}
+                            className="border-b border-gray-200 py-6"
+                            itemScope
+                            itemProp="mainEntity"
+                            itemType="https://schema.org/Question"
+                        >
                             <button
                                 onClick={() => toggle(index)}
                                 className="flex w-full items-center justify-between text-left"
                                 aria-expanded={openId === index}
                             >
-                                <h3 className="text-sm md:text-base font-semibold text-foreground pr-4">
+                                <h3
+                                    className="text-sm md:text-base font-semibold text-foreground pr-4"
+                                    itemProp="name"
+                                >
                                     {faq.question}
                                 </h3>
                                 <ChevronDown
@@ -53,8 +62,14 @@ export function AccordionFAQ({ faqs, title }: AccordionFAQProps) {
                                     "overflow-hidden transition-all duration-300 ease-in-out",
                                     openId === index ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
                                 )}
+                                itemScope
+                                itemProp="acceptedAnswer"
+                                itemType="https://schema.org/Answer"
                             >
-                                <p className="text-sm text-gray-600 leading-relaxed">
+                                <p
+                                    className="text-sm text-gray-600 leading-relaxed"
+                                    itemProp="text"
+                                >
                                     {faq.answer}
                                 </p>
                             </div>
