@@ -132,9 +132,6 @@ export default async function CityPage({ params }: PageProps) {
                                     </Link>
                                 ))}
                             </div>
-                            <p className="mt-8 text-xs text-gray-400 tracking-wider uppercase">
-                                Service Area ZIPs: {city.zipCodes.join(', ')}
-                            </p>
                         </div>
 
                         <div>
