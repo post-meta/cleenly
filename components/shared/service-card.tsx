@@ -1,95 +1,72 @@
-"use client";
-
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { ServiceData } from '@/lib/data/services';
 
 interface ServiceCardProps {
-    service: {
-        slug: string;
-        name: string;
-        shortDescription: string;
-        priceRange: string;
-        priceMin: number;
-        priceMax: number;
-        duration: string;
-    };
-    city: {
-        slug: string;
-        name: string;
-    };
+    service: ServiceData;
+    citySlug: string;
+    cityName: string;
 }
 
-export function ServiceCard({ service, city }: ServiceCardProps) {
+export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
     return (
-        <div className="bg-white border border-gray-100 rounded-[12px] p-8 hover:border-accent/40 transition-all shadow-sm hover:shadow-md flex flex-col h-full group">
+        <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-foreground/20 min-w-[280px] max-w-[320px] snap-center">
+
             {/* Availability Badge */}
-            <div className="flex items-center gap-2 text-xs font-medium text-emerald-600 bg-emerald-50 w-fit px-2 py-1 rounded-full mb-4">
-                <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-pulse"></span>
-                Available Today
+            <div className="absolute top-4 right-4">
+                <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700">
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    Available Today
+                </span>
             </div>
 
-            {/* Service Name */}
-            <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-accent transition-colors">{service.name}</h3>
+            <div className="mb-4">
+                <h3 className="text-xl font-semibold text-foreground group-hover:text-foreground/80 transition-colors">
+                    {service.name}
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed min-h-[60px]">
+                    {service.shortDescription}
+                </p>
+            </div>
 
-            {/* Description */}
-            <p className="text-gray-600 mb-6 text-sm flex-1 leading-relaxed">{service.shortDescription}</p>
-
-            {/* Price & Duration */}
-            <div className="mb-6 pb-6 border-b border-gray-100">
-                <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-2xl font-semibold text-foreground">{service.priceRange}</span>
+            <div className="space-y-4">
+                {/* Price & Duration */}
+                <div className="flex items-center justify-between border-t border-border pt-4">
+                    <div className="flex flex-col">
+                        <span className="text-lg font-semibold text-foreground">{service.priceRange}</span>
+                        <span className="text-xs text-muted-foreground">Est. Price</span>
+                    </div>
+                    <div className="flex flex-col items-end">
+                        <span className="text-sm font-medium text-foreground">{service.duration}</span>
+                        <span className="text-xs text-muted-foreground">Duration</span>
+                    </div>
                 </div>
-                <div className="text-xs text-gray-400 uppercase tracking-widest font-medium">{service.duration}</div>
-            </div>
 
-            {/* Trust Signals */}
-            <div className="flex flex-wrap gap-3 text-sm text-gray-500 mb-6">
-                <span className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded text-xs">
-                    <span className="text-yellow-400">★</span> 4.8 (47)
-                </span>
-                <span className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded text-xs">
-                    <span className="text-gray-400">🛡️</span> Insured
-                </span>
-            </div>
+                {/* Trust Signals */}
+                <div className="flex items-center gap-3 text-xs text-muted-foreground bg-muted p-2 rounded-lg">
+                    <div className="flex items-center gap-1">
+                        <span className="text-yellow-500">★</span>
+                        <span className="font-semibold text-foreground">{service.rating}</span>
+                        <span className="text-muted-foreground">({service.reviews})</span>
+                    </div>
+                    <span className="h-3 w-[1px] bg-border"></span>
+                    <div className="flex items-center gap-1">
+                        <span>🔒</span>
+                        <span>Insured</span>
+                    </div>
+                </div>
 
-            {/* CTA */}
-            <Button variant="secondary" asChild className="w-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
+                {/* Smart SEO Link with sr-only context */}
                 <Link
-                    href={`/${city.slug}/${service.slug}`}
+                    href={`/${citySlug}/${service.slug}`}
+                    title={`${service.name} in ${cityName}`}
+                    className="flex w-full items-center justify-center rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
                 >
-                    Book {service.name} →
+                    Book {service.name}
+                    {/* Hidden text for SEO and screen readers */}
+                    <span className="sr-only"> in {cityName}</span>
+                    <span className="ml-2">→</span>
                 </Link>
-            </Button>
-
-            {/* Hidden Schema Markup */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Product",
-                        "name": `${service.name} in ${city.name}`,
-                        "description": service.shortDescription,
-                        "brand": {
-                            "@type": "Brand",
-                            "name": "CLEENLY"
-                        },
-                        "offers": {
-                            "@type": "AggregateOffer",
-                            "lowPrice": service.priceMin,
-                            "highPrice": service.priceMax,
-                            "priceCurrency": "USD",
-                            "availability": "https://schema.org/InStock",
-                            "url": `https://cleenly.app/${city.slug}/${service.slug}`
-                        },
-                        "aggregateRating": {
-                            "@type": "AggregateRating",
-                            "ratingValue": "4.8",
-                            "reviewCount": "47"
-                        }
-                    })
-                }}
-            />
+            </div>
         </div>
     );
 }

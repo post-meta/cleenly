@@ -10,6 +10,7 @@ import { AccordionFAQ } from '@/components/shared/accordion-faq';
 import { Footer } from '@/components/shared/footer';
 import { getCityContent } from '@/lib/utils/content-parser';
 import { ServiceCard } from '@/components/shared/service-card';
+import { ServiceCarousel } from '@/components/shared/service-carousel';
 
 interface PageProps {
     params: Promise<{ city: string }>;
@@ -110,20 +111,38 @@ export default async function CityPage({ params }: PageProps) {
                 </div>
             </section>
 
-            {/* Services Grid */}
-            <section className="py-24 bg-gray-50 border-y border-gray-100">
-                <div className="mx-auto max-w-7xl px-6">
-                    <div className="text-center md:text-left mb-12">
-                        <h2 className="text-2xl font-semibold mb-4 text-foreground">Cleaning Services in {city.name}</h2>
-                        <p className="text-gray-600 max-w-2xl">
-                            Choose the service level that fits your home's needs. All bookings in {city.name} include our satisfaction guarantee.
-                        </p>
+            {/* NEW: Services Carousel Section */}
+            <section className="py-16 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="flex items-center justify-between mb-8">
+                        <h2 className="text-2xl font-semibold text-foreground">Our Services in {city.name}</h2>
+                        <Link
+                            href="/services"
+                            className="hidden md:block text-sm text-gray-500 hover:text-foreground transition-colors"
+                        >
+                            View all services →
+                        </Link>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <ServiceCarousel>
                         {services.map(service => (
-                            <ServiceCard key={service.slug} service={service} city={city} />
+                            <ServiceCard
+                                key={service.slug}
+                                service={service}
+                                citySlug={city.slug}
+                                cityName={city.name}
+                            />
                         ))}
+                    </ServiceCarousel>
+
+                    {/* Mobile "View all" link */}
+                    <div className="mt-8 text-center md:hidden">
+                        <Link
+                            href="/services"
+                            className="text-sm font-medium text-foreground underline underline-offset-4"
+                        >
+                            See all cleaning options →
+                        </Link>
                     </div>
                 </div>
             </section>

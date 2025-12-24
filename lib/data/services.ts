@@ -14,6 +14,9 @@ export interface ServiceData {
         question: string;
         answer: string;
     }[];
+    // New fields
+    rating: string;
+    reviews: number;
 }
 
 export const services: ServiceData[] = [
@@ -26,6 +29,8 @@ export const services: ServiceData[] = [
         priceMin: 100,
         priceMax: 200,
         duration: '2-3 hours',
+        rating: '4.9',
+        reviews: 124,
         checklist: [
             'Dust all reachable surfaces',
             'Vacuum carpets and rugs',
@@ -72,6 +77,8 @@ export const services: ServiceData[] = [
         priceMin: 150,
         priceMax: 300,
         duration: '3-5 hours',
+        rating: '4.8',
+        reviews: 89,
         checklist: [
             'Everything in regular cleaning',
             'Inside oven',
@@ -120,7 +127,9 @@ export const services: ServiceData[] = [
         priceRange: '$200-$400',
         priceMin: 200,
         priceMax: 400,
-        duration: '4-7 hours',
+        duration: '5-7 hours',
+        rating: '4.9',
+        reviews: 215,
         checklist: [
             'Everything in deep cleaning',
             'Inside all cabinets and drawers',
@@ -162,6 +171,118 @@ export const services: ServiceData[] = [
             },
         ],
     },
+    {
+        slug: 'move-in-cleaning',
+        name: 'Move-In Cleaning',
+        shortDescription: 'Sanitize and prepare your new home before you unpack boxes.',
+        longDescription: 'Start fresh in your new home with our comprehensive Move-In Cleaning service. We sanitize every surface, clean inside cabinets and appliances, and ensure your new space is sparkling clean and ready for your family.',
+        priceRange: '$180-$350',
+        priceMin: 180,
+        priceMax: 350,
+        duration: '4-6 hours',
+        rating: '5.0',
+        reviews: 56,
+        checklist: ['Sanitize all surfaces', 'Clean inside cabinets & drawers', 'Appliances inside & out', 'Floors vacuumed & mopped'],
+        notIncluded: ['Carpet shampooing', 'Exterior windows'],
+        bestFor: ['Moving into a new home', 'New homeowners', 'Post-renovation'],
+        faqs: [{ question: 'Do you clean inside cabinets?', answer: 'Yes, move-in cleaning includes cleaning inside all empty cabinets and drawers.' }]
+    },
+    {
+        slug: 'bi-weekly-cleaning',
+        name: 'Bi-Weekly Service',
+        shortDescription: 'Most popular. Keep your home consistently clean every two weeks.',
+        longDescription: 'Our most popular service! Bi-weekly cleaning strikes the perfect balance between cost and cleanliness, keeping your home maintained without the hassle. We rotate detailed tasks to ensure deep cleanliness over time.',
+        priceRange: '$90-$180',
+        priceMin: 90,
+        priceMax: 180,
+        duration: '2-3 hours',
+        rating: '4.9',
+        reviews: 340,
+        checklist: ['Kitchen & Bathrooms', 'Dusting & Vacuuming', 'Mopping', 'Bed making'],
+        notIncluded: ['Inside ovens (add-on)', 'Inside fridge (add-on)'],
+        bestFor: ['Maintenance', 'Busy families', 'Pet owners'],
+        faqs: [{ question: 'Do I need to be home?', answer: 'No, most clients provide a key or door code.' }]
+    },
+    {
+        slug: 'organization-service',
+        name: 'Home Organization',
+        shortDescription: 'Declutter and organize closets, pantries, and chaotic spaces.',
+        longDescription: 'Transform chaotic spaces into organized havens. Our professional organizers help you declutter, sort, and implement systems that make it easy to stay organized. Perfect for closets, pantries, playrooms, and garages.',
+        priceRange: '$60/hr',
+        priceMin: 60,
+        priceMax: 200,
+        duration: '3-6 hours',
+        rating: '5.0',
+        reviews: 28,
+        checklist: ['Decluttering assistance', 'Sorting & categorizing', 'Bin/basket labeling', 'System implementation'],
+        notIncluded: ['Cleaning (focus is on organizing)', 'Hauling away trash'],
+        bestFor: ['Closets', 'Kitchen pantries', 'Playrooms', 'Garages'],
+        faqs: [{ question: 'Do I need to buy bins?', answer: 'We can recommend products or work with what you have.' }]
+    },
+    {
+        slug: 'pre-event-cleaning',
+        name: 'Pre-Event Cleaning',
+        shortDescription: 'Get your home guest-ready for parties, holidays, or hosting.',
+        longDescription: 'Prepare to host with confidence. Our pre-event cleaning focuses on high-traffic areas, guest bathrooms, and main entertaining spaces to ensure your home looks its absolute best for your guests.',
+        priceRange: '$150-$350',
+        priceMin: 150,
+        priceMax: 350,
+        duration: '2-5 hours',
+        rating: '4.8',
+        reviews: 42,
+        checklist: ['Guest bathroom detail', 'Kitchen detail', 'Entryway & living areas', 'Patio sweep'],
+        notIncluded: ['Inside appliances', 'Bedrooms (unless requested)'],
+        bestFor: ['Parties', 'Holidays', 'Family gatherings'],
+        faqs: [{ question: 'How close to the event should I book?', answer: 'We recommend 1-2 days before your event.' }]
+    },
+    {
+        slug: 'post-emergency-cleaning',
+        name: 'Post-Emergency',
+        shortDescription: 'Urgent cleanup after water leaks, mild smoke, or unexpected messes.',
+        longDescription: 'Quick response cleaning for when life happens. Whether it\'s a minor leak, a messy spill, or post-party chaos, we help restore order to your home quickly and efficiently.',
+        priceRange: '$200-$600+',
+        priceMin: 200,
+        priceMax: 600,
+        duration: '4-8 hours',
+        rating: '5.0',
+        reviews: 12,
+        checklist: ['Water extraction (minor)', 'Disinfecting surfaces', 'Debris removal', 'Deep cleaning affected areas'],
+        notIncluded: ['Mold remediation', 'Major construction repair', 'Hazardous materials'],
+        bestFor: ['After leaks', 'Post-party', 'Unexpected messes'],
+        faqs: [{ question: 'How fast can you come?', answer: 'We often have same-day or next-day availability for emergencies.' }]
+    },
+    {
+        slug: 'airbnb-cleaning',
+        name: 'Airbnb Turnover',
+        shortDescription: 'Fast, reliable turnovers for hosts. Linen service included.',
+        longDescription: 'Reliable turnover service for short-term rental hosts. We understand the tight schedules and high standards required for 5-star reviews. Includes linen changing, restocking supplies, and damage reporting.',
+        priceRange: '$80-$150',
+        priceMin: 80,
+        priceMax: 150,
+        duration: '2-3 hours',
+        rating: '4.7',
+        reviews: 156,
+        checklist: ['Change linens', 'Clean & sanitize bathroom/kitchen', 'Restock amenities', 'Check for damages'],
+        notIncluded: ['Laundry off-site (on-site only)', 'Deep stain removal'],
+        bestFor: ['Airbnb hosts', 'VRBO hosts', 'Vacation rentals'],
+        faqs: [{ question: 'Do you take photos?', answer: 'Yes, we can provide before/after photos for your peace of mind.' }]
+    },
+    {
+        slug: 'post-construction-cleaning',
+        name: 'Post-Construction',
+        shortDescription: 'Remove drywall dust and debris after renovation or remodeling.',
+        longDescription: 'Dust gets everywhere during renovation. Our post-construction cleaning uses HEPA vacuums and specialized techniques to remove fine dust from every surface, including walls, ceilings, and inside cabinets.',
+        priceRange: '$250-$500+',
+        priceMin: 250,
+        priceMax: 500,
+        duration: '4-8 hours',
+        rating: '4.8',
+        reviews: 34,
+        checklist: ['HEPA vacuuming', 'Wall dusting', 'Inside cabinets & drawers', 'Label removal from fixtures'],
+        notIncluded: ['Hauling heavy debris', 'Exterior pressure washing'],
+        bestFor: ['Post-renovation', 'New builds', 'Remodeling projects'],
+        faqs: [{ question: 'Do you remove stickers from windows?', answer: 'Yes, we safely remove manufacturer stickers and residue.' }]
+    }
 ];
 
 export const getServiceBySlug = (slug: string): ServiceData | undefined => {
