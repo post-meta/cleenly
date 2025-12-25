@@ -133,3 +133,67 @@ export async function markPayoutPaid({
     revalidatePath('/admin/finance');
     return { success: true };
 }
+
+export async function markMultiplePayoutsPaid(
+    payoutIds: string[],
+    method: string,
+    transactionId?: string
+) {
+    const supabase = await createClient();
+
+    // Fetch payouts to get current amounts
+    const { data: payouts, error: fetchError } = await supabase
+        .from('cleaner_payouts')
+        .select('id, amount_to_pay')
+        .in('id', payoutIds);
+
+    if (fetchError || !payouts) {
+        return { error: 'Could not fetch payouts' };
+    }
+
+    const timestamp = new Date().toISOString();
+
+    // updates for upsert must include all primary keys (id)
+    const updates = payouts.map(p => ({
+        id: p.id,
+        amount_paid: p.amount_to_pay,
+        method,
+        transaction_id: transactionId,
+        paid_at: timestamp,
+        // We must include other required fields if upserting creates new rows, but here we update. 
+        // Ideally we should use .update() but Supabase JS client doesn't support bulk update with different values easily (though here values are same except ID... wait).
+        // Actually, since we are setting amount_paid = amount_to_pay (which varies per row), we can't do a simple bulk .update({ ... }).
+        // We have to use .upsert(). But .upsert() requires all non-nullable columns if it were to insert. 
+        // Since IDs exist, it *should* update. BUT typically upsert matches on PK.
+        // Let's ensure we don't accidentally wipe out other fields if we don't provide them? 
+        // Supabase upsert performs an INSERT ... ON CONFLICT DO UPDATE.
+        // If we only provide partial data, does it preserve the rest? No, standard SQL REPLACE/UPSERT usually replaces the row. 
+        // Postgres `ON CONFLICT DO UPDATE SET` allows specific column updates. Supabase client handles this by default by updating only provided columns if we don't specify `ignoreDuplicates`.  
+        // However, `amount_to_pay` is needed? No, we just need to set `amount_paid` to that value.
+        // We need to pass `amount_to_pay` back in if we are fully replacing? 
+        // Actually, safer way for now: Promise.all of individual updates. It's slower but 100% safe.
+    }));
+
+    // Safe iteration approach
+    const updatePromises = payouts.map(p =>
+        supabase
+            .from('cleaner_payouts')
+            .update({
+                amount_paid: p.amount_to_pay,
+                method,
+                transaction_id: transactionId,
+                paid_at: timestamp
+            })
+            .eq('id', p.id)
+    );
+
+    const results = await Promise.all(updatePromises);
+    const firstError = results.find(r => r.error)?.error;
+
+    if (firstError) {
+        return { error: firstError.message };
+    }
+
+    revalidatePath('/admin/finance');
+    return { success: true };
+}
