@@ -7,7 +7,7 @@ export default auth((req) => {
     const { nextUrl } = req;
     const isLoggedIn = !!req.auth;
 
-    const isProtectedRoute = nextUrl.pathname.startsWith('/dashboard');
+    const isProtectedRoute = nextUrl.pathname.startsWith('/dashboard') || nextUrl.pathname.startsWith('/admin');
 
     if (isProtectedRoute && !isLoggedIn) {
         return NextResponse.redirect(new URL('/login', nextUrl));
