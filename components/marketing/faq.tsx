@@ -102,7 +102,7 @@ export function FAQ() {
         {!showAll && (
           <div className="mt-12 flex justify-center">
             <Button
-              variant="outline"
+              variant="secondary"
               onClick={() => setShowAll(true)}
               className="gap-2"
             >
