@@ -1,295 +1,237 @@
-import { getBooking, getBookingPayments } from '@/app/actions/bookings';
-import { calculatePaymentStatus } from '@/lib/utils/payment-status';
+import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
-import { format } from 'date-fns';
-import Link from 'next/link';
-import { ArrowLeft, User, MapPin, Calendar, DollarSign, Clock } from 'lucide-react';
-import { BookingStatusActions } from './status-actions';
+import { RecordPaymentForm } from '@/components/admin/record-payment-form';
+import { CreatePayoutForm } from '@/components/admin/create-payout-form';
+import { MarkPayoutPaidForm } from '@/components/admin/mark-payout-paid-form';
 
 export default async function BookingDetailPage({
     params,
 }: {
-    params: Promise<{ id: string }>;
+    params: { id: string };
 }) {
-    const { id } = await params;
-    const { data: booking, error } = await getBooking(id);
+    const supabase = await createClient();
 
-    if (error || !booking) {
-        notFound();
-    }
+    const { data: booking } = await supabase
+        .from('bookings')
+        .select(`
+      *,
+      customer:profiles!customer_id(*),
+      cleaner:cleaner_profiles(*),
+      payments(*),
+      payouts:cleaner_payouts(*)
+    `)
+        .eq('id', params.id)
+        .single();
 
-    const { data: payments } = await getBookingPayments(id);
-    const paymentStatus = calculatePaymentStatus(booking.price_final || 0, payments || []);
+    if (!booking) notFound();
 
-    const serviceTypeLabels: Record<string, string> = {
-        regular: 'Regular Cleaning',
-        deep: 'Deep Cleaning',
-        move_out: 'Move-Out Cleaning',
-    };
-    const serviceTypeLabel = serviceTypeLabels[booking.service_type] || booking.service_type;
+    const totalPaid = booking.payments
+        ?.filter((p: any) => p.status === 'completed')
+        .reduce((sum: number, p: any) => sum + Number(p.amount_paid || 0), 0) || 0;
+
+    const payoutExists = booking.payouts && booking.payouts.length > 0;
+    const totalToPay = booking.payouts
+        ?.reduce((sum: number, p: any) => sum + Number(p.amount_to_pay || 0), 0) || 0;
+    const totalPaidToCleaner = booking.payouts
+        ?.reduce((sum: number, p: any) => sum + Number(p.amount_paid || 0), 0) || 0;
 
     return (
-        <div>
-            <Link
-                href="/admin/bookings"
-                className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-foreground mb-6"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Bookings
-            </Link>
-
-            <div className="flex items-start justify-between mb-6">
+        <div className="max-w-4xl mx-auto space-y-6 p-6">
+            {/* Header */}
+            <div className="flex justify-between items-start">
                 <div>
-                    <h1 className="text-2xl font-bold">{serviceTypeLabel}</h1>
-                    <p className="text-gray-600 text-sm mt-1">Booking #{id.slice(0, 8)}</p>
+                    <h1 className="text-3xl font-semibold">
+                        Booking #{booking.id.slice(0, 8)}
+                    </h1>
+                    <p className="text-muted-foreground">
+                        {new Date(booking.scheduled_date).toLocaleDateString()}
+                    </p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <StatusBadge status={booking.status} />
-                    <PaymentBadge status={paymentStatus} />
+                <StatusBadge status={booking.status || 'pending_payment'} />
+            </div>
+
+            {/* Customer & Service Details */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-background border rounded-lg p-6">
+                    <h2 className="font-semibold mb-4">Customer</h2>
+                    <div className="space-y-2 text-sm">
+                        <p><span className="text-muted-foreground">Name:</span> {booking.customer?.full_name}</p>
+                        <p><span className="text-muted-foreground">Email:</span> {booking.customer?.email}</p>
+                        <p><span className="text-muted-foreground">Phone:</span> {booking.customer?.phone}</p>
+                        <p><span className="text-muted-foreground">Types:</span> {booking.service_type}</p>
+                    </div>
+                </div>
+                <div className="bg-background border rounded-lg p-6">
+                    <h2 className="font-semibold mb-4">Properties</h2>
+                    <div className="space-y-2 text-sm">
+                        <p>{booking.address_line1}</p>
+                        <p>{booking.city}, {booking.state} {booking.zip}</p>
+                        <p>{booking.bedrooms} Bed, {booking.bathrooms} Bath</p>
+                    </div>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Main Info */}
-                <div className="lg:col-span-2 space-y-6">
-                    {/* Customer */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4 flex items-center gap-2">
-                            <User className="w-5 h-5" />
-                            Customer
-                        </h2>
-                        <div className="space-y-2 text-sm">
-                            {(booking.name || booking.guest_name) && (
-                                <p><span className="text-gray-600">Name:</span> {booking.name || booking.guest_name}</p>
-                            )}
-                            {(booking.email || booking.guest_email) && (
-                                <p><span className="text-gray-600">Email:</span> {booking.email || booking.guest_email}</p>
-                            )}
-                            {(booking.phone || booking.guest_phone) && (
-                                <p><span className="text-gray-600">Phone:</span> {booking.phone || booking.guest_phone}</p>
-                            )}
-                        </div>
-                    </section>
+            {/* Payment from Customer */}
+            <div className="bg-background border rounded-lg p-6">
+                <h2 className="text-lg font-semibold mb-4">Payment from Customer</h2>
 
-                    {/* Address */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4 flex items-center gap-2">
-                            <MapPin className="w-5 h-5" />
-                            Address
-                        </h2>
-                        <div className="text-sm">
-                            <p>{booking.address}</p>
-                            <p>{booking.city}, {booking.zip}</p>
-                        </div>
-                    </section>
-
-                    {/* Schedule */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4 flex items-center gap-2">
-                            <Calendar className="w-5 h-5" />
-                            Schedule
-                        </h2>
-                        <div className="space-y-2 text-sm">
-                            <p>
-                                <span className="text-gray-600">Date:</span>{' '}
-                                {booking.scheduled_date
-                                    ? format(new Date(booking.scheduled_date), 'MMMM d, yyyy')
-                                    : 'Not scheduled'}
-                            </p>
-                            {booking.scheduled_time && (
-                                <p><span className="text-gray-600">Time:</span> {booking.scheduled_time}</p>
-                            )}
-                            {booking.estimated_duration && (
-                                <p><span className="text-gray-600">Duration:</span> {booking.estimated_duration} hours</p>
-                            )}
-                        </div>
-                    </section>
-
-                    {/* Service Details */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4">Service Details</h2>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                            <div>
-                                <p className="text-gray-600">Type</p>
-                                <p className="font-medium">{serviceTypeLabel}</p>
-                            </div>
-                            {booking.bedrooms && (
-                                <div>
-                                    <p className="text-gray-600">Bedrooms</p>
-                                    <p className="font-medium">{booking.bedrooms}</p>
-                                </div>
-                            )}
-                            {booking.bathrooms && (
-                                <div>
-                                    <p className="text-gray-600">Bathrooms</p>
-                                    <p className="font-medium">{booking.bathrooms}</p>
-                                </div>
-                            )}
-                            {booking.sqft_range && (
-                                <div>
-                                    <p className="text-gray-600">Sq Ft</p>
-                                    <p className="font-medium">{booking.sqft_range}</p>
-                                </div>
-                            )}
-                        </div>
-                    </section>
-
-                    {/* Notes */}
-                    {(booking.special_requests || booking.notes_for_cleaner) && (
-                        <section className="bg-white border border-gray-200 rounded-lg p-6">
-                            <h2 className="font-semibold mb-4">Notes</h2>
-                            {booking.special_requests && (
-                                <div className="mb-4">
-                                    <p className="text-sm text-gray-600 mb-1">Customer Notes:</p>
-                                    <p className="text-sm">{booking.special_requests}</p>
-                                </div>
-                            )}
-                            {booking.notes_for_cleaner && (
-                                <div>
-                                    <p className="text-sm text-gray-600 mb-1">Admin Notes:</p>
-                                    <p className="text-sm">{booking.notes_for_cleaner}</p>
-                                </div>
-                            )}
-                        </section>
-                    )}
+                <div className="mb-4">
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-muted-foreground">Status</span>
+                        <span className={`font-medium ${totalPaid >= booking.price_final
+                                ? 'text-green-600'
+                                : 'text-yellow-600'
+                            }`}>
+                            {totalPaid >= booking.price_final ? '✓ Paid' : '⚠ Pending'}
+                        </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                        <span className="text-muted-foreground">Amount Paid</span>
+                        <span className="font-semibold">
+                            ${totalPaid} / ${booking.price_final}
+                        </span>
+                    </div>
                 </div>
 
-                {/* Sidebar */}
-                <div className="space-y-6">
-                    {/* Pricing */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4 flex items-center gap-2">
-                            <DollarSign className="w-5 h-5" />
-                            Pricing
-                        </h2>
-                        <div className="space-y-2 text-sm">
-                            {booking.price_quoted && (
-                                <p>
-                                    <span className="text-gray-600">Estimated:</span>{' '}
-                                    ${(booking.price_quoted / 100).toFixed(2)}
-                                </p>
-                            )}
-                            <p className="text-lg font-semibold">
-                                Final: ${(booking.price_final / 100).toFixed(2)}
-                            </p>
-                        </div>
-                    </section>
-
-                    {/* Cleaner */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4">Assigned Cleaner</h2>
-                        {booking.cleaners ? (
-                            <div className="flex items-center gap-3">
-                                {booking.cleaners.photo_url ? (
-                                    <img
-                                        src={booking.cleaners.photo_url}
-                                        alt={booking.cleaners.full_name}
-                                        className="w-10 h-10 rounded-full object-cover"
-                                    />
-                                ) : (
-                                    <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium">
-                                        {booking.cleaners.full_name.charAt(0)}
-                                    </div>
-                                )}
+                {/* Payment History */}
+                {booking.payments && booking.payments.length > 0 && (
+                    <div className="mb-4 space-y-2">
+                        <p className="text-sm font-medium">Payment History</p>
+                        {booking.payments.map((payment: any) => (
+                            <div key={payment.id} className="flex justify-between text-sm border-t pt-2">
                                 <div>
-                                    <p className="font-medium">{booking.cleaners.full_name}</p>
-                                    {booking.cleaners.phone && (
-                                        <p className="text-sm text-gray-600">{booking.cleaners.phone}</p>
+                                    <span className="text-muted-foreground">
+                                        {new Date(payment.created_at).toLocaleDateString()}
+                                    </span>
+                                    <span className="mx-2">•</span>
+                                    <span className="capitalize">{payment.method}</span>
+                                </div>
+                                <span className="font-medium">${payment.amount_paid}</span>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {totalPaid < booking.price_final && (
+                    <RecordPaymentForm
+                        bookingId={booking.id}
+                        amountDue={booking.price_final - totalPaid}
+                    />
+                )}
+            </div>
+
+            {/* Cleaner Payout - MANUAL VERSION */}
+            {booking.cleaner_id && booking.cleaner && (
+                <div className="bg-background border rounded-lg p-6">
+                    <h2 className="text-lg font-semibold mb-4">Payout to Cleaner</h2>
+
+                    {!payoutExists ? (
+                        // No payout set yet - show form to create one
+                        <div className="space-y-4">
+                            <p className="text-sm text-muted-foreground">
+                                Customer paid: ${totalPaid}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                                No payout set for {booking.cleaner.full_name}
+                            </p>
+
+                            <CreatePayoutForm
+                                bookingId={booking.id}
+                                cleanerId={booking.cleaner_id}
+                                customerPaid={totalPaid}
+                            />
+                        </div>
+                    ) : (
+                        // Payout exists - show details
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center">
+                                <span className="text-muted-foreground">Amount to Pay</span>
+                                <span className="font-semibold">${totalToPay}</span>
+                            </div>
+
+                            <div className="flex justify-between items-center">
+                                <span className="text-muted-foreground">Amount Paid</span>
+                                <span className={`font-medium ${totalPaidToCleaner >= totalToPay
+                                        ? 'text-green-600'
+                                        : 'text-yellow-600'
+                                    }`}>
+                                    ${totalPaidToCleaner}
+                                </span>
+                            </div>
+
+                            <div className="flex justify-between items-center font-semibold pt-2 border-t">
+                                <span>Balance</span>
+                                <span className={
+                                    totalPaidToCleaner >= totalToPay
+                                        ? 'text-green-600'
+                                        : 'text-red-600'
+                                }>
+                                    ${totalToPay - totalPaidToCleaner}
+                                </span>
+                            </div>
+
+                            {/* Payout Details */}
+                            {booking.payouts.map((payout: any) => (
+                                <div key={payout.id} className="border-t pt-4 space-y-2">
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-muted-foreground">Created</span>
+                                        <span>{new Date(payout.created_at).toLocaleDateString()}</span>
+                                    </div>
+
+                                    {payout.notes && (
+                                        <div className="text-sm">
+                                            <span className="text-muted-foreground">Note: </span>
+                                            <span>{payout.notes}</span>
+                                        </div>
+                                    )}
+
+                                    {!payout.amount_paid && (
+                                        <MarkPayoutPaidForm payoutId={payout.id} />
+                                    )}
+
+                                    {payout.amount_paid && (
+                                        <div className="space-y-1">
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-muted-foreground">Paid via</span>
+                                                <span className="capitalize">{payout.method}</span>
+                                            </div>
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-muted-foreground">Paid on</span>
+                                                <span>
+                                                    {new Date(payout.paid_at).toLocaleDateString()}
+                                                </span>
+                                            </div>
+                                            {payout.transaction_id && (
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="text-muted-foreground">Transaction ID</span>
+                                                    <span className="font-mono text-xs">
+                                                        {payout.transaction_id}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
                                     )}
                                 </div>
-                            </div>
-                        ) : (
-                            <p className="text-gray-600 text-sm">Not assigned</p>
-                        )}
-                    </section>
-
-                    {/* Actions */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4">Actions</h2>
-                        <BookingStatusActions
-                            bookingId={id}
-                            currentStatus={booking.status}
-                        />
-                    </section>
-
-                    {/* Timeline */}
-                    <section className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 className="font-semibold mb-4 flex items-center gap-2">
-                            <Clock className="w-5 h-5" />
-                            Timeline
-                        </h2>
-                        <div className="space-y-3 text-sm">
-                            <TimelineItem
-                                label="Created"
-                                date={booking.created_at}
-                            />
-                            {booking.confirmed_at && (
-                                <TimelineItem
-                                    label="Confirmed"
-                                    date={booking.confirmed_at}
-                                />
-                            )}
-                            {booking.started_at && (
-                                <TimelineItem
-                                    label="Started"
-                                    date={booking.started_at}
-                                />
-                            )}
-                            {booking.completed_at && (
-                                <TimelineItem
-                                    label="Completed"
-                                    date={booking.completed_at}
-                                />
-                            )}
-                            {booking.cancelled_at && (
-                                <TimelineItem
-                                    label="Cancelled"
-                                    date={booking.cancelled_at}
-                                />
-                            )}
+                            ))}
                         </div>
-                    </section>
+                    )}
                 </div>
-            </div>
+            )}
         </div>
     );
 }
 
 function StatusBadge({ status }: { status: string }) {
-    const styles: Record<string, string> = {
-        new: 'bg-blue-100 text-blue-700',
-        confirmed: 'bg-green-100 text-green-700',
-        in_progress: 'bg-yellow-100 text-yellow-700',
-        completed: 'bg-gray-100 text-gray-700',
-        cancelled: 'bg-red-100 text-red-700',
+    const colors: Record<string, string> = {
+        pending_payment: 'bg-yellow-100 text-yellow-800',
+        confirmed: 'bg-blue-100 text-blue-800',
+        completed: 'bg-green-100 text-green-800',
+        cancelled: 'bg-red-100 text-red-800',
     };
 
     return (
-        <span className={`px-3 py-1 rounded-sm text-xs font-medium capitalize ${styles[status] || styles.new}`}>
+        <span className={`px-3 py-1 rounded text-sm font-medium ${colors[status] || ''}`}>
             {status.replace('_', ' ')}
         </span>
-    );
-}
-
-function PaymentBadge({ status }: { status: 'paid' | 'partial' | 'unpaid' }) {
-    const styles = {
-        paid: 'bg-green-100 text-green-700',
-        partial: 'bg-yellow-100 text-yellow-700',
-        unpaid: 'bg-red-100 text-red-700',
-    };
-
-    return (
-        <span className={`px-3 py-1 rounded-sm text-xs font-medium capitalize ${styles[status]}`}>
-            {status}
-        </span>
-    );
-}
-
-function TimelineItem({ label, date }: { label: string; date: string }) {
-    return (
-        <div className="flex justify-between">
-            <span className="text-gray-600">{label}</span>
-            <span>{format(new Date(date), 'MMM d, h:mm a')}</span>
-        </div>
     );
 }

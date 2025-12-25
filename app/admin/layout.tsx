@@ -1,36 +1,29 @@
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
-import { AdminHeader } from '@/components/admin/header';
-import { AdminNav } from '@/components/admin/nav';
+import Link from 'next/link';
 
-export default async function AdminLayout({
+export default function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const session = await auth();
-
-    if (!session?.user) {
-        redirect('/login');
-    }
-
     return (
-        <div className="min-h-screen bg-gray-50">
-            <AdminHeader user={session.user} />
-
-            <div className="max-w-7xl mx-auto px-6 py-8">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    {/* Sidebar Navigation */}
-                    <aside className="lg:col-span-2">
-                        <AdminNav />
-                    </aside>
-
-                    {/* Main Content */}
-                    <main className="lg:col-span-10">
-                        {children}
-                    </main>
+        <div className="flex flex-col min-h-screen">
+            <header className="border-b bg-white">
+                <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+                    <div className="flex items-center gap-8">
+                        <Link href="/admin" className="font-bold text-xl">Cleenly Admin</Link>
+                        <nav className="flex gap-6 text-sm font-medium text-muted-foreground">
+                            <Link href="/admin/bookings" className="hover:text-foreground transition-colors">Bookings</Link>
+                            <Link href="/admin/finance" className="hover:text-foreground transition-colors">Finance</Link>
+                        </nav>
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                        {/* Account dropdown could go here */}
+                    </div>
                 </div>
-            </div>
+            </header>
+            <main className="flex-1 container mx-auto">
+                {children}
+            </main>
         </div>
     );
 }

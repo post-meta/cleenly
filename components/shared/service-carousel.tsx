@@ -27,7 +27,7 @@ export function ServiceCarousel({ services, city }: ServiceCarouselProps) {
             className="w-full"
         >
             <CarouselContent className="-ml-4 pb-4">
-                {services.map((service) => (
+                {services.map((service, index) => (
                     <CarouselItem key={service.slug} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                         <div className="h-full">
                             <ServiceCard
@@ -35,6 +35,7 @@ export function ServiceCarousel({ services, city }: ServiceCarouselProps) {
                                 citySlug={city.slug}
                                 cityName={city.name}
                                 cityWikipediaUrl={city.wikipediaUrl}
+                                index={index}
                             />
                         </div>
                     </CarouselItem>

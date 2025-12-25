@@ -93,3 +93,23 @@ export interface PriceEstimate {
   base: number;
   addonsTotal: number;
 }
+
+// Supabase DB Types
+import { Database } from './supabase';
+
+export type Profile = Database['public']['Tables']['profiles']['Row'];
+export type CleanerProfile = Database['public']['Tables']['cleaner_profiles']['Row'];
+export type DbBooking = Database['public']['Tables']['bookings']['Row'];
+export type Payment = Database['public']['Tables']['payments']['Row'];
+export type CleanerPayout = Database['public']['Tables']['cleaner_payouts']['Row'];
+
+export type BookingWithRelations = DbBooking & {
+  customer: Profile;
+  cleaner: CleanerProfile | null;
+  payments: Payment[];
+  payouts: CleanerPayout[];
+};
+
+export type PaymentMethod = Database['public']['Enums']['payment_method'];
+export type PaymentStatus = Database['public']['Enums']['payment_status'];
+export type DbBookingStatus = Database['public']['Enums']['booking_status'];
