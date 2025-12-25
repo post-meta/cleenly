@@ -27,11 +27,11 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-white py-24 md:py-32">
+    <section id="how-it-works" className="bg-gray-50 py-16 md:py-24">
       <div className="mx-auto max-w-5xl px-6">
         <div className="text-center">
-          <h2 className="mb-6 text-2xl font-semibold">How It Works</h2>
-          <p className="mx-auto mb-16 max-w-2xl text-center text-gray-600">
+          <h2 className="mb-4 text-2xl font-semibold">How It Works</h2>
+          <p className="mx-auto mb-12 max-w-2xl text-center text-gray-600">
             Booking takes about 2 minutes. No account required to see your price.
           </p>
         </div>

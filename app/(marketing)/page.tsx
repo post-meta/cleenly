@@ -7,6 +7,8 @@ import { WhyUs } from "@/components/marketing/why-us";
 import { FAQ } from "@/components/marketing/faq";
 import { ServiceAreas } from "@/components/marketing/service-areas";
 import { CTA } from "@/components/marketing/cta";
+import { TrustStrip } from "@/components/marketing/trust-strip";
+import { SocialProof } from "@/components/marketing/social-proof";
 import { JsonLd } from "@/components/shared/json-ld";
 import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/utils/schema-generators";
 import { cities } from "@/lib/data/cities";
@@ -77,8 +79,10 @@ export default function HomePage() {
       <Hero />
       <HowItWorks />
       <Services />
+      <TrustStrip />
       <PricingPreview />
       <WhyUs />
+      <SocialProof />
       <FAQ />
       <ServiceAreas />
       <CTA />

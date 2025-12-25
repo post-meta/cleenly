@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const faqs = [
   {
@@ -50,32 +51,35 @@ const faqs = [
 
 export function FAQ() {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   const toggle = (id: string) => {
     setOpenId(openId === id ? null : id);
   };
 
+  const displayedFaqs = showAll ? faqs : faqs.slice(0, 5);
+
   return (
     <section id="faq" className="bg-white py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-6">
-        <div className="mb-16">
+        <div className="mb-16 text-center md:text-left">
           <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
         </div>
 
-        <div className="space-y-0">
-          {faqs.map((faq) => (
+        <div className="space-y-0 border-t border-gray-200">
+          {displayedFaqs.map((faq) => (
             <div key={faq.id} className="border-b border-gray-200 py-6">
               <button
                 onClick={() => toggle(faq.id)}
-                className="flex w-full items-center justify-between text-left"
+                className="flex w-full items-center justify-between text-left group"
                 aria-expanded={openId === faq.id}
               >
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-foreground group-hover:text-accent transition-colors">
                   {faq.question}
                 </h3>
                 <ChevronDown
                   className={cn(
-                    "h-5 w-5 text-gray-600 transition-transform duration-200",
+                    "h-5 w-5 text-gray-400 transition-transform duration-200 group-hover:text-accent",
                     openId === faq.id ? "rotate-180" : ""
                   )}
                 />
@@ -94,6 +98,19 @@ export function FAQ() {
             </div>
           ))}
         </div>
+
+        {!showAll && (
+          <div className="mt-12 flex justify-center">
+            <Button
+              variant="outline"
+              onClick={() => setShowAll(true)}
+              className="gap-2"
+            >
+              Show More Questions
+              <ChevronDown className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

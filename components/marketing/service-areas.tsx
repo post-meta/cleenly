@@ -2,7 +2,7 @@ import { Container } from "@/components/ui/container";
 
 export function ServiceAreas() {
   return (
-    <section id="service-areas" className="py-20 md:py-28">
+    <section id="service-areas" className="py-20 md:py-28 bg-gray-50">
       <Container>
         <div className="text-center">
           <h2>Service Areas</h2>

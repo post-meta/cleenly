@@ -30,7 +30,7 @@ const reasons = [
 
 export function WhyUs() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-20 md:py-28 bg-gray-50">
       <Container>
         <div className="text-center">
           <h2>Why CLEENLY</h2>

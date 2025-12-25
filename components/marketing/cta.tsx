@@ -14,7 +14,7 @@ export function CTA() {
           <div className="mt-10">
             <Button
               size="lg"
-              className="bg-background text-foreground hover:bg-background/90"
+              className="bg-background text-foreground hover:bg-background/90 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300"
               asChild
             >
               <Link href="/book">Get a Quote</Link>

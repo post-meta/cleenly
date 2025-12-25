@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[80vh] items-center overflow-hidden animate-fadeInUp">
+    <section className="relative flex min-h-[90vh] items-center overflow-hidden animate-fadeInUp pb-20 md:pb-32">
       <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10">
         {/* Left Content - 6 columns */}
         <div className="col-span-12 space-y-8 md:col-span-6">

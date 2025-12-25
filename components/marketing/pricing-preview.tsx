@@ -21,7 +21,7 @@ const pricingData = [
 
 export function PricingPreview() {
   return (
-    <section id="pricing" className="bg-gray-50 py-24 md:py-32">
+    <section id="pricing" className="bg-white py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <div className="text-center">
           <h2 className="mb-6 text-2xl font-semibold">Simple, Flat Pricing</h2>
@@ -31,7 +31,7 @@ export function PricingPreview() {
           </p>
         </div>
 
-        <div className="overflow-hidden rounded-[16px] border border-gray-200 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-[16px] border border-gray-100 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
