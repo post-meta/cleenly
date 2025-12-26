@@ -95,7 +95,7 @@ export default function ServicesPage() {
                                         </div>
 
                                         <ul className="space-y-3 text-sm text-gray-600">
-                                            {service.checklist.slice(0, 5).map((item, i) => (
+                                            {service.checklist?.slice(0, 5).map((item, i) => (
                                                 <li key={i} className="flex items-start gap-2">
                                                     <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent/10 text-[10px] font-bold text-accent">
                                                         ✓
@@ -103,7 +103,7 @@ export default function ServicesPage() {
                                                     {item}
                                                 </li>
                                             ))}
-                                            {service.checklist.length > 5 && (
+                                            {service.checklist && service.checklist.length > 5 && (
                                                 <li className="text-xs text-gray-400 pl-6">
                                                     +{service.checklist.length - 5} more inclusions
                                                 </li>

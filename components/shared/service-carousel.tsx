@@ -34,8 +34,6 @@ export function ServiceCarousel({ services, city }: ServiceCarouselProps) {
                                 service={service}
                                 citySlug={city.slug}
                                 cityName={city.name}
-                                cityWikipediaUrl={city.wikipediaUrl}
-                                index={index}
                             />
                         </div>
                     </CarouselItem>

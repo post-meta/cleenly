@@ -5,7 +5,7 @@ import { Resend } from 'resend';
 import { getPasswordResetEmailHtml, getPasswordResetEmailText } from '@/lib/email-templates/password-reset';
 import crypto from 'crypto';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Request password reset
 export async function POST(request: NextRequest) {
@@ -66,6 +66,14 @@ export async function POST(request: NextRequest) {
         const resetUrl = `${process.env.NEXTAUTH_URL}/reset-password?token=${resetToken}`;
 
         try {
+            if (!resend) {
+                console.warn('Resend API key not configured, skipping email');
+                return NextResponse.json({
+                    success: true,
+                    message: 'If an account exists with this email, a password reset link has been sent.',
+                });
+            }
+
             await resend.emails.send({
                 from: 'CLEENLY <noreply@cleenly.app>',
                 to: user.email,

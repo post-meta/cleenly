@@ -57,7 +57,7 @@ export default async function CityServicePage({ params }: PageProps) {
 
     const serviceSchema = generateServiceSchema(city, service);
     const localFaqs = content?.localFAQs || [];
-    const allFaqs = [...localFaqs, ...service.faqs];
+    const allFaqs = [...localFaqs, ...(service.faqs || [])];
     const faqSchema = generateFAQSchema(allFaqs);
     const breadcrumbSchema = generateBreadcrumbSchema([
         { name: 'Home', url: 'https://cleenly.app' },
@@ -122,16 +122,18 @@ export default async function CityServicePage({ params }: PageProps) {
                     <div className="grid lg:grid-cols-2 gap-20">
                         <div>
                             <h2 className="text-2xl font-semibold mb-8">What's Included</h2>
-                            <ul className="space-y-4">
-                                {service.checklist.map((item, i) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                        <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/10 text-[10px] font-bold text-accent">
-                                            ✓
-                                        </span>
-                                        <span className="text-gray-700 leading-relaxed">{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                            {service.checklist && service.checklist.length > 0 && (
+                                <ul className="space-y-4">
+                                    {service.checklist.map((item, i) => (
+                                        <li key={i} className="flex items-start gap-3">
+                                            <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/10 text-[10px] font-bold text-accent">
+                                                ✓
+                                            </span>
+                                            <span className="text-gray-700 leading-relaxed">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
 
                         <div>

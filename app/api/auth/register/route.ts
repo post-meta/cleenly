@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase';
 import { Resend } from 'resend';
 import { getWelcomeEmailHtml, getWelcomeEmailText } from '@/lib/email-templates/welcome';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: NextRequest) {
     try {
@@ -65,13 +65,17 @@ export async function POST(request: NextRequest) {
 
         // Send welcome email
         try {
-            await resend.emails.send({
-                from: 'CLEENLY <noreply@cleenly.app>',
-                to: email,
-                subject: 'Welcome to CLEENLY! 🎉',
-                html: getWelcomeEmailHtml(name || 'there'),
-                text: getWelcomeEmailText(name || 'there'),
-            });
+            if (resend) {
+                await resend.emails.send({
+                    from: 'CLEENLY <noreply@cleenly.app>',
+                    to: email,
+                    subject: 'Welcome to CLEENLY! 🎉',
+                    html: getWelcomeEmailHtml(name || 'there'),
+                    text: getWelcomeEmailText(name || 'there'),
+                });
+            } else {
+                console.warn('Resend API key not configured, skipping welcome email');
+            }
         } catch (emailError) {
             console.error('Error sending welcome email:', emailError);
             // Don't fail registration if email fails

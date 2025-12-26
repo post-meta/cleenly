@@ -32,7 +32,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     const service = getServiceBySlug(serviceSlug);
     if (!service) notFound();
 
-    const faqSchema = {
+    const faqSchema = service.faqs ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": service.faqs.map(faq => ({
@@ -40,7 +40,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             "name": faq.question,
             "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
         }))
-    };
+    } : null;
 
     const breadcrumbSchema = {
         "@context": "https://schema.org",
@@ -57,7 +57,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
     return (
         <main className="bg-white">
-            <JsonLd data={faqSchema} />
+            {faqSchema && <JsonLd data={faqSchema} />}
             <JsonLd data={breadcrumbSchema} />
 
             {/* Breadcrumbs */}
@@ -96,57 +96,65 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </section>
 
             {/* What's Included */}
-            <section className="py-16 bg-gray-50">
-                <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-2xl font-semibold mb-8 text-black">What's Included</h2>
-                    <div className="grid md:grid-cols-2 gap-4">
-                        {service.checklist.map((item, i) => (
-                            <div key={i} className="flex items-start gap-3 bg-white p-4 rounded-lg border border-gray-100">
-                                <span className="text-black font-medium text-lg">✓</span>
-                                <span className="text-gray-700">{item}</span>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="mt-8 p-6 border border-gray-200 rounded-lg bg-white">
-                        <h3 className="font-semibold mb-3 text-black">Not included (available as add-ons):</h3>
-                        <ul className="text-gray-500 space-y-1">
-                            {service.notIncluded.map((item, i) => (
-                                <li key={i}>• {item}</li>
+            {service.checklist && service.checklist.length > 0 && (
+                <section className="py-16 bg-gray-50">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <h2 className="text-2xl font-semibold mb-8 text-black">What's Included</h2>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            {service.checklist.map((item, i) => (
+                                <div key={i} className="flex items-start gap-3 bg-white p-4 rounded-lg border border-gray-100">
+                                    <span className="text-black font-medium text-lg">✓</span>
+                                    <span className="text-gray-700">{item}</span>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
+
+                        {service.notIncluded && service.notIncluded.length > 0 && (
+                            <div className="mt-8 p-6 border border-gray-200 rounded-lg bg-white">
+                                <h3 className="font-semibold mb-3 text-black">Not included (available as add-ons):</h3>
+                                <ul className="text-gray-500 space-y-1">
+                                    {service.notIncluded.map((item, i) => (
+                                        <li key={i}>• {item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             {/* Best For */}
-            <section className="py-16">
-                <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-2xl font-semibold mb-8 text-black">Best For</h2>
-                    <div className="grid md:grid-cols-3 gap-6">
-                        {service.bestFor.map((item, i) => (
-                            <div key={i} className="p-6 border border-gray-200 rounded-lg bg-white">
-                                <p className="font-medium text-gray-700">{item}</p>
-                            </div>
-                        ))}
+            {service.bestFor && service.bestFor.length > 0 && (
+                <section className="py-16">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <h2 className="text-2xl font-semibold mb-8 text-black">Best For</h2>
+                        <div className="grid md:grid-cols-3 gap-6">
+                            {service.bestFor.map((item, i) => (
+                                <div key={i} className="p-6 border border-gray-200 rounded-lg bg-white">
+                                    <p className="font-medium text-gray-700">{item}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             {/* FAQ */}
-            <section className="py-16 bg-gray-50">
-                <div className="max-w-3xl mx-auto px-6">
-                    <h2 className="text-2xl font-semibold mb-8 text-black">Frequently Asked Questions</h2>
-                    <div className="space-y-6">
-                        {service.faqs.map((faq, i) => (
-                            <div key={i} className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
-                                <h3 className="font-semibold mb-2 text-black">{faq.question}</h3>
-                                <p className="text-gray-500 leading-relaxed">{faq.answer}</p>
-                            </div>
-                        ))}
+            {service.faqs && service.faqs.length > 0 && (
+                <section className="py-16 bg-gray-50">
+                    <div className="max-w-3xl mx-auto px-6">
+                        <h2 className="text-2xl font-semibold mb-8 text-black">Frequently Asked Questions</h2>
+                        <div className="space-y-6">
+                            {service.faqs.map((faq, i) => (
+                                <div key={i} className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+                                    <h3 className="font-semibold mb-2 text-black">{faq.question}</h3>
+                                    <p className="text-gray-500 leading-relaxed">{faq.answer}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             {/* City Links */}
             <section className="py-16">
