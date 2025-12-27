@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     description: 'House cleaning in Kirkland. Serving homes near Carillon Point, Juanita, and Totem Lake. From $100-$400 based on home size. Book online in 2 minutes.',
     openGraph: {
         title: 'House Cleaning in Kirkland, WA | CLEENLY',
-        description: 'Professional house cleaning in Kirkland. From waterfront condos to family homes. Book online in 2 minutes.',
+        description: 'House cleaning in Kirkland. From waterfront condos to family homes. Book online in 2 minutes.',
         url: 'https://cleenly.app/kirkland',
         siteName: 'CLEENLY',
         images: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'House Cleaning in Kirkland, WA | CLEENLY',
-        description: 'Professional house cleaning in Kirkland. Book online in 2 minutes.',
+        description: 'House cleaning in Kirkland. Book online in 2 minutes.',
         images: ['https://cleenly.app/images/kirkland-cleaning-og.jpg'],
     },
 };

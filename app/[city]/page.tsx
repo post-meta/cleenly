@@ -49,7 +49,7 @@ export default async function CityPage({ params }: PageProps) {
         },
         {
             question: "Are your cleaners insured?",
-            answer: "Yes, all professional cleaners on the CLEENLY platform are fully insured and background-checked for your peace of mind."
+            answer: "Yes, all cleaners on the CLEENLY platform are fully insured and background-checked for your peace of mind."
         },
         {
             question: "Do I need to be home during the cleaning?",
@@ -169,7 +169,7 @@ export default async function CityPage({ params }: PageProps) {
                         <div>
                             <h2 className="text-2xl font-semibold mb-6 text-foreground">Why {city.name} Homeowners Choose CLEENLY</h2>
                             <p className="text-gray-600 leading-relaxed">
-                                {content.whyChoose || "Our professional cleaners are background-checked, insured, and dedicated to making your home shine. We understand the local needs of our community and provide tailored cleaning services that fit your schedule and lifestyle."}
+                                {content.whyChoose || "Cleaners on our platform are background-checked, insured, and show up on time. We keep things simple — you book, they clean, your home stays fresh."}
                             </p>
                         </div>
                     </div>

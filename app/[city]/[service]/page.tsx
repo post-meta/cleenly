@@ -85,7 +85,7 @@ export default async function CityServicePage({ params }: PageProps) {
             <ServiceHero
                 cityName={city.name}
                 serviceName={service.name}
-                introText={serviceIntro || `Expert ${service.name.toLowerCase()} in ${city.name}.`}
+                introText={serviceIntro || `House ${service.name.toLowerCase()} in ${city.name}.`}
                 priceRange={service.priceRange}
                 citySlug={city.slug}
             />
@@ -143,7 +143,7 @@ export default async function CityServicePage({ params }: PageProps) {
                             </p>
                             <div className="bg-accent/5 p-8 rounded-[12px] border-l-4 border-accent">
                                 <p className="text-gray-700 font-medium">
-                                    {content?.whyChoose || `Professional ${service.name.toLowerCase()} tailored for your homes in ${city.name}. Our background-checked cleaners ensure local quality you can trust.`}
+                                    {content?.whyChoose || `House ${service.name.toLowerCase()} tailored for your home in ${city.name}. Every cleaner is background-checked and insured.`}
                                 </p>
                             </div>
                         </div>

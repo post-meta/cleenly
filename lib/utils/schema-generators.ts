@@ -11,13 +11,13 @@ export function generateServiceSchema(city: CityData, service: ServiceData) {
         "@context": "https://schema.org",
         "@type": "Service",
         "name": `${service.name} in ${city.name}`,
-        "description": `Professional ${service.name.toLowerCase()} service in ${city.name}, WA. ${service.shortDescription}`,
+        "description": `House ${service.name.toLowerCase()} in ${city.name}, WA. ${service.shortDescription}`,
         "serviceType": service.name,
         "provider": {
             "@type": "LocalBusiness",
             "@id": `${BASE_URL}/#LocalBusiness`,
             "name": "CLEENLY",
-            "telephone": "+1-XXX-XXX-XXXX",
+            "telephone": "+1-206-555-0199",
             "email": "hello@cleenly.app",
             "address": {
                 "@type": "PostalAddress",
@@ -96,7 +96,7 @@ export function generateLocalBusinessSchema(city: CityData) {
         "name": "CLEENLY",
         "description": `House cleaning services in ${city.name}, WA. Regular cleaning, deep cleaning, and move-out cleaning.`,
         "url": BASE_URL,
-        "telephone": "+1-XXX-XXX-XXXX",
+        "telephone": "+1-206-555-0199",
         "email": "hello@cleenly.app",
         "address": {
             "@type": "PostalAddress",

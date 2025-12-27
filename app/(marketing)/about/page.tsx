@@ -108,8 +108,8 @@ export default function AboutPage() {
           <div className="mt-8 space-y-4 text-lg text-muted-foreground">
             <p>
               CLEENLY is a house cleaning booking platform serving Seattle and
-              the Greater Eastside. We connect customers with vetted cleaning
-              professionals through a simple online booking system. You see the
+              the Greater Eastside. We connect customers with background-checked
+              cleaners through a simple online booking system. You see the
               price before you book, choose your cleaner, and schedule in
               minutes.
             </p>

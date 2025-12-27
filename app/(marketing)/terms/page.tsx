@@ -156,7 +156,7 @@ export default function TermsOfServicePage() {
                 Welcome to CLEENLY. These Terms of Service (&quot;Terms&quot;)
                 govern your use of the CLEENLY website (cleenly.com) and
                 services. CLEENLY is a platform that connects customers with
-                independent cleaning professionals in the Seattle area.
+                independent cleaners in the Seattle area.
               </p>
               <p className="mt-4 text-muted-foreground">
                 By using CLEENLY, you agree to these Terms. If you do not agree,
@@ -179,8 +179,7 @@ export default function TermsOfServicePage() {
               <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>Allows customers to book house cleaning services</li>
                 <li>
-                  Connects customers with vetted, independent cleaning
-                  professionals
+                  Connects customers with background-checked, independent cleaners
                 </li>
                 <li>Facilitates scheduling, payment, and communication</li>
                 <li>Provides customer support for booking-related issues</li>

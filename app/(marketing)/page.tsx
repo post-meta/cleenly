@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/marketing/hero";
 import { HowItWorks } from "@/components/marketing/how-it-works";
-import { Services } from "@/components/marketing/services";
-import { PricingPreview } from "@/components/marketing/pricing-preview";
+import { PricingSection } from "@/components/marketing/pricing-section";
 import { WhyUs } from "@/components/marketing/why-us";
 import { FAQ } from "@/components/marketing/faq";
 import { ServiceAreas } from "@/components/marketing/service-areas";
@@ -78,9 +77,8 @@ export default function HomePage() {
       <JsonLd data={faqSchema} />
       <Hero />
       <HowItWorks />
-      <Services />
       <TrustStrip />
-      <PricingPreview />
+      <PricingSection />
       <WhyUs />
       <SocialProof />
       <FAQ />
