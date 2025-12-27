@@ -1,57 +1,48 @@
-const steps = [
-  {
-    number: "1",
-    title: "Tell us about your place",
-    description:
-      "Select bedrooms, bathrooms, and the type of cleaning you need. Add any special requests.",
-  },
-  {
-    number: "2",
-    title: "Get your price",
-    description:
-      "See a price range based on your home. Final price confirmed after quick details.",
-  },
-  {
-    number: "3",
-    title: "Pick a time",
-    description:
-      "Choose a date and time slot that works for you. Morning, afternoon, or evening.",
-  },
-  {
-    number: "4",
-    title: "Done",
-    description:
-      "You'll get confirmation and cleaner details. We handle the rest.",
-  },
-];
-
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-gray-50 py-16 md:py-24">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="text-center">
-          <h2 className="mb-4 text-2xl font-semibold">How It Works</h2>
-          <p className="mx-auto mb-12 max-w-2xl text-center text-gray-600">
-            Booking takes about 2 minutes. No account required to see your price.
-          </p>
-        </div>
+    <section id="how-it-works" className="how-it-works py-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
 
-        <div className="grid gap-12 md:grid-cols-4">
-          {steps.map((step) => (
-            <div key={step.number} className="relative space-y-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/5 text-2xl font-bold text-accent">
-                {step.number}
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">
-                {step.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-gray-600">
-                {step.description}
-              </p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-4 gap-8">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-muted-foreground mb-4">1</div>
+            <h3 className="text-lg font-semibold mb-2">
+              Tell us: bedrooms, bathrooms
+            </h3>
+            <p className="text-sm text-muted-foreground">Takes 30 seconds</p>
+          </div>
+
+          <div className="text-center">
+            <div className="text-4xl font-bold text-muted-foreground mb-4">2</div>
+            <h3 className="text-lg font-semibold mb-2">
+              See price on screen
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              No waiting, no phone calls
+            </p>
+          </div>
+
+          <div className="text-center">
+            <div className="text-4xl font-bold text-muted-foreground mb-4">3</div>
+            <h3 className="text-lg font-semibold mb-2">
+              Pick date & time
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Next day or next week
+            </p>
+          </div>
+
+          <div className="text-center">
+            <div className="text-4xl font-bold text-muted-foreground mb-4">4</div>
+            <h3 className="text-lg font-semibold mb-2">Done</h3>
+            <p className="text-sm text-muted-foreground">
+              Cleaner shows up and cleans
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
