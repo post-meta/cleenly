@@ -3,43 +3,34 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] items-center overflow-hidden animate-fadeInUp pb-20 md:pb-32">
-      <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10">
-        {/* Left Content - 6 columns */}
-        <div className="col-span-12 space-y-8 md:col-span-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-foreground leading-tight tracking-tight">
-            House Cleaning in Seattle — Book Online in Minutes
-          </h1>
+    <section className="hero py-20">
+      <div className="max-w-4xl mx-auto px-6 text-center">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          House Cleaning in Seattle — From $100
+        </h1>
 
-          <p className="text-xl text-gray-600 leading-relaxed">
-            See your price upfront. Choose your cleaner. Schedule when it works for you.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <Button variant="primary" size="lg" asChild>
-              <Link href="/book">Get Your Price →</Link>
-            </Button>
-            <Button variant="link" asChild>
-              <Link href="#how-it-works">See How It Works</Link>
-            </Button>
-          </div>
-        </div>
-
-        {/* Right Content - Hero Image */}
-        <div className="col-span-12 md:col-span-6 flex items-center justify-center">
-          <img
-            src="/hero-image.jpg"
-            alt="Bright empty living room with morning light"
-            className="w-full h-auto rounded-[8px] object-cover aspect-[16/9] md:aspect-auto"
-          />
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center w-full px-6">
-        <p className="text-sm font-medium tracking-widest uppercase text-gray-500 opacity-80">
-          We clean. You live.
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
+          See your price in 30 seconds. Pick a time. Done.
+          <br />
+          No hidden fees. No phone calls. No BS.
         </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" asChild>
+            <Link href="/book">See My Price Now</Link>
+          </Button>
+
+          <Button size="lg" variant="secondary" asChild>
+            <a href="sms:+12065550199">Questions? Text us →</a>
+          </Button>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-8 mt-12 text-sm text-muted-foreground">
+          <span>✓ Exact price upfront</span>
+          <span>✓ Book in 2 minutes</span>
+        </div>
       </div>
     </section>
   );
 }
+
