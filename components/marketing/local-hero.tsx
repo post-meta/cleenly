@@ -21,7 +21,7 @@ export function LocalHero({ city, service }: LocalHeroProps) {
                         {title}
                     </h1>
                     <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                        Top-rated professional cleaning for homes and apartments in {city.name}.
+                        House cleaning for homes and apartments in {city.name}.
                         Serving all neighborhoods including {city.neighborhoods.slice(0, 2).join(' and ')}.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
@@ -52,11 +52,11 @@ export function LocalHero({ city, service }: LocalHeroProps) {
                         <ul className="space-y-4">
                             <li className="flex items-center gap-3 text-gray-700">
                                 <div className="w-2 h-2 rounded-full bg-accent" />
-                                Background-checked professionals
+                                Background-checked cleaners
                             </li>
                             <li className="flex items-center gap-3 text-gray-700">
                                 <div className="w-2 h-2 rounded-full bg-accent" />
-                                100% satisfaction guarantee
+                                24-hour guarantee
                             </li>
                             <li className="flex items-center gap-3 text-gray-700">
                                 <div className="w-2 h-2 rounded-full bg-accent" />

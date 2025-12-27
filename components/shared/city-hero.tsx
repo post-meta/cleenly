@@ -19,7 +19,7 @@ export function CityHero({ cityName, description }: CityHeroProps) {
                     </h1>
 
                     <p className="text-xl text-gray-600 leading-relaxed">
-                        {description || `Professional cleaning services for ${cityName} homes. See your price upfront. Choose your cleaner. Schedule when it works for you.`}
+                        {description || `House cleaning for ${cityName} homes. See your price upfront. Choose your cleaner. Schedule when it works for you.`}
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-4">
