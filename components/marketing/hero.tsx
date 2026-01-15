@@ -30,7 +30,7 @@ export function Hero() {
           <img
             src="/hero-image.jpg"
             alt="Bright empty living room with morning light"
-            className="w-full h-auto rounded-[8px] object-cover aspect-[16/9] md:aspect-auto"
+            className="w-full h-auto rounded-lg object-cover aspect-[4/5] shadow-lg"
           />
         </div>
       </div>

@@ -37,7 +37,7 @@ export function CityHero({ cityName, description }: CityHeroProps) {
                     <img
                         src="/hero-image.jpg"
                         alt={`Bright empty living room in ${cityName} with morning light`}
-                        className="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-lg"
+                        className="w-full h-auto rounded-lg object-cover aspect-[4/5] shadow-lg"
                     />
                 </div>
             </div>
@@ -88,7 +88,7 @@ export function ServiceHero({ cityName, serviceName, introText, priceRange, city
                     <img
                         src="/hero-image.jpg"
                         alt={`${serviceName} service in ${cityName}`}
-                        className="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-lg"
+                        className="w-full h-auto rounded-lg object-cover aspect-[4/5] shadow-lg"
                     />
                 </div>
             </div>
