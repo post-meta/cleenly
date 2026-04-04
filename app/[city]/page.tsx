@@ -207,7 +207,7 @@ export default async function CityPage({ params }: PageProps) {
                                 "name": "CLEENLY",
                                 "description": `House cleaning services in ${city.name}, WA`,
                                 "url": `https://cleenly.app/${city.slug}`,
-                                "telephone": "+1-206-555-0199",
+                                "telephone": "+1-206-641-4739",
                                 "email": "hello@cleenly.app",
                                 "address": {
                                     "@type": "PostalAddress",

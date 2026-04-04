@@ -17,7 +17,7 @@ export function generateServiceSchema(city: CityData, service: ServiceData) {
             "@type": "LocalBusiness",
             "@id": `${BASE_URL}/#LocalBusiness`,
             "name": "CLEENLY",
-            "telephone": "+1-206-555-0199",
+            "telephone": "+1-206-641-4739",
             "email": "hello@cleenly.app",
             "address": {
                 "@type": "PostalAddress",
@@ -94,9 +94,10 @@ export function generateLocalBusinessSchema(city: CityData) {
         "@type": "LocalBusiness",
         "@id": `${BASE_URL}/#LocalBusiness`,
         "name": "CLEENLY",
+        "alternateName": "Pro Craft Cleaning",
         "description": `House cleaning services in ${city.name}, WA. Regular cleaning, deep cleaning, and move-out cleaning.`,
         "url": BASE_URL,
-        "telephone": "+1-206-555-0199",
+        "telephone": "+1-206-641-4739",
         "email": "hello@cleenly.app",
         "address": {
             "@type": "PostalAddress",
