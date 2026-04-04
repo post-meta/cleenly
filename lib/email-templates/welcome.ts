@@ -17,7 +17,7 @@ export function getWelcomeEmailHtml(name: string): string {
     <p style="font-size: 16px; margin: 0 0 20px 0;">Hi ${name},</p>
     
     <p style="font-size: 16px; margin: 0 0 20px 0;">
-      Thank you for joining CLEENLY! We're excited to help you keep your home sparkling clean.
+      Thank you for joining CLEENLY! Your account is set up. You can book your first cleaning in under 2 minutes.
     </p>
 
     <div style="background: #f8f9fa; padding: 20px; border-radius: 6px; margin: 20px 0;">
@@ -44,7 +44,7 @@ export function getWelcomeEmailHtml(name: string): string {
 
   <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
     <p style="color: #999; font-size: 14px; margin: 0;">
-      CLEENLY - Professional House Cleaning in Seattle
+      CLEENLY — House Cleaning, Greater Seattle
     </p>
     <p style="color: #999; font-size: 12px; margin: 10px 0 0 0;">
       © ${new Date().getFullYear()} CLEENLY. All rights reserved.
@@ -61,7 +61,7 @@ Welcome to CLEENLY!
 
 Hi ${name},
 
-Thank you for joining CLEENLY! We're excited to help you keep your home sparkling clean.
+Thank you for joining CLEENLY! Your account is set up. You can book your first cleaning in under 2 minutes.
 
 Getting Started:
 • Book your first cleaning in just 2 minutes
@@ -73,7 +73,7 @@ Visit your dashboard: ${process.env.NEXTAUTH_URL}/dashboard
 
 Need help? Reply to this email or visit our FAQ page at ${process.env.NEXTAUTH_URL}/faq
 
-CLEENLY - Professional House Cleaning in Seattle
+CLEENLY — House Cleaning, Greater Seattle
 © ${new Date().getFullYear()} CLEENLY. All rights reserved.
   `.trim();
 }

@@ -130,7 +130,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Can I cancel my cleaning appointment?",
         answer:
-          "Yes. Cancel up to 24 hours before your appointment at no charge. Cancellations within 24 hours may be subject to a cancellation fee (typically 50% of the booking). To cancel, use the link in your confirmation email or contact hello@cleenly.com.",
+          "Yes. Cancel up to 24 hours before your appointment at no charge. Cancellations within 24 hours may be subject to a cancellation fee (typically 50% of the booking). To cancel, use the link in your confirmation email or contact hello@cleenly.app.",
       },
       {
         question: "Can I reschedule my cleaning?",
@@ -140,7 +140,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "What if I need to cancel last minute?",
         answer:
-          "Cancellations less than 24 hours before the appointment may incur a fee (typically 50% of booking value). This compensates the cleaner who reserved time for you. If you have an emergency, contact us at hello@cleenly.com — we handle situations case by case.",
+          "Cancellations less than 24 hours before the appointment may incur a fee (typically 50% of booking value). This compensates the cleaner who reserved time for you. If you have an emergency, contact us at hello@cleenly.app — we handle situations case by case.",
       },
       {
         question: "What is your cancellation policy?",
@@ -181,7 +181,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "What if something is damaged during cleaning?",
         answer:
-          "All cleaners on CLEENLY carry liability insurance. If something is damaged, report it within 24 hours. Take photos and email hello@cleenly.com with details. We'll work with the cleaner and their insurance to resolve the issue. Genuine accidents are covered.",
+          "All cleaners on CLEENLY carry liability insurance. If something is damaged, report it within 24 hours. Take photos and email hello@cleenly.app with details. We'll work with the cleaner and their insurance to resolve the issue. Genuine accidents are covered.",
       },
     ],
   },
@@ -285,7 +285,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How do I get a receipt?",
         answer:
-          "A receipt is automatically emailed after your cleaning is complete. It includes: services provided, final price, cleaner name, and date. You can also view all receipts in your account under \"Cleaning History.\" Need a receipt resent? Email hello@cleenly.com.",
+          "A receipt is automatically emailed after your cleaning is complete. It includes: services provided, final price, cleaner name, and date. You can also view all receipts in your account under \"Cleaning History.\" Need a receipt resent? Email hello@cleenly.app.",
       },
     ],
   },

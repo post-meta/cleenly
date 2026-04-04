@@ -307,10 +307,10 @@ export default function ApplyPage() {
             <p className="mt-6 text-sm text-muted-foreground">
               Questions? Email{" "}
               <a
-                href="mailto:cleaners@cleenly.com"
+                href="mailto:cleaners@cleenly.app"
                 className="text-foreground underline"
               >
-                cleaners@cleenly.com
+                cleaners@cleenly.app
               </a>
             </p>
             <div className="mt-8">

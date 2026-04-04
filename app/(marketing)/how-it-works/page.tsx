@@ -176,7 +176,7 @@ export default function HowItWorksPage() {
                   "Background-checked, vetted independent contractors",
                   "All cleaning supplies and equipment provided",
                   "Rate your cleaner and help us maintain quality",
-                  "Satisfaction guaranteed—we fix issues or refund you"
+                  "Something off? Tell us within 24 hours. We send someone to fix it, free."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="h-5 w-5 text-foreground shrink-0 mt-0.5" />

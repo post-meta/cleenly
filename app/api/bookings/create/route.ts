@@ -90,7 +90,7 @@ export async function POST(request: Request) {
             await sendBookingConfirmationEmail({
                 email: guestEmail,
                 booking,
-                magicLinkUrl: `${process.env.NEXTAUTH_URL} /api/auth / magic - link ? email = ${guestEmail}& bookingId=${booking.id} `,
+                magicLinkUrl: `${process.env.NEXTAUTH_URL}/api/auth/magic-link?email=${guestEmail}&bookingId=${booking.id}`,
             });
         }
 

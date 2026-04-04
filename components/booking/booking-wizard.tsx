@@ -164,15 +164,6 @@ export function BookingWizard() {
         estimated_max: finalMax,
       };
 
-      // Debug logging (remove in production)
-      console.log("Submitting booking:", {
-        estimated_min: finalMin,
-        estimated_max: finalMax,
-        service_type: formData.service_type,
-        bedrooms: formData.bedrooms,
-        bathrooms: formData.bathrooms,
-      });
-
       const response = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

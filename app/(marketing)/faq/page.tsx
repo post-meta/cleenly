@@ -103,10 +103,10 @@ export default function FAQPage() {
               Quick answers to common questions about booking house cleaning in
               Seattle. Can&apos;t find what you&apos;re looking for? Email us at{" "}
               <a
-                href="mailto:hello@cleenly.com"
+                href="mailto:hello@cleenly.app"
                 className="text-foreground underline"
               >
-                hello@cleenly.com
+                hello@cleenly.app
               </a>
             </p>
           </div>
@@ -142,7 +142,7 @@ export default function FAQPage() {
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
-                href="mailto:hello@cleenly.com"
+                href="mailto:hello@cleenly.app"
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 font-medium transition-colors hover:bg-muted"
               >
                 <svg
@@ -158,7 +158,7 @@ export default function FAQPage() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                hello@cleenly.com
+                hello@cleenly.app
               </a>
               <Link
                 href="/book"

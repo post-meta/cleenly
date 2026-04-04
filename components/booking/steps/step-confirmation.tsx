@@ -103,9 +103,9 @@ export function StepConfirmation({
         <h3 className="font-semibold">What happens next</h3>
         <ol className="mt-4 space-y-4">
           {[
-            "We'll match you with an available cleaner",
-            "You'll get an email with cleaner details and exact price",
-            "On the day, your cleaner will arrive during your time slot",
+            "We'll match you with an available cleaner in your area",
+            "You'll get an email with your cleaner's details, exact price, and payment options",
+            "Your cleaner arrives during your time slot with all supplies",
             "After cleaning, you'll receive a receipt and can leave a review",
           ].map((step, index) => (
             <li key={index} className="flex gap-3 text-sm">
@@ -129,10 +129,10 @@ export function StepConfirmation({
       <p className="text-center text-sm text-muted-foreground">
         Questions? Email us at{" "}
         <a
-          href="mailto:hello@cleenly.com"
+          href="mailto:hello@cleenly.app"
           className="text-foreground underline"
         >
-          hello@cleenly.com
+          hello@cleenly.app
         </a>
       </p>
     </div>

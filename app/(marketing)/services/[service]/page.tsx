@@ -146,7 +146,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                         <h2 className="text-2xl font-semibold mb-8 text-black">Frequently Asked Questions</h2>
                         <div className="space-y-6">
                             {service.faqs.map((faq, i) => (
-                                <div key={i} className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+                                <div key={i} className="bg-white p-6 rounded-lg border border-gray-200">
                                     <h3 className="font-semibold mb-2 text-black">{faq.question}</h3>
                                     <p className="text-gray-500 leading-relaxed">{faq.answer}</p>
                                 </div>

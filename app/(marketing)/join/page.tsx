@@ -546,10 +546,10 @@ export default function JoinPage() {
             <p className="mt-4 text-sm text-background/60">
               Questions? Email us at{" "}
               <a
-                href="mailto:cleaners@cleenly.com"
+                href="mailto:cleaners@cleenly.app"
                 className="underline hover:text-background"
               >
-                cleaners@cleenly.com
+                cleaners@cleenly.app
               </a>
             </p>
           </div>

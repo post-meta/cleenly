@@ -310,7 +310,7 @@ export default function TermsOfServicePage() {
                   <ul className="mt-2 text-sm text-muted-foreground">
                     <li>✓ Full refund</li>
                     <li>✓ No cancellation fee</li>
-                    <li>✓ Cancel online or email hello@cleenly.com</li>
+                    <li>✓ Cancel online or email hello@cleenly.app</li>
                   </ul>
                 </div>
 
@@ -351,10 +351,10 @@ export default function TermsOfServicePage() {
                 <li>
                   Email{" "}
                   <a
-                    href="mailto:hello@cleenly.com"
+                    href="mailto:hello@cleenly.app"
                     className="text-foreground underline"
                   >
-                    hello@cleenly.com
+                    hello@cleenly.app
                   </a>{" "}
                   with your booking reference
                 </li>
@@ -398,7 +398,7 @@ export default function TermsOfServicePage() {
               </ul>
               <p className="mt-4 text-muted-foreground">
                 Reschedule via the link in your confirmation email, your account,
-                or by emailing hello@cleenly.com.
+                or by emailing hello@cleenly.app.
               </p>
             </section>
 
@@ -441,7 +441,7 @@ export default function TermsOfServicePage() {
                 </li>
                 <li>
                   <strong className="text-foreground">Disputes:</strong> If you
-                  believe a charge is incorrect, contact hello@cleenly.com within
+                  believe a charge is incorrect, contact hello@cleenly.app within
                   7 days. We will review and resolve the issue.
                 </li>
               </ul>
@@ -611,10 +611,10 @@ export default function TermsOfServicePage() {
                 <li>
                   Email{" "}
                   <a
-                    href="mailto:hello@cleenly.com"
+                    href="mailto:hello@cleenly.app"
                     className="text-foreground underline"
                   >
-                    hello@cleenly.com
+                    hello@cleenly.app
                   </a>{" "}
                   with &quot;Damage Report&quot; in subject line
                 </li>
@@ -688,7 +688,7 @@ export default function TermsOfServicePage() {
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">Informal Resolution:</strong>{" "}
                 Before initiating formal proceedings, you agree to contact
-                CLEENLY at hello@cleenly.com and attempt to resolve any dispute
+                CLEENLY at hello@cleenly.app and attempt to resolve any dispute
                 informally for at least 30 days.
               </p>
               <p className="mt-4 text-muted-foreground">
@@ -761,7 +761,7 @@ export default function TermsOfServicePage() {
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">By You:</strong> You may stop
                 using CLEENLY at any time. To delete your account, email
-                hello@cleenly.com.
+                hello@cleenly.app.
               </p>
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">By CLEENLY:</strong> We may
@@ -807,10 +807,10 @@ export default function TermsOfServicePage() {
                   <strong className="text-foreground">Contact:</strong> Questions
                   about these Terms? Email{" "}
                   <a
-                    href="mailto:hello@cleenly.com"
+                    href="mailto:hello@cleenly.app"
                     className="text-foreground underline"
                   >
-                    hello@cleenly.com
+                    hello@cleenly.app
                   </a>{" "}
                   with &quot;Terms Question&quot; in the subject line.
                 </li>

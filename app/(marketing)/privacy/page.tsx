@@ -439,10 +439,10 @@ export default function PrivacyPolicyPage() {
                 believe your account has been compromised, contact us immediately
                 at{" "}
                 <a
-                  href="mailto:hello@cleenly.com"
+                  href="mailto:hello@cleenly.app"
                   className="text-foreground underline"
                 >
-                  hello@cleenly.com
+                  hello@cleenly.app
                 </a>
                 .
               </p>
@@ -483,10 +483,10 @@ export default function PrivacyPolicyPage() {
               <p className="mt-4 text-muted-foreground">
                 To exercise any of these rights, email us at{" "}
                 <a
-                  href="mailto:hello@cleenly.com"
+                  href="mailto:hello@cleenly.app"
                   className="text-foreground underline"
                 >
-                  hello@cleenly.com
+                  hello@cleenly.app
                 </a>{" "}
                 with &quot;Privacy Request&quot; in the subject line. We will
                 respond within 30 days.
@@ -529,10 +529,10 @@ export default function PrivacyPolicyPage() {
               <p className="mt-4 text-muted-foreground">
                 To make a CCPA request, email{" "}
                 <a
-                  href="mailto:hello@cleenly.com"
+                  href="mailto:hello@cleenly.app"
                   className="text-foreground underline"
                 >
-                  hello@cleenly.com
+                  hello@cleenly.app
                 </a>{" "}
                 with &quot;CCPA Request&quot; in the subject line. We may need to
                 verify your identity before processing your request.
@@ -597,10 +597,10 @@ export default function PrivacyPolicyPage() {
                 believe we have collected information from a child, please
                 contact us immediately at{" "}
                 <a
-                  href="mailto:hello@cleenly.com"
+                  href="mailto:hello@cleenly.app"
                   className="text-foreground underline"
                 >
-                  hello@cleenly.com
+                  hello@cleenly.app
                 </a>{" "}
                 and we will delete it.
               </p>
@@ -648,10 +648,10 @@ export default function PrivacyPolicyPage() {
                 <p>
                   <strong>Email:</strong>{" "}
                   <a
-                    href="mailto:hello@cleenly.com"
+                    href="mailto:hello@cleenly.app"
                     className="text-foreground underline"
                   >
-                    hello@cleenly.com
+                    hello@cleenly.app
                   </a>
                 </p>
                 <p className="mt-2 text-muted-foreground">

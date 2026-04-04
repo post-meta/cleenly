@@ -62,7 +62,7 @@ const organizationSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "hello@cleenly.com",
+    email: "hello@cleenly.app",
     availableLanguage: ["English"],
   },
 };
@@ -366,10 +366,10 @@ export default function AboutPage() {
               <p>
                 <strong className="text-foreground">Email:</strong>{" "}
                 <a
-                  href="mailto:hello@cleenly.com"
+                  href="mailto:hello@cleenly.app"
                   className="text-foreground underline"
                 >
-                  hello@cleenly.com
+                  hello@cleenly.app
                 </a>
               </p>
               <p>
