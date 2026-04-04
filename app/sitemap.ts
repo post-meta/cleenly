@@ -7,16 +7,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Core pages
     const routes = [
-        '',
-        '/services',
-        '/login',
-        '/forgot-password',
-        '/book',
+        { path: '', priority: 1 },
+        { path: '/pricing', priority: 0.9 },
+        { path: '/services', priority: 0.9 },
+        { path: '/book', priority: 0.9 },
+        { path: '/about', priority: 0.7 },
+        { path: '/faq', priority: 0.7 },
+        { path: '/how-it-works', priority: 0.8 },
+        { path: '/join', priority: 0.6 },
+        { path: '/locations', priority: 0.6 },
+        { path: '/privacy', priority: 0.3 },
+        { path: '/terms', priority: 0.3 },
     ].map((route) => ({
-        url: `${baseUrl}${route}`,
+        url: `${baseUrl}${route.path}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
-        priority: route === '' ? 1 : 0.8,
+        priority: route.priority,
     }));
 
     // Service Detail pages (/services/[service])
