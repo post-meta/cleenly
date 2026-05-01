@@ -4,33 +4,30 @@ import { PHONE_DISPLAY, PHONE_SMS_HREF, PHONE_TEL_HREF } from "@/lib/constants";
 
 export function Hero() {
   return (
-    <section className="hero py-16 md:py-20">
+    <section className="hero py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left: lifestyle image */}
-          <div>
+          <div className="w-full">
             <img
               src="/hero-image.jpg"
-              alt="A calm clean kitchen with morning light, a single ceramic mug on the counter — the moment after we leave"
+              alt="A calm clean kitchen with morning light, a single ceramic mug on the counter"
               className="w-full h-auto rounded-2xl object-cover aspect-[4/3] shadow-sm"
-              width={1024}
-              height={768}
               loading="eager"
             />
           </div>
 
           {/* Right: text */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl font-semibold mb-6 leading-[1.05] tracking-tight text-balance">
-              House cleaning <br className="hidden md:inline" />
-              in Greater Seattle
+          <div className="space-y-6 text-left">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight">
+              House cleaning in Greater Seattle.
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               See your price online. Pick a time. We bring our own supplies. No memberships, no hidden fees.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button size="lg" asChild>
                 <Link href="/book">See my price now</Link>
               </Button>
@@ -40,7 +37,7 @@ export function Hero() {
               </Button>
             </div>
 
-            <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 mt-8 text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-x-5 gap-y-2 pt-2 text-sm text-muted-foreground">
               <span>Exact price upfront</span>
               <span>Book in 2 minutes</span>
               <a href={PHONE_TEL_HREF} className="font-medium text-foreground hover:underline">
