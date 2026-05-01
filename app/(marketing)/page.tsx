@@ -7,6 +7,7 @@ import { FAQ } from "@/components/marketing/faq";
 import { ServiceAreas } from "@/components/marketing/service-areas";
 import { CTA } from "@/components/marketing/cta";
 import { TrustStrip } from "@/components/marketing/trust-strip";
+import { LifestyleStrip } from "@/components/marketing/lifestyle-strip";
 import { JsonLd } from "@/components/shared/json-ld";
 import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/utils/schema-generators";
 import { cities } from "@/lib/data/cities";
@@ -71,6 +72,7 @@ export default function HomePage() {
       <TrustStrip />
       <PricingSection />
       <WhyUs />
+      <LifestyleStrip />
       <FAQ />
       <ServiceAreas />
       <CTA />
