@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { notifyNewApplication } from "@/lib/notifications";
 import type { CleanerApplicationFormData } from "@/types/cleaner";
 
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Check if email already exists
     const { data: existingApplication } = await supabase
