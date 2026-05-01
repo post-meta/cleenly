@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { notifyNewApplication } from "@/lib/notifications";
 import type { CleanerApplicationFormData } from "@/types/cleaner";
 
 export async function POST(request: NextRequest) {
@@ -155,6 +156,20 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    notifyNewApplication({
+      id: data.id,
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      phone: data.phone,
+      city: data.city,
+      hours_per_week: data.hours_per_week,
+      available_days: data.available_days,
+      service_areas: data.service_areas,
+      has_experience: data.has_experience,
+      years_experience: data.years_experience,
+    }).catch((e) => console.error("notifyNewApplication failed:", e));
 
     return NextResponse.json({
       success: true,

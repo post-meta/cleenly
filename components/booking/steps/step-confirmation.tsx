@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { formatPriceRange } from "@/lib/pricing";
+import { trackBookingSubmitted } from "@/lib/analytics";
 import type { ServiceType, TimeSlot, BookingFormData } from "@/types";
 
 const serviceNames: Record<ServiceType, string> = {
@@ -30,6 +32,17 @@ export function StepConfirmation({
   estimatedMin,
   estimatedMax,
 }: StepConfirmationProps) {
+  useEffect(() => {
+    if (!bookingRef) return;
+    trackBookingSubmitted({
+      ref: bookingRef,
+      service: data.service_type ?? "unknown",
+      estimatedMin,
+      estimatedMax,
+      city: data.city,
+    });
+  }, [bookingRef, data.service_type, data.city, estimatedMin, estimatedMax]);
+
   const formattedDate = data.preferred_date
     ? new Date(data.preferred_date + "T12:00:00").toLocaleDateString("en-US", {
         weekday: "long",

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description:
       "Answers to common questions about house cleaning in Seattle. Pricing, what's included, booking, and more.",
     type: "website",
-    url: "https://cleenly.com/faq",
+    url: "https://cleenly.app/faq",
   },
   twitter: {
     card: "summary_large_image",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     description: "Answers to common questions about house cleaning in Seattle.",
   },
   alternates: {
-    canonical: "https://cleenly.com/faq",
+    canonical: "https://cleenly.app/faq",
   },
 };
 
@@ -64,13 +64,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://cleenly.com",
+      item: "https://cleenly.app",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "FAQ",
-      item: "https://cleenly.com/faq",
+      item: "https://cleenly.app/faq",
     },
   ],
 };

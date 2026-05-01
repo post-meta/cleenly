@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "Book house cleaning in Seattle. See your price instantly, pick a time, confirm in minutes.",
     type: "website",
-    url: "https://cleenly.com/book",
+    url: "https://cleenly.app/book",
   },
   twitter: {
     card: "summary_large_image",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: "Book house cleaning in Seattle. See your price instantly.",
   },
   alternates: {
-    canonical: "https://cleenly.com/book",
+    canonical: "https://cleenly.app/book",
   },
 };
 
@@ -42,13 +42,13 @@ const bookingPageSchema = {
   name: "Book House Cleaning Seattle",
   description:
     "Book house cleaning in Seattle. See your price, pick a time, confirm in minutes.",
-  url: "https://cleenly.com/book",
+  url: "https://cleenly.app/book",
   mainEntity: {
     "@type": "Service",
     name: "House Cleaning Booking",
     provider: {
       "@type": "LocalBusiness",
-      "@id": "https://cleenly.com/#LocalBusiness",
+      "@id": "https://cleenly.app/#LocalBusiness",
     },
     areaServed: {
       "@type": "City",
@@ -58,7 +58,7 @@ const bookingPageSchema = {
       "@type": "ReserveAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://cleenly.com/book",
+        urlTemplate: "https://cleenly.app/book",
         actionPlatform: [
           "http://schema.org/DesktopWebPlatform",
           "http://schema.org/MobileWebPlatform",
@@ -80,13 +80,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://cleenly.com",
+      item: "https://cleenly.app",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Book",
-      item: "https://cleenly.com/book",
+      item: "https://cleenly.app/book",
     },
   ],
 };

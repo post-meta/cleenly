@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     description:
       "Get cleaning customers without marketing. Set your own rates and schedule.",
     type: "website",
-    url: "https://cleenly.com/join",
+    url: "https://cleenly.app/join",
   },
   alternates: {
-    canonical: "https://cleenly.com/join",
+    canonical: "https://cleenly.app/join",
   },
 };
 
@@ -42,7 +42,7 @@ const jobPostingSchema = {
   hiringOrganization: {
     "@type": "Organization",
     name: "CLEENLY",
-    sameAs: "https://cleenly.com",
+    sameAs: "https://cleenly.app",
   },
   jobLocation: {
     "@type": "Place",
@@ -89,13 +89,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://cleenly.com",
+      item: "https://cleenly.app",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Join as Cleaner",
-      item: "https://cleenly.com/join",
+      item: "https://cleenly.app/join",
     },
   ],
 };

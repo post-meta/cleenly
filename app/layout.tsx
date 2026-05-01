@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
+import { AuthProvider } from "@/components/shared/auth-provider";
+import { StickyMobileCTA } from "@/components/shared/sticky-mobile-cta";
+import { SITE_URL } from "@/lib/constants";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Cleenly — Cleaning Services in Seattle",
   description:
     "Book cleaning services in Greater Seattle area. Choose your cleaner, see the price, book online.",
@@ -12,10 +20,10 @@ export const metadata: Metadata = {
       "Book cleaning services in Greater Seattle area. Choose your cleaner, see the price, book online.",
     type: "website",
     locale: "en_US",
+    url: SITE_URL,
   },
+  ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
 };
-
-import { AuthProvider } from "@/components/shared/auth-provider";
 
 export default function RootLayout({
   children,
@@ -41,8 +49,25 @@ export default function RootLayout({
           async
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased pb-12 md:pb-0">
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', { send_page_view: true });
+              `}
+            </Script>
+          </>
+        )}
         <AuthProvider>{children}</AuthProvider>
+        <StickyMobileCTA />
       </body>
     </html>
   );

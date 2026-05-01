@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
-import { Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
+import { NAV_LINKS, SITE_NAME, PHONE_DISPLAY, PHONE_TEL_HREF } from "@/lib/constants";
+import { Menu, X, User, LogOut, LayoutDashboard, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession, signOut } from "next-auth/react";
 
@@ -37,6 +37,13 @@ export function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
+            <a
+              href={PHONE_TEL_HREF}
+              className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:opacity-80"
+            >
+              <Phone className="h-4 w-4" />
+              {PHONE_DISPLAY}
+            </a>
             {!isLoading && (
               <>
                 {session ? (

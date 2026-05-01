@@ -3,7 +3,14 @@ export const SITE_TAGLINE = "We clean. You live.";
 export const SITE_DESCRIPTION =
   "Book cleaning services in Greater Seattle area. Choose your cleaner, see the price, book online.";
 
+export const SITE_URL = "https://cleenly.app";
 export const SERVICE_AREA = "Greater Seattle";
+
+export const PHONE_E164 = "+12066414739";
+export const PHONE_DISPLAY = "(206) 641-4739";
+export const PHONE_TEL_HREF = `tel:${PHONE_E164}`;
+export const PHONE_SMS_HREF = `sms:${PHONE_E164}`;
+export const SUPPORT_EMAIL = "hello@cleenly.app";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },

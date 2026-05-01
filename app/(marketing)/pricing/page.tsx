@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     description:
       "Seattle house cleaning prices: Regular $100-$200, Deep $150-$300, Move-out $200-$400. Get your exact price.",
     type: "website",
-    url: "https://cleenly.com/pricing",
+    url: "https://cleenly.app/pricing",
   },
   alternates: {
-    canonical: "https://cleenly.com/pricing",
+    canonical: "https://cleenly.app/pricing",
   },
 };
 
@@ -38,7 +38,7 @@ const serviceSchema = {
   serviceType: "House Cleaning",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://cleenly.com/#LocalBusiness",
+    "@id": "https://cleenly.app/#LocalBusiness",
     name: "CLEENLY",
   },
   areaServed: {
@@ -152,13 +152,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://cleenly.com",
+      item: "https://cleenly.app",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Pricing",
-      item: "https://cleenly.com/pricing",
+      item: "https://cleenly.app/pricing",
     },
   ],
 };

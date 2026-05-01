@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { PHONE_DISPLAY, PHONE_SMS_HREF, PHONE_TEL_HREF } from "@/lib/constants";
 
 export function Hero() {
   return (
@@ -21,13 +22,16 @@ export function Hero() {
           </Button>
 
           <Button size="lg" variant="secondary" asChild>
-            <a href="sms:+12065550199">Questions? Text us →</a>
+            <a href={PHONE_SMS_HREF}>Questions? Text us →</a>
           </Button>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-8 mt-12 text-sm text-muted-foreground">
-          <span>✓ Exact price upfront</span>
-          <span>✓ Book in 2 minutes</span>
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-muted-foreground">
+          <span>Exact price upfront</span>
+          <span>Book in 2 minutes</span>
+          <a href={PHONE_TEL_HREF} className="font-medium text-foreground hover:underline">
+            Or call {PHONE_DISPLAY}
+          </a>
         </div>
       </div>
     </section>

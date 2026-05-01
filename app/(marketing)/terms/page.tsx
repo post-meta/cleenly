@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://cleenly.com/terms",
+    canonical: "https://cleenly.app/terms",
   },
 };
 
@@ -23,7 +23,7 @@ const pageSchema = {
   name: "Terms of Service",
   description:
     "CLEENLY terms of service, cancellation policy, and booking rules",
-  url: "https://cleenly.com/terms",
+  url: "https://cleenly.app/terms",
   dateModified: "2025-12-01",
 };
 
@@ -35,13 +35,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://cleenly.com",
+      item: "https://cleenly.app",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Terms of Service",
-      item: "https://cleenly.com/terms",
+      item: "https://cleenly.app/terms",
     },
   ],
 };
@@ -154,7 +154,7 @@ export default function TermsOfServicePage() {
               </h2>
               <p className="mt-4 text-muted-foreground">
                 Welcome to CLEENLY. These Terms of Service (&quot;Terms&quot;)
-                govern your use of the CLEENLY website (cleenly.com) and
+                govern your use of the CLEENLY website (cleenly.app) and
                 services. CLEENLY is a platform that connects customers with
                 independent cleaners in the Seattle area.
               </p>

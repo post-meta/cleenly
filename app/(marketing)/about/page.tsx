@@ -20,23 +20,23 @@ export const metadata: Metadata = {
     description:
       "We built CLEENLY because booking cleaning shouldn't be this hard. See prices upfront, choose your cleaner, book in minutes.",
     type: "website",
-    url: "https://cleenly.com/about",
+    url: "https://cleenly.app/about",
   },
   alternates: {
-    canonical: "https://cleenly.com/about",
+    canonical: "https://cleenly.app/about",
   },
 };
 
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://cleenly.com/#Organization",
+  "@id": "https://cleenly.app/#Organization",
   name: "CLEENLY",
   alternateName: "Cleenly",
   description:
     "House cleaning booking platform serving Seattle and Greater Eastside. Customers see prices upfront, choose cleaners, and book online.",
-  url: "https://cleenly.com",
-  logo: "https://cleenly.com/logo.png",
+  url: "https://cleenly.app",
+  logo: "https://cleenly.app/logo.png",
   foundingDate: "2024",
   foundingLocation: {
     "@type": "Place",
@@ -75,13 +75,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://cleenly.com",
+      item: "https://cleenly.app",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "About",
-      item: "https://cleenly.com/about",
+      item: "https://cleenly.app/about",
     },
   ],
 };

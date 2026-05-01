@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { notifyNewBooking } from "@/lib/notifications";
 import type { BookingFormData } from "@/types";
 
 export async function POST(request: NextRequest) {
@@ -60,6 +61,25 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    notifyNewBooking({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      service_type: data.service_type,
+      bedrooms: data.bedrooms,
+      bathrooms: data.bathrooms,
+      address: data.address,
+      city: data.city,
+      zip: data.zip,
+      preferred_date: data.preferred_date,
+      preferred_time: data.preferred_time,
+      estimated_min: data.estimated_min,
+      estimated_max: data.estimated_max,
+      special_requests: data.special_requests,
+      addons: data.addons,
+    }).catch((e) => console.error("notifyNewBooking failed:", e));
 
     return NextResponse.json({ success: true, booking: data });
   } catch (error) {

@@ -99,7 +99,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How do I book a cleaning?",
         answer:
-          "Book online at cleenly.com/book. Enter your home details (bedrooms, bathrooms), see your price, choose a date and time, and provide contact info. Takes about 2 minutes. No account required. You'll receive confirmation by email within 2 hours with cleaner details.",
+          "Book online at cleenly.app/book. Enter your home details (bedrooms, bathrooms), see your price, choose a date and time, and provide contact info. Takes about 2 minutes. No account required. You'll receive confirmation by email within 2 hours with cleaner details.",
       },
       {
         question: "How far in advance do I need to book?",

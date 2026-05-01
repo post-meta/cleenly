@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://cleenly.com/privacy",
+    canonical: "https://cleenly.app/privacy",
   },
 };
 
@@ -22,11 +22,11 @@ const pageSchema = {
   name: "Privacy Policy",
   description:
     "CLEENLY privacy policy - how we collect, use, and protect your information",
-  url: "https://cleenly.com/privacy",
+  url: "https://cleenly.app/privacy",
   inLanguage: "en-US",
   isPartOf: {
     "@type": "WebSite",
-    "@id": "https://cleenly.com/#WebSite",
+    "@id": "https://cleenly.app/#WebSite",
   },
   dateModified: "2025-12-01",
 };
@@ -39,13 +39,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://cleenly.com",
+      item: "https://cleenly.app",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Privacy Policy",
-      item: "https://cleenly.com/privacy",
+      item: "https://cleenly.app/privacy",
     },
   ],
 };
@@ -120,7 +120,7 @@ export default function PrivacyPolicyPage() {
                 operates a house cleaning booking platform serving Seattle and
                 the Greater Eastside. This Privacy Policy explains how we
                 collect, use, disclose, and protect your personal information
-                when you use our website (cleenly.com) and services.
+                when you use our website (cleenly.app) and services.
               </p>
               <p className="mt-4 text-muted-foreground">
                 By using CLEENLY, you agree to the collection and use of

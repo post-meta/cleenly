@@ -33,12 +33,12 @@ export const metadata: Metadata = {
     description:
       "Book house cleaning in Seattle. See prices upfront, choose your cleaner, schedule in minutes.",
     type: "website",
-    url: "https://cleenly.com",
+    url: "https://cleenly.app",
     locale: "en_US",
     siteName: "CLEENLY",
     images: [
       {
-        url: "https://cleenly.com/og-image.jpg",
+        url: "https://cleenly.app/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "CLEENLY - House Cleaning in Seattle",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "House Cleaning Seattle | Book Online | CLEENLY",
     description:
       "Book house cleaning in Seattle. See prices upfront, choose your cleaner.",
-    images: ["https://cleenly.com/twitter-image.jpg"],
+    images: ["https://cleenly.app/twitter-image.jpg"],
   },
   other: {
     "geo.region": "US-WA",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     ICBM: "47.6062, -122.3321",
   },
   alternates: {
-    canonical: "https://cleenly.com",
+    canonical: "https://cleenly.app",
   },
 };
 
