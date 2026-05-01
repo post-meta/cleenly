@@ -7,7 +7,19 @@ export function Hero() {
     <section className="hero py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left: text */}
+          {/* Left: lifestyle image */}
+          <div>
+            <img
+              src="/hero-image.jpg"
+              alt="A calm clean kitchen with morning light, a single ceramic mug on the counter — the moment after we leave"
+              className="w-full h-auto rounded-2xl object-cover aspect-[4/3] shadow-sm"
+              width={1024}
+              height={768}
+              loading="eager"
+            />
+          </div>
+
+          {/* Right: text */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               House cleaning in Greater Seattle
@@ -36,18 +48,6 @@ export function Hero() {
                 Or call {PHONE_DISPLAY}
               </a>
             </div>
-          </div>
-
-          {/* Right: lifestyle image */}
-          <div className="order-first lg:order-last">
-            <img
-              src="/hero-image.jpg"
-              alt="A calm clean kitchen with morning light, a single ceramic mug on the counter — the moment after we leave"
-              className="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-sm"
-              width={1024}
-              height={768}
-              loading="eager"
-            />
           </div>
         </div>
       </div>
