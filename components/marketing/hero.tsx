@@ -21,14 +21,13 @@ export function Hero() {
 
           {/* Right: text */}
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              House cleaning in Greater Seattle
+            <h1 className="text-4xl md:text-5xl font-semibold mb-6 leading-[1.05] tracking-tight text-balance">
+              House cleaning <br className="hidden md:inline" />
+              in Greater Seattle
             </h1>
 
-            <p className="text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-              See your price online. Pick a time. We bring our own supplies.
-              <br className="hidden md:block" />
-              No memberships. No hidden fees.
+            <p className="text-lg md:text-xl text-muted-foreground max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed">
+              See your price online. Pick a time. We bring our own supplies. No memberships, no hidden fees.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
