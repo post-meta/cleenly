@@ -14,6 +14,8 @@ export interface ServiceData {
         question: string;
         answer: string;
     }[];
+    /** Service-specific hero image. Falls back to /hero-image.jpg when absent. */
+    heroImage?: string;
 }
 
 export const services: ServiceData[] = [
@@ -65,6 +67,7 @@ export const services: ServiceData[] = [
     },
     {
         slug: "deep-cleaning",
+        heroImage: "/service-deep.jpg",
         name: "Deep Cleaning",
         shortDescription: "Everything in regular cleaning plus inside oven, fridge, baseboards, ceiling fans. Good for first-time or seasonal cleaning.",
         longDescription: 'Deep cleaning covers everything in regular cleaning plus the areas that build up over time: inside appliances, baseboards, window sills, ceiling fans, and behind furniture. Recommended for first-time cleanings or homes that need extra attention.',
@@ -114,6 +117,7 @@ export const services: ServiceData[] = [
     },
     {
         slug: "move-out-cleaning",
+        heroImage: "/service-move-out.jpg",
         name: "Move-Out Cleaning",
         shortDescription: "Inside all appliances, cabinets, closets. Window tracks. Walls spot-cleaned. Meets landlord requirements for deposit return.",
         longDescription: 'Move-out cleaning is our most thorough service. We clean to property manager inspection standards — inside all cabinets, closets, appliances, and detailed work on every surface. Designed to help you get your security deposit back.',
@@ -220,6 +224,7 @@ export const services: ServiceData[] = [
     },
     {
         slug: "restorative-cleaning",
+        heroImage: "/service-restorative.jpg",
         name: "Restorative Cleaning",
         shortDescription: "Heavy-soil cleaning when life got in the way — illness, postpartum, recovery, or a home that needs more than a regular clean.",
         longDescription: "Restorative cleaning is for homes that need more than a regular clean. After illness, postpartum, depression, recovery, or a long stretch where keeping up wasn't possible. We come without judgment. We work at the pace the home needs, not on a stopwatch. Tell us what you want us to focus on and what to skip — we follow your lead.",
@@ -238,6 +243,7 @@ export const services: ServiceData[] = [
     },
     {
         slug: "airbnb-turnover",
+        heroImage: "/service-airbnb.jpg",
         name: "Airbnb Turnover",
         shortDescription: "Quick turnaround cleaning between guests. Linens, bathrooms, kitchen. Same-day service available.",
         longDescription: 'Reliable turnover service for short-term rental hosts. We understand the tight schedules and high standards needed for guest-ready listings. Includes linen changing, restocking supplies, and damage reporting.',

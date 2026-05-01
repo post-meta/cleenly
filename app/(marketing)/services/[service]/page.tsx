@@ -78,10 +78,20 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {/* Hero */}
             <section className="py-16 md:py-24">
                 <div className="max-w-6xl mx-auto px-6">
-                    <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-black">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+                        <div>
+                            <img
+                                src={service.heroImage || "/hero-image.jpg"}
+                                alt={service.name}
+                                className="w-full h-auto rounded-2xl object-cover aspect-[4/3] shadow-sm"
+                                loading="eager"
+                            />
+                        </div>
+                        <div>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-black">
                         {service.name}
                     </h1>
-                    <p className="mt-6 text-xl text-gray-500 max-w-2xl">
+                    <p className="mt-6 text-lg md:text-xl text-gray-500">
                         {service.longDescription}
                     </p>
                     <div className="mt-8 flex items-baseline gap-4">
@@ -95,6 +105,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                         >
                             Book {service.name}
                         </Link>
+                    </div>
+                        </div>
                     </div>
                 </div>
             </section>

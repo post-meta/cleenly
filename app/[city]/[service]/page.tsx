@@ -88,6 +88,7 @@ export default async function CityServicePage({ params }: PageProps) {
                 introText={serviceIntro || `House ${service.name.toLowerCase()} in ${city.name}.`}
                 priceRange={service.priceRange}
                 citySlug={city.slug}
+                heroImage={service.heroImage}
             />
 
             {/* Pricing Details */}

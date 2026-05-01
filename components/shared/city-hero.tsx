@@ -61,19 +61,30 @@ interface ServiceHeroProps {
     introText: string;
     priceRange: string;
     citySlug: string;
+    heroImage?: string;
 }
 
-export function ServiceHero({ cityName, serviceName, introText, priceRange, citySlug }: ServiceHeroProps) {
+export function ServiceHero({ cityName, serviceName, introText, priceRange, citySlug, heroImage }: ServiceHeroProps) {
+    const imageSrc = heroImage || "/hero-image.jpg";
     return (
         <section className="relative flex min-h-[70vh] items-center overflow-hidden animate-fadeInUp bg-background py-16 md:py-0">
             <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10 w-full">
-                {/* Left Content - 6 columns */}
-                <div className="col-span-12 space-y-8 md:col-span-6 flex flex-col justify-center">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight tracking-tight">
+                {/* Left Content - hero image */}
+                <div className="col-span-12 md:col-span-6 flex items-center justify-center order-1 md:order-1">
+                    <img
+                        src={imageSrc}
+                        alt={`${serviceName} in ${cityName}`}
+                        className="w-full h-auto rounded-2xl object-cover aspect-[4/3] shadow-sm"
+                    />
+                </div>
+
+                {/* Right Content - text */}
+                <div className="col-span-12 space-y-8 md:col-span-6 flex flex-col justify-center order-2 md:order-2">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight tracking-tight">
                         {serviceName} in {cityName} — starting at {priceRange.split('-')[0]}
                     </h1>
 
-                    <p className="text-xl text-gray-600 leading-relaxed">
+                    <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
                         {introText}
                     </p>
 
@@ -85,15 +96,6 @@ export function ServiceHero({ cityName, serviceName, introText, priceRange, city
                             <Link href={`/${citySlug}`}>More in {cityName}</Link>
                         </Button>
                     </div>
-                </div>
-
-                {/* Right Content - Hero Image */}
-                <div className="col-span-12 md:col-span-6 flex items-center justify-center">
-                    <img
-                        src="/hero-image.jpg"
-                        alt={`${serviceName} service in ${cityName}`}
-                        className="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-lg"
-                    />
                 </div>
             </div>
 
