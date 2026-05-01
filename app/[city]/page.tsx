@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     return {
         title: `House Cleaning ${city.name} WA | Book Online | CLEENLY`,
-        description: `Professional house cleaning in ${city.name}. Regular cleaning, deep cleaning, and move-out cleaning. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online.`,
+        description: `House cleaning in ${city.name}: regular, deep, and move-out. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. See your price online and book in minutes.`,
         alternates: {
             canonical: `https://cleenly.app/${city.slug}`,
         },
@@ -40,16 +40,14 @@ export default async function CityPage({ params }: PageProps) {
     const content = getCityContent(citySlug);
     if (!city || !content) notFound();
 
-    if (!city || !content) notFound();
-
     const faqs = content.localFAQs.length > 0 ? content.localFAQs : [
         {
             question: `How much does house cleaning cost in ${city.name}?`,
-            answer: `Local rates in ${city.name} vary by home size. Regular cleaning typically starts at $100, deep cleaning at $150, and move-out cleaning at $200. We offer instant upfront pricing during booking.`
+            answer: `Rates in ${city.name} depend on home size and condition. Regular cleaning typically runs $100-$200, deep cleaning $150-$300, and move-out cleaning $200-$400. The booking calculator shows your exact price before you book.`
         },
         {
             question: "Are your cleaners insured?",
-            answer: "Yes, all cleaners on the CLEENLY platform are fully insured and background-checked for your peace of mind."
+            answer: "Yes — our cleaners carry liability insurance."
         },
         {
             question: "Do I need to be home during the cleaning?",
@@ -60,7 +58,7 @@ export default async function CityPage({ params }: PageProps) {
     // AI-Enhanced Content Generation
     const enhancedDescription = content.cityIntro || (
         city.description +
-        (city.landmarks?.length ? ` Proudly serving ${city.professions?.[0] || 'homes'} near ${city.landmarks.slice(0, 2).join(' and ')}.` : '')
+        (city.landmarks?.length ? ` We work throughout ${city.name} — including ${city.landmarks.slice(0, 2).join(' and ')}.` : '')
     );
 
     return (
@@ -76,7 +74,7 @@ export default async function CityPage({ params }: PageProps) {
             </nav>
 
             {/* Hero */}
-            <CityHero cityName={city.name} description={enhancedDescription} />
+            <CityHero cityName={city.name} citySlug={city.slug} description={enhancedDescription} />
 
             {/* How It Works */}
             <section className="py-12 border-b border-gray-100">
@@ -111,7 +109,7 @@ export default async function CityPage({ params }: PageProps) {
                                 4
                             </div>
                             <h3 className="font-medium mb-1">We clean</h3>
-                            <p className="text-sm text-gray-500">Show up on time, guaranteed</p>
+                            <p className="text-sm text-gray-500">We bring our own supplies</p>
                         </div>
                     </div>
                 </div>
@@ -122,10 +120,10 @@ export default async function CityPage({ params }: PageProps) {
                 <div className="flex items-end justify-between mb-12">
                     <div className="max-w-xl">
                         <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">
-                            Curated Cleaning Services
+                            Cleaning services
                         </h2>
                         <p className="text-gray-500 text-lg">
-                            Choose the perfect service level for your home in {city.name}.
+                            Pick the service that fits your home in {city.name}.
                         </p>
                     </div>
 
@@ -167,9 +165,9 @@ export default async function CityPage({ params }: PageProps) {
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-semibold mb-6 text-foreground">Why {city.name} Homeowners Choose CLEENLY</h2>
+                            <h2 className="text-2xl font-semibold mb-6 text-foreground">Why {city.name} homeowners book CLEENLY</h2>
                             <p className="text-gray-600 leading-relaxed">
-                                {content.whyChoose || "Cleaners on our platform are background-checked, insured, and show up on time. We keep things simple — you book, they clean, your home stays fresh."}
+                                {content.whyChoose || "We're a small Greater Seattle team. Our cleaners carry liability insurance. You see your price before you book and pick the time that works for you. If something isn't right, we come back within 24 hours."}
                             </p>
                         </div>
                     </div>
@@ -183,10 +181,10 @@ export default async function CityPage({ params }: PageProps) {
                         Ready for a cleaner home in {city.name}?
                     </h2>
                     <p className="text-white/80 mb-10 text-lg max-w-2xl mx-auto">
-                        Join hundreds of {city.name} families who trust CLEENLY for their weekly and monthly cleanings.
+                        See your price online and book in 2 minutes. We bring our own supplies.
                     </p>
                     <Button variant="secondary" size="lg" asChild className="bg-white text-accent border-none hover:bg-white/90">
-                        <Link href="/book">Get Your Price in 2 Minutes</Link>
+                        <Link href="/book">Get your price in 2 minutes</Link>
                     </Button>
                 </div>
             </section>

@@ -59,7 +59,6 @@ const sections = [
   { id: "guarantee", title: "Service Guarantee", important: true },
   { id: "responsibilities", title: "User Responsibilities" },
   { id: "damage", title: "Damage and Liability" },
-  { id: "contractor", title: "Independent Contractor Relationship" },
   { id: "ip", title: "Intellectual Property" },
   { id: "prohibited", title: "Prohibited Conduct" },
   { id: "disputes", title: "Dispute Resolution" },
@@ -154,9 +153,9 @@ export default function TermsOfServicePage() {
               </h2>
               <p className="mt-4 text-muted-foreground">
                 Welcome to CLEENLY. These Terms of Service (&quot;Terms&quot;)
-                govern your use of the CLEENLY website (cleenly.app) and
-                services. CLEENLY is a platform that connects customers with
-                independent cleaners in the Seattle area.
+                govern your use of the CLEENLY website (cleenly.app) and our
+                house cleaning services. CLEENLY is a house cleaning company
+                serving the Greater Seattle area.
               </p>
               <p className="mt-4 text-muted-foreground">
                 By using CLEENLY, you agree to these Terms. If you do not agree,
@@ -174,23 +173,22 @@ export default function TermsOfServicePage() {
             <section id="service">
               <h2 className="text-xl font-semibold">2. Description of Service</h2>
               <p className="mt-4 text-muted-foreground">
-                CLEENLY operates a marketplace platform that:
+                CLEENLY provides house cleaning services in the Greater Seattle
+                area. Through our website, customers can:
               </p>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
-                <li>Allows customers to book house cleaning services</li>
-                <li>
-                  Connects customers with background-checked, independent cleaners
-                </li>
-                <li>Facilitates scheduling, payment, and communication</li>
-                <li>Provides customer support for booking-related issues</li>
+                <li>See pricing for their home before booking</li>
+                <li>Book regular, deep, or move-out cleaning</li>
+                <li>Schedule a date and time that works for them</li>
+                <li>Reach our team for support and questions</li>
               </ul>
               <div className="mt-6 rounded-lg border border-border bg-muted/50 p-4">
-                <p className="font-medium">Important</p>
+                <p className="font-medium">About our team</p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  CLEENLY is a platform, not a cleaning company. Cleaners on our
-                  platform are independent contractors, not CLEENLY employees.
-                  CLEENLY facilitates the connection and transaction but does not
-                  directly employ the cleaners or supervise their work.
+                  CLEENLY is a small cleaning team. We do the work ourselves and
+                  may bring in additional cleaners as 1099 contractors when
+                  the schedule requires. In either case, you book CLEENLY and
+                  we coordinate the visit.
                 </p>
               </div>
             </section>
@@ -435,8 +433,8 @@ export default function TermsOfServicePage() {
                 </li>
                 <li>
                   <strong className="text-foreground">Tips:</strong> Tips are
-                  optional but appreciated. You can tip in cash or through the
-                  platform after service completion. 100% of tips go to the
+                  optional but appreciated. You can tip in cash or through our
+                  website after service completion. 100% of tips go to the
                   cleaner.
                 </li>
                 <li>
@@ -600,9 +598,9 @@ export default function TermsOfServicePage() {
             <section id="damage">
               <h2 className="text-xl font-semibold">12. Damage and Liability</h2>
               <p className="mt-4 text-muted-foreground">
-                <strong className="text-foreground">Cleaner Insurance:</strong>{" "}
-                All cleaners on the CLEENLY platform carry liability insurance
-                that covers accidental damage during cleaning.
+                <strong className="text-foreground">Insurance:</strong>{" "}
+                Our cleaners carry liability insurance that covers accidental
+                damage during cleaning.
               </p>
               <h3 className="mt-6 font-medium">Reporting Damage</h3>
               <ol className="mt-3 list-decimal space-y-2 pl-6 text-muted-foreground">
@@ -620,33 +618,15 @@ export default function TermsOfServicePage() {
                 </li>
               </ol>
               <p className="mt-4 text-muted-foreground">
-                Legitimate claims are processed through the cleaner&apos;s
-                insurance. Resolution typically takes 10-15 business days.
-                Maximum claim amount is $10,000 per incident.
+                Legitimate claims are processed through liability insurance.
+                Resolution typically takes 10-15 business days. Maximum claim
+                amount is $10,000 per incident.
               </p>
             </section>
 
-            {/* 13. Independent Contractor */}
-            <section id="contractor">
-              <h2 className="text-xl font-semibold">
-                13. Independent Contractor Relationship
-              </h2>
-              <p className="mt-4 text-muted-foreground">
-                Cleaners on CLEENLY are independent contractors, not employees.
-                This means CLEENLY does not control how cleaners perform their
-                work, does not provide equipment or supplies to cleaners, and
-                cleaners set their own schedules and accept bookings at their
-                discretion.
-              </p>
-              <p className="mt-4 text-muted-foreground">
-                This does not affect your rights as a customer. The Service
-                Guarantee and our policies apply regardless of employment status.
-              </p>
-            </section>
-
-            {/* 14. Intellectual Property */}
+            {/* 13. Intellectual Property */}
             <section id="ip">
-              <h2 className="text-xl font-semibold">14. Intellectual Property</h2>
+              <h2 className="text-xl font-semibold">13. Intellectual Property</h2>
               <p className="mt-4 text-muted-foreground">
                 The CLEENLY website, logo, designs, and content are owned by
                 CLEENLY and protected by copyright and trademark laws. By
@@ -656,25 +636,24 @@ export default function TermsOfServicePage() {
               </p>
             </section>
 
-            {/* 15. Prohibited Conduct */}
+            {/* 14. Prohibited Conduct */}
             <section id="prohibited">
-              <h2 className="text-xl font-semibold">15. Prohibited Conduct</h2>
+              <h2 className="text-xl font-semibold">14. Prohibited Conduct</h2>
               <p className="mt-4 text-muted-foreground">You agree not to:</p>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>Use CLEENLY for any unlawful purpose</li>
                 <li>Provide false or misleading information</li>
-                <li>Harass, abuse, or harm cleaners or CLEENLY staff</li>
+                <li>Harass, abuse, or harm our cleaners or staff</li>
                 <li>
-                  Circumvent the platform (booking directly with cleaners you
-                  found through CLEENLY)
+                  Solicit our cleaners directly to circumvent CLEENLY
                 </li>
                 <li>
-                  Use automated tools to access or scrape our platform
+                  Use automated tools to access or scrape our website
                 </li>
                 <li>
-                  Interfere with the security or operation of the platform
+                  Interfere with the security or operation of our website
                 </li>
-                <li>Post false reviews or manipulate the rating system</li>
+                <li>Post false reviews</li>
               </ul>
               <p className="mt-4 text-muted-foreground">
                 Violation of these terms may result in account suspension or
@@ -684,7 +663,7 @@ export default function TermsOfServicePage() {
 
             {/* 16. Dispute Resolution */}
             <section id="disputes">
-              <h2 className="text-xl font-semibold">16. Dispute Resolution</h2>
+              <h2 className="text-xl font-semibold">15. Dispute Resolution</h2>
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">Informal Resolution:</strong>{" "}
                 Before initiating formal proceedings, you agree to contact
@@ -708,7 +687,7 @@ export default function TermsOfServicePage() {
 
             {/* 17. Governing Law */}
             <section id="governing-law">
-              <h2 className="text-xl font-semibold">17. Governing Law</h2>
+              <h2 className="text-xl font-semibold">16. Governing Law</h2>
               <p className="mt-4 text-muted-foreground">
                 These Terms are governed by the laws of the State of Washington,
                 without regard to conflict of law principles. Any legal action
@@ -719,7 +698,7 @@ export default function TermsOfServicePage() {
             {/* 18. Limitation of Liability */}
             <section id="liability">
               <h2 className="text-xl font-semibold">
-                18. Limitation of Liability
+                17. Limitation of Liability
               </h2>
               <div className="mt-4 rounded-lg border border-border bg-muted/50 p-4 text-sm text-muted-foreground">
                 <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</p>
@@ -744,7 +723,7 @@ export default function TermsOfServicePage() {
 
             {/* 19. Indemnification */}
             <section id="indemnification">
-              <h2 className="text-xl font-semibold">19. Indemnification</h2>
+              <h2 className="text-xl font-semibold">18. Indemnification</h2>
               <p className="mt-4 text-muted-foreground">
                 You agree to indemnify, defend, and hold harmless CLEENLY, its
                 officers, directors, employees, and agents from any claims,
@@ -757,7 +736,7 @@ export default function TermsOfServicePage() {
 
             {/* 20. Termination */}
             <section id="termination">
-              <h2 className="text-xl font-semibold">20. Termination</h2>
+              <h2 className="text-xl font-semibold">19. Termination</h2>
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">By You:</strong> You may stop
                 using CLEENLY at any time. To delete your account, email
@@ -781,7 +760,7 @@ export default function TermsOfServicePage() {
 
             {/* 21. General Provisions */}
             <section id="general">
-              <h2 className="text-xl font-semibold">21. General Provisions</h2>
+              <h2 className="text-xl font-semibold">20. General Provisions</h2>
               <ul className="mt-4 space-y-4 text-muted-foreground">
                 <li>
                   <strong className="text-foreground">Entire Agreement:</strong>{" "}

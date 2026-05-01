@@ -28,6 +28,10 @@ export async function POST(request: NextRequest) {
 
     const supabase = createAdminClient();
 
+    // TODO: re-enable sms_opt_in DB write after migration 20260501100000_add_sms_opt_in_to_bookings.sql is applied.
+    // The checkbox in step-contact.tsx still captures consent and is shown to A2P 10DLC Trust Hub via screenshot.
+    // const smsOptIn = !!body.sms_opt_in;
+
     const { data, error } = await supabase
       .from("bookings")
       .insert({

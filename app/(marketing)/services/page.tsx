@@ -133,16 +133,16 @@ export default function ServicesPage() {
             {/* Trust Section */}
             <section className="py-24 bg-gray-50 border-y border-gray-100">
                 <div className="mx-auto max-w-7xl px-6 text-center">
-                    <h2 className="text-2xl font-semibold mb-6">Fully Local & Insured</h2>
+                    <h2 className="text-2xl font-semibold mb-6">Local team, simple guarantees</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto mb-10">
-                        CLEENLY operates throughout the Greater Seattle area. Every cleaner on our platform is background-checked and fully insured.
+                        We work throughout Greater Seattle — Seattle, Eastside, and South Sound. Our cleaners carry liability insurance. If something isn&apos;t right, we come back within 24 hours.
                     </p>
                     <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-gray-400 uppercase tracking-widest">
-                        <span>Background Checked</span>
+                        <span>Greater Seattle</span>
                         <span>•</span>
-                        <span>100% Guaranteed</span>
+                        <span>Liability Insurance</span>
                         <span>•</span>
-                        <span>Locally Owned</span>
+                        <span>24-Hour Re-Clean</span>
                     </div>
                 </div>
             </section>

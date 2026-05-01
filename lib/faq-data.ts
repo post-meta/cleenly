@@ -218,17 +218,17 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Are your cleaners background checked?",
         answer:
-          "Yes. Every cleaner on CLEENLY passes a background check before being approved. This includes criminal history check and identity verification. We also check references and work history. Only cleaners who pass all checks are accepted to the platform.",
+          "Yes. Every cleaner who joins CLEENLY passes a background check before working in homes. This includes criminal history check and identity verification, plus reference and work history checks.",
       },
       {
         question: "Are cleaners insured?",
         answer:
-          "Yes. All cleaners on CLEENLY carry liability insurance. This covers accidental damage to your property during cleaning. If something is broken or damaged, report it within 24 hours and the insurance covers legitimate claims.",
+          "Yes. Our cleaners carry liability insurance. This covers accidental damage during cleaning. If something is broken or damaged, report it within 24 hours and the insurance covers legitimate claims.",
       },
       {
         question: "How do you vet cleaners?",
         answer:
-          "Our vetting process includes: identity verification, background check, reference check, cleaning experience verification, and an interview. Once approved, cleaners build reviews from customers. Cleaners with consistently poor reviews are removed from the platform.",
+          "Our vetting process includes identity verification, background check, reference check, cleaning experience verification, and an interview. Cleaners who don't keep our quality standards don't keep working with us.",
       },
       {
         question: "Is my payment information secure?",

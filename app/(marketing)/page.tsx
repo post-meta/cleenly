@@ -7,7 +7,6 @@ import { FAQ } from "@/components/marketing/faq";
 import { ServiceAreas } from "@/components/marketing/service-areas";
 import { CTA } from "@/components/marketing/cta";
 import { TrustStrip } from "@/components/marketing/trust-strip";
-import { SocialProof } from "@/components/marketing/social-proof";
 import { JsonLd } from "@/components/shared/json-ld";
 import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/utils/schema-generators";
 import { cities } from "@/lib/data/cities";
@@ -15,13 +14,13 @@ import { cities } from "@/lib/data/cities";
 export const metadata: Metadata = {
   title: "House Cleaning Seattle | Book Online Today | CLEENLY",
   description:
-    "Book house cleaning in Seattle online. See prices upfront, choose your cleaner, schedule in minutes. Regular, deep clean, and move-out services available.",
+    "Book house cleaning in Seattle online. See your price upfront, pick a time, done. Regular, deep clean, and move-out services.",
   keywords: [
     "house cleaning seattle",
     "cleaning service seattle",
     "seattle house cleaners",
     "book cleaning online seattle",
-    "maid service seattle",
+    "house cleaning service seattle",
     "home cleaning seattle wa",
     "house cleaning near me",
     "cleaning service bellevue",
@@ -31,26 +30,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: "House Cleaning Seattle | Book Online | CLEENLY",
     description:
-      "Book house cleaning in Seattle. See prices upfront, choose your cleaner, schedule in minutes.",
+      "Book house cleaning in Seattle. See your price upfront, pick a time, done.",
     type: "website",
     url: "https://cleenly.app",
     locale: "en_US",
     siteName: "CLEENLY",
-    images: [
-      {
-        url: "https://cleenly.app/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "CLEENLY - House Cleaning in Seattle",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "House Cleaning Seattle | Book Online | CLEENLY",
     description:
-      "Book house cleaning in Seattle. See prices upfront, choose your cleaner.",
-    images: ["https://cleenly.app/twitter-image.jpg"],
+      "Book house cleaning in Seattle. See your price upfront, pick a time, done.",
   },
   other: {
     "geo.region": "US-WA",
@@ -67,8 +57,9 @@ export default function HomePage() {
   const seattle = cities.find(c => c.slug === 'seattle')!;
   const localBusinessSchema = generateLocalBusinessSchema(seattle);
   const faqSchema = generateFAQSchema([
-    { question: "How much does house cleaning cost in Seattle?", answer: "Our regular cleaning starts at $100, deep cleaning at $150, and move-out cleaning at $200. Prices vary based on home size and condition." },
-    { question: "Are your cleaners insured?", answer: "Yes, all cleaners on the CLEENLY platform are fully insured and background-checked for your peace of mind." }
+    { question: "How much does house cleaning cost in Seattle?", answer: "For a 2-bedroom home: $100-$200 regular, $150-$300 deep, $200-$400 move-out. Exact price depends on home size and condition." },
+    { question: "Are your cleaners insured?", answer: "Yes — our cleaners carry liability insurance." },
+    { question: "What if I'm not happy with the clean?", answer: "Tell us within 24 hours and we come back to fix it. No charge." }
   ]);
 
   return (
@@ -80,7 +71,6 @@ export default function HomePage() {
       <TrustStrip />
       <PricingSection />
       <WhyUs />
-      <SocialProof />
       <FAQ />
       <ServiceAreas />
       <CTA />

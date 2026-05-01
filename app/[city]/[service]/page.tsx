@@ -137,13 +137,13 @@ export default async function CityServicePage({ params }: PageProps) {
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-semibold mb-8">Why {city.name} Homeowners Choose Us</h2>
-                            <p className="text-gray-600 mb-8 leading-relaxed italic">
-                                "{service.longDescription}"
+                            <h2 className="text-2xl font-semibold mb-8">Why {city.name} homeowners book CLEENLY</h2>
+                            <p className="text-gray-600 mb-8 leading-relaxed">
+                                {service.longDescription}
                             </p>
                             <div className="bg-accent/5 p-8 rounded-[12px] border-l-4 border-accent">
                                 <p className="text-gray-700 font-medium">
-                                    {content?.whyChoose || `House ${service.name.toLowerCase()} tailored for your home in ${city.name}. Every cleaner is background-checked and insured.`}
+                                    {content?.whyChoose || `${service.name} for homes in ${city.name}. We're a small Greater Seattle team. Liability insurance. 24-hour re-clean if something isn't right.`}
                                 </p>
                             </div>
                         </div>
@@ -179,10 +179,10 @@ export default async function CityServicePage({ params }: PageProps) {
                         Book your {service.name.toLowerCase()} in {city.name}
                     </h2>
                     <p className="text-white/80 mb-10 text-lg max-w-2xl mx-auto">
-                        See your exact price in seconds. No estimates, no hidden fees.
+                        See your exact price in seconds. No memberships, no hidden fees.
                     </p>
                     <Button variant="secondary" size="lg" asChild className="bg-white text-accent border-transparent hover:bg-white/90">
-                        <Link href="/book">Get Your Price Now →</Link>
+                        <Link href="/book">Get your price now →</Link>
                     </Button>
                 </div>
             </section>

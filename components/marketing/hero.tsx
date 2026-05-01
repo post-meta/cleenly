@@ -7,18 +7,18 @@ export function Hero() {
     <section className="hero py-20">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          House Cleaning in Seattle — From $100
+          House cleaning in Greater Seattle
         </h1>
 
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-          See your price in 30 seconds. Pick a time. Done.
+          See your price online. Pick a time. We bring our own supplies.
           <br />
-          No hidden fees. No phone calls. No BS.
+          No memberships. No hidden fees.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" asChild>
-            <Link href="/book">See My Price Now</Link>
+            <Link href="/book">See my price now</Link>
           </Button>
 
           <Button size="lg" variant="secondary" asChild>
@@ -37,4 +37,3 @@ export function Hero() {
     </section>
   );
 }
-

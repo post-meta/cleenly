@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { cities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
+import { blogPosts } from '@/lib/data/blog-posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://cleenly.app';
@@ -14,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/about', priority: 0.7 },
         { path: '/faq', priority: 0.7 },
         { path: '/how-it-works', priority: 0.8 },
+        { path: '/blog', priority: 0.7 },
         { path: '/join', priority: 0.6 },
         { path: '/locations', priority: 0.6 },
         { path: '/privacy', priority: 0.3 },
@@ -54,5 +56,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         }
     }
 
-    return [...routes, ...serviceRoutes, ...cityRoutes, ...comboRoutes];
+    // Blog posts (/blog/[slug])
+    const blogRoutes = blogPosts.map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(post.publishedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }));
+
+    return [...routes, ...serviceRoutes, ...cityRoutes, ...comboRoutes, ...blogRoutes];
 }

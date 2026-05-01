@@ -85,6 +85,7 @@ export interface BookingFormData {
   city?: string;
   zip?: string;
   access_instructions?: string;
+  sms_opt_in?: boolean;
 }
 
 export interface PriceEstimate {

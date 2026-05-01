@@ -24,7 +24,7 @@ export function LocalFAQ({ city, service }: LocalFAQProps) {
         },
         {
             q: `Are your cleaners insured?`,
-            a: `Yes, all cleaners on the CLEENLY platform are fully insured and background-checked for your peace of mind.`,
+            a: `Yes — our cleaners carry liability insurance.`,
         },
     ];
 

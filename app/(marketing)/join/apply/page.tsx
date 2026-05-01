@@ -679,7 +679,7 @@ export default function ApplyPage() {
                 <div>
                   <p className="font-medium">I am at least 18 years old</p>
                   <p className="text-sm text-muted-foreground">
-                    You must be 18 or older to use the platform
+                    You must be 18 or older to apply
                   </p>
                 </div>
               </label>

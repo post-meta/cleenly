@@ -1,30 +1,30 @@
 import { Container } from "@/components/ui/container";
-import { DollarSign, UserCheck, Calendar, ShieldCheck } from "lucide-react";
+import { DollarSign, MessageSquare, Calendar, ShieldCheck } from "lucide-react";
 
 const reasons = [
   {
     icon: DollarSign,
-    title: "Upfront pricing",
+    title: "Price upfront",
     description:
-      "You see the price before you book. The price on screen is the price you pay. No \"starting at\" games.",
+      "You see your exact price before you book. No \"starting at\" games, no quote calls.",
   },
   {
-    icon: UserCheck,
-    title: "Vetted cleaners",
+    icon: MessageSquare,
+    title: "A real person answers",
     description:
-      "Every cleaner on our platform has been background-checked and has reviews from real customers.",
+      "Call or text the number on this page. You'll reach us, not a chatbot.",
   },
   {
     icon: Calendar,
     title: "Easy rescheduling",
     description:
-      "Plans change. Reschedule or cancel up to 24 hours before your appointment, no fees.",
+      "Plans change. Reschedule or cancel up to 24 hours before, no fees.",
   },
   {
     icon: ShieldCheck,
-    title: "24-hour guarantee",
+    title: "24-hour re-clean",
     description:
-      "Something not right? Tell us within 24 hours and we'll send someone to fix it. No charge.",
+      "Something not right? Tell us within 24 hours and we come back to fix it.",
   },
 ];
 

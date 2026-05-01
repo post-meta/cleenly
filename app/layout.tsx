@@ -10,14 +10,14 @@ const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Cleenly — Cleaning Services in Seattle",
+  title: "Cleenly — House Cleaning in Greater Seattle",
   description:
-    "Book cleaning services in Greater Seattle area. Choose your cleaner, see the price, book online.",
-  keywords: ["cleaning", "seattle", "house cleaning", "maid service"],
+    "Book house cleaning in Greater Seattle. See your price online, pick a time, done.",
+  keywords: ["cleaning", "seattle", "house cleaning", "house cleaning service"],
   openGraph: {
-    title: "Cleenly — Cleaning Services in Seattle",
+    title: "Cleenly — House Cleaning in Greater Seattle",
     description:
-      "Book cleaning services in Greater Seattle area. Choose your cleaner, see the price, book online.",
+      "Book house cleaning in Greater Seattle. See your price online, pick a time, done.",
     type: "website",
     locale: "en_US",
     url: SITE_URL,

@@ -14,8 +14,6 @@ export interface ServiceData {
         question: string;
         answer: string;
     }[];
-    rating: string;
-    reviews: number;
 }
 
 export const services: ServiceData[] = [
@@ -28,8 +26,6 @@ export const services: ServiceData[] = [
         priceMin: 100,
         priceMax: 200,
         duration: "2-3 hours",
-        rating: "4.9",
-        reviews: 127,
         checklist: [
             'Dust all reachable surfaces',
             'Vacuum carpets and rugs',
@@ -76,8 +72,6 @@ export const services: ServiceData[] = [
         priceMin: 150,
         priceMax: 300,
         duration: "3-5 hours",
-        rating: "4.8",
-        reviews: 89,
         checklist: [
             'Everything in regular cleaning',
             'Inside oven',
@@ -127,8 +121,6 @@ export const services: ServiceData[] = [
         priceMin: 200,
         priceMax: 400,
         duration: "4-6 hours",
-        rating: "4.9",
-        reviews: 156,
         checklist: [
             'Everything in deep cleaning',
             'Inside all cabinets and drawers',
@@ -179,8 +171,6 @@ export const services: ServiceData[] = [
         priceMin: 180,
         priceMax: 350,
         duration: "4-6 hours",
-        rating: "4.8",
-        reviews: 94,
         checklist: ['Sanitize all surfaces', 'Clean inside cabinets & drawers', 'Appliances inside & out', 'Floors vacuumed & mopped'],
         notIncluded: ['Carpet shampooing', 'Exterior windows'],
         bestFor: ['Moving into a new home', 'New homeowners', 'Post-renovation'],
@@ -195,8 +185,6 @@ export const services: ServiceData[] = [
         priceMin: 100,
         priceMax: 200,
         duration: "2-3 hours",
-        rating: "4.9",
-        reviews: 203,
         checklist: ['Kitchen & Bathrooms', 'Dusting & Vacuuming', 'Mopping', 'Bed making'],
         notIncluded: ['Inside ovens (add-on)', 'Inside fridge (add-on)'],
         bestFor: ['Maintenance', 'Busy families', 'Pet owners'],
@@ -211,8 +199,6 @@ export const services: ServiceData[] = [
         priceMin: 80,
         priceMax: 150,
         duration: "2-4 hours",
-        rating: "4.7",
-        reviews: 67,
         checklist: ['Decluttering assistance', 'Sorting & categorizing', 'Bin/basket labeling', 'System implementation'],
         notIncluded: ['Cleaning (focus is on organizing)', 'Hauling away trash'],
         bestFor: ['Closets', 'Kitchen pantries', 'Playrooms', 'Garages'],
@@ -227,40 +213,38 @@ export const services: ServiceData[] = [
         priceMin: 150,
         priceMax: 280,
         duration: "3-5 hours",
-        rating: "4.8",
-        reviews: 81,
         checklist: ['Guest bathroom detail', 'Kitchen detail', 'Entryway & living areas', 'Patio sweep'],
         notIncluded: ['Inside appliances', 'Bedrooms (unless requested)'],
         bestFor: ['Parties', 'Holidays', 'Family gatherings'],
         faqs: [{ question: 'How close to the event should I book?', answer: 'We recommend 1-2 days before your event.' }]
     },
     {
-        slug: "post-emergency",
-        name: "Post-Emergency Cleanup",
-        shortDescription: "Clean up after water damage, fire residue, or other emergencies. We work with insurance companies.",
-        longDescription: 'Quick response cleaning for when life happens. Whether it\'s a minor leak, a messy spill, or post-party chaos, we help restore order to your home quickly and efficiently.',
+        slug: "restorative-cleaning",
+        name: "Restorative Cleaning",
+        shortDescription: "Heavy-soil cleaning when life got in the way — illness, postpartum, recovery, or a home that needs more than a regular clean.",
+        longDescription: "Restorative cleaning is for homes that need more than a regular clean. After illness, postpartum, depression, recovery, or a long stretch where keeping up wasn't possible. We come without judgment. We work at the pace the home needs, not on a stopwatch. Tell us what you want us to focus on and what to skip — we follow your lead.",
         priceRange: "$200-$500",
         priceMin: 200,
         priceMax: 500,
         duration: "4-8 hours",
-        rating: "4.9",
-        reviews: 42,
-        checklist: ['Water extraction (minor)', 'Disinfecting surfaces', 'Debris removal', 'Deep cleaning affected areas'],
-        notIncluded: ['Mold remediation', 'Major construction repair', 'Hazardous materials'],
-        bestFor: ['After leaks', 'Post-party', 'Unexpected messes'],
-        faqs: [{ question: 'How fast can you come?', answer: 'We often have same-day or next-day availability for emergencies.' }]
+        checklist: ['Heavy-soil kitchen and bathrooms', 'Visible-area reset (high-traffic rooms first)', 'Disinfecting surfaces', 'Trash and basic decluttering by your direction', 'Deep cleaning affected areas'],
+        notIncluded: ['Mold remediation', 'Hoarding-level removal', 'Hazardous materials', 'Repairs or construction'],
+        bestFor: ['Post-illness or postpartum', 'Recovering from a hard stretch', 'Heavy soil from any cause', 'When a regular clean isn\'t enough'],
+        faqs: [
+            { question: 'Will you judge me for the state of the home?', answer: "No. We've seen everything and we don't comment. Tell us what you'd like us to focus on. The rest stays private." },
+            { question: 'How fast can you come?', answer: "We often have same-day or next-day availability. Text or call us — say it's a restorative clean and we'll find a slot." },
+            { question: "What if I don't want anyone to see certain rooms?", answer: "Tell us before we start. We skip what you say to skip — closed doors, specific drawers, anything. No questions." }
+        ]
     },
     {
         slug: "airbnb-turnover",
         name: "Airbnb Turnover",
         shortDescription: "Quick turnaround cleaning between guests. Linens, bathrooms, kitchen. Same-day service available.",
-        longDescription: 'Reliable turnover service for short-term rental hosts. We understand the tight schedules and high standards required for 5-star reviews. Includes linen changing, restocking supplies, and damage reporting.',
+        longDescription: 'Reliable turnover service for short-term rental hosts. We understand the tight schedules and high standards needed for guest-ready listings. Includes linen changing, restocking supplies, and damage reporting.',
         priceRange: "$80-$150",
         priceMin: 80,
         priceMax: 150,
         duration: "1-2 hours",
-        rating: "4.8",
-        reviews: 118,
         checklist: ['Change linens', 'Clean & sanitize bathroom/kitchen', 'Restock amenities', 'Check for damages'],
         notIncluded: ['Laundry off-site (on-site only)', 'Deep stain removal'],
         bestFor: ['Airbnb hosts', 'VRBO hosts', 'Vacation rentals'],
@@ -275,8 +259,6 @@ export const services: ServiceData[] = [
         priceMin: 250,
         priceMax: 600,
         duration: "5-10 hours",
-        rating: "4.7",
-        reviews: 53,
         checklist: ['HEPA vacuuming', 'Wall dusting', 'Inside cabinets & drawers', 'Label removal from fixtures'],
         notIncluded: ['Hauling heavy debris', 'Exterior pressure washing'],
         bestFor: ['Post-renovation', 'New builds', 'Remodeling projects'],

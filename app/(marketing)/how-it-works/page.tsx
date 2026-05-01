@@ -173,10 +173,10 @@ export default function HowItWorksPage() {
               </p>
               <ul className="space-y-4">
                 {[
-                  "Background-checked, vetted independent contractors",
-                  "All cleaning supplies and equipment provided",
-                  "Rate your cleaner and help us maintain quality",
-                  "Something off? Tell us within 24 hours. We send someone to fix it, free."
+                  "Our cleaners are background-checked and carry liability insurance",
+                  "We bring all supplies and equipment",
+                  "Rate the cleaning and help us improve",
+                  "Something off? Tell us within 24 hours. We come back to fix it, free."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="h-5 w-5 text-foreground shrink-0 mt-0.5" />
@@ -194,10 +194,10 @@ export default function HowItWorksPage() {
         <Container>
           <div className="flex flex-wrap justify-center gap-4 md:gap-8">
             {[
-              "500+ homes cleaned in Greater Seattle",
-              "4.8★ average rating",
-              "Licensed & Insured",
-              "Background-checked cleaners"
+              "Greater Seattle service area",
+              "Online booking",
+              "Liability insurance",
+              "24-hour re-clean guarantee"
             ].map((badge, i) => (
               <div key={i} className="px-4 py-2 rounded-full bg-muted border border-border text-sm font-medium text-muted-foreground">
                 {badge}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -10,42 +10,54 @@ const faqs = [
     id: "cost",
     question: "How much does house cleaning cost in Seattle?",
     answer:
-      "For a 2-3 bedroom home, expect $120-$200 for regular cleaning, $180-$280 for deep cleaning, and $250-$400 for move-out cleaning. Exact price depends on home size and condition. We show you the price before you book.",
-  },
-  {
-    id: "advance",
-    question: "How far in advance do I need to book?",
-    answer:
-      "We often have availability within 2-3 days. For specific times or move-out cleanings, booking a week ahead helps.",
+      "For a 2-bedroom home: $100-$200 for regular cleaning, $150-$300 for deep cleaning, $200-$400 for move-out. Exact price depends on home size and condition. The booking calculator shows your price before you book.",
   },
   {
     id: "included",
     question: "What's included in a regular cleaning?",
     answer:
-      "Dusting all surfaces, vacuuming floors and carpets, mopping hard floors, cleaning bathrooms (toilet, shower, sink, mirrors), wiping kitchen surfaces, and taking out trash.",
+      "Dusting, vacuuming, mopping, kitchen surfaces (counters, sink, outside of appliances), bathrooms (toilet, shower, sink, mirrors), beds made, trash out. Inside oven/fridge and baseboards are part of deep cleaning.",
+  },
+  {
+    id: "not-happy",
+    question: "What if I'm not happy with the clean?",
+    answer:
+      "Tell us within 24 hours and we come back to fix it. No charge.",
+  },
+  {
+    id: "insured",
+    question: "Are your cleaners insured?",
+    answer: "Yes — our cleaners carry liability insurance.",
   },
   {
     id: "supplies",
     question: "Do I need to provide cleaning supplies?",
     answer:
-      "No. Cleaners bring their own supplies and equipment. If you prefer specific products (eco-friendly, specific brand), let us know in the booking notes.",
+      "No. We bring our own supplies and equipment. If you prefer specific products (eco-friendly, fragrance-free), tell us in the booking notes.",
   },
   {
-    id: "insured",
-    question: "Are your cleaners insured?",
-    answer: "Yes. All cleaners on our platform carry liability insurance.",
+    id: "same-cleaner",
+    question: "Will I get the same cleaner every time?",
+    answer:
+      "We keep your cleaner the same whenever we can — that's how cleanings get faster and better over time. On busy weeks we may send a teammate; if you've booked recurring service, we'll always tell you in advance.",
+  },
+  {
+    id: "advance",
+    question: "How far in advance do I need to book?",
+    answer:
+      "Most weeks we have availability within 2-3 days. For move-out cleanings or specific time slots, booking a week ahead is safer.",
   },
   {
     id: "cancel",
     question: "What if I need to cancel?",
     answer:
-      "Cancel up to 24 hours before your appointment at no charge. Cancellations within 24 hours may have a fee.",
+      "Cancel free up to 24 hours before. Cancellations within 24 hours may have a fee.",
   },
   {
     id: "areas",
     question: "What areas do you serve?",
     answer:
-      "Seattle and the Greater Eastside: Bellevue, Kirkland, Redmond, Renton, Kent, Federal Way, Tacoma, Everett, and surrounding areas.",
+      "Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Renton, Kent, Federal Way, Tacoma, Everett, and surrounding cities.",
   },
 ];
 
@@ -88,7 +100,7 @@ export function FAQ() {
               <div
                 className={cn(
                   "overflow-hidden transition-all duration-300 ease-in-out",
-                  openId === faq.id ? "max-h-48 opacity-100 mt-4" : "max-h-0 opacity-0"
+                  openId === faq.id ? "max-h-72 opacity-100 mt-4" : "max-h-0 opacity-0"
                 )}
               >
                 <p className="text-sm text-gray-600 leading-relaxed">

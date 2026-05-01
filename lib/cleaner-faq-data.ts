@@ -5,44 +5,44 @@ export interface CleanerFAQItem {
 
 export const cleanerFAQItems: CleanerFAQItem[] = [
   {
-    question: "Is it really free to join?",
+    question: "Is it really free to apply?",
     answer:
-      "Yes. No application fee, no monthly fee, no signup cost. We make money by taking a small percentage when you get paid. If you don't get paid, we don't get paid.",
+      "Yes. No application fee, no signup cost. We pay you per job you complete.",
   },
   {
-    question: "How much can I earn?",
+    question: "How does pay work?",
     answer:
-      "Depends on your rates, how many hours you work, and the jobs you accept. Most cleaners on CLEENLY earn $25-45 per hour after our fee. Top cleaners with great reviews earn more.",
+      "We pay per job. The amount depends on the type of cleaning, home size, and how long the job takes. We share specific numbers during your interview so you know what to expect before you accept any bookings.",
   },
   {
-    question: "How do I set my prices?",
+    question: "Am I an employee or a contractor?",
     answer:
-      "You set your own hourly rate or per-job pricing. We show you what similar cleaners charge to help you decide. You can adjust your rates anytime. Customers see your rate before booking.",
+      "1099 independent contractor at this stage. As we grow, we may convert reliable cleaners to W-2 employees. We'll talk about this during your interview.",
   },
   {
     question: "What if a customer cancels?",
     answer:
-      "If a customer cancels less than 24 hours before the appointment, they're charged a cancellation fee — and you get a portion of it. We protect your time.",
+      "If a customer cancels less than 24 hours before the appointment, they're charged a cancellation fee — and you receive a portion of it for blocking the time slot.",
   },
   {
     question: "Do I need my own supplies?",
     answer:
-      "Most cleaners bring their own supplies (vacuum, mop, cleaning products). Some customers have preferences or provide their own. You can note in your profile what you bring.",
+      "We bring our own supplies — you don't need to buy anything to get started. If you have preferred products, let us know.",
   },
   {
     question: "Do I need insurance?",
     answer:
-      "Liability insurance is strongly recommended. It protects you if something is accidentally damaged. If you don't have it, we can point you to affordable options. It's typically $30-50/month.",
+      "Liability insurance is strongly recommended for cleaners working in homes. If you don't have it, we can point you to affordable options. We'll discuss coverage during your interview.",
   },
   {
     question: "What's the background check?",
     answer:
-      "We use a third-party service to check criminal history and verify identity. It takes 2-5 business days. This is standard for home services and protects both you and customers.",
+      "We use a third-party service to check criminal history and verify identity. It takes 2-5 business days. This is standard for home services and protects both you and the customers we serve.",
   },
   {
-    question: "Can I also work for other platforms?",
+    question: "Can I also work other cleaning jobs?",
     answer:
-      "Yes. You're an independent contractor. You can work for other platforms, have your own clients, or have another job. We just ask that you honor the bookings you accept on CLEENLY.",
+      "Yes. As an independent contractor you can have other clients or jobs. We just ask that you honor the bookings you accept from us and don't solicit our customers directly.",
   },
   {
     question: "What areas do you cover?",
@@ -50,8 +50,8 @@ export const cleanerFAQItems: CleanerFAQItem[] = [
       "Seattle and the Greater Eastside: Bellevue, Kirkland, Redmond, Renton, Kent, Tacoma, Everett, and surrounding cities. You choose which areas you're willing to travel to.",
   },
   {
-    question: "How fast can I start getting bookings?",
+    question: "How fast can I start?",
     answer:
-      "After approval (usually 3-7 days including background check), you can start getting bookings immediately. How fast depends on your profile, rates, availability, and demand in your area.",
+      "After approval (usually 3-7 days including background check), we can start adding you to bookings as the schedule allows. Hours ramp up as you build a track record with us.",
   },
 ];

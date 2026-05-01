@@ -86,6 +86,46 @@ export function generateBreadcrumbSchema(
 }
 
 /**
+ * Service Schema for the standalone /services/[service] page (no city scope).
+ * Lists all served cities in areaServed so Google understands geographic coverage.
+ */
+export function generateGenericServiceSchema(service: ServiceData, allCities: CityData[]) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": service.name,
+        "description": `${service.name} in Greater Seattle. ${service.shortDescription}`,
+        "serviceType": service.name,
+        "provider": {
+            "@type": "LocalBusiness",
+            "@id": `${BASE_URL}/#LocalBusiness`,
+            "name": "CLEENLY",
+            "telephone": "+1-206-641-4739",
+            "email": "hello@cleenly.app",
+            "url": BASE_URL,
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Seattle",
+                "addressRegion": "WA",
+                "addressCountry": "US"
+            }
+        },
+        "areaServed": allCities.map(city => ({
+            "@type": "City",
+            "name": city.name,
+            "containedInPlace": { "@type": "State", "name": "Washington" }
+        })),
+        "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": service.priceMin,
+            "highPrice": service.priceMax,
+            "priceCurrency": "USD"
+        },
+        "url": `${BASE_URL}/services/${service.slug}`
+    };
+}
+
+/**
  * LocalBusiness Schema для страницы города
  */
 export function generateLocalBusinessSchema(city: CityData) {

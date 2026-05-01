@@ -5,20 +5,19 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/shared/json-ld";
 
 export const metadata: Metadata = {
-  title: "About CLEENLY | Seattle House Cleaning Booking Platform",
+  title: "About CLEENLY | Greater Seattle House Cleaning",
   description:
-    "CLEENLY is a house cleaning booking platform in Seattle. We built it because booking cleaning shouldn't be complicated. See prices upfront, choose your cleaner, book in minutes.",
+    "CLEENLY is a small house cleaning team serving Greater Seattle. We built a simpler way to book — see your price online, pick a time, done.",
   keywords: [
     "cleenly about",
-    "seattle cleaning service about",
-    "house cleaning company seattle",
+    "seattle house cleaning company",
     "local cleaning service seattle",
-    "cleaning booking platform",
+    "greater seattle cleaning",
   ],
   openGraph: {
-    title: "About CLEENLY | Seattle House Cleaning Platform",
+    title: "About CLEENLY | Greater Seattle House Cleaning",
     description:
-      "We built CLEENLY because booking cleaning shouldn't be this hard. See prices upfront, choose your cleaner, book in minutes.",
+      "We built CLEENLY because booking cleaning shouldn't be this hard. See your price online and book in minutes.",
     type: "website",
     url: "https://cleenly.app/about",
   },
@@ -29,12 +28,12 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
   "@id": "https://cleenly.app/#Organization",
   name: "CLEENLY",
   alternateName: "Cleenly",
   description:
-    "House cleaning booking platform serving Seattle and Greater Eastside. Customers see prices upfront, choose cleaners, and book online.",
+    "House cleaning company serving Greater Seattle. Customers see their price online and book in minutes.",
   url: "https://cleenly.app",
   logo: "https://cleenly.app/logo.png",
   foundingDate: "2024",
@@ -103,32 +102,30 @@ export default function AboutPage() {
             <span>About</span>
           </nav>
 
-          {/* Hero - Entity Definition for LLM */}
+          {/* Hero */}
           <h1>About CLEENLY</h1>
           <div className="mt-8 space-y-4 text-lg text-muted-foreground">
             <p>
-              CLEENLY is a house cleaning booking platform serving Seattle and
-              the Greater Eastside. We connect customers with background-checked
-              cleaners through a simple online booking system. You see the
-              price before you book, choose your cleaner, and schedule in
-              minutes.
+              CLEENLY is a small house cleaning team serving Greater Seattle.
+              We built a simpler way to book a clean — you see your price
+              online, pick a time, and we show up.
             </p>
             <p>
-              We&apos;re not a cleaning company. We&apos;re a platform that
-              helps good cleaners find customers, and helps customers find
-              reliable cleaning help.
+              We do the cleaning ourselves and bring in extra cleaners as
+              needed when the schedule gets full. Either way, you&apos;re
+              booking CLEENLY.
             </p>
           </div>
 
           {/* Why We Built This */}
           <section className="mt-16">
-            <h2>Why We Built This</h2>
+            <h2>Why we built this</h2>
             <div className="mt-6 space-y-4 text-muted-foreground">
               <p>
                 We built CLEENLY because booking a cleaning shouldn&apos;t be
                 this hard.
               </p>
-              <p>Here&apos;s what we kept running into:</p>
+              <p>Here&apos;s what kept getting in the way:</p>
               <p>
                 <strong className="text-foreground">
                   &quot;Starting at $99&quot; that turned into $180.
@@ -140,34 +137,27 @@ export default function AboutPage() {
                 <strong className="text-foreground">
                   No idea who&apos;s coming.
                 </strong>{" "}
-                You book through a service and someone shows up. Maybe
-                they&apos;re great. Maybe not. We wanted to know who we&apos;re
-                letting into our home.
+                You book through a service and someone different shows up every
+                time. We wanted consistency — the same team in your home as
+                often as possible.
               </p>
               <p>
                 <strong className="text-foreground">Phone tag to book.</strong>{" "}
-                Calling, leaving messages, waiting for callbacks. In 2024. We
-                wanted to book like we book everything else — online, in a few
-                minutes.
+                Calling, leaving messages, waiting for callbacks. We wanted to
+                book like we book everything else — online, in a few minutes.
               </p>
               <p>
-                So we built what we wanted: a platform where you see prices
-                upfront, choose the actual person coming to clean, and book
-                without phone calls.
-              </p>
-              <p>
-                That&apos;s it. Nothing revolutionary. Just booking a cleaning
-                without the hassle.
+                So we built what we wanted: an honest price online, a real time
+                slot, and people who actually show up to clean.
               </p>
             </div>
           </section>
 
           {/* How CLEENLY Works */}
           <section className="mt-16">
-            <h2>How CLEENLY Works</h2>
+            <h2>How it works</h2>
 
             <div className="mt-8">
-              <h3 className="text-lg font-semibold">For Customers</h3>
               <ol className="mt-4 space-y-3 text-muted-foreground">
                 <li className="flex gap-3">
                   <span className="font-semibold text-foreground">1.</span>
@@ -184,58 +174,33 @@ export default function AboutPage() {
                     <strong className="text-foreground">
                       See your price range
                     </strong>{" "}
-                    — based on your home, not some made-up &quot;starting at&quot;
+                    — based on your home, not a generic &quot;starting at&quot;
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="font-semibold text-foreground">3.</span>
-                  <span>
-                    <strong className="text-foreground">Browse cleaners</strong>{" "}
-                    — profiles, reviews, photos of their work
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-semibold text-foreground">4.</span>
                   <span>
                     <strong className="text-foreground">Pick a time</strong> —
                     morning, afternoon, or evening
                   </span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="font-semibold text-foreground">5.</span>
+                  <span className="font-semibold text-foreground">4.</span>
                   <span>
-                    <strong className="text-foreground">Book</strong> —
-                    confirmation and cleaner details sent to you
+                    <strong className="text-foreground">We clean</strong> —
+                    we bring our own supplies and equipment
                   </span>
                 </li>
               </ol>
               <p className="mt-4 text-sm text-muted-foreground">
-                Takes about 2 minutes. No account needed to see prices.
-              </p>
-            </div>
-
-            <div className="mt-10">
-              <h3 className="text-lg font-semibold">For Cleaners</h3>
-              <p className="mt-4 text-muted-foreground">
-                CLEENLY helps independent cleaners and small cleaning businesses
-                find customers without the marketing headache.
-              </p>
-              <p className="mt-3 text-muted-foreground">
-                You set your availability. You set your rates. We send you
-                customers. You keep most of what you earn — our platform fee is
-                transparent and predictable.
-              </p>
-              <p className="mt-3 text-muted-foreground">
-                No chasing leads. No competing on price against everyone else.
-                Customers choose you based on your profile, reviews, and the
-                work you show.
+                Takes about 2 minutes to book. No account needed to see prices.
               </p>
             </div>
           </section>
 
           {/* Our Principles */}
           <section className="mt-16">
-            <h2>Our Principles</h2>
+            <h2>Our principles</h2>
             <p className="mt-4 text-muted-foreground">
               A few things we believe in:
             </p>
@@ -256,13 +221,13 @@ export default function AboutPage() {
 
               <div>
                 <h3 className="text-lg font-semibold">
-                  You know who&apos;s coming
+                  Same team when we can
                 </h3>
                 <p className="mt-2 text-muted-foreground">
-                  Every cleaner on CLEENLY has a profile — photo, bio, reviews
-                  from real customers. You&apos;re not getting &quot;a team
-                  member.&quot; You&apos;re choosing a specific person to let
-                  into your home.
+                  We try to send you the same cleaner every time — that&apos;s
+                  how cleanings get faster and better. On busy weeks we may
+                  send a teammate. If you&apos;ve booked recurring service,
+                  we&apos;ll always tell you in advance who&apos;s coming.
                 </p>
               </div>
 
@@ -270,88 +235,36 @@ export default function AboutPage() {
                 <h3 className="text-lg font-semibold">Problems get fixed</h3>
                 <p className="mt-2 text-muted-foreground">
                   Something&apos;s not right after a cleaning? Tell us within 24
-                  hours. We&apos;ll send someone back to fix it. No
-                  interrogation, no runaround. We&apos;d rather re-do a cleaning
-                  than have you unhappy.
+                  hours. We&apos;ll come back to fix it. No interrogation, no
+                  runaround.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-semibold">
-                  Cleaners get paid fairly
+                  We&apos;re a small team
                 </h3>
                 <p className="mt-2 text-muted-foreground">
-                  We take a platform fee to keep CLEENLY running. Cleaners keep
-                  the majority of what you pay. We&apos;re transparent about the
-                  split. Underpaid cleaners don&apos;t stick around, and we want
-                  good people on the platform.
+                  CLEENLY is run by a small group based in Greater Seattle. When
+                  the schedule fills up, we bring in extra cleaners we trust to
+                  cover the load. Either way, you&apos;re working with us — not
+                  a marketplace, not an algorithm matching you to a stranger.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* For Cleaners */}
+          {/* Cleaner recruitment teaser */}
           <section className="mt-16">
-            <h2>For Cleaners</h2>
+            <h2>Want to clean with us?</h2>
             <p className="mt-4 text-muted-foreground">
-              If you&apos;re an independent cleaner or run a small cleaning
-              business in the Seattle area, CLEENLY might be a good fit.
+              We&apos;re always interested in hearing from reliable cleaners in
+              the Greater Seattle area. If you do good work and want steady
+              hours, get in touch.
             </p>
-
-            <div className="mt-8 grid gap-8 md:grid-cols-2">
-              <div>
-                <h4 className="font-semibold">What we offer:</h4>
-                <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-success">•</span>
-                    Customers who&apos;ve already decided to book (not
-                    &quot;leads&quot; to chase)
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-success">•</span>
-                    You set your rates and availability
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-success">•</span>
-                    Your own profile where you can show off your work
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-success">•</span>
-                    Transparent platform fee — you know what you&apos;re keeping
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-success">•</span>
-                    No competition to be the cheapest
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold">What we look for:</h4>
-                <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span>•</span>
-                    Reliable, on-time, does good work
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span>•</span>
-                    Background check passed
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span>•</span>
-                    Liability insurance (we can help if you don&apos;t have it)
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span>•</span>
-                    Available for at least 15 hours/week
-                  </li>
-                </ul>
-              </div>
-            </div>
-
             <div className="mt-8">
               <Button asChild>
-                <Link href="/join">Apply to Join CLEENLY</Link>
+                <Link href="/join">Apply to join our team</Link>
               </Button>
             </div>
           </section>
@@ -377,7 +290,8 @@ export default function AboutPage() {
                 respond within a few hours during business days.
               </p>
               <p className="text-sm">
-                We&apos;re a small team based in Seattle. We read every email.
+                We&apos;re a small team based in Greater Seattle. We read every
+                email.
               </p>
             </div>
           </section>

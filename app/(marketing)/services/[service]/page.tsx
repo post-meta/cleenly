@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { services, getServiceBySlug, getAllServiceSlugs } from '@/lib/data/services';
+import { getServiceBySlug, getAllServiceSlugs } from '@/lib/data/services';
 import { cities } from '@/lib/data/cities';
 import { JsonLd } from '@/components/shared/json-ld';
+import { generateGenericServiceSchema } from '@/lib/utils/schema-generators';
 
 interface PageProps {
     params: Promise<{ service: string }>;
@@ -32,6 +33,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     const service = getServiceBySlug(serviceSlug);
     if (!service) notFound();
 
+    const serviceSchema = generateGenericServiceSchema(service, cities);
+
     const faqSchema = service.faqs ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -57,6 +60,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
     return (
         <main className="bg-white">
+            <JsonLd data={serviceSchema} />
             {faqSchema && <JsonLd data={faqSchema} />}
             <JsonLd data={breadcrumbSchema} />
 

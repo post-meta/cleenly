@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "how much house cleaning seattle",
     "deep cleaning cost seattle",
     "move out cleaning price seattle",
-    "maid service rates seattle",
+    "house cleaning rates seattle",
   ],
   openGraph: {
     title: "House Cleaning Prices Seattle | CLEENLY",

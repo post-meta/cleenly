@@ -116,11 +116,11 @@ export default function PrivacyPolicyPage() {
             <section id="introduction">
               <h2 className="text-xl font-semibold">1. Introduction</h2>
               <p className="mt-4 text-muted-foreground">
-                CLEENLY (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;)
-                operates a house cleaning booking platform serving Seattle and
-                the Greater Eastside. This Privacy Policy explains how we
-                collect, use, disclose, and protect your personal information
-                when you use our website (cleenly.app) and services.
+                CLEENLY (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is
+                a house cleaning company serving Greater Seattle. This Privacy
+                Policy explains how we collect, use, disclose, and protect
+                your personal information when you use our website
+                (cleenly.app) and services.
               </p>
               <p className="mt-4 text-muted-foreground">
                 By using CLEENLY, you agree to the collection and use of
@@ -166,7 +166,7 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li>
                   <strong className="text-foreground">Communications:</strong>{" "}
-                  Messages you send us or your cleaner through our platform
+                  Messages you send us or your cleaner through our website
                 </li>
                 <li>
                   <strong className="text-foreground">Preferences:</strong>{" "}
@@ -226,7 +226,7 @@ export default function PrivacyPolicyPage() {
                   <strong className="text-foreground">
                     Background Check Services:
                   </strong>{" "}
-                  For cleaners joining our platform (not for customers)
+                  For cleaners joining our team (not for customers)
                 </li>
                 <li>
                   <strong className="text-foreground">
@@ -270,7 +270,7 @@ export default function PrivacyPolicyPage() {
                   <strong className="text-foreground">
                     Safety and Security:
                   </strong>{" "}
-                  Verify identities, prevent fraud, ensure platform safety
+                  Verify identities, prevent fraud, ensure service safety
                 </li>
                 <li>
                   <strong className="text-foreground">Legal Compliance:</strong>{" "}
@@ -300,7 +300,7 @@ export default function PrivacyPolicyPage() {
 
               <h3 className="mt-6 font-medium">With Service Providers</h3>
               <p className="mt-2 text-muted-foreground">
-                We use third-party services to operate our platform:
+                We use third-party services to operate our website:
               </p>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>

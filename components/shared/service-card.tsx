@@ -46,8 +46,8 @@ export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
 
             {/* Trust Signals */}
             <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                <span>⭐ {service.rating} ({service.reviews})</span>
-                <span>🔒 Insured</span>
+                <span>Liability insurance</span>
+                <span>24h re-clean if not right</span>
             </div>
 
             {/* CTA */}
@@ -82,11 +82,6 @@ export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
                             "@type": "Offer",
                             "price": service.priceRange.split("-")[0].replace("$", ""),
                             "priceCurrency": "USD"
-                        },
-                        "aggregateRating": {
-                            "@type": "AggregateRating",
-                            "ratingValue": service.rating,
-                            "reviewCount": service.reviews
                         }
                     })
                 }}

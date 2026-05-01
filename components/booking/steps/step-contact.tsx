@@ -28,6 +28,10 @@ export function StepContact({
     onChange({ [name]: value || undefined });
   };
 
+  const handleSmsOptIn = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange({ sms_opt_in: e.target.checked });
+  };
+
   const isValid = data.name && data.email && data.phone && data.address;
 
   return (
@@ -104,6 +108,21 @@ export function StepContact({
       <p className="text-sm text-muted-foreground">
         We never share your information with anyone except your assigned cleaner.
       </p>
+
+      {/* SMS opt-in: kept isolated from any other consent (required for A2P 10DLC compliance) */}
+      <label htmlFor="sms_opt_in" className="flex items-start gap-3 rounded-lg border border-border bg-background p-4 cursor-pointer hover:border-foreground/30 transition-colors">
+        <input
+          id="sms_opt_in"
+          name="sms_opt_in"
+          type="checkbox"
+          checked={!!data.sms_opt_in}
+          onChange={handleSmsOptIn}
+          className="mt-1 h-4 w-4 shrink-0 rounded border-border text-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2"
+        />
+        <span className="text-sm text-foreground leading-relaxed">
+          I agree to receive SMS notifications about my booking from CLEENLY. Message and data rates may apply. Reply STOP to unsubscribe.
+        </span>
+      </label>
 
       {errors.form && (
         <p className="text-center text-sm text-error">{errors.form}</p>
