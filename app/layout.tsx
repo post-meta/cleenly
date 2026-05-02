@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "@/components/shared/auth-provider";
 import { StickyMobileCTA } from "@/components/shared/sticky-mobile-cta";
+import { ChatWidget } from "@/components/shared/chat-widget";
 import { SITE_URL } from "@/lib/constants";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
@@ -68,6 +69,7 @@ export default function RootLayout({
         )}
         <AuthProvider>{children}</AuthProvider>
         <StickyMobileCTA />
+        <ChatWidget />
       </body>
     </html>
   );
