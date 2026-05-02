@@ -10,9 +10,9 @@ const reasons = [
   },
   {
     icon: MessageSquare,
-    title: "A real person answers",
+    title: "Two ways to book",
     description:
-      "Call or text the number on this page. You'll reach us, not a chatbot.",
+      "Book online in 2 minutes — that's the easiest path. Or call us if you'd rather talk to someone.",
   },
   {
     icon: Calendar,
