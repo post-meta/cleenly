@@ -102,6 +102,16 @@ export default function AboutPage() {
             <span>About</span>
           </nav>
 
+          {/* Hero image */}
+          <div className="mb-12 overflow-hidden rounded-2xl bg-muted shadow-sm">
+            <img
+              src="/lifestyle-living-1.jpg"
+              alt="A calm clean living room with a single mug on the coffee table and soft daylight"
+              className="w-full h-auto object-cover aspect-[16/9]"
+              loading="eager"
+            />
+          </div>
+
           {/* Hero */}
           <h1>About CLEENLY</h1>
           <div className="mt-8 space-y-4 text-lg text-muted-foreground">
