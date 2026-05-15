@@ -6,7 +6,13 @@ export interface ServiceData {
     priceRange: string;
     priceMin?: number;
     priceMax?: number;
+    /** Display-form starting price for v2 ServiceCard (e.g., "$285"). Falls back to priceRange[0] if absent. */
+    priceFrom?: string;
     duration: string;
+    /** Eyebrow category label. Defaults to "Service" when absent. */
+    category?: string;
+    /** When true, ServiceCard uses the Deep Forest signal accent (PNW protocol tier). */
+    isClimateTier?: boolean;
     checklist?: string[];
     notIncluded?: string[];
     bestFor?: string[];
@@ -255,6 +261,67 @@ export const services: ServiceData[] = [
         notIncluded: ['Laundry off-site (on-site only)', 'Deep stain removal'],
         bestFor: ['Airbnb hosts', 'VRBO hosts', 'Vacation rentals'],
         faqs: [{ question: 'Do you take photos?', answer: 'Yes, we can provide before/after photos for your peace of mind.' }]
+    },
+    {
+        slug: "damp-season-reset",
+        name: "The Damp-Season Reset",
+        category: "PNW Protocol",
+        isClimateTier: true,
+        shortDescription: "October to March, Seattle homes fight water. We address what generic deep cleans miss.",
+        longDescription: "October to March, Seattle homes fight water. We address what generic deep cleans miss: mold colonies behind toilets, mildew at window seals, mud captured in entry-point fibers, and the slow rot that starts where caulking meets ceramic.",
+        priceRange: "$285-$420",
+        priceMin: 285,
+        priceMax: 420,
+        priceFrom: "$285",
+        duration: "3-4 hours",
+        checklist: [
+            "Mold and mildew protocol — bathrooms, window seals, basement edges",
+            "Mud-room and entry detail — floors, baseboards, fiber traps",
+            "Window-seal moisture audit",
+            "Caulking and grout inspection with proactive notes",
+            "Pet-safe, plant-based products throughout",
+        ],
+        notIncluded: [
+            "Mold remediation behind walls",
+            "Structural moisture repair",
+            "HVAC duct cleaning",
+        ],
+        bestFor: [
+            "Seattle homes between October and March",
+            "Households with chronic damp-season mildew",
+            "After heavy rainfall or roof leaks",
+        ],
+    },
+    {
+        slug: "pollen-purge",
+        name: "The Pollen Purge",
+        category: "PNW Protocol",
+        isClimateTier: true,
+        shortDescription: "March to June, the lush PNW spring brings a quiet invasion. HEPA-filtration vacuuming, surface dust protocol, return-air vent attention.",
+        longDescription: "March to June, the lush PNW spring brings a quiet invasion. We use HEPA-filtration vacuuming, a surface dust protocol, return-air vent attention, and fabric refresh to pull pollen out of the home rather than redistributing it.",
+        priceRange: "$245-$360",
+        priceMin: 245,
+        priceMax: 360,
+        priceFrom: "$245",
+        duration: "2.5-3.5 hours",
+        checklist: [
+            "HEPA-filtration vacuum — all soft surfaces",
+            "Surface dust protocol with microfiber",
+            "Return-air vent attention",
+            "Fabric refresh — curtains, throws, soft furnishings",
+            "Window-track and sill detail",
+            "Pet-safe, plant-based products throughout",
+        ],
+        notIncluded: [
+            "HVAC duct cleaning",
+            "Carpet shampooing",
+            "Air-purifier rental",
+        ],
+        bestFor: [
+            "Allergy-sensitive households",
+            "Pacific Northwest homes between March and June",
+            "Homes with heavy soft furnishings",
+        ],
     },
     {
         slug: "post-construction",

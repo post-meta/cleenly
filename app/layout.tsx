@@ -1,10 +1,19 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/shared/auth-provider";
 import { StickyMobileCTA } from "@/components/shared/sticky-mobile-cta";
 import { ChatWidget } from "@/components/shared/chat-widget";
 import { SITE_URL } from "@/lib/constants";
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+  display: "swap",
+});
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
@@ -32,17 +41,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={instrumentSerif.variable}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
         />
         <script
           src="https://analytics.ahrefs.com/analytics.js"

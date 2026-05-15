@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { DividerWarm } from "@/components/ui/divider-warm";
 
 const faqs = [
   {
@@ -72,41 +72,47 @@ export function FAQ() {
   const displayedFaqs = showAll ? faqs : faqs.slice(0, 5);
 
   return (
-    <section id="faq" className="bg-white py-24 md:py-32">
+    <section id="faq" className="bg-background py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-6">
         <div className="mb-16 text-center md:text-left">
-          <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
+          <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.01em] text-foreground">
+            Frequently Asked Questions
+          </h2>
         </div>
 
-        <div className="space-y-0 border-t border-gray-200">
+        <DividerWarm />
+        <div>
           {displayedFaqs.map((faq) => (
-            <div key={faq.id} className="border-b border-gray-200 py-6">
-              <button
-                onClick={() => toggle(faq.id)}
-                className="flex w-full items-center justify-between text-left group"
-                aria-expanded={openId === faq.id}
-              >
-                <h3 className="text-base font-semibold text-foreground group-hover:text-accent transition-colors">
-                  {faq.question}
-                </h3>
-                <ChevronDown
-                  className={cn(
-                    "h-5 w-5 text-gray-400 transition-transform duration-200 group-hover:text-accent",
-                    openId === faq.id ? "rotate-180" : ""
-                  )}
-                />
-              </button>
+            <div key={faq.id}>
+              <div className="py-6">
+                <button
+                  onClick={() => toggle(faq.id)}
+                  className="flex w-full items-start justify-between gap-6 text-left group"
+                  aria-expanded={openId === faq.id}
+                >
+                  <h3 className="text-[18px] font-medium text-foreground group-hover:text-accent transition-colors">
+                    {faq.question}
+                  </h3>
+                  <span
+                    aria-hidden="true"
+                    className="text-[20px] font-normal text-foreground-muted group-hover:text-accent transition-colors leading-none mt-1"
+                  >
+                    {openId === faq.id ? "−" : "+"}
+                  </span>
+                </button>
 
-              <div
-                className={cn(
-                  "overflow-hidden transition-all duration-300 ease-in-out",
-                  openId === faq.id ? "max-h-72 opacity-100 mt-4" : "max-h-0 opacity-0"
-                )}
-              >
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {faq.answer}
-                </p>
+                <div
+                  className={cn(
+                    "overflow-hidden transition-all duration-300 ease-in-out",
+                    openId === faq.id ? "max-h-72 opacity-100 mt-4" : "max-h-0 opacity-0"
+                  )}
+                >
+                  <p className="text-[16px] text-foreground-muted leading-[1.6]">
+                    {faq.answer}
+                  </p>
+                </div>
               </div>
+              <DividerWarm />
             </div>
           ))}
         </div>
@@ -116,10 +122,8 @@ export function FAQ() {
             <Button
               variant="secondary"
               onClick={() => setShowAll(true)}
-              className="gap-2"
             >
               Show More Questions
-              <ChevronDown className="h-4 w-4" />
             </Button>
           </div>
         )}

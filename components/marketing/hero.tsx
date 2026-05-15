@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { PHONE_DISPLAY, PHONE_SMS_HREF, PHONE_TEL_HREF } from "@/lib/constants";
+
+function DotSep() {
+  return <span aria-hidden="true" className="text-foreground-muted/50">·</span>;
+}
 
 export function Hero() {
   return (
@@ -18,12 +23,14 @@ export function Hero() {
           </div>
 
           {/* Right: text */}
-          <div className="space-y-6 text-left">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight">
-              House cleaning in Greater Seattle.
+          <div className="space-y-8 text-left">
+            <Eyebrow>Greater Seattle · House cleaning</Eyebrow>
+
+            <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground">
+              House cleaning that <em className="italic text-foreground-soft">cares for the home,</em> not just cleans it.
             </h1>
 
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="text-[19px] leading-[1.65] text-foreground-muted max-w-[520px]">
               See your price online. Pick a time. We bring our own supplies. No memberships, no hidden fees.
             </p>
 
@@ -37,10 +44,12 @@ export function Hero() {
               </Button>
             </div>
 
-            <div className="flex flex-wrap gap-x-5 gap-y-2 pt-2 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-2 text-[14px] text-foreground-muted">
               <span>Exact price upfront</span>
+              <DotSep />
               <span>Book in 2 minutes</span>
-              <a href={PHONE_TEL_HREF} className="font-medium text-foreground hover:underline">
+              <DotSep />
+              <a href={PHONE_TEL_HREF} className="font-medium text-foreground hover:text-accent transition-colors">
                 Or call {PHONE_DISPLAY}
               </a>
             </div>

@@ -1,91 +1,116 @@
 import Link from 'next/link';
 import type { ServiceData } from '@/lib/data/services';
+import { Eyebrow } from '@/components/ui/eyebrow';
+import { Button } from '@/components/ui/button';
 
 interface ServiceCardProps {
     service: ServiceData;
-    citySlug: string;
-    cityName: string;
+    citySlug?: string;
+    cityName?: string;
+}
+
+function CheckGlyph({ tone = "default" }: { tone?: "default" | "signal" }) {
+    const color = tone === "signal" ? "text-signal" : "text-foreground-soft";
+    return (
+        <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            aria-hidden="true"
+            className={`mt-1 flex-none ${color}`}
+        >
+            <path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    );
 }
 
 export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
-    return (
-        <article className="bg-background border border-border rounded-lg p-6 hover:border-foreground/20 hover:shadow-lg transition-all group flex flex-col h-full">
-            {/* Badge */}
-            <div className="mb-4">
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded-full">
-                    <span className="w-1.5 h-1.5 bg-green-600 rounded-full animate-pulse" />
-                    Available Today
-                </span>
-            </div>
+    const eyebrowTone = service.isClimateTier ? "signal" : "default";
+    const eyebrowText = service.category ?? "Service";
+    const checkTone = service.isClimateTier ? "signal" : "default";
 
-            {/* Title */}
-            <h3 className="text-xl font-bold mb-2 group-hover:text-foreground/80">
+    const priceDisplay = service.priceFrom ?? service.priceRange.split('-')[0];
+
+    const bookHref = citySlug
+        ? `/${citySlug}/${service.slug}`
+        : `/book?service=${service.slug}`;
+
+    const buttonLabel = citySlug && cityName
+        ? `Book ${service.name}`
+        : `Book ${service.name}`;
+
+    return (
+        <article className="bg-background border border-border rounded-lg p-6 md:p-8 hover:shadow-card transition-shadow duration-[var(--motion-base)] flex flex-col h-full">
+            <Eyebrow tone={eyebrowTone}>{eyebrowText}</Eyebrow>
+
+            <h3 className="mt-3 text-[22px] md:text-[24px] font-semibold tracking-[-0.005em] text-foreground">
                 {service.name}
             </h3>
 
-            {/* Description */}
-            <p className="text-muted-foreground text-sm mb-4 min-h-[60px] flex-grow">
+            <p className="mt-3 text-[15px] leading-[1.6] text-foreground-muted">
                 {service.shortDescription}
             </p>
 
-            {/* Price & Duration */}
-            <div className="flex items-center justify-between border-t border-border pt-4 mb-4">
-                <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wide">Price</p>
-                    <p className="text-lg font-semibold text-[#D97757]">
-                        {service.priceRange}
-                    </p>
-                </div>
-                <div className="text-right">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wide">Time</p>
-                    <p className="text-lg font-semibold">
-                        {service.duration}
-                    </p>
-                </div>
+            <div className="mt-6 flex items-baseline gap-2">
+                <span
+                    className="font-display font-normal text-[36px] md:text-[44px] leading-none text-foreground"
+                    style={{ fontFeatureSettings: '"tnum"' }}
+                >
+                    {priceDisplay}
+                </span>
+                <span className="text-[14px] text-foreground-muted">starting</span>
             </div>
 
-            {/* Trust Signals */}
-            <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                <span>Liability insurance</span>
-                <span>24h re-clean if not right</span>
-            </div>
+            <p className="mt-1 text-[14px] text-foreground-muted">
+                {service.duration} · supplies included
+            </p>
 
-            {/* CTA */}
-            <Link
-                href={`/${citySlug}/${service.slug}`}
-                className="block w-full text-center border border-border px-4 py-2 rounded-md hover:border-foreground hover:bg-foreground hover:text-background transition-colors font-medium"
-            >
-                Book {service.name}
-                <span className="sr-only"> in {cityName}</span>
-                <span className="ml-1">→</span>
-            </Link>
+            {service.checklist && service.checklist.length > 0 && (
+                <ul className="mt-6 space-y-2 flex-grow">
+                    {service.checklist.slice(0, 5).map((item) => (
+                        <li key={item} className="flex gap-3 text-[14px] text-foreground-soft leading-[1.5]">
+                            <CheckGlyph tone={checkTone} />
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
 
-            {/* Service Schema */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Service",
-                        "serviceType": service.name,
-                        "name": `${service.name} in ${cityName}`,
-                        "provider": {
-                            "@type": "LocalBusiness",
-                            "name": "CLEENLY"
-                        },
-                        "areaServed": {
-                            "@type": "City",
-                            "name": cityName,
-                            "sameAs": `https://en.wikipedia.org/wiki/${cityName},_Washington`
-                        },
-                        "offers": {
-                            "@type": "Offer",
-                            "price": service.priceRange.split("-")[0].replace("$", ""),
-                            "priceCurrency": "USD"
-                        }
-                    })
-                }}
-            />
+            <Button variant="secondary" className="mt-8 w-full" asChild>
+                <Link href={bookHref}>
+                    {buttonLabel}
+                    {cityName && <span className="sr-only"> in {cityName}</span>}
+                </Link>
+            </Button>
+
+            {citySlug && cityName && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Service",
+                            "serviceType": service.name,
+                            "name": `${service.name} in ${cityName}`,
+                            "provider": {
+                                "@type": "LocalBusiness",
+                                "name": "CLEENLY"
+                            },
+                            "areaServed": {
+                                "@type": "City",
+                                "name": cityName,
+                                "sameAs": `https://en.wikipedia.org/wiki/${cityName},_Washington`
+                            },
+                            "offers": {
+                                "@type": "Offer",
+                                "price": service.priceRange.split("-")[0].replace("$", ""),
+                                "priceCurrency": "USD"
+                            }
+                        })
+                    }}
+                />
+            )}
         </article>
     );
 }

@@ -2,13 +2,13 @@
 
 Cleaning booking platform, Greater Seattle. Family business (Eugene + wife).
 CLEENLY is a cleaning COMPANY, not a marketplace. Customers book "CLEENLY", not individual cleaners.
-Production: https://cleenly.app · Supabase project: `hspmtqlnrmomatmzklnh`
+Production: https://cleenly.app · Supabase project: `onhrawahtfiuqzovglkb` (CityHill org, Pro plan — old `hspmtqlnrmomatmzklnh` is dead, do not reuse)
 
 ---
 
 ## Stack
 
-- **Framework:** Next.js 15 (App Router, TypeScript strict)
+- **Framework:** Next.js 16 (App Router, TypeScript strict) · React 19
 - **Styling:** Tailwind CSS 4 + shadcn/ui
 - **Database:** Supabase (PostgreSQL + Auth + Storage)
 - **Auth:** NextAuth + Supabase Auth + Google OAuth
@@ -90,18 +90,22 @@ cleaner_applications (id, name, email, phone, experience, availability, transpor
 
 ## Services (lib/data/services.ts)
 
-| Slug | Name | Rate |
+| Slug | Name | Tier |
 |------|------|------|
-| regular-cleaning | Regular Cleaning | $50/hr |
-| deep-cleaning | Deep Cleaning | $60/hr |
-| move-out-cleaning | Move-Out Cleaning | $60/hr |
-| move-in-cleaning | Move-In Cleaning | $60/hr |
-| bi-weekly-service | Bi-Weekly Service | $50/hr |
-| home-organization | Home Organization | $50/hr |
-| pre-event-cleaning | Pre-Event Cleaning | $50/hr |
-| post-emergency | Post-Emergency | $60/hr |
-| airbnb-turnover | Airbnb Turnover | $50/hr |
-| post-construction | Post-Construction | $60/hr |
+| regular-cleaning | Regular Cleaning | Standard |
+| deep-cleaning | Deep Cleaning | Standard |
+| move-out-cleaning | Move-Out Cleaning | Standard |
+| move-in-cleaning | Move-In Cleaning | Standard |
+| bi-weekly-service | Bi-Weekly Service | Standard |
+| home-organization | Home Organization | Standard |
+| pre-event-cleaning | Pre-Event Cleaning | Standard |
+| restorative-cleaning | Restorative Cleaning | Standard |
+| airbnb-turnover | Airbnb Turnover | Standard |
+| post-construction | Post-Construction | Standard |
+| damp-season-reset | The Damp-Season Reset | PNW Protocol (signal accent) |
+| pollen-purge | The Pollen Purge | PNW Protocol (signal accent) |
+
+PNW Protocol services are climate-specific (`isClimateTier: true`) and render with the Deep Forest signal accent.
 
 ---
 
@@ -116,29 +120,51 @@ Price calculated client-side, **ALWAYS validated server-side** before charge.
 
 ---
 
-## Design System
+## Design System (v2 — premium domestic stewardship)
+
+Source of truth: `~/Downloads/cleenly-design-system-v2.md`. Tokens defined in `app/globals.css @theme` block.
 
 ```css
---background: #FFFFFF
---foreground: #0A0A0A
---muted: #F5F5F5
---muted-foreground: #6B7280
---border: #E5E5E5
---primary: #0A0A0A
---primary-foreground: #FFFFFF
-/* Accent (CTA only): #D97757 (terracotta orange) */
+/* Backgrounds */
+--color-background:        #FAFAF8;   /* off-white, primary body */
+--color-surface-warm:      #F5EFE6;   /* cream-warm section bg */
+--color-surface-sand:      #E8E0D2;   /* sand alt section bg */
+--color-surface-deep:      #2D2826;   /* charcoal — footer, dark CTAs */
+
+/* Foreground (warm, never pure black) */
+--color-foreground:        #2D2826;
+--color-foreground-soft:   #4A4540;
+--color-foreground-muted:  #8C8073;
+
+/* Accents */
+--color-accent:            #D97757;   /* terracotta — primary CTA, brand */
+--color-signal:            #2D4A3E;   /* Deep Forest — stewardship, PNW protocol */
+
+/* Warm neutrals (third tier) */
+--color-mushroom:          #C9BFB0;
+--color-sage:              #B8C2B0;
+--color-cedar:             #8C7A65;
+
+/* Greys are warm-shifted (gray-500 = #8C8073, gray-600 = #6B6358, etc.) */
 ```
 
+**Type stack:**
+- `--font-sans`: IBM Plex Sans (body, UI, H2/H3)
+- `--font-display`: Instrument Serif (H1, editorial pull-quotes, large stat numbers, climate-tier prices)
+- `--font-logo`: OPTIUniversSixtySeven (CLEENLY wordmark only)
+
 **Rules:**
-- Font: Inter (next/font)
-- Max content width: 800px centered
-- No gradients, no shadows on cards (use border)
-- Buttons: black fill + white text (primary), white fill + black border (outline)
-- Terracotta orange for main CTA only
-- No emojis in UI
-- No stock photography
-- Page rhythm: alternate white and #F5F5F5 sections
-- Reference page: "How It Works" = canonical design template
+- Every H1 is `font-display` with one short italic phrase (`<em className="italic text-foreground-soft">…</em>`)
+- No `text-black` / `text-white` (pure values) — use `text-foreground` / `text-background`
+- Radius: prefer `rounded-lg` (16px) for cards/photos, `rounded-md` (10px) for buttons/badges, `rounded-sm` (6px) for form fields
+- Shadows: `shadow-soft`/`shadow-card`/`shadow-lift` (charcoal-based, never pure black)
+- No emojis in UI · no stock photography · no people in marketing photography · result, not process
+- Footer is dark mode (charcoal bg, off-white text, mushroom links)
+- PNW Protocol services (Damp-Season Reset, Pollen Purge) carry the Deep Forest signal accent (Eyebrow + check glyphs)
+
+**v2 primitives** (`components/ui/`): `Eyebrow`, `EditorialPullQuote`, `Stat`, `DividerWarm`. Use these instead of ad-hoc inline patterns.
+
+**Forbidden:** electric blue, hospital white, pure black, saturated "eco" green, bright yellow-orange, multiple bright accents on one screen, italic body copy, bold-italic combinations.
 
 ---
 

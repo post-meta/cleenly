@@ -18,8 +18,8 @@ export function CityHero({ cityName, citySlug, description }: CityHeroProps) {
             <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10 w-full">
                 {/* Left Content - 6 columns */}
                 <div className="col-span-12 space-y-8 md:col-span-6 flex flex-col justify-center">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight tracking-tight">
-                        {variant.headline.replace("{city}", cityName)}
+                    <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground">
+                        House cleaning <em className="italic text-foreground-soft">{variant.italicPhrase}</em> in {cityName}.
                     </h1>
 
                     <p className="text-xl text-gray-600 leading-relaxed">
@@ -80,7 +80,8 @@ export function ServiceHero({ cityName, serviceName, introText, priceRange, city
 
                 {/* Right Content - text */}
                 <div className="col-span-12 space-y-8 md:col-span-6 flex flex-col justify-center order-2 md:order-2">
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight tracking-tight">
+                    {/* TODO: per-service italic phrases pending sign-off (Chunk E). Typography in font-display, no italic phrase yet. */}
+                    <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground">
                         {serviceName} in {cityName} — starting at {priceRange.split('-')[0]}
                     </h1>
 

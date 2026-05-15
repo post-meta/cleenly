@@ -17,17 +17,17 @@ const photos = [
 
 export function LifestyleStrip() {
     return (
-        <section className="py-24 md:py-32 bg-white">
+        <section className="py-24 md:py-32 bg-background">
             <Container>
                 <div className="text-center mb-14 md:mb-20">
-                    <h2 className="text-3xl md:text-5xl font-semibold tracking-tight">
-                        We clean. You live.
+                    <h2 className="font-display font-normal text-[44px] md:text-[56px] leading-[1.1] tracking-[-0.02em] text-foreground">
+                        We clean. You <em className="italic text-foreground-soft">live.</em>
                     </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
                     {photos.map((photo) => (
-                        <div key={photo.src} className="overflow-hidden rounded-2xl bg-muted shadow-sm">
+                        <div key={photo.src} className="overflow-hidden rounded-lg bg-surface-warm shadow-soft">
                             <img
                                 src={photo.src}
                                 alt={photo.alt}

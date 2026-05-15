@@ -1,31 +1,31 @@
-// Per-city hero copy variations. Use {city} as a token replaced with the city name.
-// Variants are soft and verifiable — no battle stance, no competitor callouts.
-// Add a city to a group below to change which variant it gets.
+// Per-city hero copy variations. Used by <CityHero>.
+// The headline template is unified: "House cleaning <em>{italicPhrase}</em> in {city}."
+// Italic phrases approved in design system v2 (§ 5.3.1).
 
 export interface CityHeroVariant {
-    headline: string;
+    italicPhrase: string;
     subtitle: string;
 }
 
 const VARIANTS: Record<string, CityHeroVariant> = {
     eastside: {
-        headline: "House cleaning in {city} — book online in minutes",
+        italicPhrase: "for homes built to last,",
         subtitle: "See your price online. Pick a time. We bring our own supplies and do the work ourselves.",
     },
     southSound: {
-        headline: "House cleaning in {city}",
+        italicPhrase: "for the way you actually live,",
         subtitle: "Real prices online — no calls required. We bring our own supplies and clean to a checklist you can see before you book.",
     },
     seattle: {
-        headline: "House cleaning in {city}",
+        italicPhrase: "that quietly takes care of it,",
         subtitle: "See your price online. Pick a time. We work in older homes, dense apartments, and everything in between.",
     },
     northSound: {
-        headline: "House cleaning in {city}",
+        italicPhrase: "that fits how you live in this climate,",
         subtitle: "See your price online. Pick a time. We bring our own supplies and clean to a checklist you can see.",
     },
     default: {
-        headline: "House cleaning in {city} — book online in minutes",
+        italicPhrase: "for the way you actually live,",
         subtitle: "See your price online. Pick a time. We bring our own supplies.",
     },
 };

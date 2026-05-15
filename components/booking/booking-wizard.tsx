@@ -11,7 +11,8 @@ import {
   StepContact,
   StepConfirmation,
 } from "./steps";
-import { calculatePrice } from "@/lib/pricing";
+import { calculatePrice, getEstimatedDuration } from "@/lib/pricing";
+import { StickyPriceFooter } from "./sticky-price-footer";
 import type {
   ServiceType,
   HomeCondition,
@@ -19,6 +20,12 @@ import type {
 } from "@/types";
 
 const TOTAL_STEPS = 6;
+
+const SERVICE_LABEL: Record<ServiceType, string> = {
+  regular: "Regular Cleaning",
+  deep: "Deep Cleaning",
+  move_out: "Move-Out Cleaning",
+};
 
 // Generate a simple booking reference
 function generateBookingRef(): string {
@@ -192,8 +199,29 @@ export function BookingWizard() {
   // Don't show step indicator on confirmation page
   const showStepIndicator = step < 6;
 
+  // Live price estimate for the sticky footer (visible Step 2+, hidden Step 1 and confirmation)
+  const canEstimate = Boolean(
+    formData.service_type && formData.bedrooms && formData.bathrooms
+  );
+  const showStickyFooter = step >= 2 && step <= 5 && canEstimate;
+  const liveEstimate = canEstimate
+    ? calculatePrice(
+        formData.service_type as ServiceType,
+        formData.bedrooms!,
+        formData.bathrooms!,
+        (formData.condition || "average") as HomeCondition,
+        formData.addons || []
+      )
+    : null;
+  const liveTotalMin = liveEstimate ? liveEstimate.min + liveEstimate.addonsTotal : 0;
+  const liveTotalMax = liveEstimate ? liveEstimate.max + liveEstimate.addonsTotal : 0;
+  const liveDuration = canEstimate
+    ? getEstimatedDuration(formData.service_type as ServiceType, formData.bedrooms!)
+    : "";
+  const isContactStep = step === 5;
+
   return (
-    <div>
+    <div className={showStickyFooter ? "pb-[80px] md:pb-[96px]" : undefined}>
       {showStepIndicator && (
         <StepIndicator currentStep={step} totalSteps={TOTAL_STEPS} />
       )}
@@ -252,6 +280,18 @@ export function BookingWizard() {
           bookingRef={bookingRef}
           estimatedMin={estimatedMin}
           estimatedMax={estimatedMax}
+        />
+      )}
+
+      {showStickyFooter && liveEstimate && (
+        <StickyPriceFooter
+          priceMin={liveTotalMin}
+          priceMax={liveTotalMax}
+          duration={liveDuration}
+          serviceName={SERVICE_LABEL[formData.service_type as ServiceType]}
+          onContinue={isContactStep ? handleSubmit : goNext}
+          isFinalStep={isContactStep}
+          isSubmitting={isSubmitting}
         />
       )}
     </div>

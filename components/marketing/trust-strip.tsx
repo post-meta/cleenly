@@ -1,26 +1,23 @@
-import { CheckCircle2 } from "lucide-react";
+import { EditorialPullQuote } from "@/components/ui/editorial-pull-quote";
+
+const statements = [
+  "Greater Seattle service area.",
+  "Liability insurance carried.",
+  "Not right? We come back within 24 hours.",
+];
 
 export function TrustStrip() {
-    return (
-        <section className="bg-gray-50 border-y border-gray-100 py-4">
-            <div className="mx-auto max-w-7xl px-6">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-12 text-sm font-medium text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary/70" />
-                        <span>Greater Seattle service area</span>
-                    </div>
-                    <div className="hidden md:block text-gray-300">•</div>
-                    <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary/70" />
-                        <span>Liability insurance</span>
-                    </div>
-                    <div className="hidden md:block text-gray-300">•</div>
-                    <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary/70" />
-                        <span>24-hour re-clean if not right</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section className="bg-surface-warm py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+          {statements.map((line) => (
+            <EditorialPullQuote key={line} className="text-[22px] md:text-[26px]">
+              {line}
+            </EditorialPullQuote>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
