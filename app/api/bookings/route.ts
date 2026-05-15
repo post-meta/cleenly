@@ -4,6 +4,14 @@ import { notifyNewBooking } from "@/lib/notifications";
 import type { BookingFormData } from "@/types";
 
 export async function POST(request: NextRequest) {
+  return NextResponse.json(
+    {
+      error: "Booking is temporarily paused",
+      message: "We're not accepting new bookings right now. Please check back soon.",
+    },
+    { status: 503 },
+  );
+
   try {
     const body = (await request.json()) as BookingFormData & {
       estimated_min: number;

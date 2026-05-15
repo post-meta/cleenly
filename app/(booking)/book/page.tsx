@@ -1,137 +1,51 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { BookingWizard } from "@/components/booking/booking-wizard";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
-import { JsonLd } from "@/components/shared/json-ld";
 
 export const metadata: Metadata = {
-  title: "Book House Cleaning Seattle | Get Price in 30 Seconds",
+  title: "Booking Paused | CLEENLY",
   description:
-    "Book house cleaning in Seattle. Enter your home details, see your price instantly, pick a time. No account required. Takes 2 minutes.",
-  keywords: [
-    "book cleaning seattle",
-    "schedule house cleaning seattle",
-    "cleaning appointment seattle",
-    "book house cleaning online seattle",
-    "schedule cleaning service near me",
-    "get cleaning quote seattle",
-  ],
-  openGraph: {
-    title: "Book House Cleaning Seattle | CLEENLY",
-    description:
-      "Book house cleaning in Seattle. See your price instantly, pick a time, confirm in minutes.",
-    type: "website",
-    url: "https://cleenly.app/book",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Book House Cleaning Seattle | CLEENLY",
-    description: "Book house cleaning in Seattle. See your price instantly.",
+    "CLEENLY is not accepting new bookings right now. We'll be back soon.",
+  robots: {
+    index: false,
+    follow: false,
   },
   alternates: {
     canonical: "https://cleenly.app/book",
   },
 };
 
-const bookingPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: "Book House Cleaning Seattle",
-  description:
-    "Book house cleaning in Seattle. See your price, pick a time, confirm in minutes.",
-  url: "https://cleenly.app/book",
-  mainEntity: {
-    "@type": "Service",
-    name: "House Cleaning Booking",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://cleenly.app/#LocalBusiness",
-    },
-    areaServed: {
-      "@type": "City",
-      name: "Seattle",
-    },
-    potentialAction: {
-      "@type": "ReserveAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: "https://cleenly.app/book",
-        actionPlatform: [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform",
-        ],
-      },
-      result: {
-        "@type": "Reservation",
-        name: "Cleaning Appointment",
-      },
-    },
-  },
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "https://cleenly.app",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Book",
-      item: "https://cleenly.app/book",
-    },
-  ],
-};
-
 export default function BookPage() {
   return (
-    <>
-      <JsonLd data={bookingPageSchema} />
-      <JsonLd data={breadcrumbSchema} />
-
-      <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1 py-8 md:py-12">
-          <Container size="narrow">
-            {/* Breadcrumb */}
-            <nav className="mb-6 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">
-                Home
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1 py-16 md:py-24">
+        <Container size="narrow">
+          <div className="text-center">
+            <h1 className="font-display text-4xl md:text-5xl text-foreground">
+              Booking is{" "}
+              <em className="italic text-foreground-soft">paused</em>
+            </h1>
+            <p className="mt-6 text-foreground-soft md:text-lg">
+              We&apos;re not taking new clients right now.
+            </p>
+            <p className="mt-3 text-foreground-soft md:text-lg">
+              We&apos;ll be back soon. Thank you for your patience.
+            </p>
+            <div className="mt-10">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center rounded-md bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:bg-foreground-soft"
+              >
+                Back to home
               </Link>
-              <span className="mx-2">/</span>
-              <span>Book</span>
-            </nav>
-
-            {/* Page Header */}
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold md:text-4xl">Book Your Cleaning</h1>
-              <p className="mt-2 text-muted-foreground">
-                See your price in 30 seconds. No account required.
-              </p>
             </div>
-
-            {/* Booking Wizard */}
-            <Suspense
-              fallback={
-                <div className="flex items-center justify-center py-12">
-                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-foreground border-t-transparent" />
-                </div>
-              }
-            >
-              <BookingWizard />
-            </Suspense>
-          </Container>
-        </main>
-        <Footer />
-      </div>
-    </>
+          </div>
+        </Container>
+      </main>
+      <Footer />
+    </div>
   );
 }
