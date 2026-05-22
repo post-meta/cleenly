@@ -59,15 +59,47 @@ export const addonPrices: Record<Addon, number> = {
   cabinets: 3000,
   laundry: 2500,
   windows: 500,
+  pollen_purge: 9500,
+  damp_season_reset: 8500,
 };
 
 // Addon display info
-export const addonInfo: Record<Addon, { label: string; price: string }> = {
-  fridge: { label: "Inside refrigerator", price: "+$25" },
-  oven: { label: "Inside oven", price: "+$20" },
-  cabinets: { label: "Inside cabinets", price: "+$30" },
-  laundry: { label: "Laundry (wash, dry, fold)", price: "+$25/load" },
-  windows: { label: "Interior windows", price: "+$5/window" },
+export const addonInfo: Record<Addon, { label: string; price: string; description?: string }> = {
+  fridge: {
+    label: "Inside refrigerator",
+    price: "+$25",
+    description: "Deep scrub of shelves, drawers, and interior door gaskets.",
+  },
+  oven: {
+    label: "Inside oven",
+    price: "+$20",
+    description: "Eco-friendly heat treatment and degreasing of grates and interior walls.",
+  },
+  cabinets: {
+    label: "Inside cabinets",
+    price: "+$30",
+    description: "Emptying, dusting, wiping, and organizing interior shelving.",
+  },
+  laundry: {
+    label: "Laundry (wash, dry, fold)",
+    price: "+$25/load",
+    description: "Washing, tumble drying, and neat folding of one load of linens/clothes.",
+  },
+  windows: {
+    label: "Interior windows",
+    price: "+$5/window",
+    description: "Glass detailing, pane wiping, and track dusting of interior windows.",
+  },
+  pollen_purge: {
+    label: "The Pollen Purge Protocol",
+    price: "+$95",
+    description: "HEPA return-air vent vacuuming, window sill/track detailing, and deep anti-allergen fabric/upholstery dusting.",
+  },
+  damp_season_reset: {
+    label: "Damp-Season Mold Reset",
+    price: "+$85",
+    description: "Targeted eco-mold prevention spray, deep bathroom tile/grout steam scrub, and sill sanitation.",
+  },
 };
 
 // Calculate price range

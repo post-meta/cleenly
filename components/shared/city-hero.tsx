@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { getCityHeroVariant } from "@/lib/data/city-hero-variants";
 
@@ -38,9 +39,12 @@ export function CityHero({ cityName, citySlug, description }: CityHeroProps) {
 
                 {/* Right Content - Hero Image */}
                 <div className="col-span-12 md:col-span-6 flex items-center justify-center">
-                    <img
+                    <Image
                         src="/hero-image.jpg"
                         alt={`Calm clean kitchen in a ${cityName} home with soft morning light`}
+                        width={800}
+                        height={600}
+                        priority
                         className="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-lg"
                     />
                 </div>
@@ -71,9 +75,12 @@ export function ServiceHero({ cityName, serviceName, introText, priceRange, city
             <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10 w-full">
                 {/* Left Content - hero image */}
                 <div className="col-span-12 md:col-span-6 flex items-center justify-center order-1 md:order-1">
-                    <img
+                    <Image
                         src={imageSrc}
                         alt={`${serviceName} in ${cityName}`}
+                        width={800}
+                        height={600}
+                        priority
                         className="w-full h-auto rounded-2xl object-cover aspect-[4/3] shadow-sm"
                     />
                 </div>

@@ -1,8 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { formatPriceRange } from "@/lib/utils";
-
 interface StickyPriceFooterProps {
   priceMin: number;
   priceMax: number;
@@ -25,37 +22,48 @@ export function StickyPriceFooter({
   isSubmitting = false,
 }: StickyPriceFooterProps) {
   const label = continueLabel ?? (isFinalStep ? "Confirm booking" : "Continue");
+  const disabled = isSubmitting;
 
   return (
     <div
       className="fixed bottom-0 inset-x-0 z-50 bg-background border-t border-border"
-      style={{ boxShadow: "var(--shadow-lift)" }}
+      style={{
+        boxShadow: "0 -8px 24px rgba(45, 40, 38, 0.06)",
+        padding: "14px 20px 22px",
+      }}
     >
-      <div className="max-w-3xl mx-auto px-6 h-[80px] md:h-[96px] flex items-center justify-between gap-4">
-        <div className="flex flex-col min-w-0">
-          <span className="text-[13px] md:text-[14px] font-medium text-foreground-muted truncate">
+      <div className="max-w-3xl mx-auto flex items-center justify-between gap-4">
+        <div className="flex flex-col min-w-0 flex-1">
+          <span className="text-[12px] font-medium text-foreground-muted truncate">
             {serviceName}
           </span>
           <span
-            className="font-display font-normal text-[22px] md:text-[28px] leading-none text-foreground"
-            style={{ fontFeatureSettings: '"tnum"' }}
+            className="tnum font-display font-normal text-[24px] leading-none text-foreground mt-0.5"
           >
-            {formatPriceRange(priceMin, priceMax)}
+            ${priceMin} – ${priceMax}
           </span>
-          <span className="text-[12px] md:text-[13px] text-foreground-muted">
+          <span className="text-[11px] text-foreground-muted mt-0.5">
             {duration}
           </span>
         </div>
 
-        <Button
+        <button
           type="button"
-          size="lg"
           onClick={onContinue}
-          disabled={isSubmitting}
-          className="flex-none"
+          disabled={disabled}
+          className="flex-none text-[15px] font-medium font-sans rounded-md transition-all ease-out cursor-pointer"
+          style={{
+            background: disabled ? "var(--color-gray-300)" : "var(--color-accent)",
+            color: "#FAFAF8",
+            height: "52px",
+            padding: "0 24px",
+            border: "none",
+            transitionDuration: "220ms",
+            transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
         >
           {isSubmitting ? "Submitting…" : label}
-        </Button>
+        </button>
       </div>
     </div>
   );

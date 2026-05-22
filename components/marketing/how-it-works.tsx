@@ -25,8 +25,8 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="how-it-works py-20 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-[28px] md:text-[32px] font-semibold text-center mb-16 tracking-[-0.01em] text-foreground">
-          How it works
+        <h2 className="font-display font-normal text-[36px] md:text-[44px] text-center mb-16 tracking-[-0.015em] text-foreground">
+          How it <em className="italic text-foreground-soft font-display">works</em>
         </h2>
 
         <div className="grid md:grid-cols-4 gap-12 md:gap-8">

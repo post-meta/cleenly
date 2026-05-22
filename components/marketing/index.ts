@@ -11,3 +11,5 @@ export { FAQ } from "./faq";
 export { FAQAccordion, FAQCategory } from "./faq-accordion";
 export { ServiceAreas } from "./service-areas";
 export { CTA } from "./cta";
+export { PullQuote } from "./pull-quote";
+

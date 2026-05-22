@@ -72,7 +72,9 @@ function PricingTable({ data }: PricingTableProps) {
 export function PricingTables() {
   return (
     <section className="mt-16">
-      <h2>Pricing by Service Type</h2>
+      <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-4">
+        Pricing by <em className="italic text-foreground-soft font-display">Service Type</em>
+      </h2>
       <p className="mt-4 text-muted-foreground">
         All prices are for the Seattle metro area including Bellevue, Kirkland,
         Redmond, and surrounding cities. Final price depends on your specific

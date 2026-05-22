@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Logo } from './logo';
 import { footerConfig, getFooterCities } from '@/lib/data/footer-config';
 import { getCityBySlug } from '@/lib/data/cities';
 
@@ -18,8 +19,8 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {/* Logo & Tagline */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="text-logo text-background hover:text-accent transition-colors">
-              CLEENLY
+            <Link href="/" className="text-background hover:text-accent transition-colors">
+              <Logo eeClassName="text-mushroom" />
             </Link>
             <p className="mt-3 text-sm text-mushroom font-medium tracking-wider">
               We clean. You <em className="italic">live.</em>

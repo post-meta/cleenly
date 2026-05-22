@@ -46,8 +46,8 @@ export default function ServicesPage() {
             <section className="relative flex min-h-[60vh] items-center overflow-hidden animate-fadeInUp py-20">
                 <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 relative z-10 w-full">
                     <div className="col-span-12 space-y-8 md:col-span-10 lg:col-span-8">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight tracking-tight">
-                            Our Cleaning Services
+                        <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground">
+                            Our Cleaning <em className="italic text-foreground-soft font-display">Services</em>
                         </h1>
 
                         <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
@@ -133,7 +133,9 @@ export default function ServicesPage() {
             {/* Trust Section */}
             <section className="py-24 bg-gray-50 border-y border-gray-100">
                 <div className="mx-auto max-w-7xl px-6 text-center">
-                    <h2 className="text-2xl font-semibold mb-6">Local team, simple guarantees</h2>
+                    <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
+                        Local team, <em className="italic text-foreground-soft font-display font-normal">simple guarantees</em>
+                    </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto mb-10">
                         We work throughout Greater Seattle — Seattle, Eastside, and South Sound. Our cleaners carry liability insurance. If something isn&apos;t right, we come back within 24 hours.
                     </p>

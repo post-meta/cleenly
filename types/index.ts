@@ -17,7 +17,7 @@ export type SqftRange =
 
 export type HomeCondition = "clean" | "average" | "needs_work";
 
-export type Addon = "fridge" | "oven" | "cabinets" | "laundry" | "windows";
+export type Addon = "fridge" | "oven" | "cabinets" | "laundry" | "windows" | "pollen_purge" | "damp_season_reset";
 
 export type BookingStatus =
   | "new"

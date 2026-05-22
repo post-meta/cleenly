@@ -46,8 +46,8 @@ export default function LocationsPage() {
             {/* Hero */}
             <section className="py-20 md:py-32">
                 <div className="mx-auto max-w-7xl px-6">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground">
-                        House Cleaning Service Areas
+                    <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground">
+                        House Cleaning <em className="italic text-foreground-soft font-display">Service Areas</em>
                     </h1>
                     <p className="mt-6 text-xl text-gray-600 max-w-2xl leading-relaxed">
                         We serve {totalCities} cities across Greater Seattle.
@@ -91,7 +91,9 @@ export default function LocationsPage() {
             {/* Services Section */}
             <section className="py-24 bg-gray-50 border-y border-gray-100">
                 <div className="mx-auto max-w-7xl px-6">
-                    <h2 className="text-2xl font-semibold mb-8 text-foreground">Services Available in All Locations</h2>
+                    <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-8">
+                        Services Available in <em className="italic text-foreground-soft font-display font-normal">All Locations</em>
+                    </h2>
                     <div className="grid md:grid-cols-3 gap-8">
                         {services.map((service) => (
                             <div
@@ -120,7 +122,9 @@ export default function LocationsPage() {
             {/* CTA */}
             <section className="py-24">
                 <div className="mx-auto max-w-7xl px-6 text-center">
-                    <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-foreground">Don't see your city?</h2>
+                    <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-4">
+                        Don't see <em className="italic text-foreground-soft font-display font-normal">your city?</em>
+                    </h2>
                     <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
                         We're expanding. Enter your ZIP code to check availability or join our waitlist.
                     </p>

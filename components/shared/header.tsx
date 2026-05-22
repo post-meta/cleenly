@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { NAV_LINKS, SITE_NAME, PHONE_DISPLAY, PHONE_TEL_HREF } from "@/lib/constants";
 import { Menu, X, User, LogOut, LayoutDashboard, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Logo } from "./logo";
 import { useSession, signOut } from "next-auth/react";
 
 export function Header() {
@@ -18,8 +19,8 @@ export function Header() {
       <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           {/* Logo */}
-          <Link href="/" className="text-xl text-logo text-foreground">
-            {SITE_NAME}
+          <Link href="/" className="text-xl text-foreground">
+            <Logo />
           </Link>
 
           {/* Desktop Navigation */}
@@ -100,10 +101,10 @@ export function Header() {
           <div className="flex items-center justify-between mb-8">
             <Link
               href="/"
-              className="text-xl text-logo text-foreground"
+              className="text-xl text-foreground"
               onClick={() => setIsMenuOpen(false)}
             >
-              {SITE_NAME}
+              <Logo />
             </Link>
             <button
               className="flex h-10 w-10 items-center justify-center rounded-sm text-foreground"

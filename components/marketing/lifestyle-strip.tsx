@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 
 const photos = [
@@ -28,13 +29,12 @@ export function LifestyleStrip() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
                     {photos.map((photo) => (
                         <div key={photo.src} className="overflow-hidden rounded-lg bg-surface-warm shadow-soft">
-                            <img
+                            <Image
                                 src={photo.src}
                                 alt={photo.alt}
                                 className="w-full h-auto object-cover aspect-[4/5] transition-transform duration-500 ease-out hover:scale-[1.02]"
                                 width={800}
                                 height={1000}
-                                loading="lazy"
                             />
                         </div>
                     ))}

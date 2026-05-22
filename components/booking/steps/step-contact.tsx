@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import type { BookingFormData } from "@/types";
 
 interface StepContactProps {
@@ -11,6 +10,58 @@ interface StepContactProps {
   onBack: () => void;
   isSubmitting: boolean;
   errors?: Record<string, string>;
+}
+
+interface FieldProps {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder: string;
+  value?: string;
+  onChange: (data: Partial<BookingFormData>) => void;
+  optional?: boolean;
+  error?: string;
+  autoComplete?: string;
+}
+
+function Field({
+  label,
+  name,
+  type = "text",
+  placeholder,
+  value = "",
+  onChange,
+  optional,
+  error,
+  autoComplete,
+}: FieldProps) {
+  return (
+    <div>
+      <label className="block text-[13px] font-medium mb-1.5 text-foreground">
+        {label}{" "}
+        {optional && (
+          <span className="text-foreground-muted font-normal">(optional)</span>
+        )}
+      </label>
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange({ [name]: e.target.value || undefined })}
+        autoComplete={autoComplete}
+        className={cn(
+          "w-full h-[48px] px-3.5 border rounded-md font-sans text-[15px] text-foreground bg-background placeholder:text-foreground-muted focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all",
+          error ? "border-error focus:ring-error focus:border-error" : "border-border hover:border-border-hover"
+        )}
+        style={{
+          transitionDuration: "220ms",
+          transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
+      />
+      {error && <p className="mt-1 text-[11px] text-error">{error}</p>}
+    </div>
+  );
 }
 
 export function StepContact({
@@ -35,133 +86,156 @@ export function StepContact({
   const isValid = data.name && data.email && data.phone && data.address;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">How can we reach you?</h2>
-        <p className="mt-2 text-muted-foreground">
-          We&apos;ll send confirmation and updates to this contact info
-        </p>
-      </div>
+    <div className="px-5 pb-5">
+      <h2 className="font-display font-normal text-[30px] leading-[1.15] mt-4 text-foreground">
+        How can we <em className="font-display italic font-normal text-foreground-soft">reach you?</em>
+      </h2>
+      <p className="text-[14px] text-foreground-muted mt-2">
+        We&apos;ll send confirmation to this contact info.
+      </p>
 
-      <div className="space-y-4">
-        <Input
-          name="name"
+      <div className="flex flex-col gap-3.5 mt-[22px]">
+        <Field
           label="Your name"
+          name="name"
           placeholder="First and last name"
-          value={data.name || ""}
-          onChange={handleChange}
+          value={data.name}
+          onChange={onChange}
           error={errors.name}
           autoComplete="name"
         />
 
-        <Input
+        <Field
+          label="Email"
           name="email"
           type="email"
-          label="Email"
           placeholder="you@example.com"
-          value={data.email || ""}
-          onChange={handleChange}
+          value={data.email}
+          onChange={onChange}
           error={errors.email}
           autoComplete="email"
         />
 
-        <Input
+        <Field
+          label="Phone"
           name="phone"
           type="tel"
-          label="Phone"
           placeholder="(206) 555-0123"
-          value={data.phone || ""}
-          onChange={handleChange}
+          value={data.phone}
+          onChange={onChange}
           error={errors.phone}
           autoComplete="tel"
         />
 
-        <Input
-          name="address"
+        <Field
           label="Service address"
+          name="address"
           placeholder="123 Main St, Seattle, WA 98101"
-          value={data.address || ""}
-          onChange={handleChange}
+          value={data.address}
+          onChange={onChange}
           error={errors.address}
           autoComplete="street-address"
         />
 
         <div>
-          <label
-            htmlFor="access_instructions"
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
-            Access instructions (optional)
+          <label className="block text-[13px] font-medium mb-1.5 text-foreground">
+            Access instructions <span className="text-foreground-muted font-normal">(optional)</span>
           </label>
           <textarea
-            id="access_instructions"
             name="access_instructions"
             rows={3}
-            placeholder="How will the cleaner get in? Lockbox code, doorman, you'll be home..."
+            placeholder="How will the cleaner get in? Lockbox code, doorman, you'll be home…"
             value={data.access_instructions || ""}
             onChange={handleChange}
-            className="flex w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground transition-colors placeholder:text-muted-foreground focus:border-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            className="w-full p-[12px_14px] border border-border rounded-md font-sans text-[14px] text-foreground bg-background placeholder:text-foreground-muted resize-y focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all hover:border-border-hover"
+            style={{
+              transitionDuration: "220ms",
+              transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+            }}
           />
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground">
+      <p className="mt-3.5 text-[12px] text-foreground-muted">
         We never share your information with anyone except your assigned cleaner.
       </p>
 
-      {/* SMS opt-in: kept isolated from any other consent (required for A2P 10DLC compliance) */}
-      <label htmlFor="sms_opt_in" className="flex items-start gap-3 rounded-lg border border-border bg-background p-4 cursor-pointer hover:border-foreground/30 transition-colors">
+      {/* SMS opt-in checkbox */}
+      <label className="mt-3.5 flex gap-2.5 p-[12px_14px] border border-border rounded-md items-start cursor-pointer hover:border-border-hover transition-colors">
         <input
           id="sms_opt_in"
           name="sms_opt_in"
           type="checkbox"
           checked={!!data.sms_opt_in}
           onChange={handleSmsOptIn}
-          className="mt-1 h-4 w-4 shrink-0 rounded border-border text-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          className="mt-0.5"
+          style={{
+            width: "16px",
+            height: "16px",
+            accentColor: "#2D2826",
+          }}
         />
-        <span className="text-sm text-foreground leading-relaxed">
+        <span className="text-[12px] leading-[1.5] text-foreground font-sans">
           I agree to receive SMS notifications about my booking from CLEENLY. Message and data rates may apply. Reply STOP to unsubscribe.
         </span>
       </label>
 
       {errors.form && (
-        <p className="text-center text-sm text-error">{errors.form}</p>
+        <p className="mt-2 text-center text-sm text-error">{errors.form}</p>
       )}
 
-      <div className="flex gap-3">
-        <Button type="button" variant="secondary" onClick={onBack}>
+      <div className="flex gap-3 mt-6">
+        <button
+          type="button"
+          onClick={onBack}
+          className="border border-border bg-background hover:bg-gray-50 text-foreground h-[52px] px-6 font-sans text-[15px] font-medium rounded-md cursor-pointer transition-all flex items-center justify-center"
+          style={{
+            transitionDuration: "220ms",
+            transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
           Back
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={onSubmit}
           disabled={!isValid || isSubmitting}
-          className="flex-1"
+          className="flex-1 bg-accent text-[#FAFAF8] hover:bg-accent-hover h-[52px] px-6 font-sans text-[15px] font-medium rounded-md transition-all cursor-pointer flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{
+            transitionDuration: "220ms",
+            transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
         >
           {isSubmitting ? "Submitting..." : "Confirm Booking"}
-        </Button>
+        </button>
       </div>
 
       {/* Trust indicators */}
-      <div className="flex flex-wrap justify-center gap-4 text-xs text-muted-foreground">
-        <span className="flex items-center gap-1">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          No payment required now
-        </span>
-        <span className="flex items-center gap-1">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          Final price confirmed before charging
-        </span>
-        <span className="flex items-center gap-1">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          Cancel free up to 24 hours before
-        </span>
+      <div className="mt-[18px] flex flex-col gap-2">
+        {[
+          "No payment required now",
+          "Final price confirmed before charging",
+          "Cancel free up to 24 hrs before",
+        ].map((t) => (
+          <div
+            key={t}
+            className="flex gap-2 items-center text-[12px] text-foreground-muted"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2D4A3E"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+            {t}
+          </div>
+        ))}
       </div>
     </div>
   );

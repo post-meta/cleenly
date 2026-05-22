@@ -75,8 +75,8 @@ export function FAQ() {
     <section id="faq" className="bg-background py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-6">
         <div className="mb-16 text-center md:text-left">
-          <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.01em] text-foreground">
-            Frequently Asked Questions
+          <h2 className="font-display font-normal text-[36px] md:text-[44px] tracking-[-0.015em] text-foreground">
+            Frequently Asked <em className="italic text-foreground-soft font-display">Questions</em>
           </h2>
         </div>
 

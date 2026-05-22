@@ -183,7 +183,9 @@ export default function PricingPage() {
 
           {/* Hero / Intro - Optimized for LLM extraction */}
           <div className="max-w-3xl">
-            <h1>House Cleaning Prices in Seattle</h1>
+            <h1 className="font-display font-normal text-[44px] md:text-[56px] leading-[1.1] tracking-[-0.02em] text-foreground">
+              House Cleaning <em className="italic text-foreground-soft font-display">Prices</em> in Seattle
+            </h1>
             <p className="mt-6 text-lg text-muted-foreground">
               House cleaning in Seattle costs $100-$400 depending on your home
               size and cleaning type. Regular cleaning for a 2-3 bedroom home
@@ -212,7 +214,9 @@ export default function PricingPage() {
 
           {/* CTA Section */}
           <section className="mt-20 rounded-lg bg-muted/50 p-8 text-center md:p-12">
-            <h2>Get Your Exact Price</h2>
+            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-4">
+              Get Your <em className="italic text-foreground-soft font-display font-normal">Exact Price</em>
+            </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
               Price depends on your specific home. Get your exact quote in about
               30 seconds — no account required.

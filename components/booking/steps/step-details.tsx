@@ -1,48 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Select, type SelectOption } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import type {
   BedroomCount,
   BathroomCount,
-  SqftRange,
   HomeCondition,
   BookingFormData,
 } from "@/types";
-
-const bedroomOptions: SelectOption[] = [
-  { value: "studio", label: "Studio" },
-  { value: "1", label: "1 Bedroom" },
-  { value: "2", label: "2 Bedrooms" },
-  { value: "3", label: "3 Bedrooms" },
-  { value: "4", label: "4 Bedrooms" },
-  { value: "5+", label: "5+ Bedrooms" },
-];
-
-const bathroomOptions: SelectOption[] = [
-  { value: "1", label: "1 Bathroom" },
-  { value: "1.5", label: "1.5 Bathrooms" },
-  { value: "2", label: "2 Bathrooms" },
-  { value: "2.5", label: "2.5 Bathrooms" },
-  { value: "3", label: "3 Bathrooms" },
-  { value: "3.5+", label: "3.5+ Bathrooms" },
-];
-
-const sqftOptions: SelectOption[] = [
-  { value: "under_800", label: "Under 800 sq ft" },
-  { value: "800_1200", label: "800 - 1,200 sq ft" },
-  { value: "1200_1800", label: "1,200 - 1,800 sq ft" },
-  { value: "1800_2500", label: "1,800 - 2,500 sq ft" },
-  { value: "2500_3500", label: "2,500 - 3,500 sq ft" },
-  { value: "over_3500", label: "Over 3,500 sq ft" },
-  { value: "not_sure", label: "Not sure" },
-];
-
-const conditionOptions: SelectOption[] = [
-  { value: "clean", label: "Clean (maintained regularly)" },
-  { value: "average", label: "Average (some areas need attention)" },
-  { value: "needs_work", label: "Needs work (hasn't been cleaned in a while)" },
-];
 
 interface StepDetailsProps {
   data: Partial<BookingFormData>;
@@ -52,6 +16,64 @@ interface StepDetailsProps {
   errors?: Record<string, string>;
 }
 
+const bedrooms = ["Studio", "1", "2", "3", "4", "5+"];
+const bathrooms = ["1", "1.5", "2", "2.5", "3", "3.5+"];
+const conditions = [
+  { id: "clean", label: "Clean", sub: "maintained regularly" },
+  { id: "average", label: "Average", sub: "some areas need attention" },
+  { id: "needs_work", label: "Needs work", sub: "hasn't been cleaned in a while" },
+];
+
+function FieldSelect({
+  label,
+  value,
+  options,
+  onChange,
+  formatOption,
+  error,
+}: {
+  label: string;
+  value?: string;
+  options: string[];
+  onChange: (v: string) => void;
+  formatOption?: (o: string) => string;
+  error?: string;
+}) {
+  return (
+    <div>
+      <label className="block text-[13px] font-medium mb-1.5 text-foreground">{label}</label>
+      <div className="relative">
+        <select
+          value={value || ""}
+          onChange={(e) => onChange(e.target.value)}
+          className="appearance-none w-full h-[48px] pl-3.5 pr-9 border border-border rounded-md font-sans text-[15px] text-foreground bg-background focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent cursor-pointer"
+        >
+          <option value="" disabled>Select</option>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {formatOption ? formatOption(o) : o}
+            </option>
+          ))}
+        </select>
+        <svg
+          className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+          width="14"
+          height="14"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="#8C8073"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 8l4 4 4-4" />
+        </svg>
+      </div>
+      {error && <p className="mt-1 text-[11px] text-error">{error}</p>}
+    </div>
+  );
+}
+
 export function StepDetails({
   data,
   onChange,
@@ -59,95 +81,106 @@ export function StepDetails({
   onBack,
   errors = {},
 }: StepDetailsProps) {
-  const handleChange = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    onChange({ [name]: value || undefined });
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange({ special_requests: e.target.value || undefined });
   };
 
   const isValid = data.bedrooms && data.bathrooms;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">Tell us about your place</h2>
-        <p className="mt-2 text-muted-foreground">
-          This helps us give you an accurate price estimate
-        </p>
+    <div className="px-5 pb-5">
+      <h2 className="font-display font-normal text-[30px] leading-[1.15] mt-4 text-foreground">
+        Tell us about <em className="font-display italic font-normal text-foreground-soft">your place.</em>
+      </h2>
+      <p className="text-[14px] text-foreground-muted mt-2">
+        So we can give you an accurate price estimate.
+      </p>
+
+      <div className="grid grid-cols-2 gap-3 mt-[22px]">
+        <FieldSelect
+          label="Bedrooms"
+          value={data.bedrooms}
+          options={bedrooms}
+          onChange={(v) => onChange({ bedrooms: v as BedroomCount })}
+          formatOption={(o) => (o === "Studio" ? "Studio" : `${o} bed`)}
+          error={errors.bedrooms}
+        />
+        <FieldSelect
+          label="Bathrooms"
+          value={data.bathrooms}
+          options={bathrooms}
+          onChange={(v) => onChange({ bathrooms: v as BathroomCount })}
+          formatOption={(o) => `${o} bath`}
+          error={errors.bathrooms}
+        />
       </div>
 
-      <div className="space-y-4">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Select
-            name="bedrooms"
-            label="Bedrooms"
-            options={bedroomOptions}
-            placeholder="Select bedrooms"
-            value={data.bedrooms || ""}
-            onChange={handleChange}
-            error={errors.bedrooms}
-          />
-          <Select
-            name="bathrooms"
-            label="Bathrooms"
-            options={bathroomOptions}
-            placeholder="Select bathrooms"
-            value={data.bathrooms || ""}
-            onChange={handleChange}
-            error={errors.bathrooms}
-          />
-        </div>
-
-        <Select
-          name="sqft_range"
-          label="Approximate size (optional)"
-          options={sqftOptions}
-          placeholder="Select size range"
-          value={data.sqft_range || ""}
-          onChange={handleChange}
-        />
-
-        <Select
-          name="condition"
-          label="Home condition"
-          options={conditionOptions}
-          placeholder="Select condition"
-          value={data.condition || "average"}
-          onChange={handleChange}
-        />
-
-        <div>
-          <label
-            htmlFor="special_requests"
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
-            Special requests (optional)
-          </label>
-          <textarea
-            id="special_requests"
-            name="special_requests"
-            rows={3}
-            placeholder="Pets, specific areas to focus on, access instructions..."
-            value={data.special_requests || ""}
-            onChange={handleChange}
-            className="flex w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-foreground transition-colors placeholder:text-muted-foreground focus:border-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-          />
+      <div className="mt-[18px]">
+        <label className="block text-[13px] font-medium mb-2 text-foreground">Home condition</label>
+        <div className="flex flex-col gap-2">
+          {conditions.map((c) => {
+            const selected = data.condition === c.id;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => onChange({ condition: c.id as HomeCondition })}
+                className={cn(
+                  "text-left p-[12px_14px] rounded-md border transition-all cursor-pointer",
+                  selected
+                    ? "border-2 border-foreground bg-surface-warm"
+                    : "border-border bg-background hover:border-border-hover"
+                )}
+                style={{
+                  transitionDuration: "220ms",
+                  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+                }}
+              >
+                <div className="text-[14px] font-semibold text-foreground">{c.label}</div>
+                <div className="text-[12px] text-foreground-muted mt-0.5">{c.sub}</div>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      <div className="flex gap-3">
-        <Button type="button" variant="secondary" onClick={onBack}>
+      <div className="mt-[18px]">
+        <label className="block text-[13px] font-medium mb-1.5 text-foreground">
+          Special requests <span className="text-foreground-muted font-normal">(optional)</span>
+        </label>
+        <textarea
+          rows={3}
+          placeholder="Pets, specific areas to focus on, access instructions…"
+          value={data.special_requests || ""}
+          onChange={handleTextareaChange}
+          className="w-full p-[12px_14px] border border-border rounded-md font-sans text-[14px] text-foreground bg-background resize-y focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
+        />
+      </div>
+
+      <div className="flex gap-3 mt-6">
+        <button
+          type="button"
+          onClick={onBack}
+          className="border border-border bg-background hover:bg-gray-50 text-foreground h-[52px] px-6 font-sans text-[15px] font-medium rounded-md cursor-pointer transition-all flex items-center justify-center"
+          style={{
+            transitionDuration: "220ms",
+            transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
           Back
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={onNext}
           disabled={!isValid}
-          className="flex-1"
+          className="flex-1 bg-accent text-[#FAFAF8] hover:bg-accent-hover h-[52px] px-6 font-sans text-[15px] font-medium rounded-md transition-all cursor-pointer flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{
+            transitionDuration: "220ms",
+            transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
         >
           See My Price
-        </Button>
+        </button>
       </div>
     </div>
   );

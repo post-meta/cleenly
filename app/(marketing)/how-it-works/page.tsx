@@ -33,10 +33,10 @@ export default function HowItWorksPage() {
       {/* Hero Section */}
       <section className="py-16 md:py-24 bg-white">
         <Container size="narrow" className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            How it works
+          <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] text-foreground">
+            How it <em className="italic text-foreground-soft font-display">works</em>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
+          <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-foreground-muted leading-relaxed">
             From dirty to clean in four simple steps. No phone calls, no guesswork, no hassle.
           </p>
         </Container>
@@ -50,7 +50,9 @@ export default function HowItWorksPage() {
               1
             </div>
             <div className="flex-1">
-              <h2 className="text-2xl font-semibold mb-6">Tell us about your place</h2>
+              <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.01em] mb-6 leading-tight text-foreground">
+                Tell us about <em className="italic text-foreground-soft font-display">your place</em>
+              </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Select the type of cleaning you need, enter the number of bedrooms and bathrooms.
                 Know your square footage? Add it for a more accurate quote.
@@ -85,7 +87,9 @@ export default function HowItWorksPage() {
               2
             </div>
             <div className="flex-1">
-              <h2 className="text-2xl font-semibold mb-6">See your price instantly</h2>
+              <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.01em] mb-6 leading-tight text-foreground">
+                See your price <em className="italic text-foreground-soft font-display">instantly</em>
+              </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Our calculator shows you a price range immediately—no waiting for callbacks,
                 no mystery quotes. What you see is what you'll pay, give or take 15% after
@@ -131,7 +135,9 @@ export default function HowItWorksPage() {
               3
             </div>
             <div className="flex-1">
-              <h2 className="text-2xl font-semibold mb-6">Pick your time slot</h2>
+              <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.01em] mb-6 leading-tight text-foreground">
+                Pick your <em className="italic text-foreground-soft font-display">time slot</em>
+              </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Choose a date and time window that works for you. Morning, afternoon,
                 or evening—we work around your schedule. We'll confirm availability
@@ -165,7 +171,9 @@ export default function HowItWorksPage() {
               4
             </div>
             <div className="flex-1">
-              <h2 className="text-2xl font-semibold mb-6">Your home gets cleaned</h2>
+              <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.01em] mb-6 leading-tight text-foreground">
+                Your home <em className="italic text-foreground-soft font-display">gets cleaned</em>
+              </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Your assigned cleaner arrives on time with all supplies and equipment.
                 After the cleaning, you can rate the service and leave feedback.
@@ -211,7 +219,9 @@ export default function HowItWorksPage() {
       <section className="py-20 bg-muted border-t border-border">
         <Container>
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold">Why professionals choose Cleenly</h2>
+            <h2 className="font-display font-normal text-[36px] md:text-[44px] tracking-[-0.015em] text-foreground">
+              Why professionals choose <em className="italic text-foreground-soft font-display">Cleenly</em>
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="p-8 bg-white rounded-xl shadow-sm border border-border">
@@ -251,7 +261,9 @@ export default function HowItWorksPage() {
       {/* Final CTA */}
       <section className="py-20 bg-white border-t border-border">
         <Container size="narrow" className="text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to get started?</h2>
+          <h2 className="font-display font-normal text-[36px] md:text-[44px] tracking-[-0.015em] text-foreground mb-6">
+            Ready to <em className="italic text-foreground-soft font-display">get started?</em>
+          </h2>
           <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
             Get a quote in under a minute. No commitment until you book.
           </p>

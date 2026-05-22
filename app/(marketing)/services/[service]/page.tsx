@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { getServiceBySlug, getAllServiceSlugs } from '@/lib/data/services';
 import { cities } from '@/lib/data/cities';
@@ -80,15 +81,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
                         <div>
-                            <img
+                            <Image
                                 src={service.heroImage || "/hero-image.jpg"}
                                 alt={service.name}
+                                width={800}
+                                height={600}
+                                priority
                                 className="w-full h-auto rounded-2xl object-cover aspect-[4/3] shadow-sm"
-                                loading="eager"
                             />
                         </div>
                         <div>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-black">
+                    <h1 className="font-display font-normal text-[36px] md:text-[48px] tracking-tight text-foreground">
                         {service.name}
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-gray-500">
@@ -115,7 +118,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {service.checklist && service.checklist.length > 0 && (
                 <section className="py-16 bg-gray-50">
                     <div className="max-w-6xl mx-auto px-6">
-                        <h2 className="text-2xl font-semibold mb-8 text-black">What's Included</h2>
+                        <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-8">
+                            What&apos;s <em className="italic text-foreground-soft font-display font-normal">Included</em>
+                        </h2>
                         <div className="grid md:grid-cols-2 gap-4">
                             {service.checklist.map((item, i) => (
                                 <div key={i} className="flex items-start gap-3 bg-white p-4 rounded-lg border border-gray-100">
@@ -127,7 +132,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
                         {service.notIncluded && service.notIncluded.length > 0 && (
                             <div className="mt-8 p-6 border border-gray-200 rounded-lg bg-white">
-                                <h3 className="font-semibold mb-3 text-black">Not included (available as add-ons):</h3>
+                                <h3 className="font-sans text-[16px] font-semibold text-foreground mb-3">Not included (available as add-ons):</h3>
                                 <ul className="text-gray-500 space-y-1">
                                     {service.notIncluded.map((item, i) => (
                                         <li key={i}>• {item}</li>
@@ -143,7 +148,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {service.bestFor && service.bestFor.length > 0 && (
                 <section className="py-16">
                     <div className="max-w-6xl mx-auto px-6">
-                        <h2 className="text-2xl font-semibold mb-8 text-black">Best For</h2>
+                        <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-8">
+                            Best <em className="italic text-foreground-soft font-display font-normal">For</em>
+                        </h2>
                         <div className="grid md:grid-cols-3 gap-6">
                             {service.bestFor.map((item, i) => (
                                 <div key={i} className="p-6 border border-gray-200 rounded-lg bg-white">
@@ -159,11 +166,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {service.faqs && service.faqs.length > 0 && (
                 <section className="py-16 bg-gray-50">
                     <div className="max-w-3xl mx-auto px-6">
-                        <h2 className="text-2xl font-semibold mb-8 text-black">Frequently Asked Questions</h2>
+                        <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-8">
+                            Frequently Asked <em className="italic text-foreground-soft font-display font-normal">Questions</em>
+                        </h2>
                         <div className="space-y-6">
                             {service.faqs.map((faq, i) => (
                                 <div key={i} className="bg-white p-6 rounded-lg border border-gray-200">
-                                    <h3 className="font-semibold mb-2 text-black">{faq.question}</h3>
+                                    <h3 className="font-sans text-[18px] font-semibold text-foreground mb-2">{faq.question}</h3>
                                     <p className="text-gray-500 leading-relaxed">{faq.answer}</p>
                                 </div>
                             ))}
@@ -175,7 +184,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {/* City Links */}
             <section className="py-16">
                 <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-2xl font-semibold mb-8 text-black">{service.name} by City</h2>
+                    <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-8">
+                        {service.name} by <em className="italic text-foreground-soft font-display font-normal">City</em>
+                    </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         {topCities.map(city => (
                             <Link

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -104,16 +105,20 @@ export default function AboutPage() {
 
           {/* Hero image */}
           <div className="mb-12 overflow-hidden rounded-2xl bg-muted shadow-sm">
-            <img
+            <Image
               src="/lifestyle-living-1.jpg"
               alt="A calm clean living room with a single mug on the coffee table and soft daylight"
+              width={1000}
+              height={562}
+              priority
               className="w-full h-auto object-cover aspect-[16/9]"
-              loading="eager"
             />
           </div>
 
           {/* Hero */}
-          <h1>About CLEENLY</h1>
+          <h1 className="font-display font-normal text-[44px] md:text-[56px] leading-[1.1] tracking-[-0.02em] text-foreground mb-6">
+            About <em className="italic text-foreground-soft font-display">CLEENLY</em>
+          </h1>
           <div className="mt-8 space-y-4 text-lg text-muted-foreground">
             <p>
               CLEENLY is a small house cleaning team serving Greater Seattle.
@@ -129,7 +134,9 @@ export default function AboutPage() {
 
           {/* Why We Built This */}
           <section className="mt-16">
-            <h2>Why we built this</h2>
+            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
+              Why we <em className="italic text-foreground-soft font-display font-normal">built this</em>
+            </h2>
             <div className="mt-6 space-y-4 text-muted-foreground">
               <p>
                 We built CLEENLY because booking a cleaning shouldn&apos;t be
@@ -165,7 +172,9 @@ export default function AboutPage() {
 
           {/* How CLEENLY Works */}
           <section className="mt-16">
-            <h2>How it works</h2>
+            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
+              How it <em className="italic text-foreground-soft font-display font-normal">works</em>
+            </h2>
 
             <div className="mt-8">
               <ol className="mt-4 space-y-3 text-muted-foreground">
@@ -210,7 +219,9 @@ export default function AboutPage() {
 
           {/* Our Principles */}
           <section className="mt-16">
-            <h2>Our principles</h2>
+            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
+              Our <em className="italic text-foreground-soft font-display font-normal">principles</em>
+            </h2>
             <p className="mt-4 text-muted-foreground">
               A few things we believe in:
             </p>
@@ -266,7 +277,9 @@ export default function AboutPage() {
 
           {/* Cleaner recruitment teaser */}
           <section className="mt-16">
-            <h2>Want to clean with us?</h2>
+            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
+              Want to <em className="italic text-foreground-soft font-display font-normal">clean with us?</em>
+            </h2>
             <p className="mt-4 text-muted-foreground">
               We&apos;re always interested in hearing from reliable cleaners in
               the Greater Seattle area. If you do good work and want steady
@@ -281,7 +294,9 @@ export default function AboutPage() {
 
           {/* Contact */}
           <section className="mt-16">
-            <h2>Contact</h2>
+            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
+              Get in <em className="italic text-foreground-soft font-display font-normal">touch</em>
+            </h2>
             <div className="mt-6 space-y-4 text-muted-foreground">
               <p>
                 Have questions? Running into an issue? Just want to say hi?

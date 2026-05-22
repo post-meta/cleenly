@@ -96,8 +96,8 @@ export default function FAQPage() {
 
           {/* Header */}
           <div className="mb-12 max-w-2xl">
-            <h1 className="text-3xl font-bold md:text-4xl">
-              Frequently Asked Questions
+            <h1 className="font-display font-normal text-[44px] md:text-[56px] leading-[1.1] tracking-[-0.02em] text-foreground mb-6">
+              Frequently Asked <em className="italic text-foreground-soft font-display">Questions</em>
             </h1>
             <p className="mt-4 text-lg text-muted-foreground">
               Quick answers to common questions about booking house cleaning in
@@ -135,7 +135,9 @@ export default function FAQPage() {
 
           {/* CTA Section */}
           <section className="mt-16 rounded-2xl bg-muted/50 p-8 text-center md:p-12">
-            <h2 className="text-2xl font-semibold">Still have questions?</h2>
+            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-4">
+              Still have <em className="italic text-foreground-soft font-display font-normal">questions?</em>
+            </h2>
             <p className="mt-3 text-muted-foreground">
               We&apos;re here to help. Get in touch and we&apos;ll respond within 2
               hours.
@@ -184,7 +186,7 @@ export default function FAQPage() {
 
           {/* Quick Links */}
           <section className="mt-12 border-t border-border pt-12">
-            <h2 className="text-lg font-semibold">Quick Links</h2>
+            <h2 className="text-sm font-semibold tracking-wider uppercase text-foreground-muted mb-4">Quick Links</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
               <Link
                 href="/pricing"

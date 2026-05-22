@@ -43,8 +43,8 @@ export function WhyUs() {
     <section className="py-20 md:py-28 bg-background">
       <Container>
         <div className="text-center">
-          <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.01em] text-foreground">
-            Why CLEENLY
+          <h2 className="font-display font-normal text-[36px] md:text-[44px] tracking-[-0.015em] text-foreground">
+            Why <em className="italic text-foreground-soft font-display">CLEENLY</em>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[17px] text-foreground-muted">
             We keep things simple. Here&apos;s what that actually means.

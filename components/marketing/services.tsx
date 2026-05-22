@@ -1,119 +1,110 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Sparkles, Home, Truck } from "lucide-react";
 
 const services = [
   {
     id: "regular",
-    icon: Sparkles,
     name: "Regular Cleaning",
-    description:
-      "The basics done right. Dusting, vacuuming, mopping, bathroom and kitchen cleaning. Good for homes that get cleaned regularly.",
-    priceRange: "$100-$150",
-    priceNote: "(2-3 bed)",
-    bestFor: "Weekly or bi-weekly maintenance",
-    includes: [
-      "All rooms dusted and vacuumed",
-      "Kitchen surfaces wiped",
-      "Bathrooms cleaned",
-      "Floors mopped",
-      "Trash taken out",
-    ],
+    desc: "Routine maintenance. Dusting, vacuuming, bathrooms, kitchen.",
+    bestFor: "Weekly or bi-weekly cleaning",
+    price: "From $80",
+    img: "/lifestyle-living-2.jpg",
+    slug: "regular-cleaning",
   },
   {
     id: "deep",
-    icon: Home,
     name: "Deep Cleaning",
-    description:
-      "Everything in regular cleaning plus the spots that usually get skipped. Inside the oven, behind the fridge, baseboards, light fixtures.",
-    priceRange: "$150-$250",
-    priceNote: "(2-3 bed)",
-    bestFor: "First-time cleanings, seasonal refresh",
-    includes: [
-      "Everything in regular cleaning",
-      "Appliance interiors",
-      "Baseboards and window sills",
-      "Ceiling fans",
-      "Cabinet fronts",
-    ],
+    desc: "Everything in regular plus inside appliances, baseboards, detailed work.",
+    bestFor: "First time, seasonal refresh, or overdue cleaning",
+    price: "From $140",
+    img: "/service-deep.jpg",
+    slug: "deep-cleaning",
   },
   {
-    id: "move_out",
-    icon: Truck,
+    id: "move-out",
     name: "Move-Out Cleaning",
-    description:
-      "Landlord-ready cleaning to help you get your deposit back. We know what property managers check.",
-    priceRange: "$200-$350",
-    priceNote: "(2-3 bed)",
-    bestFor: "End of lease, selling your home",
-    includes: [
-      "Deep clean of entire home",
-      "Inside all appliances",
-      "Inside cabinets and closets",
-      "Window tracks",
-      "Walls spot-cleaned",
-    ],
+    desc: "Complete cleaning to landlord standards. Get your deposit back.",
+    bestFor: "End of lease, selling, or move-in prep",
+    price: "From $150",
+    img: "/service-move-out.jpg",
+    slug: "move-out-cleaning",
+  },
+  {
+    id: "airbnb",
+    name: "Airbnb Turnover",
+    desc: "Same-day turnaround between guests. Linens, restocking, photo-ready.",
+    bestFor: "Short-term hosts in Seattle metro",
+    price: "From $110",
+    img: "/service-airbnb.jpg",
+    slug: "airbnb-turnover",
   },
 ];
 
 export function Services() {
   return (
-    <section id="services" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center">
-          <h2 className="mb-6 text-2xl font-semibold">Our Services</h2>
-          <p className="mx-auto mb-16 max-w-2xl text-center text-gray-600">
-            Three types of cleaning for different situations. Pick what fits your needs.
+    <section id="services" className="py-24 bg-surface-warm">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-16 mb-14 items-end">
+          <div>
+            <span className="eyebrow">What we do</span>
+            <h2 className="mt-4 text-[48px] md:text-[56px] leading-[1.1] tracking-[-0.020em] font-display font-normal text-foreground">
+              Four signature <em className="italic text-foreground-soft font-display font-normal">protocols.</em>
+            </h2>
+          </div>
+          <p className="text-[18px] leading-[1.55] text-foreground-soft max-w-[460px] lg:mb-2">
+            Each service is a defined checklist, a typical duration, and a known
+            price range. No call-outs. No surprises after we arrive.
           </p>
         </div>
 
-        <div className="grid gap-12 md:grid-cols-3">
-          {services.map((service) => (
-            <div
-              key={service.id}
-              className="group flex flex-col rounded-[12px] border border-gray-100 bg-white p-8 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {services.map((s) => (
+            <article
+              key={s.id}
+              className="bg-background border border-border rounded-[24px] overflow-hidden grid grid-cols-1 sm:grid-cols-[180px_1fr] transition-all duration-300 hover:border-border-hover shadow-sm"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-[8px] bg-accent/5 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
-                <service.icon className="h-6 w-6" />
+              <div className="relative h-[200px] sm:h-full min-h-[180px] w-full">
+                <Image
+                  src={s.img}
+                  alt={s.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-w-640px) 100vw, 180px"
+                />
               </div>
-
-              <h3 className="mb-4 text-xl font-semibold text-foreground">
-                {service.name}
-              </h3>
-              <p className="mb-6 text-sm leading-relaxed text-gray-600">
-                {service.description}
-              </p>
-
-              <div className="mb-6 flex-1 space-y-4">
-                <div className="rounded-[4px] bg-gray-50 px-3 py-2">
-                  <p className="text-xs font-medium text-gray-500">
-                    Best for: {service.bestFor}
+              <div className="p-6 md:p-7 flex flex-col justify-between">
+                <div>
+                  <div className="flex justify-between items-baseline gap-3">
+                    <h3 className="text-[22px] font-sans font-semibold text-foreground tracking-tight">
+                      {s.name}
+                    </h3>
+                    <span
+                      className="font-display font-normal text-[22px] tracking-[-0.01em] text-foreground whitespace-nowrap tnum"
+                    >
+                      {s.price}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-[15px] leading-[1.55] text-foreground-soft">
+                    {s.desc}
                   </p>
                 </div>
-
-                <ul className="space-y-3 text-sm text-gray-600">
-                  {service.includes.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent/10 text-[10px] font-bold text-accent">
-                        ✓
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-auto">
-                <Button variant="link" asChild className="p-0 h-auto">
-                  <Link href={`/book?service=${service.id}`}>
-                    Learn More →
+                <div className="mt-6 pt-4.5 border-t border-border flex items-center justify-between">
+                  <span className="text-[13px] text-foreground-soft">
+                    Best for: <span className="text-foreground font-medium">{s.bestFor}</span>
+                  </span>
+                  <Link
+                    href={`/book?service=${s.slug}`}
+                    className="text-[13px] font-semibold text-accent hover:text-accent-hover transition-colors"
+                  >
+                    Book →
                   </Link>
-                </Button>
+                </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
     </section>
   );
 }
+

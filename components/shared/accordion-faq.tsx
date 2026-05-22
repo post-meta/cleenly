@@ -26,7 +26,7 @@ export function AccordionFAQ({ faqs, title }: AccordionFAQProps) {
         <section className="bg-white py-24 md:py-32">
             <div className="mx-auto max-w-3xl px-6">
                 <div className="mb-16 text-center md:text-left">
-                    <h2 className="text-2xl font-semibold">{title}</h2>
+                    <h2 className="font-display font-normal text-[28px] md:text-[36px] tracking-[-0.015em] text-foreground">{title}</h2>
                 </div>
 
                 <div className="space-y-0">

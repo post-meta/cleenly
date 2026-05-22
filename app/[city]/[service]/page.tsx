@@ -96,7 +96,9 @@ export default async function CityServicePage({ params }: PageProps) {
                 <div className="mx-auto max-w-3xl px-6">
                     <div className="bg-white rounded-[12px] border border-gray-200 shadow-sm overflow-hidden">
                         <div className="p-8 border-b border-gray-100">
-                            <h2 className="text-2xl font-semibold mb-2">Pricing for {city.name}</h2>
+                            <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.015em] text-foreground mb-2">
+                                Pricing for <em className="italic text-foreground-soft font-display font-normal">{city.name}</em>
+                            </h2>
                             <p className="text-gray-500 text-sm">Transparent pricing based on local rates in {city.name}, Washington.</p>
                         </div>
                         <div className="p-8">
@@ -122,7 +124,9 @@ export default async function CityServicePage({ params }: PageProps) {
                 <div className="mx-auto max-w-7xl px-6">
                     <div className="grid lg:grid-cols-2 gap-20">
                         <div>
-                            <h2 className="text-2xl font-semibold mb-8">What's Included</h2>
+                            <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.015em] text-foreground mb-8">
+                                What's <em className="italic text-foreground-soft font-display font-normal">Included</em>
+                            </h2>
                             {service.checklist && service.checklist.length > 0 && (
                                 <ul className="space-y-4">
                                     {service.checklist.map((item, i) => (
@@ -138,7 +142,9 @@ export default async function CityServicePage({ params }: PageProps) {
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-semibold mb-8">Why {city.name} homeowners book CLEENLY</h2>
+                            <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.015em] text-foreground mb-8">
+                                Why {city.name} homeowners book <em className="italic text-foreground-soft font-display font-normal">CLEENLY</em>
+                            </h2>
                             <p className="text-gray-600 mb-8 leading-relaxed">
                                 {service.longDescription}
                             </p>
@@ -158,7 +164,9 @@ export default async function CityServicePage({ params }: PageProps) {
             {/* Service Coverage */}
             <section className="py-24 border-t border-gray-100 bg-gray-50">
                 <div className="mx-auto max-w-7xl px-6 text-center">
-                    <h2 className="text-xl font-semibold mb-6">Service Coverage in {city.name}</h2>
+                    <h2 className="font-display font-normal text-[24px] md:text-[28px] tracking-[-0.015em] text-foreground mb-6">
+                        Service Coverage in <em className="italic text-foreground-soft font-display font-normal">{city.name}</em>
+                    </h2>
                     <div className="flex flex-wrap justify-center gap-2">
                         {city.neighborhoods.map(hood => (
                             <Link
@@ -176,8 +184,8 @@ export default async function CityServicePage({ params }: PageProps) {
             {/* Final CTA */}
             <section className="py-24 bg-accent text-white relative overflow-hidden">
                 <div className="mx-auto max-w-7xl px-6 text-center relative z-10">
-                    <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                        Book your {service.name.toLowerCase()} in {city.name}
+                    <h2 className="font-display font-normal text-[32px] md:text-[44px] tracking-[-0.015em] text-white mb-6">
+                        Book your <em className="italic text-white/90 font-display font-normal">{service.name.toLowerCase()}</em> in {city.name}
                     </h2>
                     <p className="text-white/80 mb-10 text-lg max-w-2xl mx-auto">
                         See your exact price in seconds. No memberships, no hidden fees.

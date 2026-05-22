@@ -119,8 +119,8 @@ export default async function CityPage({ params }: PageProps) {
             <section className="py-24 container mx-auto px-6">
                 <div className="flex items-end justify-between mb-12">
                     <div className="max-w-xl">
-                        <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">
-                            Cleaning services
+                        <h2 className="font-display font-normal text-[32px] md:text-[44px] tracking-[-0.015em] text-foreground mb-4">
+                            Cleaning <em className="italic text-foreground-soft font-display font-normal">services</em>
                         </h2>
                         <p className="text-gray-500 text-lg">
                             Pick the service that fits your home in {city.name}.
@@ -147,7 +147,9 @@ export default async function CityPage({ params }: PageProps) {
                 <div className="mx-auto max-w-7xl px-6">
                     <div className="grid md:grid-cols-2 gap-16">
                         <div>
-                            <h2 className="text-2xl font-semibold mb-6 text-foreground">Neighborhoods Served</h2>
+                            <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.015em] text-foreground mb-6">
+                                Neighborhoods <em className="italic text-foreground-soft font-display font-normal">Served</em>
+                            </h2>
                             <div className="flex flex-wrap gap-2">
                                 {city.neighborhoods.map(hood => (
                                     <Link
@@ -165,7 +167,9 @@ export default async function CityPage({ params }: PageProps) {
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-semibold mb-6 text-foreground">Why {city.name} homeowners book CLEENLY</h2>
+                            <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.015em] text-foreground mb-6">
+                                Why {city.name} homeowners book <em className="italic text-foreground-soft font-display font-normal">CLEENLY</em>
+                            </h2>
                             <p className="text-gray-600 leading-relaxed">
                                 {content.whyChoose || "We're a small Greater Seattle team. Our cleaners carry liability insurance. You see your price before you book and pick the time that works for you. If something isn't right, we come back within 24 hours."}
                             </p>
@@ -177,8 +181,8 @@ export default async function CityPage({ params }: PageProps) {
             {/* Final Brand CTA */}
             <section className="py-24 bg-accent text-white overflow-hidden relative">
                 <div className="mx-auto max-w-7xl px-6 text-center relative z-10">
-                    <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                        Ready for a cleaner home in {city.name}?
+                    <h2 className="font-display font-normal text-[32px] md:text-[44px] tracking-[-0.015em] text-white mb-6">
+                        Ready for a <em className="italic text-white/90 font-display font-normal">cleaner home</em> in {city.name}?
                     </h2>
                     <p className="text-white/80 mb-10 text-lg max-w-2xl mx-auto">
                         See your price online and book in 2 minutes. We bring our own supplies.

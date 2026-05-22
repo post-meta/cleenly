@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Logo } from '../shared/logo';
 import { signOut } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { User } from 'next-auth';
@@ -9,8 +10,8 @@ export function DashboardHeader({ user }: { user: User }) {
     return (
         <header className="border-b border-gray-200 bg-white">
             <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                <Link href="/" className="text-xl text-logo text-foreground">
-                    CLEENLY
+                <Link href="/" className="text-xl text-foreground">
+                    <Logo />
                 </Link>
 
                 <div className="flex items-center gap-4">

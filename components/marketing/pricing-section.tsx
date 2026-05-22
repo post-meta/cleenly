@@ -13,8 +13,8 @@ export function PricingSection() {
         <section className="pricing py-20 md:py-28 bg-background">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="text-center mb-14 md:mb-20">
-                    <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.01em] text-foreground">
-                        Simple, honest pricing
+                    <h2 className="font-display font-normal text-[36px] md:text-[44px] tracking-[-0.015em] text-foreground">
+                        Simple, honest <em className="italic text-foreground-soft font-display">pricing</em>
                     </h2>
                     <p className="mt-4 text-[17px] text-foreground-muted max-w-2xl mx-auto">
                         Price depends on your home size and condition. The calculator shows your exact price before you book.

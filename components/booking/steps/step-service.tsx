@@ -6,33 +6,32 @@ import type { ServiceType } from "@/types";
 interface ServiceOption {
   id: ServiceType;
   name: string;
-  description: string;
+  desc: string;
   bestFor: string;
-  fromPrice: string;
+  price: string;
 }
 
 const services: ServiceOption[] = [
   {
     id: "regular",
     name: "Regular Cleaning",
-    description: "Routine maintenance. Dusting, vacuuming, bathrooms, kitchen.",
-    bestFor: "Weekly or bi-weekly cleaning",
-    fromPrice: "From $80",
+    desc: "Routine maintenance. Dusting, vacuuming, bathrooms, kitchen.",
+    bestFor: "Weekly or bi-weekly",
+    price: "From $80",
   },
   {
     id: "deep",
     name: "Deep Cleaning",
-    description:
-      "Everything in regular plus inside appliances, baseboards, detailed work.",
-    bestFor: "First time, seasonal refresh, or overdue cleaning",
-    fromPrice: "From $140",
+    desc: "Regular, plus inside appliances, baseboards, detailed work.",
+    bestFor: "First time or seasonal refresh",
+    price: "From $140",
   },
   {
     id: "move_out",
     name: "Move-Out Cleaning",
-    description: "Complete cleaning to landlord standards. Get your deposit back.",
-    bestFor: "End of lease, selling, or move-in prep",
-    fromPrice: "From $150",
+    desc: "Complete cleaning to landlord standards. Get your deposit back.",
+    bestFor: "End of lease",
+    price: "From $150",
   },
 ];
 
@@ -48,82 +47,86 @@ export function StepService({ value, onChange, onNext }: StepServiceProps) {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">What type of cleaning do you need?</h2>
-        <p className="mt-2 text-muted-foreground">
-          Select the service that best fits your needs
-        </p>
+    <div className="px-5 pb-5">
+      <h2 className="font-display font-normal text-[30px] leading-[1.15] mt-4 text-foreground">
+        What type of cleaning <em className="font-display italic font-normal text-foreground-soft">do you need?</em>
+      </h2>
+      <p className="text-[14px] text-foreground-muted mt-2">
+        Select the service that best fits your home.
+      </p>
+
+      <div className="flex flex-col gap-3 mt-[22px]">
+        {services.map((s) => {
+          const selected = value === s.id;
+          return (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => handleSelect(s.id)}
+              className={cn(
+                "group relative w-full text-left p-[18px] rounded-xl border-2 transition-all cursor-pointer",
+                selected
+                  ? "border-foreground bg-surface-warm"
+                  : "border-border bg-background hover:border-border-hover"
+              )}
+              style={{
+                transitionDuration: "220ms",
+                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+            >
+              <div className="flex items-baseline justify-between">
+                <span className="text-[17px] font-semibold text-foreground">{s.name}</span>
+                <span className="text-[15px] font-semibold text-foreground">{s.price}</span>
+              </div>
+              <p className="text-[13px] text-foreground-soft mt-1.5 leading-relaxed">
+                {s.desc}
+              </p>
+              <p className="text-[12px] mt-2.5">
+                <span className="text-foreground-soft">Best for: </span>
+                <span className="text-foreground font-medium">{s.bestFor}</span>
+              </p>
+              {selected && (
+                <div className="absolute top-4 right-4 w-[22px] h-[22px] rounded-full bg-foreground flex items-center justify-center">
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#FAFAF8"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+              )}
+            </button>
+          );
+        })}
       </div>
 
-      <div className="grid gap-4">
-        {services.map((service) => (
-          <button
-            key={service.id}
-            type="button"
-            onClick={() => handleSelect(service.id)}
-            className={cn(
-              "group relative w-full rounded-xl border-2 p-6 text-left transition-all",
-              "hover:border-foreground hover:shadow-md",
-              value === service.id
-                ? "border-foreground bg-muted/50"
-                : "border-border bg-background"
-            )}
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold">{service.name}</h3>
-                <p className="mt-1 text-muted-foreground">
-                  {service.description}
-                </p>
-                <p className="mt-3 text-sm">
-                  <span className="text-muted-foreground">Best for: </span>
-                  <span className="text-foreground">{service.bestFor}</span>
-                </p>
-              </div>
-              <div className="text-right">
-                <span className="text-lg font-semibold">{service.fromPrice}</span>
-                {value === service.id && (
-                  <div className="mt-2 flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background">
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                )}
-              </div>
-            </div>
-          </button>
-        ))}
-      </div>
-
-      <p className="text-center text-sm text-muted-foreground">
-        Not sure which to choose?{" "}
-        <span className="text-foreground">
-          Regular is great for maintained homes. Deep for first-time or seasonal.
+      <p className="mt-[18px] text-center text-[12px] text-foreground-soft">
+        Not sure?{" "}
+        <span className="text-foreground font-medium">
+          Regular is great for maintained homes. Deep for first-time.
         </span>
       </p>
 
-      {/* Continue Button */}
       {value && (
-        <div className="flex justify-end pt-4">
-          <button
-            type="button"
-            onClick={onNext}
-            className="rounded-lg bg-foreground px-8 py-3 font-semibold text-background transition-all hover:opacity-90"
-          >
-            Continue
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onNext}
+          className="mt-[22px] w-full bg-accent text-[#FAFAF8] hover:bg-accent-hover font-sans text-[15px] font-medium rounded-md cursor-pointer transition-all flex items-center justify-center"
+          style={{
+            height: "52px",
+            border: "none",
+            transitionDuration: "220ms",
+            transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
+          Continue
+        </button>
       )}
     </div>
   );

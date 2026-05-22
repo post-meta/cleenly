@@ -1,47 +1,54 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Suspense } from "react";
 import { Container } from "@/components/ui/container";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
+import { BookingWizard } from "@/components/booking";
 
 export const metadata: Metadata = {
-  title: "Booking Paused | CLEENLY",
+  title: "Book Premium House Cleaning | CLEENLY",
   description:
-    "CLEENLY is not accepting new bookings right now. We'll be back soon.",
-  robots: {
-    index: false,
-    follow: false,
-  },
+    "See your price online and pick a convenient time slot in 2 minutes. Transparent local rates in Seattle.",
   alternates: {
     canonical: "https://cleenly.app/book",
   },
 };
 
+function BookingWizardFallback() {
+  return (
+    <div className="animate-pulse space-y-6">
+      <div className="space-y-2">
+        <div className="h-4 bg-muted rounded w-1/4"></div>
+        <div className="h-8 bg-muted rounded w-1/2"></div>
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="h-24 bg-muted rounded-xl"></div>
+        <div className="h-24 bg-muted rounded-xl"></div>
+        <div className="h-24 bg-muted rounded-xl"></div>
+      </div>
+      <div className="h-12 bg-muted rounded-xl w-full"></div>
+    </div>
+  );
+}
+
 export default function BookPage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      <main className="flex-1 py-16 md:py-24">
+      <main className="flex-1 py-12 md:py-16">
         <Container size="narrow">
-          <div className="text-center">
-            <h1 className="font-display text-4xl md:text-5xl text-foreground">
-              Booking is{" "}
-              <em className="italic text-foreground-soft">paused</em>
+          <div className="mb-10 text-center">
+            <h1 className="font-display font-normal text-[36px] md:text-[48px] tracking-tight text-foreground">
+              Book Your <em className="italic text-foreground-soft font-display">Service</em>
             </h1>
-            <p className="mt-6 text-foreground-soft md:text-lg">
-              We&apos;re not taking new clients right now.
+            <p className="mt-3 text-base text-foreground-muted">
+              See your precise, transparent estimate online. Select your parameters below and request a slot in 2 minutes.
             </p>
-            <p className="mt-3 text-foreground-soft md:text-lg">
-              We&apos;ll be back soon. Thank you for your patience.
-            </p>
-            <div className="mt-10">
-              <Link
-                href="/"
-                className="inline-flex items-center justify-center rounded-md bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:bg-foreground-soft"
-              >
-                Back to home
-              </Link>
-            </div>
+          </div>
+          <div className="bg-white rounded-2xl border border-border shadow-soft p-6 md:p-10">
+            <Suspense fallback={<BookingWizardFallback />}>
+              <BookingWizard />
+            </Suspense>
           </div>
         </Container>
       </main>
