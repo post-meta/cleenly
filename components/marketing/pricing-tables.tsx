@@ -1,30 +1,30 @@
 import { Container } from "@/components/ui/container";
 
 const regularPricing = [
-  { size: "1 bed / 1 bath", price: "$80-$120", duration: "1.5-2 hours" },
-  { size: "2 bed / 1 bath", price: "$100-$140", duration: "2-2.5 hours" },
-  { size: "2 bed / 2 bath", price: "$120-$160", duration: "2-3 hours" },
-  { size: "3 bed / 2 bath", price: "$140-$180", duration: "2.5-3.5 hours" },
-  { size: "4 bed / 2.5 bath", price: "$160-$220", duration: "3-4 hours" },
-  { size: "4+ bed / 3+ bath", price: "$200-$280", duration: "4-5 hours" },
+  { size: "1 bed / 1 bath", price: "$165-$200", duration: "1.5-2 hours" },
+  { size: "2 bed / 1 bath", price: "$200-$240", duration: "2-2.5 hours" },
+  { size: "2 bed / 2 bath", price: "$230-$280", duration: "2-3 hours" },
+  { size: "3 bed / 2 bath", price: "$280-$340", duration: "2.5-3.5 hours" },
+  { size: "4 bed / 2.5 bath", price: "$360-$440", duration: "3-4 hours" },
+  { size: "4+ bed / 3+ bath", price: "$450-$560", duration: "4-5 hours" },
 ];
 
 const deepPricing = [
-  { size: "1 bed / 1 bath", price: "$140-$180", duration: "2.5-3 hours" },
-  { size: "2 bed / 1 bath", price: "$160-$200", duration: "3-3.5 hours" },
-  { size: "2 bed / 2 bath", price: "$180-$240", duration: "3-4 hours" },
-  { size: "3 bed / 2 bath", price: "$200-$280", duration: "3.5-5 hours" },
-  { size: "4 bed / 2.5 bath", price: "$250-$320", duration: "4-6 hours" },
-  { size: "4+ bed / 3+ bath", price: "$300-$400", duration: "5-7 hours" },
+  { size: "1 bed / 1 bath", price: "$250-$300", duration: "2.5-3 hours" },
+  { size: "2 bed / 1 bath", price: "$335-$400", duration: "3-3.5 hours" },
+  { size: "2 bed / 2 bath", price: "$385-$460", duration: "3-4 hours" },
+  { size: "3 bed / 2 bath", price: "$460-$550", duration: "3.5-5 hours" },
+  { size: "4 bed / 2.5 bath", price: "$580-$700", duration: "4-6 hours" },
+  { size: "4+ bed / 3+ bath", price: "$740-$880", duration: "5-7 hours" },
 ];
 
 const moveOutPricing = [
-  { size: "Studio", price: "$150-$180", duration: "2-3 hours" },
-  { size: "1 bed / 1 bath", price: "$180-$220", duration: "3-4 hours" },
-  { size: "2 bed / 1 bath", price: "$220-$280", duration: "3.5-4.5 hours" },
-  { size: "2 bed / 2 bath", price: "$250-$320", duration: "4-5 hours" },
-  { size: "3 bed / 2 bath", price: "$300-$380", duration: "5-6 hours" },
-  { size: "4 bed / 2.5 bath", price: "$350-$450", duration: "5-7 hours" },
+  { size: "Studio", price: "$250-$300", duration: "2-3 hours" },
+  { size: "1 bed / 1 bath", price: "$320-$380", duration: "3-4 hours" },
+  { size: "2 bed / 1 bath", price: "$420-$500", duration: "3.5-4.5 hours" },
+  { size: "2 bed / 2 bath", price: "$485-$580", duration: "4-5 hours" },
+  { size: "3 bed / 2 bath", price: "$600-$720", duration: "5-6 hours" },
+  { size: "4 bed / 2.5 bath", price: "$745-$890", duration: "5-7 hours" },
 ];
 
 interface PricingTableProps {

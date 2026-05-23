@@ -60,7 +60,7 @@ export default function HomePage() {
   const seattle = cities.find(c => c.slug === 'seattle')!;
   const localBusinessSchema = generateLocalBusinessSchema(seattle);
   const faqSchema = generateFAQSchema([
-    { question: "How much does house cleaning cost in Seattle?", answer: "For a 2-bedroom home: $100-$200 regular, $150-$300 deep, $200-$400 move-out. Exact price depends on home size and condition." },
+    { question: "How much does house cleaning cost in Seattle?", answer: "For a 2-bedroom home: $200 regular, $335 deep, $420 move-out (starting). Exact price depends on home size and condition." },
     { question: "Are your cleaners insured?", answer: "Yes — our cleaners carry liability insurance." },
     { question: "What if I'm not happy with the clean?", answer: "Tell us within 24 hours and we come back to fix it. No charge." }
   ]);

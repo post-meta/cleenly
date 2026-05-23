@@ -1,7 +1,6 @@
 export { Hero } from "./hero";
 export { HowItWorks } from "./how-it-works";
 export { Services } from "./services";
-export { PricingPreview } from "./pricing-preview";
 export { PricingTables } from "./pricing-tables";
 export { PricingFactors } from "./pricing-factors";
 export { PricingChecklists } from "./pricing-checklists";

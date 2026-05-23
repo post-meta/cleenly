@@ -8,30 +8,31 @@ import type {
 } from "@/types";
 
 // Base prices by service type and bedroom count (in cents)
+// Seattle 2026 market-aligned; aggressive premium-mid positioning.
 const basePrices: Record<ServiceType, Record<BedroomCount, number>> = {
   regular: {
-    studio: 8000,
-    "1": 10000,
-    "2": 12000,
-    "3": 14000,
-    "4": 18000,
-    "5+": 22000,
-  },
-  deep: {
     studio: 14000,
-    "1": 16000,
+    "1": 16500,
     "2": 20000,
     "3": 24000,
     "4": 30000,
-    "5+": 38000,
+    "5+": 36000,
+  },
+  deep: {
+    studio: 20000,
+    "1": 25000,
+    "2": 33500,
+    "3": 40000,
+    "4": 48000,
+    "5+": 59000,
   },
   move_out: {
-    studio: 15000,
-    "1": 18000,
-    "2": 25000,
-    "3": 32000,
-    "4": 40000,
-    "5+": 50000,
+    studio: 25000,
+    "1": 32000,
+    "2": 42000,
+    "3": 52000,
+    "4": 62000,
+    "5+": 75000,
   },
 };
 

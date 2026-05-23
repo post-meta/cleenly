@@ -70,9 +70,9 @@ export default function HowItWorksPage() {
                 ))}
               </ul>
               <div className="p-4 rounded-lg bg-muted border border-border text-sm text-muted-foreground">
-                Most Greater Seattle homes: $150-240 for a thorough 3-4 hour clean.
+                Most Greater Seattle homes: $280-460 for a thorough 3-4 hour clean.
                 <br />
-                That's $50-60/hour vs the typical $75/hour you'd pay elsewhere.
+                Flat rate, not hourly — you pay for the result, not the clock.
               </div>
             </div>
           </div>

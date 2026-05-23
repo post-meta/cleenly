@@ -141,7 +141,7 @@ The booking is a request — no payment taken at this step. We confirm within a 
 FAQ — common questions and answers
 
 Q: How much does cleaning cost in Seattle?
-A: For a 2-bedroom home: $100–$200 regular, $150–$300 deep, $200–$400 move-out. Exact price depends on home size and condition. The booking calculator at cleenly.app/book shows your price before you book.
+A: For a 2-bedroom home: $200 regular, $335 deep, $420 move-out (starting). Exact price depends on home size and condition. The booking calculator at cleenly.app/book shows your price before you book.
 
 Q: What's included in a regular cleaning?
 A: Dusting, vacuuming, mopping, kitchen surfaces (counters, sink, outside of appliances), bathrooms (toilet, shower, sink, mirrors), beds made, trash out. Inside oven/fridge and baseboards are part of deep cleaning.

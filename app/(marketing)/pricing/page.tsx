@@ -9,9 +9,9 @@ import { PricingChecklists } from "@/components/marketing/pricing-checklists";
 import { PricingFAQ } from "@/components/marketing/pricing-faq";
 
 export const metadata: Metadata = {
-  title: "House Cleaning Prices Seattle | $100-$350 | CLEENLY",
+  title: "House Cleaning Prices Seattle | From $165 | CLEENLY",
   description:
-    "Seattle house cleaning prices: Regular cleaning $100-$200, Deep cleaning $150-$300, Move-out $200-$400. See what's included. Get your exact price in 30 seconds.",
+    "Seattle house cleaning prices: Regular cleaning $165-$300, Deep cleaning $250-$450, Move-out $320-$560. See what's included. Get your exact price in 30 seconds.",
   keywords: [
     "house cleaning prices seattle",
     "cleaning service cost seattle",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "House Cleaning Prices Seattle | CLEENLY",
     description:
-      "Seattle house cleaning prices: Regular $100-$200, Deep $150-$300, Move-out $200-$400. Get your exact price.",
+      "Seattle house cleaning prices: Regular $165-$300, Deep $250-$450, Move-out $320-$560. Get your exact price.",
     type: "website",
     url: "https://cleenly.app/pricing",
   },
@@ -56,7 +56,7 @@ const serviceSchema = {
           "Routine house cleaning including dusting, vacuuming, mopping, bathroom and kitchen cleaning",
         priceSpecification: {
           "@type": "PriceSpecification",
-          price: "100-200",
+          price: "165-300",
           priceCurrency: "USD",
           unitText: "per cleaning",
         },
@@ -68,7 +68,7 @@ const serviceSchema = {
           "Thorough cleaning including inside appliances, baseboards, and hard-to-reach areas",
         priceSpecification: {
           "@type": "PriceSpecification",
-          price: "150-300",
+          price: "250-450",
           priceCurrency: "USD",
           unitText: "per cleaning",
         },
@@ -80,7 +80,7 @@ const serviceSchema = {
           "Complete cleaning to landlord standards for security deposit return",
         priceSpecification: {
           "@type": "PriceSpecification",
-          price: "200-400",
+          price: "320-560",
           priceCurrency: "USD",
           unitText: "per cleaning",
         },
@@ -98,7 +98,7 @@ const faqSchema = {
       name: "How much does house cleaning cost in Seattle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "House cleaning in Seattle costs $100-$400 depending on home size and cleaning type. Regular cleaning: $100-$200. Deep cleaning: $150-$300. Move-out cleaning: $200-$400.",
+        text: "House cleaning in Seattle costs $165-$750 depending on home size and cleaning type. Regular cleaning: $165-$300. Deep cleaning: $250-$450. Move-out cleaning: $320-$560.",
       },
     },
     {
@@ -187,10 +187,10 @@ export default function PricingPage() {
               House Cleaning <em className="italic text-foreground-soft font-display">Prices</em> in Seattle
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
-              House cleaning in Seattle costs $100-$400 depending on your home
+              House cleaning in Seattle costs $165-$750 depending on your home
               size and cleaning type. Regular cleaning for a 2-3 bedroom home
-              runs $120-$180. Deep cleaning costs $180-$280. Move-out cleaning
-              ranges from $250-$400. Below you&apos;ll find detailed pricing by
+              runs $200-$340. Deep cleaning costs $335-$460. Move-out cleaning
+              ranges from $420-$600. Below you&apos;ll find detailed pricing by
               service type and what&apos;s included in each.
             </p>
             <div className="mt-8">

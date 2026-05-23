@@ -17,21 +17,21 @@ const services: ServiceOption[] = [
     name: "Regular Cleaning",
     desc: "Routine maintenance. Dusting, vacuuming, bathrooms, kitchen.",
     bestFor: "Weekly or bi-weekly",
-    price: "From $80",
+    price: "From $165",
   },
   {
     id: "deep",
     name: "Deep Cleaning",
     desc: "Regular, plus inside appliances, baseboards, detailed work.",
     bestFor: "First time or seasonal refresh",
-    price: "From $140",
+    price: "From $250",
   },
   {
     id: "move_out",
     name: "Move-Out Cleaning",
     desc: "Complete cleaning to landlord standards. Get your deposit back.",
     bestFor: "End of lease",
-    price: "From $150",
+    price: "From $320",
   },
 ];
 

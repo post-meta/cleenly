@@ -17,17 +17,17 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How much does house cleaning cost in Seattle?",
         answer:
-          "House cleaning in Seattle costs $100-$400 depending on home size and cleaning type. Regular cleaning for a 2-3 bedroom home runs $120-$180. Deep cleaning costs $180-$280. Move-out cleaning ranges from $250-$400. CLEENLY shows you the exact price before you book — no surprises.",
+          "House cleaning in Seattle costs $165-$750 depending on home size and cleaning type. Regular cleaning for a 2-3 bedroom home runs $200-$240. Deep cleaning costs $335-$400. Move-out cleaning ranges from $420-$520. CLEENLY shows you the exact price before you book — no surprises.",
       },
       {
         question: "How much does deep cleaning cost?",
         answer:
-          "Deep cleaning in Seattle costs $150-$300 for most homes. A 2-bedroom apartment typically costs $150-$200. A 3-bedroom house runs $200-$280. Larger homes (4+ bedrooms) cost $280-$400. Price includes inside appliances, baseboards, and detailed cleaning of all surfaces.",
+          "Deep cleaning in Seattle costs $250-$590 for most homes. A 2-bedroom apartment typically costs $335-$380. A 3-bedroom house runs $400-$450. Larger homes (4+ bedrooms) cost $480-$590. Price includes inside appliances, baseboards, and detailed cleaning of all surfaces.",
       },
       {
         question: "How much is move-out cleaning in Seattle?",
         answer:
-          "Move-out cleaning in Seattle costs $200-$400 depending on home size. A 1-bedroom apartment runs $180-$220. A 2-3 bedroom home costs $250-$380. This includes cleaning to landlord inspection standards — inside cabinets, appliances, and all surfaces to help you get your deposit back.",
+          "Move-out cleaning in Seattle costs $320-$680 depending on home size. A 1-bedroom apartment runs $320-$380. A 2-3 bedroom home costs $420-$520. This includes cleaning to landlord inspection standards — inside cabinets, appliances, and all surfaces to help you get your deposit back.",
       },
       {
         question: "Do you charge by the hour or flat rate?",

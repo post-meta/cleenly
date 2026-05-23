@@ -232,8 +232,8 @@ export default function AboutPage() {
                   Price on screen = price you pay
                 </h3>
                 <p className="mt-2 text-muted-foreground">
-                  When you see $160, you pay $160. Not $160 &quot;starting
-                  at&quot; that becomes $220 after mysterious add-ons. If
+                  When you see $200, you pay $200. Not $200 &quot;starting
+                  at&quot; that becomes $280 after mysterious add-ons. If
                   something changes the price (you want inside the oven cleaned,
                   home is bigger than expected), we tell you before you&apos;re
                   charged.
