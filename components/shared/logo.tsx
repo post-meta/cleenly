@@ -2,17 +2,18 @@ import { cn } from "@/lib/utils";
 
 interface LogoProps {
   className?: string;
-  eeClassName?: string;
 }
 
-export function Logo({ className, eeClassName }: LogoProps) {
+export function Logo({ className }: LogoProps) {
   return (
-    <span className={cn("text-logo tracking-[-0.02em] font-normal inline-block select-none", className)}>
-      CL
-      <span className={cn("font-display italic text-foreground-soft px-[1px] normal-case", eeClassName)}>
-        EE
-      </span>
-      NLY
+    <span
+      aria-label="Cleenly"
+      className={cn(
+        "font-display italic font-normal tracking-[-0.035em] leading-none inline-block whitespace-nowrap select-none",
+        className
+      )}
+    >
+      Cleenly
     </span>
   );
 }
