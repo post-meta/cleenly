@@ -1,7 +1,9 @@
-import Link from 'next/link';
-import { Logo } from './logo';
-import { footerConfig, getFooterCities } from '@/lib/data/footer-config';
-import { getCityBySlug } from '@/lib/data/cities';
+import Link from "next/link";
+import { Logo } from "./logo";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { footerConfig, getFooterCities } from "@/lib/data/footer-config";
+import { getCityBySlug } from "@/lib/data/cities";
+import { PHONE_DISPLAY, PHONE_TEL_HREF, SUPPORT_EMAIL } from "@/lib/constants";
 
 interface FooterProps {
   currentCity?: string;
@@ -13,29 +15,41 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-surface-deep text-background">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Main Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {/* Logo & Tagline */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="text-background hover:text-accent transition-colors">
-              <Logo eeClassName="text-mushroom" />
+    <footer className="bg-surface-warm pt-20 pb-14">
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
+        <div className="mb-14 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-16">
+          <div>
+            <Link href="/" className="inline-block text-[28px] text-foreground no-underline">
+              <Logo />
             </Link>
-            <p className="mt-3 text-sm text-mushroom font-medium tracking-wider">
-              We clean. You <em className="italic">live.</em>
+            <p className="mt-5 max-w-[280px] text-[14px] leading-[1.6] text-foreground-soft">
+              Residential cleaning for the Greater Seattle area. Same crew, same
+              neighborhood, every time.
             </p>
+            <div className="mt-6 flex flex-col gap-2 text-[13px] text-foreground-muted">
+              <a
+                href={`mailto:${SUPPORT_EMAIL}`}
+                className="text-foreground-muted no-underline hover:text-foreground transition-colors"
+              >
+                {SUPPORT_EMAIL}
+              </a>
+              <a
+                href={PHONE_TEL_HREF}
+                className="text-foreground-muted no-underline hover:text-foreground transition-colors"
+              >
+                {PHONE_DISPLAY}
+              </a>
+            </div>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="font-semibold mb-4 text-background">Services</h4>
-            <ul className="space-y-3">
+            <Eyebrow className="mb-4 block">Services</Eyebrow>
+            <ul className="flex flex-col gap-2.5 list-none p-0">
               {footerConfig.services.map((service) => (
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="text-sm text-mushroom hover:text-background transition-colors"
+                    className="text-[14px] text-foreground no-underline transition-colors hover:text-accent"
                   >
                     {service.name}
                   </Link>
@@ -44,49 +58,45 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
             </ul>
           </div>
 
-          {/* Cities */}
           <div>
-            <h4 className="font-semibold mb-4 text-background">Cities</h4>
-            <ul className="space-y-3">
+            <Eyebrow className="mb-4 block">Areas</Eyebrow>
+            <ul className="flex flex-col gap-2.5 list-none p-0">
               {citySlugs.map((slug) => {
                 const city = getCityBySlug(slug);
                 if (!city) return null;
 
-                const href = currentService
-                  ? `/${slug}/${currentService}`
-                  : `/${slug}`;
+                const href = currentService ? `/${slug}/${currentService}` : `/${slug}`;
 
                 return (
                   <li key={slug}>
                     <Link
                       href={href}
-                      className="text-sm text-mushroom hover:text-background transition-colors"
+                      className="text-[14px] text-foreground no-underline transition-colors hover:text-accent"
                     >
                       {city.name}
                     </Link>
                   </li>
                 );
               })}
-              <li className="pt-2">
+              <li className="pt-1">
                 <Link
                   href="/locations"
-                  className="text-sm text-background hover:text-accent font-medium transition-colors"
+                  className="text-[14px] font-medium text-accent no-underline transition-colors hover:text-accent-hover"
                 >
-                  All locations →
+                  All neighborhoods →
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Company */}
           <div>
-            <h4 className="font-semibold mb-4 text-background">Company</h4>
-            <ul className="space-y-3">
+            <Eyebrow className="mb-4 block">Cleenly</Eyebrow>
+            <ul className="flex flex-col gap-2.5 list-none p-0">
               {footerConfig.company.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-mushroom hover:text-background transition-colors"
+                    className="text-[14px] text-foreground no-underline transition-colors hover:text-accent"
                   >
                     {item.name}
                   </Link>
@@ -96,30 +106,25 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-foreground-soft flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <div className="text-mushroom">
-            <a
-              href={`mailto:${footerConfig.contact.email}`}
-              className="hover:text-background transition-colors"
-            >
-              {footerConfig.contact.email}
-            </a>
-          </div>
+        <div className="divider-warm" />
 
-          <div className="flex items-center gap-3 text-mushroom">
-            <span>© {currentYear} CLEENLY</span>
-            <span className="text-foreground-soft">·</span>
-            {footerConfig.legal.map((item, i) => (
-              <span key={item.href} className="flex items-center gap-3">
-                <Link
-                  href={item.href}
-                  className="hover:text-background transition-colors"
-                >
-                  {item.name}
-                </Link>
-                {i < footerConfig.legal.length - 1 && <span className="text-foreground-soft">·</span>}
-              </span>
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-[12px] text-foreground-muted">
+          <div>
+            © {currentYear}{" "}
+            <span className="font-display italic font-normal tracking-[-0.035em] text-[14px] text-foreground-soft">
+              Cleenly
+            </span>
+            , Inc. · Licensed in Washington state.
+          </div>
+          <div className="flex gap-[18px]">
+            {footerConfig.legal.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-foreground-muted no-underline transition-colors hover:text-foreground"
+              >
+                {item.name}
+              </Link>
             ))}
           </div>
         </div>
