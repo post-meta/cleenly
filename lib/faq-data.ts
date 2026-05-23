@@ -88,7 +88,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Do you clean windows?",
         answer:
-          "Interior windows are cleaned as time allows during standard and deep cleaning — we don't itemize per pane. For homes with many large windows (view homes, sunrooms), note it in the special requests field at booking and we'll plan extra time. Exterior windows and high glass requiring ladders are not part of our service — we recommend a specialized window cleaning company for those.",
+          "Interior windows are cleaned as time allows during standard and deep cleaning — we don't itemize per pane. For homes with many large windows (view homes, sunrooms), mention it in the special requests field at booking and we'll quote a custom add-on. We reach what a step stool can reach — vaulted ceilings, atrium glass, and any high-reach interior windows need a specialized window service, same as exterior windows.",
       },
     ],
   },

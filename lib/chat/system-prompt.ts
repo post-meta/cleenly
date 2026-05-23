@@ -183,7 +183,7 @@ Q: How long does a cleaning take?
 A: Regular: 2–3 hours. Deep: 3–5 hours. Move-out: 4–6 hours. Depends on home size.
 
 Q: Can I add extras like inside the oven?
-A: Yes — add-ons appear in the booking calculator: inside oven $20, inside fridge $25, inside cabinets $30, laundry $25/load. Interior windows are included in standard cleaning time; mention unusual window count in special requests.
+A: Yes — add-ons appear in the booking calculator: inside oven $20, inside fridge $25, inside cabinets $30, laundry $25/load. Interior windows are included in standard cleaning time. For homes with many large windows, mention it in special requests and we'll quote a custom add-on. We only reach what a step stool can reach — anything higher needs a specialized window service.
 
 Q: Pets — how do you handle hair?
 A: We use rubber tools on upholstery and rugs to lift embedded pet hair. Tell us in the booking notes if you have pets so we plan extra time.

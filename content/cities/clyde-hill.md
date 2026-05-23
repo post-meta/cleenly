@@ -28,7 +28,7 @@ Yes. It's a small city — we cover all of it. Often combined with nearby Bellev
 
 ### My home has a lot of windows overlooking the city. Is window cleaning included?
 
-Interior windows are cleaned as time allows during a standard or deep clean — we don't itemize per pane. For Clyde Hill view homes with many large windows, mention it in the special requests field when booking and we'll plan extra time. Exterior windows and multi-story exterior glass require a specialized window service we don't offer.
+Interior windows are cleaned as time allows during a standard or deep clean — we don't itemize per pane. For Clyde Hill view homes with many large windows, mention it in special requests when booking and we'll quote a custom add-on. We reach what a step stool can reach — vaulted ceilings, two-story foyer glass, and exterior or multi-story windows need a specialized window service.
 
 ### Do you clean renovated mid-century homes?
 
