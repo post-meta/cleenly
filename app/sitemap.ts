@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { cities } from '@/lib/data/cities';
+import { getIndexableCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 import { blogPosts } from '@/lib/data/blog-posts';
 
@@ -35,17 +35,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
     }));
 
-    // City Landing pages (/[city])
-    const cityRoutes = cities.map((city) => ({
+    // City Landing pages (/[city]) — only indexable cities.
+    // Non-indexable cities still render and accept GBP parasite traffic, but
+    // are excluded from sitemap.xml and emit `robots: noindex, follow`.
+    const indexableCities = getIndexableCities();
+    const cityRoutes = indexableCities.map((city) => ({
         url: `${baseUrl}/${city.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.6,
     }));
 
-    // City + Service combo pages (/[city]/[service])
+    // City + Service combo pages (/[city]/[service]) — only for indexable cities.
     const comboRoutes = [];
-    for (const city of cities) {
+    for (const city of indexableCities) {
         for (const service of services) {
             comboRoutes.push({
                 url: `${baseUrl}/${city.slug}/${service.slug}`,
