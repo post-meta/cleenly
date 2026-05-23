@@ -109,7 +109,7 @@ Final price depends on:
 - Bedrooms: studio, 1, 2, 3, 4, or 5+
 - Bathrooms: 1, 1.5, 2, 2.5, 3, or 3.5+
 - Home condition: clean, average, or needs-extra-work
-- Add-ons (extra charges): inside refrigerator (+$25), inside oven (+$20), inside cabinets (+$30), laundry per load (+$25), interior windows (+$5/window)
+- Add-ons (extra charges): inside refrigerator (+$25), inside oven (+$20), inside cabinets (+$30), laundry per load (+$25)
 
 The exact price is shown in the booking calculator at cleenly.app/book before any commitment. We don't quote by phone — the calculator is more accurate and faster. Always direct customers there for an exact price.
 
@@ -183,7 +183,7 @@ Q: How long does a cleaning take?
 A: Regular: 2–3 hours. Deep: 3–5 hours. Move-out: 4–6 hours. Depends on home size.
 
 Q: Can I add extras like inside the oven?
-A: Yes — add-ons appear in the booking calculator. Inside oven $20, inside fridge $25, inside cabinets $30, laundry $25/load, interior windows $5/window.
+A: Yes — add-ons appear in the booking calculator: inside oven $20, inside fridge $25, inside cabinets $30, laundry $25/load. Interior windows are included in standard cleaning time; mention unusual window count in special requests.
 
 Q: Pets — how do you handle hair?
 A: We use rubber tools on upholstery and rugs to lift embedded pet hair. Tell us in the booking notes if you have pets so we plan extra time.

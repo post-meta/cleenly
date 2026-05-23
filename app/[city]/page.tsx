@@ -93,7 +93,7 @@ export default async function CityPage({ params }: PageProps) {
                                 2
                             </div>
                             <h3 className="font-medium mb-1">See your price</h3>
-                            <p className="text-sm text-gray-500">$100-$400 based on home size</p>
+                            <p className="text-sm text-gray-500">See your exact price in 2 minutes</p>
                         </div>
 
                         <div>
