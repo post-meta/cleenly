@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { cities, getCityBySlug, getAllCitySlugs } from '@/lib/data/cities';
+import { cities, getCityBySlug, getAllCitySlugs, isCityIndexable } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 import { JsonLd } from '@/components/shared/json-ld';
 import { CityHero } from '@/components/shared/city-hero';
@@ -25,12 +25,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const city = getCityBySlug(citySlug);
     if (!city) return {};
 
+    const indexable = isCityIndexable(city.slug);
+
     return {
         title: `House Cleaning ${city.name} WA | Book Online | CLEENLY`,
         description: `House cleaning in ${city.name}: regular, deep, and move-out. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. See your price online and book in minutes.`,
         alternates: {
             canonical: `https://cleenly.app/${city.slug}`,
         },
+        robots: indexable
+            ? undefined
+            : { index: false, follow: true, googleBot: { index: false, follow: true } },
     };
 }
 
@@ -93,7 +98,7 @@ export default async function CityPage({ params }: PageProps) {
                                 2
                             </div>
                             <h3 className="font-medium mb-1">See your price</h3>
-                            <p className="text-sm text-gray-500">$100-$400 based on home size</p>
+                            <p className="text-sm text-gray-500">See your exact price in 2 minutes</p>
                         </div>
 
                         <div>

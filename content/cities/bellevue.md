@@ -6,7 +6,7 @@ House cleaning in Bellevue, Washington. We serve high-rise condos in Downtown, l
 
 ## Regular Cleaning
 
-Regular cleaning in Bellevue costs $100-$200 for most homes. We clean Downtown high-rises, Somerset estates, and everything in between. Bellevue's challenge is keeping large windows streak-free and managing dust in high-traffic urban condos. Our regular cleaning maintains the standard your home deserves. Serving Downtown, Crossroads, Factoria, Somerset, Newport, Eastgate, and Bridle Trails.
+Regular cleaning in Bellevue covers Downtown high-rises, Somerset estates, and everything in between. Bellevue homes accumulate dust fast — large sun-facing rooms, high ceilings, high-traffic urban condos. Our regular cleaning maintains the surfaces you live on day to day. Serving Downtown, Crossroads, Factoria, Somerset, Newport, Eastgate, and Bridle Trails.
 
 ## Deep Cleaning
 

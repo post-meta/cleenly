@@ -1,5 +1,7 @@
 "use client";
 
+import { formatPriceRange } from "@/lib/pricing";
+
 interface StickyPriceFooterProps {
   priceMin: number;
   priceMax: number;
@@ -40,7 +42,7 @@ export function StickyPriceFooter({
           <span
             className="tnum font-display font-normal text-[24px] leading-none text-foreground mt-0.5"
           >
-            ${priceMin} – ${priceMax}
+            {formatPriceRange(priceMin, priceMax)}
           </span>
           <span className="text-[11px] text-foreground-muted mt-0.5">
             {duration}

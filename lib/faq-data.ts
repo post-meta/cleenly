@@ -88,7 +88,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Do you clean windows?",
         answer:
-          "Interior window cleaning is available as an add-on at $5 per window. This includes washing the inside glass and wiping the frame. Exterior window cleaning and high windows requiring ladders are not available through CLEENLY — we recommend a specialized window cleaning service for those.",
+          "Interior windows are cleaned as time allows during standard and deep cleaning — we don't itemize per pane. For homes with many large windows (view homes, sunrooms), mention it in the special requests field at booking and we'll quote a custom add-on. We reach what a step stool can reach — vaulted ceilings, atrium glass, and any high-reach interior windows need a specialized window service, same as exterior windows.",
       },
     ],
   },

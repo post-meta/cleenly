@@ -16,7 +16,7 @@ interface StepDetailsProps {
   errors?: Record<string, string>;
 }
 
-const bedrooms = ["Studio", "1", "2", "3", "4", "5+"];
+const bedrooms = ["studio", "1", "2", "3", "4", "5+"];
 const bathrooms = ["1", "1.5", "2", "2.5", "3", "3.5+"];
 const conditions = [
   { id: "clean", label: "Clean", sub: "maintained regularly" },
@@ -102,7 +102,7 @@ export function StepDetails({
           value={data.bedrooms}
           options={bedrooms}
           onChange={(v) => onChange({ bedrooms: v as BedroomCount })}
-          formatOption={(o) => (o === "Studio" ? "Studio" : `${o} bed`)}
+          formatOption={(o) => (o === "studio" ? "Studio" : `${o} bed`)}
           error={errors.bedrooms}
         />
         <FieldSelect

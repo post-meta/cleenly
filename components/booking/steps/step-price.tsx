@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import {
   calculatePrice,
+  formatPriceRange,
   getEstimatedDuration,
   serviceIncludes,
 } from "@/lib/pricing";
@@ -47,7 +48,6 @@ const pnwAddonsList = [
 const standardAddonsList = [
   { id: "fridge" as Addon, label: "Inside fridge", desc: "Shelves, drawers, gaskets.", price: "+$25" },
   { id: "oven" as Addon, label: "Inside oven", desc: "Racks, glass, deep degrease.", price: "+$30" },
-  { id: "windows" as Addon, label: "Interior windows", desc: "Up to 8 panes.", price: "+$40" },
   { id: "cabinets" as Addon, label: "Inside cabinets", desc: "Empty interiors only.", price: "+$25" },
 ];
 
@@ -102,7 +102,7 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
           {serviceNames[serviceType]} · {bedroomLabels[bedrooms]} · {bathroomLabels[bathrooms]}
         </div>
         <div className="tnum font-display font-normal text-[44px] tracking-tight mt-1.5 leading-none text-foreground">
-          ${totalMin} – ${totalMax}
+          {formatPriceRange(totalMin, totalMax)}
         </div>
         <div className="text-[12px] text-foreground-muted mt-1.5">
           Typical duration: {duration}

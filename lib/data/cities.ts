@@ -11,7 +11,24 @@ export interface CityData {
     wikipediaUrl?: string;
     landmarks?: string[];
     professions?: string[];
+    // SEO indexability — true means city page + all 10 combo pages are indexed.
+    // Set to true only when content/cities/<slug>.md has city-specific intros,
+    // whyChoose, and localFAQs that genuinely differentiate from the template.
+    // Non-indexable cities still render and accept GBP parasite traffic; they
+    // just emit `robots: noindex, follow` and are excluded from sitemap.xml.
+    indexable?: boolean;
 }
+
+// Indexable cities — keep this list in sync with content/cities/<slug>.md depth.
+// Adding a city here without bespoke MD content will reintroduce thin-content
+// duplicates in GSC. See cleenly.md → Recent Sessions → 2026-05-23 SEO triage.
+const INDEXABLE_CITY_SLUGS = new Set([
+    'seattle',
+    'bellevue',
+    'kirkland',
+    'tacoma',
+    'edmonds',
+]);
 
 export const cities: CityData[] = [
     // === SEATTLE ===
@@ -348,9 +365,21 @@ export const cities: CityData[] = [
 ];
 
 export const getCityBySlug = (slug: string): CityData | undefined => {
-    return cities.find(c => c.slug === slug);
+    const city = cities.find(c => c.slug === slug);
+    if (!city) return undefined;
+    return { ...city, indexable: INDEXABLE_CITY_SLUGS.has(city.slug) };
 };
 
 export const getAllCitySlugs = (): string[] => {
     return cities.map(c => c.slug);
+};
+
+export const isCityIndexable = (slug: string): boolean => {
+    return INDEXABLE_CITY_SLUGS.has(slug);
+};
+
+export const getIndexableCities = (): CityData[] => {
+    return cities
+        .filter(c => INDEXABLE_CITY_SLUGS.has(c.slug))
+        .map(c => ({ ...c, indexable: true }));
 };

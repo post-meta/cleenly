@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { cities, getCityBySlug } from '@/lib/data/cities';
+import { cities, getCityBySlug, isCityIndexable } from '@/lib/data/cities';
 import { services, getServiceBySlug } from '@/lib/data/services';
 import { JsonLd } from '@/components/shared/json-ld';
 import {
@@ -36,12 +36,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const service = getServiceBySlug(serviceSlug);
     if (!city || !service) return {};
 
+    const indexable = isCityIndexable(city.slug);
+
     return {
         title: `${service.name} ${city.name} WA | ${service.priceRange} | CLEENLY`,
         description: `${service.name} in ${city.name}, Washington. ${service.priceRange}. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online in 2 minutes.`,
         alternates: {
             canonical: `https://cleenly.app/${city.slug}/${service.slug}`,
         },
+        robots: indexable
+            ? undefined
+            : { index: false, follow: true, googleBot: { index: false, follow: true } },
     };
 }
 

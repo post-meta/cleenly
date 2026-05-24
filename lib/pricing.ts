@@ -59,7 +59,6 @@ export const addonPrices: Record<Addon, number> = {
   oven: 2000,
   cabinets: 3000,
   laundry: 2500,
-  windows: 500,
   pollen_purge: 9500,
   damp_season_reset: 8500,
 };
@@ -85,11 +84,6 @@ export const addonInfo: Record<Addon, { label: string; price: string; descriptio
     label: "Laundry (wash, dry, fold)",
     price: "+$25/load",
     description: "Washing, tumble drying, and neat folding of one load of linens/clothes.",
-  },
-  windows: {
-    label: "Interior windows",
-    price: "+$5/window",
-    description: "Glass detailing, pane wiping, and track dusting of interior windows.",
   },
   pollen_purge: {
     label: "The Pollen Purge Protocol",
