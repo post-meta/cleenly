@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>CLEENLY — Wordmark lockup sheet (v2 · italic serif direction)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="colors_and_type.css"/>
+  <style>
+    :root {
+      --page-pad-x: clamp(40px, 6vw, 96px);
+      --page-pad-y: 72px;
+      --col-max: 1180px;
+      --rule: 1px solid var(--color-border);
+      --rule-soft: 1px solid rgba(45, 40, 38, 0.08);
+      --mono: ui-monospace, "SF Mono", Consolas, monospace;
+    }
+    body { padding: 0; }
+    .sheet { max-width: var(--col-max); margin: 0 auto; padding: var(--page-pad-y) var(--page-pad-x) 160px; }
+
+    /* ---------- THE WORDMARK (canonical CSS) ---------- */
+    .wm {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      color: var(--color-foreground);
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    /* ---------- TYPE UTILITIES ---------- */
+    .eyebrow-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-foreground-muted);
+    }
+    .cap-mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--color-foreground-muted);
+      letter-spacing: 0.04em;
+      line-height: 1.55;
+    }
+    .spec-label {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-foreground);
+    }
+
+    /* ---------- PAGE HEADER ---------- */
+    .page-head { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: end; padding-bottom: 48px; border-bottom: var(--rule); }
+    .page-head h1 { font-size: clamp(56px, 7vw, 88px); line-height: 0.98; letter-spacing: -0.03em; margin: 14px 0 0; }
+    .page-head .lede { font-size: 18px; line-height: 1.55; color: var(--color-foreground-soft); max-width: 38ch; margin: 0; }
+    .page-head .meta-row { display: flex; gap: 36px; margin-top: 14px; }
+    .page-head .meta-row .cell { display: flex; flex-direction: column; gap: 4px; }
+    .page-head .meta-row .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-foreground-muted); }
+    .page-head .meta-row .v { font-size: 14px; color: var(--color-foreground); }
+
+    /* ---------- SECTION ---------- */
+    section { padding: 96px 0 0; }
+    .section-head { display: grid; grid-template-columns: 96px 1fr; gap: 36px; align-items: baseline; padding-bottom: 40px; }
+    .section-head .num { font-family: var(--mono); font-size: 12px; color: var(--color-foreground-muted); letter-spacing: 0.18em; padding-top: 14px; }
+    .section-head h2 { margin: 0; font-size: clamp(36px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; }
+    .section-head p { margin: 12px 0 0; font-size: 16px; line-height: 1.55; color: var(--color-foreground-soft); max-width: 62ch; }
+
+    /* ---------- HERO LOCKUP ---------- */
+    .hero-lockup {
+      border: var(--rule);
+      border-radius: var(--radius-2xl);
+      background: var(--color-background);
+      padding: 96px 56px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      gap: 48px;
+    }
+    .hero-lockup .corner {
+      position: absolute; top: 24px; left: 28px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--color-foreground-muted);
+    }
+    .hero-lockup .corner-right {
+      position: absolute; top: 24px; right: 28px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--color-foreground-muted);
+    }
+    .hero-lockup .wm { font-size: 200px; }
+    .hero-foot {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
+      width: 100%; max-width: 760px;
+      border-top: var(--rule); padding-top: 18px; margin-top: 8px;
+    }
+    .hero-foot .cell { display: flex; flex-direction: column; gap: 4px; }
+    .hero-foot .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); }
+    .hero-foot .v { font-size: 13px; color: var(--color-foreground); line-height: 1.5; }
+
+    /* ---------- ANATOMY ---------- */
+    .anatomy-frame {
+      border: var(--rule);
+      border-radius: var(--radius-xl);
+      background: var(--color-background);
+      padding: 88px 56px 56px;
+      position: relative;
+    }
+    .anatomy-frame .corner {
+      position: absolute; top: 20px; left: 24px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--color-foreground-muted);
+    }
+    .anatomy-stage {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px 0 56px;
+    }
+    .anatomy-stage .wm { font-size: 156px; line-height: 1; position: relative; }
+
+    /* Baseline rule + cap rule + x-height rule */
+    .anatomy-stage .baseline,
+    .anatomy-stage .cap-line,
+    .anatomy-stage .x-line,
+    .anatomy-stage .desc-line {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--color-accent);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .anatomy-stage .baseline::after,
+    .anatomy-stage .cap-line::after,
+    .anatomy-stage .x-line::after,
+    .anatomy-stage .desc-line::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 12px;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+
+    .callouts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
+    .callout {
+      border-top: var(--rule);
+      padding-top: 14px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .callout .pin { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--color-accent); text-transform: uppercase; }
+    .callout .ttl { font-size: 14px; font-weight: 600; color: var(--color-foreground); }
+    .callout .bdy { font-size: 13px; color: var(--color-foreground-soft); line-height: 1.5; }
+
+    /* ---------- CLEARSPACE ---------- */
+    .clearspace-frame {
+      border: var(--rule);
+      border-radius: var(--radius-xl);
+      background: var(--color-background);
+      padding: 28px;
+      position: relative;
+    }
+    .clearspace-frame .corner {
+      position: absolute; top: 16px; left: 20px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--color-foreground-muted);
+      z-index: 1;
+    }
+    .clearspace-inner {
+      position: relative;
+      background-image:
+        linear-gradient(to right, rgba(45,40,38,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(45,40,38,0.05) 1px, transparent 1px);
+      background-size: var(--cap, 60px) var(--cap, 60px);
+      padding: var(--cap, 60px);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 320px;
+    }
+    .clearspace-mark {
+      position: relative;
+      outline: 1px dashed var(--color-accent);
+      outline-offset: 0;
+      padding: 4px 4px 14px;
+    }
+    .clearspace-mark::before {
+      content: ""; position: absolute;
+      inset: calc(var(--cap, 60px) * -1);
+      border: 1px dashed rgba(217,119,87,0.5);
+      pointer-events: none;
+    }
+    .x-tick {
+      position: absolute;
+      font-family: var(--mono); font-size: 10px;
+      color: var(--color-accent);
+      letter-spacing: 0.06em;
+      background: var(--color-background);
+      padding: 0 4px;
+    }
+    .x-tick.tl { top: calc(var(--cap, 60px) * -1 - 7px); left: calc(var(--cap, 60px) * -0.5 - 4px); }
+    .x-tick.b { bottom: calc(var(--cap, 60px) * -1 - 7px); left: 50%; transform: translateX(-50%); }
+    .x-tick.r { right: calc(var(--cap, 60px) * -1 - 14px); top: 50%; transform: translateY(-50%); }
+    .x-tick.l { left: calc(var(--cap, 60px) * -1 - 14px); top: 50%; transform: translateY(-50%); }
+
+    .clearspace-explainer {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 18px;
+    }
+    .x-row {
+      border-top: var(--rule);
+      padding-top: 12px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .x-row .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); }
+    .x-row .v { font-size: 14px; color: var(--color-foreground); }
+    .x-row .nb { font-size: 12px; color: var(--color-foreground-soft); line-height: 1.5; }
+
+    /* ---------- SIZE LADDER ---------- */
+    .ladder {
+      border: var(--rule); border-radius: var(--radius-xl); background: var(--color-background);
+      padding: 40px 48px;
+    }
+    .ladder-row {
+      display: grid; grid-template-columns: 88px 1fr auto; gap: 36px; align-items: center;
+      padding: 22px 0; border-bottom: var(--rule-soft);
+    }
+    .ladder-row:last-child { border-bottom: 0; }
+    .ladder-row .sz { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--color-foreground-muted); }
+    .ladder-row .usage { font-size: 13px; color: var(--color-foreground-soft); line-height: 1.5; max-width: 36ch; text-align: right; }
+    .ladder-divider {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 88px 1fr; gap: 36px;
+      margin: 4px 0;
+      align-items: center;
+    }
+    .ladder-divider .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent); }
+    .ladder-divider .rule { height: 1px; background: var(--color-accent); opacity: 0.35; }
+
+    /* ---------- COLOR MATRIX ---------- */
+    .color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .surface-tile {
+      border: var(--rule);
+      border-radius: var(--radius-xl);
+      background: var(--color-background);
+      min-height: 200px;
+      padding: 48px 28px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .surface-tile .corner-tag {
+      position: absolute; top: 14px; left: 18px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--color-foreground-muted);
+    }
+    .surface-tile .wm { font-size: 64px; }
+    .surface-tile--warm { background: var(--color-surface-warm); }
+    .surface-tile--sand { background: var(--color-surface-sand); }
+    .surface-tile--deep { background: var(--color-surface-deep); border-color: transparent; }
+    .surface-tile--deep .wm { color: var(--color-on-deep); }
+    .surface-tile--deep .corner-tag { color: rgba(245,239,230,0.6); }
+    .surface-tile--accent { background: var(--color-accent); border-color: transparent; }
+    .surface-tile--accent .wm { color: #F5EFE6; }
+    .surface-tile--accent .corner-tag { color: rgba(245,239,230,0.7); }
+
+    .surface-foot {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: baseline;
+      padding-top: 12px; border-top: var(--rule);
+    }
+    .surface-foot .name { font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .surface-foot .use { font-size: 12px; color: var(--color-foreground-soft); line-height: 1.5; }
+    .surface-foot .ref { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-foreground-muted); }
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    .swatch-strip { display: flex; align-items: center; gap: 10px; padding-top: 2px; }
+    .swatch-strip .sw { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(45,40,38,0.1); }
+    .swatch-strip .hex { font-family: var(--mono); font-size: 10px; color: var(--color-foreground-muted); letter-spacing: 0.06em; }
+
+    /* ---------- MARK + APP ICON ---------- */
+    .mark-row { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+    .mark-tile {
+      border: var(--rule); border-radius: var(--radius-xl); background: var(--color-background);
+      padding: 40px;
+      display: flex; flex-direction: column; gap: 24px;
+      align-items: center; justify-content: center;
+    }
+    .mark-square {
+      width: 200px; height: 200px;
+      border-radius: 28px;
+      background: var(--color-surface-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-on-deep);
+      font-size: 168px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      padding-bottom: 0.04em;
+    }
+    .mark-tile .mark-cap { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); }
+
+    .favicon-row {
+      border: var(--rule); border-radius: var(--radius-xl); background: var(--color-background);
+      padding: 40px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .favicon-ladder {
+      display: flex; align-items: end; gap: 28px;
+      padding: 28px 8px 8px;
+      border-bottom: var(--rule);
+    }
+    .favicon-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+    .favicon {
+      background: var(--color-surface-deep);
+      color: var(--color-on-deep);
+      border-radius: 4px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+      padding-bottom: 0.04em;
+    }
+    .favicon-cell .px { font-family: var(--mono); font-size: 10px; color: var(--color-foreground-muted); letter-spacing: 0.06em; }
+
+    .favicon-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 4px; }
+    .favicon-foot .col h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .favicon-foot .col p { margin: 0; font-size: 13px; color: var(--color-foreground-soft); line-height: 1.55; }
+
+    /* ---------- IN-CONTEXT ---------- */
+    .context-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .ctx-tile {
+      border: var(--rule); border-radius: var(--radius-xl); overflow: hidden;
+      background: var(--color-background);
+      display: flex; flex-direction: column;
+    }
+    .ctx-tile .foot { border-top: var(--rule); padding: 12px 24px; display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+    .ctx-tile .foot .name { font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .ctx-tile .foot .meta { font-family: var(--mono); font-size: 10px; color: var(--color-foreground-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* Header preview */
+    .ctx-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: var(--rule);
+      background: var(--color-background);
+    }
+    .ctx-header .nav { display: flex; gap: 20px; align-items: center; font-size: 13px; color: var(--color-foreground-soft); }
+    .ctx-header .cta {
+      font-size: 13px; font-weight: 500; color: var(--color-background);
+      background: var(--color-foreground); padding: 8px 14px;
+      border-radius: var(--radius-md);
+    }
+    .ctx-body-fill {
+      background-image: radial-gradient(circle, var(--color-mushroom) 1.5px, transparent 1px);
+      background-size: 18px 18px;
+      flex: 1;
+      opacity: 0.4;
+      border-bottom: var(--rule);
+    }
+
+    /* Footer preview */
+    .ctx-footer {
+      background: var(--color-surface-deep); color: var(--color-on-deep);
+      padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 14px;
+      flex: 1;
+    }
+    .ctx-footer .wm { font-size: 40px; color: var(--color-on-deep); padding-bottom: 8px; }
+    .ctx-footer .row { display: flex; gap: 24px; font-size: 12px; color: #A89B8A; }
+    .ctx-footer .row.legal { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(245,239,230,0.12); color: #8C8073; }
+
+    /* Booking topbar */
+    .ctx-topbar {
+      padding: 14px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: var(--rule);
+      background: var(--color-background);
+    }
+    .ctx-topbar .step { font-family: var(--mono); font-size: 11px; color: var(--color-foreground-muted); letter-spacing: 0.12em; }
+    .ctx-topbar .wm { font-size: 28px; padding-bottom: 4px; }
+
+    /* Email sign-off */
+    .ctx-email {
+      background: var(--color-surface-warm);
+      padding: 28px 28px 24px;
+      flex: 1;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .ctx-email p { margin: 0; font-size: 14px; color: var(--color-foreground-soft); line-height: 1.55; }
+    .ctx-email .signed { font-size: 14px; color: var(--color-foreground-soft); margin-top: 4px; }
+    .ctx-email .signed .wm { font-size: 28px; vertical-align: -5px; margin-left: 2px; }
+
+    /* ---------- DO / DON'T ---------- */
+    .dd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .dd {
+      border: var(--rule); border-radius: var(--radius-lg);
+      background: var(--color-background);
+      padding: 32px 24px 18px;
+      display: flex; flex-direction: column; gap: 14px;
+      min-height: 220px;
+    }
+    .dd .preview {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 14px 6px;
+      overflow: hidden;
+    }
+    .dd .foot {
+      border-top: var(--rule); padding-top: 12px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .dd .tag {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--color-error);
+    }
+    .dd .title { font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .dd .desc { font-size: 12px; color: var(--color-foreground-soft); line-height: 1.5; }
+
+    /* misuse-specific */
+    .dd .wm-bad-upright { font-style: normal !important; font-size: 48px; }
+    .dd .wm-bad-stretch { transform: scaleX(1.7); transform-origin: center; font-size: 36px; }
+    .dd .wm-bad-bold { font-weight: 700 !important; font-size: 48px; }
+    .dd .wm-bad-caps { text-transform: uppercase; font-size: 40px; letter-spacing: 0.02em; }
+    .dd .wm-bad-recolor { color: var(--color-accent) !important; font-size: 48px; }
+    .dd .wm-bad-shadow { font-size: 48px; text-shadow: 2px 4px 0 var(--color-accent); }
+
+    /* ---------- FOOTER ---------- */
+    .doc-foot {
+      margin-top: 120px;
+      padding-top: 28px;
+      border-top: var(--rule);
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
+    }
+    .doc-foot .cell .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); margin-bottom: 6px; }
+    .doc-foot .cell .v { font-size: 14px; color: var(--color-foreground); line-height: 1.55; }
+    .doc-foot .cell .v code { font-family: var(--mono); font-size: 12px; background: var(--color-gray-50); padding: 2px 6px; border-radius: 4px; }
+
+    @media (max-width: 880px) {
+      .color-grid, .context-grid, .dd-grid, .callouts, .mark-row { grid-template-columns: 1fr; }
+      .clearspace-explainer { grid-template-columns: 1fr; }
+      .page-head { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 8px; }
+      .section-head .num { padding-top: 0; }
+      .hero-lockup .wm { font-size: 96px; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="sheet">
+
+  <!-- HEADER -->
+  <header class="page-head" data-screen-label="00 Cover">
+    <div>
+      <span class="eyebrow-num">CLEENLY · Brand · Document 03 · v2</span>
+      <h1>Wordmark <em>lockup sheet.</em></h1>
+    </div>
+    <div>
+      <p class="lede">A single italic-serif wordmark — set in Instrument Serif, title case. Construction, clearspace, sizing and usage rules. Hand this to anyone setting CLEENLY in chrome, print, or partner placements.</p>
+      <div class="meta-row">
+        <div class="cell"><span class="k">Direction</span><span class="v">Variant 03</span></div>
+        <div class="cell"><span class="k">Status</span><span class="v">Locked · v2.0</span></div>
+        <div class="cell"><span class="k">Revised</span><span class="v">May 2026</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 01 — THE LOCKUP -->
+  <section data-screen-label="01 The lockup">
+    <div class="section-head">
+      <span class="num">01</span>
+      <div>
+        <h2>The <em>one</em> wordmark.</h2>
+        <p>CLEENLY now ships a single locked wordmark: <em>Cleenly</em> set in Instrument Serif italic, title case, weight 400. It carries every surface — marketing, product, print, email. The previous primary/editorial split is retired.</p>
+      </div>
+    </div>
+
+    <div class="hero-lockup">
+      <span class="corner">Variant 03 · Locked</span>
+      <span class="corner-right">Instrument Serif italic · 400</span>
+      <span class="wm">Cleenly</span>
+      <div class="hero-foot">
+        <div class="cell"><span class="k">Typeface</span><span class="v">Instrument Serif</span></div>
+        <div class="cell"><span class="k">Weight / style</span><span class="v">400 · italic</span></div>
+        <div class="cell"><span class="k">Tracking</span><span class="v">−0.035em</span></div>
+      </div>
+    </div>
+
+    <p class="cap-mono" style="margin-top:18px;">Why italic. The brand's editorial trick — wrap one word in <em style="font-family:var(--font-display);">&lt;em&gt;</em> — moves from the chrome into the wordmark itself. The whole identity reads as one continuous editorial thought.</p>
+  </section>
+
+  <!-- 02 — ANATOMY -->
+  <section data-screen-label="02 Anatomy">
+    <div class="section-head">
+      <span class="num">02</span>
+      <div>
+        <h2>Anatomy.</h2>
+        <p>Six letterforms. The capital <em>C</em> opens with a slight swash; the doubled <em>e</em> is the visual midpoint; the descending swash <em>y</em> is the signature. Italic angle sits at about 12°.</p>
+      </div>
+    </div>
+
+    <div class="anatomy-frame">
+      <span class="corner">Construction · Variant 03</span>
+      <div class="anatomy-stage">
+        <span class="wm">Cleenly</span>
+      </div>
+    </div>
+
+    <div class="callouts">
+      <div class="callout">
+        <span class="pin">A · Capital C</span>
+        <span class="ttl">The cap-height anchor</span>
+        <span class="bdy">The opening swash sets the brand's mood — formal but soft. The C also becomes the mark on its own (see §06).</span>
+      </div>
+      <div class="callout">
+        <span class="pin">B · Doubled e</span>
+        <span class="ttl">Visual midpoint</span>
+        <span class="bdy">The double-e is what makes CLEENLY scannable. The italic kerning pulls them tight without ligaturing — keep both bowls distinct.</span>
+      </div>
+      <div class="callout">
+        <span class="pin">C · Swash y</span>
+        <span class="ttl">The signature descender</span>
+        <span class="bdy">The terminal y carries Instrument Serif's swash. This descender extends below the baseline — reserve space for it in every layout.</span>
+      </div>
+      <div class="callout">
+        <span class="pin">D · Italic angle</span>
+        <span class="ttl">~12° from vertical</span>
+        <span class="bdy">Inherited from the typeface. Do not re-slant, re-skew, or apply any additional transform.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — CLEARSPACE -->
+  <section data-screen-label="03 Clearspace">
+    <div class="section-head">
+      <span class="num">03</span>
+      <div>
+        <h2>Clearspace.</h2>
+        <p>Reserve one cap-height of empty space on every side of the wordmark — and measure the bottom from the descender of <em>y</em>, not from the baseline. Nothing crosses this margin.</p>
+      </div>
+    </div>
+
+    <div class="clearspace-frame" style="--cap: 60px;">
+      <span class="corner">Clearspace · 1× cap-height</span>
+      <div class="clearspace-inner">
+        <div class="clearspace-mark">
+          <span class="wm" style="font-size:84px;">Cleenly</span>
+          <span class="x-tick tl">1×</span>
+          <span class="x-tick b">1×</span>
+          <span class="x-tick r">1×</span>
+          <span class="x-tick l">1×</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearspace-explainer">
+      <div class="x-row">
+        <span class="k">Unit</span>
+        <span class="v">X = cap-height of C</span>
+        <span class="nb">For an 84px wordmark, X ≈ 60px. Scale proportionally.</span>
+      </div>
+      <div class="x-row">
+        <span class="k">Bottom edge</span>
+        <span class="v">Measure from y descender</span>
+        <span class="nb">Not from the baseline. The swash y is part of the mark.</span>
+      </div>
+      <div class="x-row">
+        <span class="k">Preferred</span>
+        <span class="v">2× when space allows</span>
+        <span class="nb">Editorial layouts breathe better at double. Italic needs more air than a roman wordmark.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — SIZING -->
+  <section data-screen-label="04 Sizing">
+    <div class="section-head">
+      <span class="num">04</span>
+      <div>
+        <h2>Sizing &amp; legibility threshold.</h2>
+        <p>Instrument Serif italic holds beautifully at display sizes. Below 20px the swash terminals soften and the y descender starts to fight pixel rounding. Below 14px, switch to the upright C mark only — never set the full italic wordmark at favicon size.</p>
+      </div>
+    </div>
+
+    <div class="ladder">
+      <div class="ladder-row">
+        <span class="sz">128px</span>
+        <span class="wm" style="font-size:128px;">Cleenly</span>
+        <span class="usage">Brand splash · about-page mast · print covers</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">72px</span>
+        <span class="wm" style="font-size:72px;">Cleenly</span>
+        <span class="usage">Marketing hero · large editorial moments</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">48px</span>
+        <span class="wm" style="font-size:48px;">Cleenly</span>
+        <span class="usage">Section headers · landing-page footer</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">32px</span>
+        <span class="wm" style="font-size:32px;">Cleenly</span>
+        <span class="usage">Marketing nav · default chrome size</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">22px</span>
+        <span class="wm" style="font-size:22px;">Cleenly</span>
+        <span class="usage">Booking topbar · email header</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">18px</span>
+        <span class="wm" style="font-size:18px;">Cleenly</span>
+        <span class="usage">Floor for the full wordmark</span>
+      </div>
+
+      <div class="ladder-divider">
+        <span class="lbl">↓ Below 16px · use the C mark only</span>
+        <div class="rule"></div>
+      </div>
+
+      <div class="ladder-row">
+        <span class="sz">≤14px</span>
+        <span class="wm" style="font-size:32px;">C</span>
+        <span class="usage">Favicon · status-bar caption · OG-image corner</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — COLOR MATRIX -->
+  <section data-screen-label="05 Color usage">
+    <div class="section-head">
+      <span class="num">05</span>
+      <div>
+        <h2>Color &amp; surface usage.</h2>
+        <p>Six approved surface combinations. The wordmark never appears on raw photography — it always sits on a brand surface (paper, cream, sand, walnut), on a flat accent panel, or inside a paper bar / charcoal scrim over imagery.</p>
+      </div>
+    </div>
+
+    <div class="color-grid">
+      <div class="stack">
+        <div class="surface-tile">
+          <span class="corner-tag">A</span>
+          <span class="wm">Cleenly</span>
+        </div>
+        <div class="surface-foot">
+          <span class="name">On warm paper</span>
+          <span class="use">Default — marketing chrome, booking flow.</span>
+          <span class="ref">A</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#FAFAF8;"></span><span class="hex">#FAFAF8</span>
+          <span class="sw" style="background:#2D2826;"></span><span class="hex">#2D2826</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="surface-tile surface-tile--warm">
+          <span class="corner-tag">B</span>
+          <span class="wm">Cleenly</span>
+        </div>
+        <div class="surface-foot">
+          <span class="name">On cream / linen</span>
+          <span class="use">Quiet emphasis sections, callouts.</span>
+          <span class="ref">B</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#F5EFE6;"></span><span class="hex">#F5EFE6</span>
+          <span class="sw" style="background:#2D2826;"></span><span class="hex">#2D2826</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="surface-tile surface-tile--sand">
+          <span class="corner-tag">C</span>
+          <span class="wm">Cleenly</span>
+        </div>
+        <div class="surface-foot">
+          <span class="name">On warm sand</span>
+          <span class="use">Editorial emphasis. Print interiors.</span>
+          <span class="ref">C</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#E8E0D2;"></span><span class="hex">#E8E0D2</span>
+          <span class="sw" style="background:#2D2826;"></span><span class="hex">#2D2826</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="surface-tile surface-tile--deep">
+          <span class="corner-tag">D</span>
+          <span class="wm">Cleenly</span>
+        </div>
+        <div class="surface-foot">
+          <span class="name">On walnut</span>
+          <span class="use">Full-bleed dark sections, footer, app-icon tile.</span>
+          <span class="ref">D</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#2D2826;border-color:rgba(245,239,230,0.2);"></span><span class="hex">#2D2826</span>
+          <span class="sw" style="background:#F5EFE6;"></span><span class="hex">#F5EFE6</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="surface-tile surface-tile--accent">
+          <span class="corner-tag">E</span>
+          <span class="wm">Cleenly</span>
+        </div>
+        <div class="surface-foot">
+          <span class="name">On terracotta</span>
+          <span class="use">Promotional moments only. Use sparingly.</span>
+          <span class="ref">E</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#D97757;"></span><span class="hex">#D97757</span>
+          <span class="sw" style="background:#F5EFE6;"></span><span class="hex">#F5EFE6</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="surface-tile" style="background:url('assets/lifestyle-living-1.jpg') center/cover no-repeat; padding: 0;">
+          <span class="corner-tag" style="color:#F5EFE6;text-shadow:0 1px 2px rgba(0,0,0,0.5);">F</span>
+          <div style="background:rgba(45,40,38,0.55);padding:18px 28px;border-radius:var(--radius-lg);">
+            <span class="wm" style="color:#F5EFE6;font-size:56px;">Cleenly</span>
+          </div>
+        </div>
+        <div class="surface-foot">
+          <span class="name">On photography · with scrim</span>
+          <span class="use">Always use a warm-charcoal scrim. Never set directly on image.</span>
+          <span class="ref">F</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="hex">scrim rgba(45,40,38,0.55) min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 — MARK + APP ICON -->
+  <section data-screen-label="06 Mark and icon">
+    <div class="section-head">
+      <span class="num">06</span>
+      <div>
+        <h2>The mark &amp; app-icon system.</h2>
+        <p>The square mark is a single italic <em>C</em> in Instrument Serif, paper on walnut. The italic swash holds at icon sizes — the C is the most distinctive letterform in the wordmark. Used for app/PWA install, favicon, social-share fallback, any square placement.</p>
+      </div>
+    </div>
+
+    <div class="mark-row">
+      <div class="mark-tile">
+        <div class="mark-square">C</div>
+        <div style="text-align:center;display:flex;flex-direction:column;gap:6px;">
+          <span class="spec-label">The CLEENLY mark</span>
+          <span class="mark-cap">200 × 200 · radius 28 · italic C · paper on walnut</span>
+        </div>
+      </div>
+
+      <div class="favicon-row">
+        <div class="favicon-ladder">
+          <div class="favicon-cell">
+            <div class="favicon" style="width:96px;height:96px;border-radius:18px;font-size:84px;">C</div>
+            <span class="px">512 / 256 / 192</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:64px;height:64px;border-radius:12px;font-size:56px;">C</div>
+            <span class="px">128 / 96</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:48px;height:48px;border-radius:9px;font-size:42px;">C</div>
+            <span class="px">64</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:32px;height:32px;border-radius:6px;font-size:28px;">C</div>
+            <span class="px">48 / 32</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:20px;height:20px;border-radius:4px;font-size:18px;">C</div>
+            <span class="px">16</span>
+          </div>
+        </div>
+
+        <div class="favicon-foot">
+          <div class="col">
+            <h4>Radius scales with size</h4>
+            <p>Corner radius stays at ~14% of the tile width. 18-radius at 96px; 4-radius at 20px. Never pure square, never circular.</p>
+          </div>
+          <div class="col">
+            <h4>The italic C survives down to 16px</h4>
+            <p>Below that the swash terminal disappears into a single pixel — but the silhouette still reads. Do not substitute a roman or sans C; the italic is the brand.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 — IN CONTEXT -->
+  <section data-screen-label="07 In context">
+    <div class="section-head">
+      <span class="num">07</span>
+      <div>
+        <h2>In context.</h2>
+        <p>Four canonical placements. Because there is only one wordmark, every surface speaks with the same voice — chrome, sign-off, footer, mobile bar.</p>
+      </div>
+    </div>
+
+    <div class="context-grid">
+      <div class="ctx-tile">
+        <div class="ctx-header">
+          <span class="wm" style="font-size:32px;padding-bottom:4px;">Cleenly</span>
+          <div class="nav">
+            <span>Services</span><span>Pricing</span><span>Areas</span>
+            <span class="cta">Book now</span>
+          </div>
+        </div>
+        <div class="ctx-body-fill" style="min-height:140px;"></div>
+        <div class="foot">
+          <span class="name">Marketing header</span>
+          <span class="meta">32px · warm paper</span>
+        </div>
+      </div>
+
+      <div class="ctx-tile">
+        <div class="ctx-topbar">
+          <span class="wm">Cleenly</span>
+          <span class="step">Step 3 / 6</span>
+        </div>
+        <div class="ctx-body-fill" style="min-height:140px;"></div>
+        <div class="foot">
+          <span class="name">Booking topbar (mobile)</span>
+          <span class="meta">28px · warm paper</span>
+        </div>
+      </div>
+
+      <div class="ctx-tile">
+        <div class="ctx-footer">
+          <span class="wm">Cleenly</span>
+          <div class="row"><span>Greater Seattle</span><span>206 · 555 · CLEAN</span></div>
+          <div class="row legal"><span>© 2026 Cleenly</span><span>Licensed · Insured · Bonded</span></div>
+        </div>
+        <div class="foot">
+          <span class="name">Footer · walnut</span>
+          <span class="meta">40px · paper on deep</span>
+        </div>
+      </div>
+
+      <div class="ctx-email">
+        <p>Your kitchen reset is confirmed for Tuesday. We'll send the cleaner's name and arrival window 24 hours before.</p>
+        <p>Thanks for choosing us.</p>
+        <p class="signed">— The team at <span class="wm">Cleenly</span></p>
+      </div>
+      <div class="ctx-tile" style="display:none;"></div>
+    </div>
+  </section>
+
+  <!-- 08 — MISUSE -->
+  <section data-screen-label="08 Misuse">
+    <div class="section-head">
+      <span class="num">08</span>
+      <div>
+        <h2>Misuse.</h2>
+        <p>Six failure modes the wordmark survives without you. Don't unitalicize, stretch, bold, uppercase, recolor, or add effects.</p>
+      </div>
+    </div>
+
+    <div class="dd-grid">
+      <div class="dd">
+        <div class="preview">
+          <span class="wm wm-bad-upright">Cleenly</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 01</span>
+          <span class="title">Make it upright</span>
+          <span class="desc">The italic is non-negotiable. A roman Cleenly is not the brand.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm wm-bad-stretch">Cleenly</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 02</span>
+          <span class="title">Stretch or squish</span>
+          <span class="desc">Never apply non-uniform scaling. Resize proportionally only.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm wm-bad-bold">Cleenly</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 03</span>
+          <span class="title">Bold or semibold weight</span>
+          <span class="desc">Weight 400 only. Instrument Serif at heavier weights changes the entire mood.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm wm-bad-caps">Cleenly</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 04</span>
+          <span class="title">All-caps or title-case ALL letters</span>
+          <span class="desc">Only the C is capitalized. CLEENLY in caps reverts to a different brand era.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm wm-bad-recolor">Cleenly</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 05</span>
+          <span class="title">Recolor in terracotta</span>
+          <span class="desc">The wordmark is foreground (#2D2826) or paper (#F5EFE6) only. Accent on the wordmark is reserved.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm wm-bad-shadow">Cleenly</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 06</span>
+          <span class="title">Shadow, glow, or outline</span>
+          <span class="desc">No effects. The wordmark sits flat on its surface. If contrast is poor, change the surface — not the mark.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOC FOOTER -->
+  <footer class="doc-foot">
+    <div class="cell">
+      <div class="k">Files</div>
+      <div class="v">
+        <code>assets/cleenly-logo-italic.svg</code> · wordmark<br/>
+        <code>assets/cleenly-mark-italic.svg</code> · C mark<br/>
+        <code>assets/cleenly-logo.svg</code> · legacy v05 (retired)
+      </div>
+    </div>
+    <div class="cell">
+      <div class="k">CSS contract</div>
+      <div class="v">
+        <code>.wm</code> single class — Instrument Serif italic, weight 400, tracking −0.035em.<br/>
+        Defined in this file. Will be promoted to <code>colors_and_type.css</code> on adoption.
+      </div>
+    </div>
+    <div class="cell">
+      <div class="k">Companion docs</div>
+      <div class="v">
+        <code>logo-explorations.html</code> · all 12 directions<br/>
+        <code>Wordmark Lockup Sheet v1.html</code> · previous direction (05 + 11)
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="padding:24px 32px;">
+  <div class="card-label" style="margin-bottom:14px;">Toasts · fadeInUp from bottom (mobile) / top-right (desktop) · auto-dismiss 4s · close-x</div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <!-- success -->
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--color-signal-soft);border:1px solid var(--color-signal);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);">
+      <svg style="flex-shrink:0;margin-top:2px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D4A3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+      <div style="flex:1;color:var(--color-foreground);">
+        <div style="font-size:14px;font-weight:600;">Booking confirmed</div>
+        <div style="font-size:13px;color:var(--color-foreground-soft);margin-top:2px;">Thu, Nov 16 · 12pm – 4pm · Reema is on the way.</div>
+      </div>
+      <button style="background:none;border:none;cursor:pointer;color:var(--color-foreground-muted);padding:0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+      </button>
+    </div>
+    <!-- error -->
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(239,68,68,0.10);border:1px solid var(--color-error);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);">
+      <svg style="flex-shrink:0;margin-top:2px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C04A3B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <div style="flex:1;color:var(--color-foreground);">
+        <div style="font-size:14px;font-weight:600;">No cleaners available that day</div>
+        <div style="font-size:13px;color:var(--color-foreground-soft);margin-top:2px;">Try Friday or Saturday — we have 4 slots open.</div>
+      </div>
+      <button style="background:none;border:none;cursor:pointer;color:var(--color-foreground-muted);padding:0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+      </button>
+    </div>
+    <!-- info -->
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--color-surface-warm);border:1px solid var(--color-accent);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);">
+      <svg style="flex-shrink:0;margin-top:2px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01" stroke-linecap="round"/></svg>
+      <div style="flex:1;color:var(--color-foreground);">
+        <div style="font-size:14px;font-weight:600;">Pollen Purge added</div>
+        <div style="font-size:13px;color:var(--color-foreground-soft);margin-top:2px;">+$35 · we'll bring HEPA filters and allergen-grade cloths.</div>
+      </div>
+      <button style="background:none;border:none;cursor:pointer;color:var(--color-foreground-muted);padding:0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+      </button>
+    </div>
+  </div>
+</body></html>

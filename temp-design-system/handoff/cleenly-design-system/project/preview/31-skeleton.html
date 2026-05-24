@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+  .skel { background: linear-gradient(90deg, #F5EFE6 0%, #E8E0D2 50%, #F5EFE6 100%); background-size: 200% 100%; animation: shimmer 1.5s linear infinite; border-radius: 6px; }
+</style>
+</head>
+<body style="padding:24px 32px;">
+  <div class="card-label" style="margin-bottom:14px;">Skeleton · warm shimmer · surface-warm → surface-sand · 1.5s linear loop</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:16px 18px;">
+      <div class="skel" style="height:14px;width:35%;margin-bottom:10px;"></div>
+      <div class="skel" style="height:32px;width:55%;margin-bottom:10px;border-radius:8px;"></div>
+      <div class="skel" style="height:12px;width:70%;"></div>
+    </div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:14px;display:flex;gap:12px;align-items:center;">
+      <div class="skel" style="width:60px;height:64px;flex-shrink:0;border-radius:10px;"></div>
+      <div style="flex:1;">
+        <div class="skel" style="height:14px;width:60%;margin-bottom:8px;"></div>
+        <div class="skel" style="height:12px;width:90%;margin-bottom:6px;"></div>
+        <div class="skel" style="height:12px;width:40%;"></div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:12px;font-family:monospace;font-size:11px;color:var(--color-foreground-muted);">never cold gray pulse · stay within warm palette</p>
+</body></html>

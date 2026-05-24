@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>CLEENLY — Book a cleaning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="../../colors_and_type.css"/>
+  <style>
+    body { background: #E8E0D2; font-size: 15px; min-height: 100vh; margin: 0; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { scrollbar-width: none; }
+    .phone-shell {
+      width: 390px; height: 844px;
+      background: var(--color-background);
+      border-radius: 48px;
+      box-shadow: 0 30px 80px rgba(45, 40, 38, 0.18), 0 0 0 12px #1A1614, 0 0 0 14px #2D2826;
+      overflow: hidden;
+      position: relative;
+      margin: 60px auto;
+    }
+    .phone-shell::before {
+      content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 32px; background: #1A1614; border-radius: 9999px; z-index: 10;
+    }
+    .stage {
+      display: flex; justify-content: center; padding: 20px;
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="stage">
+    <div class="phone-shell" id="phone"></div>
+  </div>
+
+  <script type="text/babel" src="StepIndicator.jsx"></script>
+  <script type="text/babel" src="StickyPriceFooter.jsx"></script>
+  <script type="text/babel" src="Step1_Service.jsx"></script>
+  <script type="text/babel" src="Step2_Details.jsx"></script>
+  <script type="text/babel" src="Step3_Price.jsx"></script>
+  <script type="text/babel" src="Step4_Schedule.jsx"></script>
+  <script type="text/babel" src="Step5_Contact.jsx"></script>
+  <script type="text/babel" src="Step6_Confirmation.jsx"></script>
+  <script type="text/babel" src="BookingShell.jsx"></script>
+  <script type="text/babel">
+    const root = ReactDOM.createRoot(document.getElementById("phone"));
+    root.render(<BookingShell/>);
+  </script>
+</body>
+</html>

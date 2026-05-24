@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="padding:28px 32px;">
+  <div class="card-label" style="margin-bottom:14px;">Motion · vintage / heavy · never bouncy</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:14px 16px;">
+      <div style="font-size:12px;font-weight:600;color:var(--color-foreground);margin-bottom:8px;">Durations</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-family:monospace;font-size:12px;">
+        <span style="color:var(--color-foreground-muted);">--motion-fast</span><span>150ms</span>
+        <span style="color:var(--color-foreground-muted);">--motion-base</span><span>220ms</span>
+        <span style="color:var(--color-foreground-muted);">--motion-slow</span><span>400ms</span>
+      </div>
+    </div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:14px 16px;">
+      <div style="font-size:12px;font-weight:600;color:var(--color-foreground);margin-bottom:8px;">Easing curves</div>
+      <svg width="100%" height="68" viewBox="0 0 200 68">
+        <rect x="0" y="0" width="200" height="68" fill="var(--color-surface-warm)" rx="6"/>
+        <path d="M10 58 C 80 58, 120 10, 190 10" stroke="#D97757" stroke-width="2" fill="none"/>
+        <path d="M10 58 C 10 58, 80 10, 190 10" stroke="#2D4A3E" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
+        <text x="10" y="64" font-family="monospace" font-size="9" fill="#8C8073">cubic-bezier(0.4, 0, 0.2, 1) · base</text>
+      </svg>
+    </div>
+  </div>
+  <div style="margin-top:14px;display:flex;gap:10px;align-items:center;font-size:13px;color:var(--color-foreground-soft);">
+    <span style="display:inline-block;width:10px;height:10px;border-radius:9999px;background:#D97757;"></span> base
+    <span style="display:inline-block;width:10px;height:10px;border-radius:9999px;background:#2D4A3E;margin-left:8px;"></span> ease-out (entries)
+    <span style="margin-left:16px;font-family:monospace;font-size:11px;color:var(--color-foreground-muted);">fadeInUp · float 6s · no springs</span>
+  </div>
+</body></html>

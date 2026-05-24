@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="padding:24px 32px;">
+  <div class="card-label" style="margin-bottom:14px;">Primary button states</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center;">
+    <div>
+      <button class="btn btn--md btn--primary" style="width:100%;">Confirm</button>
+      <div class="card-mono" style="margin-top:8px;">default</div>
+    </div>
+    <div>
+      <button class="btn btn--md btn--primary" style="width:100%;background:var(--color-accent-hover);transform:translateY(-2px);box-shadow:var(--shadow-card);">Confirm</button>
+      <div class="card-mono" style="margin-top:8px;">hover (-2y, +shadow)</div>
+    </div>
+    <div>
+      <button class="btn btn--md btn--primary" style="width:100%;outline:2px solid var(--color-accent);outline-offset:2px;">Confirm</button>
+      <div class="card-mono" style="margin-top:8px;">focus-visible</div>
+    </div>
+    <div>
+      <button class="btn btn--md btn--primary btn--disabled" style="width:100%;">Confirm</button>
+      <div class="card-mono" style="margin-top:8px;">disabled (opacity 0.5)</div>
+    </div>
+  </div>
+  <div style="height:1px;background:var(--color-border);opacity:0.6;margin:18px 0;"></div>
+  <div class="card-label" style="margin-bottom:14px;">Secondary states</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center;">
+    <div><button class="btn btn--md btn--secondary" style="width:100%;">Back</button><div class="card-mono" style="margin-top:8px;">default</div></div>
+    <div><button class="btn btn--md btn--secondary" style="width:100%;background:var(--color-gray-50);border-color:var(--color-foreground);">Back</button><div class="card-mono" style="margin-top:8px;">hover</div></div>
+    <div><button class="btn btn--md btn--secondary" style="width:100%;outline:2px solid var(--color-accent);outline-offset:2px;">Back</button><div class="card-mono" style="margin-top:8px;">focus</div></div>
+    <div><button class="btn btn--md btn--secondary btn--disabled" style="width:100%;">Back</button><div class="card-mono" style="margin-top:8px;">disabled</div></div>
+  </div>
+</body></html>

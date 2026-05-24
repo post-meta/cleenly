@@ -1,0 +1,47 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="padding:28px 32px;">
+  <div class="card-label" style="margin-bottom:14px;">Selection vs Action · the hardest rule to keep straight</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+    <div style="border:1px solid var(--color-signal-soft);background:#fff;border-radius:var(--radius-lg);padding:16px 18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+        <span style="width:18px;height:18px;border-radius:9999px;background:var(--color-signal);display:inline-flex;align-items:center;justify-content:center;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        </span>
+        <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-signal);">Do</span>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button style="min-width:54px;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:#2D2826;color:#FAFAF8;border:1px solid #2D2826;cursor:default;">
+          <span style="font-size:11px;opacity:0.7;">Thu</span>
+          <span style="font-size:17px;font-weight:600;line-height:1;margin:3px 0;">16</span>
+          <span style="font-size:10px;opacity:0.7;">Nov</span>
+        </button>
+        <span style="font-size:13px;color:var(--color-foreground-soft);">selected = walnut</span>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:10px;align-items:center;">
+        <button style="background:#D97757;color:#fff;border:none;height:44px;padding:0 22px;font-size:14px;font-weight:500;border-radius:10px;cursor:default;">Continue</button>
+        <span style="font-size:13px;color:var(--color-foreground-soft);">action = accent</span>
+      </div>
+    </div>
+    <div style="border:1px solid #E6CDC7;background:#fff;border-radius:var(--radius-lg);padding:16px 18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+        <span style="width:18px;height:18px;border-radius:9999px;background:var(--color-error);display:inline-flex;align-items:center;justify-content:center;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+        </span>
+        <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-error);">Don't</span>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button style="min-width:54px;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:#D97757;color:#fff;border:1px solid #D97757;cursor:default;">
+          <span style="font-size:11px;opacity:0.8;">Thu</span>
+          <span style="font-size:17px;font-weight:600;line-height:1;margin:3px 0;">16</span>
+          <span style="font-size:10px;opacity:0.8;">Nov</span>
+        </button>
+        <span style="font-size:13px;color:var(--color-foreground-soft);">accent for selection</span>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:10px;align-items:center;">
+        <button style="background:#2D2826;color:#FAFAF8;border:none;height:44px;padding:0 22px;font-size:14px;font-weight:500;border-radius:10px;cursor:default;">Continue</button>
+        <span style="font-size:13px;color:var(--color-foreground-soft);">walnut for action</span>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:14px;font-family:monospace;font-size:11px;color:var(--color-foreground-muted);text-align:center;">walnut #2D2826 = "selected" only · terracotta #D97757 = "action" only · never cross the streams</p>
+</body></html>

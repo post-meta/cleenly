@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>CLEENLY — Logo explorations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="../colors_and_type.css"/>
+  <style>
+    body { padding: 56px 48px 96px; background: var(--color-background); }
+    .page-head { max-width: 1180px; margin: 0 auto 48px; }
+    .grid {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .tile {
+      background: var(--color-surface-warm);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 48px 40px 28px;
+      display: flex; flex-direction: column;
+      min-height: 200px;
+    }
+    .tile--dark { background: var(--color-surface-deep); border-color: transparent; }
+    .tile--dark .meta-num,
+    .tile--dark .meta-name { color: var(--color-on-deep); }
+    .tile--dark .meta-desc { color: #A89B8A; }
+
+    .logo-row {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 0 24px;
+      min-height: 110px;
+    }
+    .meta {
+      display: flex; align-items: baseline; justify-content: space-between;
+      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+      gap: 20px;
+    }
+    .tile--dark .meta { border-top-color: rgba(245,239,230,0.12); }
+    .meta-num {
+      font-family: monospace; font-size: 11px;
+      color: var(--color-foreground-muted);
+      letter-spacing: 0.05em;
+    }
+    .meta-name { font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .meta-desc { font-size: 12px; color: var(--color-foreground-soft); text-align: right; max-width: 60%; }
+
+    /* Logo bases */
+    .logo {
+      line-height: 1;
+      color: var(--color-foreground);
+      letter-spacing: -0.02em;
+    }
+    .tile--dark .logo { color: var(--color-on-deep); }
+
+    .logo--opti { font-family: var(--font-logo); font-weight: 400; font-size: 86px; }
+    .logo--serif { font-family: var(--font-display); font-weight: 400; font-size: 96px; letter-spacing: -0.035em; }
+    .logo--sans { font-family: var(--font-sans); font-weight: 600; font-size: 72px; letter-spacing: -0.04em; }
+    .italic { font-style: italic; }
+    .soft { color: var(--color-foreground-soft); }
+    .tile--dark .soft { color: #A89B8A; }
+    .small { font-size: 0.72em; }
+    .x-large { font-size: 1.1em; }
+  </style>
+</head>
+<body>
+
+  <header class="page-head">
+    <span class="eyebrow">Brand explorations</span>
+    <h1 style="margin-top:14px;font-size:54px;">Logo <em>variants.</em></h1>
+    <p style="margin-top:10px;font-size:16px;color:var(--color-foreground-soft);max-width:600px;">
+      Twelve directions for the CLEENLY wordmark, mixing the brand fonts
+      (OPTIUniversSixtySeven, Instrument Serif, IBM Plex Sans) in different
+      casing and italic combinations. Variants 1, 4 and 6 are closest to
+      the brand's current axis (editorial restraint × utility).
+    </p>
+  </header>
+
+  <div class="grid">
+
+    <!-- 1. Baseline -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--opti">CLEENLY</span></div>
+      <div class="meta">
+        <span class="meta-num">01</span>
+        <span class="meta-name">Baseline · OPTIUniversSixtySeven</span>
+        <span class="meta-desc">Current. Mid-century sans, all caps. Utility-first.</span>
+      </div>
+    </div>
+
+    <!-- 2. Serif title case -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--serif">Cleenly</span></div>
+      <div class="meta">
+        <span class="meta-num">02</span>
+        <span class="meta-name">Instrument Serif · title case</span>
+        <span class="meta-desc">Editorial. Reads like a magazine title.</span>
+      </div>
+    </div>
+
+    <!-- 3. Serif italic title case -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--serif italic">Cleenly</span></div>
+      <div class="meta">
+        <span class="meta-num">03</span>
+        <span class="meta-name">Instrument Serif italic · title case</span>
+        <span class="meta-desc">Soft. Cursive feel without script font.</span>
+      </div>
+    </div>
+
+    <!-- 4. CAPS + ee italic (requested) -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--opti">CL<span class="italic" style="font-family:var(--font-display);">ee</span>NLY</span></div>
+      <div class="meta">
+        <span class="meta-num">04</span>
+        <span class="meta-name">CAPS · ee in italic serif</span>
+        <span class="meta-desc">Hidden editorial moment inside utility wordmark.</span>
+      </div>
+    </div>
+
+    <!-- 5. CAPS + EE italic uppercase serif -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--opti">CL<span class="italic" style="font-family:var(--font-display);">EE</span>NLY</span></div>
+      <div class="meta">
+        <span class="meta-num">05</span>
+        <span class="meta-name">CAPS · EE in italic serif</span>
+        <span class="meta-desc">Same idea, uppercase. More balanced silhouette.</span>
+      </div>
+    </div>
+
+    <!-- 6. Serif CAPS -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--serif" style="font-size:84px;">CLEENLY</span></div>
+      <div class="meta">
+        <span class="meta-num">06</span>
+        <span class="meta-name">Instrument Serif · all caps</span>
+        <span class="meta-desc">Aperitivo / hotel-brand register. Quietly luxe.</span>
+      </div>
+    </div>
+
+    <!-- 7. CAPS + italic Y -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--opti">CLEENL<span class="italic soft" style="font-family:var(--font-display);">y</span></span></div>
+      <div class="meta">
+        <span class="meta-num">07</span>
+        <span class="meta-name">CAPS · final y in italic serif</span>
+        <span class="meta-desc">Echoes the &lt;em&gt; trick used in headlines.</span>
+      </div>
+    </div>
+
+    <!-- 8. Lowercase serif italic -->
+    <div class="tile tile--dark">
+      <div class="logo-row"><span class="logo logo--serif italic">cleenly</span></div>
+      <div class="meta">
+        <span class="meta-num">08</span>
+        <span class="meta-name">Instrument Serif italic · lowercase</span>
+        <span class="meta-desc">Most "cursive". Most departure from current axis.</span>
+      </div>
+    </div>
+
+    <!-- 9. Mixed: serif C + opti rest -->
+    <div class="tile">
+      <div class="logo-row" style="gap:2px;">
+        <span class="logo logo--serif italic" style="font-size:108px;line-height:0.8;">C</span><span class="logo logo--opti">leenly</span>
+      </div>
+      <div class="meta">
+        <span class="meta-num">09</span>
+        <span class="meta-name">Italic serif drop-cap C + sans</span>
+        <span class="meta-desc">Editorial drop-cap moment. Reads as a magazine logo.</span>
+      </div>
+    </div>
+
+    <!-- 10. Stacked two-line -->
+    <div class="tile tile--dark">
+      <div class="logo-row" style="flex-direction:column;align-items:flex-start;gap:0;padding-left:28px;">
+        <span class="logo logo--opti" style="font-size:64px;">CLEE</span>
+        <span class="logo logo--opti" style="font-size:64px;letter-spacing:0.08em;">N L Y</span>
+      </div>
+      <div class="meta">
+        <span class="meta-num">10</span>
+        <span class="meta-name">Stacked · two-line wordmark</span>
+        <span class="meta-desc">App icon / square format only. Not for inline.</span>
+      </div>
+    </div>
+
+    <!-- 11. Serif title + italic NLY -->
+    <div class="tile">
+      <div class="logo-row"><span class="logo logo--serif">Clee<span class="italic soft">nly</span></span></div>
+      <div class="meta">
+        <span class="meta-num">11</span>
+        <span class="meta-name">Title case · italic tail</span>
+        <span class="meta-desc">Half upright, half italic. Editorial split.</span>
+      </div>
+    </div>
+
+    <!-- 12. Spaced-out CAPS -->
+    <div class="tile tile--dark">
+      <div class="logo-row"><span class="logo logo--opti" style="font-size:54px;letter-spacing:0.34em;padding-left:0.34em;">CLEENLY</span></div>
+      <div class="meta">
+        <span class="meta-num">12</span>
+        <span class="meta-name">CAPS · wide-tracked</span>
+        <span class="meta-desc">Subhead / shoulder wordmark. Too quiet to be primary.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer style="max-width:1180px;margin:48px auto 0;padding-top:28px;border-top:1px solid var(--color-border);">
+    <p style="font-size:13px;color:var(--color-foreground-muted);">
+      Pick a direction (or two) and I'll apply it to the marketing header,
+      footer, and booking shell. Variants 4, 5, 9, 11 keep the editorial
+      &lt;em&gt; vocabulary the brand already uses in headlines.
+    </p>
+  </footer>
+
+</body>
+</html>

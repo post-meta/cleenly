@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>CLEENLY — Wordmark lockup sheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="colors_and_type.css"/>
+  <style>
+    :root {
+      --page-pad-x: clamp(40px, 6vw, 96px);
+      --page-pad-y: 72px;
+      --col-max: 1180px;
+      --rule: 1px solid var(--color-border);
+      --rule-soft: 1px solid rgba(45, 40, 38, 0.08);
+      --mono: ui-monospace, "SF Mono", Consolas, monospace;
+    }
+    body { padding: 0; }
+    .sheet { max-width: var(--col-max); margin: 0 auto; padding: var(--page-pad-y) var(--page-pad-x) 160px; }
+
+    /* ---------- LOCKUP TYPOGRAPHY (canonical CSS) ---------- */
+    .wm-primary {
+      font-family: var(--font-logo);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--color-foreground);
+      display: inline-flex;
+      align-items: baseline;
+      white-space: nowrap;
+    }
+    .wm-primary .ee {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-foreground-soft);
+      margin: 0 0.01em;
+    }
+    .wm-edit {
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      color: var(--color-foreground);
+      display: inline-flex;
+      align-items: baseline;
+      white-space: nowrap;
+    }
+    .wm-edit .nly {
+      font-style: italic;
+      color: var(--color-foreground-soft);
+    }
+
+    /* ---------- TYPE UTILITIES ---------- */
+    .eyebrow-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-foreground-muted);
+    }
+    .cap-mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--color-foreground-muted);
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+    .spec-label {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-foreground);
+    }
+    .spec-meta {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--color-foreground-soft);
+      line-height: 1.55;
+    }
+
+    /* ---------- PAGE HEADER ---------- */
+    .page-head { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: end; padding-bottom: 48px; border-bottom: var(--rule); }
+    .page-head h1 { font-size: clamp(56px, 7vw, 88px); line-height: 0.98; letter-spacing: -0.03em; margin: 14px 0 0; }
+    .page-head .lede { font-size: 18px; line-height: 1.5; color: var(--color-foreground-soft); max-width: 36ch; margin: 0; }
+    .page-head .meta-row { display: flex; gap: 36px; margin-top: 14px; }
+    .page-head .meta-row .cell { display: flex; flex-direction: column; gap: 4px; }
+    .page-head .meta-row .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-foreground-muted); }
+    .page-head .meta-row .v { font-size: 14px; color: var(--color-foreground); }
+
+    /* ---------- SECTION ---------- */
+    section { padding: 96px 0 0; }
+    .section-head { display: grid; grid-template-columns: 96px 1fr; gap: 36px; align-items: baseline; padding-bottom: 40px; }
+    .section-head .num { font-family: var(--mono); font-size: 12px; color: var(--color-foreground-muted); letter-spacing: 0.18em; padding-top: 14px; }
+    .section-head h2 { margin: 0; font-size: clamp(36px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.02em; }
+    .section-head p { margin: 12px 0 0; font-size: 16px; line-height: 1.55; color: var(--color-foreground-soft); max-width: 60ch; }
+
+    /* ---------- LOCKUP STAGE (big display) ---------- */
+    .lockup-stage {
+      border: var(--rule);
+      border-radius: var(--radius-xl);
+      background: var(--color-background);
+      padding: 80px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+      position: relative;
+    }
+    .lockup-stage--warm { background: var(--color-surface-warm); }
+    .lockup-stage--sand { background: var(--color-surface-sand); }
+    .lockup-stage--deep { background: var(--color-surface-deep); border-color: transparent; }
+    .lockup-stage--accent { background: var(--color-accent); border-color: transparent; }
+
+    .lockup-stage .corner-tag {
+      position: absolute; top: 16px; left: 18px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--color-foreground-muted);
+    }
+    .lockup-stage--deep .corner-tag,
+    .lockup-stage--accent .corner-tag { color: rgba(245,239,230,0.6); }
+
+    .lockup-foot {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: baseline;
+      padding-top: 14px; border-top: var(--rule);
+    }
+    .lockup-foot .name { font-size: 14px; font-weight: 600; color: var(--color-foreground); }
+    .lockup-foot .use { font-size: 13px; color: var(--color-foreground-soft); line-height: 1.5; max-width: 56ch; }
+    .lockup-foot .ref { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-foreground-muted); }
+
+    /* Variant on-dark adjusts colors */
+    .lockup-stage--deep .wm-primary { color: var(--color-on-deep); }
+    .lockup-stage--deep .wm-primary .ee { color: #C9BFB0; }
+    .lockup-stage--deep .wm-edit { color: var(--color-on-deep); }
+    .lockup-stage--deep .wm-edit .nly { color: #C9BFB0; }
+
+    .lockup-stage--accent .wm-primary { color: #F5EFE6; }
+    .lockup-stage--accent .wm-primary .ee { color: #FFF4EC; }
+    .lockup-stage--accent .wm-edit { color: #F5EFE6; }
+    .lockup-stage--accent .wm-edit .nly { color: #FFE6D5; }
+
+    /* ---------- TWO-UP LOCKUP GRID ---------- */
+    .two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .stack { display: flex; flex-direction: column; gap: 14px; }
+
+    /* ---------- ANATOMY CALL-OUTS ---------- */
+    .anatomy {
+      border: var(--rule);
+      border-radius: var(--radius-xl);
+      background: var(--color-background);
+      padding: 96px 56px 56px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .anatomy .wm-primary { font-size: 132px; }
+    .anatomy-corner { position: absolute; top: 18px; left: 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); }
+
+    .callouts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
+    .callout {
+      border-top: var(--rule);
+      padding-top: 14px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .callout .pin { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--color-accent); text-transform: uppercase; }
+    .callout .ttl { font-size: 14px; font-weight: 600; color: var(--color-foreground); }
+    .callout .bdy { font-size: 13px; color: var(--color-foreground-soft); line-height: 1.5; }
+
+    /* ---------- CLEARSPACE GRID ---------- */
+    .clearspace-frame {
+      border: var(--rule);
+      border-radius: var(--radius-xl);
+      background: var(--color-background);
+      padding: 28px;
+      position: relative;
+    }
+    .clearspace-inner {
+      position: relative;
+      background-image:
+        linear-gradient(to right, rgba(45,40,38,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(45,40,38,0.06) 1px, transparent 1px);
+      background-size: var(--cap, 56px) var(--cap, 56px);
+      padding: var(--cap, 56px);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 280px;
+    }
+    .clearspace-mark {
+      position: relative;
+      outline: 1px dashed var(--color-accent);
+      outline-offset: 0;
+    }
+    .clearspace-mark::before, .clearspace-mark::after {
+      content: ""; position: absolute;
+      border: 1px dashed rgba(217,119,87,0.5);
+      pointer-events: none;
+    }
+    .clearspace-mark::before {
+      inset: calc(var(--cap, 56px) * -1);
+    }
+    .x-tick {
+      position: absolute;
+      font-family: var(--mono); font-size: 10px;
+      color: var(--color-accent);
+      letter-spacing: 0.06em;
+      background: var(--color-background);
+      padding: 0 4px;
+    }
+    .x-tick.top-left { top: calc(var(--cap, 56px) * -1 - 7px); left: calc(var(--cap, 56px) * -0.5 - 4px); }
+    .x-tick.bottom { bottom: calc(var(--cap, 56px) * -1 - 7px); left: 50%; transform: translateX(-50%); }
+    .x-tick.right { right: calc(var(--cap, 56px) * -1 - 14px); top: 50%; transform: translateY(-50%); }
+    .x-tick.left { left: calc(var(--cap, 56px) * -1 - 14px); top: 50%; transform: translateY(-50%); }
+
+    .clearspace-explainer {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 18px;
+    }
+    .x-row {
+      border-top: var(--rule);
+      padding-top: 12px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .x-row .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); }
+    .x-row .v { font-size: 14px; color: var(--color-foreground); }
+    .x-row .nb { font-size: 12px; color: var(--color-foreground-soft); line-height: 1.5; }
+
+    /* ---------- SIZE LADDER ---------- */
+    .ladder {
+      border: var(--rule); border-radius: var(--radius-xl); background: var(--color-background);
+      padding: 40px 48px;
+    }
+    .ladder-row {
+      display: grid; grid-template-columns: 88px 1fr auto; gap: 36px; align-items: center;
+      padding: 22px 0; border-bottom: var(--rule-soft);
+    }
+    .ladder-row:last-child { border-bottom: 0; }
+    .ladder-row .sz { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--color-foreground-muted); }
+    .ladder-row .usage { font-size: 13px; color: var(--color-foreground-soft); line-height: 1.5; max-width: 36ch; text-align: right; }
+    .ladder-divider {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 88px 1fr; gap: 36px;
+      margin: 4px 0;
+      align-items: center;
+    }
+    .ladder-divider .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent); }
+    .ladder-divider .rule { height: 1px; background: var(--color-accent); opacity: 0.35; }
+
+    /* ---------- COLOR MATRIX ---------- */
+    .color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .color-grid .lockup-stage { min-height: 200px; padding: 48px 28px; }
+    .color-grid .wm-primary { font-size: 48px; }
+    .color-grid .lockup-foot { padding-top: 12px; }
+    .color-grid .lockup-foot .name { font-size: 13px; }
+    .color-grid .lockup-foot .ref { font-size: 10px; }
+    .color-grid .stack .swatch-strip {
+      display: flex; align-items: center; gap: 10px; padding-top: 6px;
+    }
+    .color-grid .stack .swatch-strip .sw {
+      width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(45,40,38,0.1);
+    }
+    .color-grid .stack .swatch-strip .hex {
+      font-family: var(--mono); font-size: 10px; color: var(--color-foreground-muted); letter-spacing: 0.06em;
+    }
+
+    /* ---------- MARK + APP ICON ---------- */
+    .mark-row { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+    .mark-tile {
+      border: var(--rule); border-radius: var(--radius-xl); background: var(--color-background);
+      padding: 40px;
+      display: flex; flex-direction: column; gap: 24px;
+      align-items: center; justify-content: center;
+    }
+    .mark-square {
+      width: 200px; height: 200px;
+      border-radius: 28px;
+      background: var(--color-surface-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-logo);
+      font-weight: 400;
+      color: var(--color-on-deep);
+      font-size: 152px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .mark-tile .mark-cap { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); }
+
+    .favicon-row {
+      border: var(--rule); border-radius: var(--radius-xl); background: var(--color-background);
+      padding: 40px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .favicon-ladder {
+      display: flex; align-items: end; gap: 28px;
+      padding: 28px 8px 8px;
+      border-bottom: var(--rule);
+    }
+    .favicon-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+    .favicon {
+      background: var(--color-surface-deep);
+      color: var(--color-on-deep);
+      border-radius: 4px;
+      font-family: var(--font-logo);
+      font-weight: 400;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+    .favicon-cell .px { font-family: var(--mono); font-size: 10px; color: var(--color-foreground-muted); letter-spacing: 0.06em; }
+
+    .favicon-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 4px; }
+    .favicon-foot .col h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .favicon-foot .col p { margin: 0; font-size: 13px; color: var(--color-foreground-soft); line-height: 1.55; }
+
+    /* ---------- IN-CONTEXT ---------- */
+    .context-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .ctx-tile {
+      border: var(--rule); border-radius: var(--radius-xl); overflow: hidden;
+      background: var(--color-background);
+      display: flex; flex-direction: column;
+    }
+    .ctx-tile .body { padding: 24px 24px 18px; min-height: 200px; display: flex; flex-direction: column; }
+    .ctx-tile .foot { border-top: var(--rule); padding: 12px 24px; display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+    .ctx-tile .foot .name { font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .ctx-tile .foot .meta { font-family: var(--mono); font-size: 10px; color: var(--color-foreground-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* Header preview */
+    .ctx-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: var(--rule);
+      background: var(--color-background);
+    }
+    .ctx-header .nav { display: flex; gap: 18px; font-size: 13px; color: var(--color-foreground-soft); }
+    .ctx-header .cta {
+      font-size: 13px; font-weight: 500; color: var(--color-background);
+      background: var(--color-foreground); padding: 8px 14px;
+      border-radius: var(--radius-md);
+    }
+    .ctx-body-fill {
+      background-image: radial-gradient(circle, var(--color-mushroom) 1.5px, transparent 1px);
+      background-size: 18px 18px;
+      flex: 1;
+      opacity: 0.4;
+      border-bottom: var(--rule);
+    }
+
+    /* Footer preview */
+    .ctx-footer {
+      background: var(--color-surface-deep); color: var(--color-on-deep);
+      padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 16px;
+      flex: 1;
+    }
+    .ctx-footer .wm-primary { font-size: 28px; color: var(--color-on-deep); }
+    .ctx-footer .wm-primary .ee { color: #C9BFB0; }
+    .ctx-footer .row { display: flex; gap: 24px; font-size: 12px; color: #A89B8A; }
+    .ctx-footer .sign-off {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid rgba(245,239,230,0.12);
+      font-size: 13px; color: #C9BFB0; line-height: 1.5;
+    }
+    .ctx-footer .sign-off .wm-edit { font-size: 22px; color: var(--color-on-deep); margin-left: 4px; vertical-align: -2px; }
+    .ctx-footer .sign-off .wm-edit .nly { color: #C9BFB0; }
+
+    /* Booking topbar */
+    .ctx-topbar {
+      padding: 14px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: var(--rule);
+      background: var(--color-background);
+    }
+    .ctx-topbar .step { font-family: var(--mono); font-size: 11px; color: var(--color-foreground-muted); letter-spacing: 0.12em; }
+
+    /* Email/sign-off */
+    .ctx-email {
+      background: var(--color-surface-warm);
+      padding: 28px 28px 24px;
+      flex: 1;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .ctx-email p { margin: 0; font-size: 14px; color: var(--color-foreground-soft); line-height: 1.55; }
+    .ctx-email .signed { font-size: 14px; color: var(--color-foreground-soft); margin-top: 4px; }
+    .ctx-email .signed .wm-edit { font-size: 22px; vertical-align: -3px; margin-left: 2px; }
+
+    /* ---------- DO / DON'T ---------- */
+    .dd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .dd {
+      border: var(--rule); border-radius: var(--radius-lg);
+      background: var(--color-background);
+      padding: 32px 24px 18px;
+      display: flex; flex-direction: column; gap: 14px;
+      min-height: 220px;
+    }
+    .dd .preview {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 14px 6px;
+    }
+    .dd .foot {
+      border-top: var(--rule); padding-top: 12px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .dd .tag {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--color-error);
+    }
+    .dd .tag.ok { color: var(--color-signal); }
+    .dd .title { font-size: 13px; font-weight: 600; color: var(--color-foreground); }
+    .dd .desc { font-size: 12px; color: var(--color-foreground-soft); line-height: 1.5; }
+
+    /* misuse-specific overrides */
+    .dd .wm-bad-stretch { transform: scaleX(1.5); transform-origin: center; font-size: 36px; }
+    .dd .wm-bad-squish { transform: scaleY(0.55); transform-origin: center; font-size: 60px; }
+    .dd .wm-bad-recolor .ee { color: var(--color-accent) !important; }
+    .dd .wm-bad-italicize-all { font-style: italic; font-family: var(--font-display); font-size: 44px; }
+    .dd .wm-bad-mix { font-size: 36px; }
+    .dd .wm-bad-mix .nly-mix { font-family: var(--font-display); font-style: italic; color: var(--color-foreground-soft); margin-left: 4px; }
+    .dd .wm-bad-shadow { font-size: 44px; text-shadow: 2px 4px 0 var(--color-accent); }
+
+    /* ---------- FOOTER ---------- */
+    .doc-foot {
+      margin-top: 120px;
+      padding-top: 28px;
+      border-top: var(--rule);
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
+    }
+    .doc-foot .cell .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-foreground-muted); margin-bottom: 6px; }
+    .doc-foot .cell .v { font-size: 14px; color: var(--color-foreground); line-height: 1.55; }
+    .doc-foot .cell .v code { font-family: var(--mono); font-size: 12px; background: var(--color-gray-50); padding: 2px 6px; border-radius: 4px; }
+
+    @media (max-width: 880px) {
+      .two-up, .color-grid, .context-grid, .dd-grid, .callouts, .mark-row { grid-template-columns: 1fr; }
+      .clearspace-explainer { grid-template-columns: 1fr; }
+      .page-head { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 8px; }
+      .section-head .num { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="sheet">
+
+  <!-- ============================================== -->
+  <!-- HEADER                                          -->
+  <!-- ============================================== -->
+  <header class="page-head" data-screen-label="00 Cover">
+    <div>
+      <span class="eyebrow-num">CLEENLY · Brand · Document 03</span>
+      <h1>Wordmark <em>lockup sheet.</em></h1>
+    </div>
+    <div>
+      <p class="lede">Construction, clearspace, sizing and usage rules for the two locked wordmarks. Hand this to anyone setting CLEENLY in chrome, print, or partner placements.</p>
+      <div class="meta-row">
+        <div class="cell"><span class="k">Status</span><span class="v">Locked · v1.0</span></div>
+        <div class="cell"><span class="k">Revised</span><span class="v">May 2026</span></div>
+        <div class="cell"><span class="k">Owner</span><span class="v">Brand</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- 01 — THE TWO LOCKUPS                            -->
+  <!-- ============================================== -->
+  <section data-screen-label="01 Two lockups">
+    <div class="section-head">
+      <span class="num">01</span>
+      <div>
+        <h2>The two <em>locked</em> wordmarks.</h2>
+        <p>CLEENLY ships two wordmark treatments. They are never mixed inside a single composition — each surface picks one. Primary wins on every product and chrome surface; editorial is reserved for closing moments and print.</p>
+      </div>
+    </div>
+
+    <div class="two-up">
+      <div class="stack">
+        <div class="lockup-stage">
+          <span class="corner-tag">Variant 05 · Primary</span>
+          <span class="wm-primary" style="font-size:96px;">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">Primary · utility</span>
+          <span class="use">Marketing header, footer, app/PWA icon, booking topbar, partner badges, email header. Default for any product chrome.</span>
+          <span class="ref">v05</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="lockup-stage lockup-stage--warm">
+          <span class="corner-tag">Variant 11 · Editorial</span>
+          <span class="wm-edit" style="font-size:120px;">Clee<span class="nly">nly</span></span>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">Secondary · editorial</span>
+          <span class="use">Email sign-offs, confirmation-page byline, pull-quote attribution, print copyright, business cards, mailing labels. Never on product chrome.</span>
+          <span class="ref">v11</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="cap-mono" style="margin-top:18px;">Both wordmarks share the same editorial contract: the secondary glyphs (EE and nly) carry the brand's italic single-word trick — same color, same weight relationship as <em style="font-family:var(--font-display);">&lt;em&gt;</em> inside display headlines.</p>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 02 — ANATOMY                                    -->
+  <!-- ============================================== -->
+  <section data-screen-label="02 Anatomy">
+    <div class="section-head">
+      <span class="num">02</span>
+      <div>
+        <h2>Anatomy of the primary mark.</h2>
+        <p>Four parts. The CL and NLY are set in OPTIUniversSixtySeven at foreground; EE is set in Instrument Serif italic at foreground-soft. Letter-spacing is −0.02em — tight, not crowded.</p>
+      </div>
+    </div>
+
+    <div class="anatomy">
+      <span class="anatomy-corner">Construction · Variant 05</span>
+      <span class="wm-primary">CL<span class="ee">EE</span>NLY</span>
+    </div>
+
+    <div class="callouts">
+      <div class="callout">
+        <span class="pin">A · CL</span>
+        <span class="ttl">OPTIUniversSixtySeven 400</span>
+        <span class="bdy">Foreground (#2D2826). Letter-spacing −0.02em. The utility face: mid-century sans, geometric.</span>
+      </div>
+      <div class="callout">
+        <span class="pin">B · EE</span>
+        <span class="ttl">Instrument Serif italic 400</span>
+        <span class="bdy">Foreground-soft (#4A4540). Sits on the same baseline. Inherits the same color/weight contract as <em style="font-family:var(--font-display);">&lt;em&gt;</em> in display copy.</span>
+      </div>
+      <div class="callout">
+        <span class="pin">C · NLY</span>
+        <span class="ttl">OPTIUniversSixtySeven 400</span>
+        <span class="bdy">Matches A. Same face, same weight, same color. The italic EE is the only deviation.</span>
+      </div>
+      <div class="callout">
+        <span class="pin">D · Joins</span>
+        <span class="ttl">2px optical gap each side of EE</span>
+        <span class="bdy">A 2-unit optical spacer prevents the serif italic from kerning into the geometric sans. Never collapse.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 03 — CLEARSPACE                                 -->
+  <!-- ============================================== -->
+  <section data-screen-label="03 Clearspace">
+    <div class="section-head">
+      <span class="num">03</span>
+      <div>
+        <h2>Clearspace.</h2>
+        <p>Reserve one cap-height of empty space on every side of the wordmark. The cap-height of the OPTIUniversSixtySeven C is the unit (X). Nothing crosses this margin — not photography edges, not adjacent UI, not co-branding.</p>
+      </div>
+    </div>
+
+    <div class="clearspace-frame" style="--cap: 56px;">
+      <div class="clearspace-inner">
+        <div class="clearspace-mark">
+          <span class="wm-primary" style="font-size:64px;">CL<span class="ee">EE</span>NLY</span>
+          <span class="x-tick top-left">1×</span>
+          <span class="x-tick bottom">1×</span>
+          <span class="x-tick right">1×</span>
+          <span class="x-tick left">1×</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearspace-explainer">
+      <div class="x-row">
+        <span class="k">Unit</span>
+        <span class="v">X = cap-height of C</span>
+        <span class="nb">For a 64px wordmark, X ≈ 46px. Scale proportionally.</span>
+      </div>
+      <div class="x-row">
+        <span class="k">Minimum</span>
+        <span class="v">1× on all four sides</span>
+        <span class="nb">No element — type, image edge, button — enters the reserved frame.</span>
+      </div>
+      <div class="x-row">
+        <span class="k">Preferred</span>
+        <span class="v">2× when space allows</span>
+        <span class="nb">In editorial layout, double the margin. The brand reads as more confident when given room.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 04 — SIZING                                     -->
+  <!-- ============================================== -->
+  <section data-screen-label="04 Sizing">
+    <div class="section-head">
+      <span class="num">04</span>
+      <div>
+        <h2>Sizing &amp; legibility threshold.</h2>
+        <p>The primary wordmark holds its italic EE moment down to 16px. Below that, the serif/sans contrast goes muddy on standard screens — drop to pure OPTIUniversSixtySeven CAPS (no italic EE) for favicons, status bars, and any usage under 14px.</p>
+      </div>
+    </div>
+
+    <div class="ladder">
+      <div class="ladder-row">
+        <span class="sz">96px</span>
+        <span class="wm-primary" style="font-size:96px;">CL<span class="ee">EE</span>NLY</span>
+        <span class="usage">Hero headers · brand splash · large editorial moments</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">64px</span>
+        <span class="wm-primary" style="font-size:64px;">CL<span class="ee">EE</span>NLY</span>
+        <span class="usage">Section headers · about-page mast</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">40px</span>
+        <span class="wm-primary" style="font-size:40px;">CL<span class="ee">EE</span>NLY</span>
+        <span class="usage">Marketing-site nav · default chrome size</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">28px</span>
+        <span class="wm-primary" style="font-size:28px;">CL<span class="ee">EE</span>NLY</span>
+        <span class="usage">Footer · email header · booking topbar</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">18px</span>
+        <span class="wm-primary" style="font-size:18px;">CL<span class="ee">EE</span>NLY</span>
+        <span class="usage">Floor for the italic EE contract</span>
+      </div>
+
+      <div class="ladder-divider">
+        <span class="lbl">↓ Below 14px · drop the italic EE</span>
+        <div class="rule"></div>
+      </div>
+
+      <div class="ladder-row">
+        <span class="sz">12px</span>
+        <span style="font-family:var(--font-logo);font-weight:400;font-size:12px;letter-spacing:-0.01em;">CLEENLY</span>
+        <span class="usage">Mobile status-bar caption · OG-image overlay</span>
+      </div>
+      <div class="ladder-row">
+        <span class="sz">10px</span>
+        <span style="font-family:var(--font-logo);font-weight:400;font-size:10px;letter-spacing:0;">CLEENLY</span>
+        <span class="usage">Print fine-print line · favicon fallback</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 05 — COLOR MATRIX                               -->
+  <!-- ============================================== -->
+  <section data-screen-label="05 Color usage">
+    <div class="section-head">
+      <span class="num">05</span>
+      <div>
+        <h2>Color &amp; surface usage.</h2>
+        <p>Five approved surface combinations. The wordmark never appears on raw photography — it always sits on a brand surface (paper, cream, sand, walnut) or on a flat accent panel. On photography, place the wordmark inside a paper bar or scrim.</p>
+      </div>
+    </div>
+
+    <div class="color-grid">
+      <div class="stack">
+        <div class="lockup-stage">
+          <span class="corner-tag">A</span>
+          <span class="wm-primary">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">On warm paper</span>
+          <span class="use">Default. Marketing chrome, booking flow.</span>
+          <span class="ref">A</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#FAFAF8;"></span><span class="hex">#FAFAF8</span>
+          <span class="sw" style="background:#2D2826;"></span><span class="hex">#2D2826</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="lockup-stage lockup-stage--warm">
+          <span class="corner-tag">B</span>
+          <span class="wm-primary">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">On cream / linen</span>
+          <span class="use">Quiet emphasis sections, callouts.</span>
+          <span class="ref">B</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#F5EFE6;"></span><span class="hex">#F5EFE6</span>
+          <span class="sw" style="background:#2D2826;"></span><span class="hex">#2D2826</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="lockup-stage lockup-stage--sand">
+          <span class="corner-tag">C</span>
+          <span class="wm-primary">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">On warm sand</span>
+          <span class="use">Editorial emphasis. Print interiors.</span>
+          <span class="ref">C</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#E8E0D2;"></span><span class="hex">#E8E0D2</span>
+          <span class="sw" style="background:#2D2826;"></span><span class="hex">#2D2826</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="lockup-stage lockup-stage--deep">
+          <span class="corner-tag">D</span>
+          <span class="wm-primary">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">On walnut</span>
+          <span class="use">Full-bleed dark sections, footer, app-icon tile.</span>
+          <span class="ref">D</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#2D2826;border-color:rgba(245,239,230,0.2);"></span><span class="hex">#2D2826</span>
+          <span class="sw" style="background:#F5EFE6;"></span><span class="hex">#F5EFE6</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="lockup-stage lockup-stage--accent">
+          <span class="corner-tag">E</span>
+          <span class="wm-primary">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">On terracotta</span>
+          <span class="use">Promotional moments only. Use sparingly.</span>
+          <span class="ref">E</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="sw" style="background:#D97757;"></span><span class="hex">#D97757</span>
+          <span class="sw" style="background:#F5EFE6;"></span><span class="hex">#F5EFE6</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="lockup-stage" style="background:url('assets/lifestyle-living-1.jpg') center/cover no-repeat; padding: 0; position: relative;">
+          <span class="corner-tag" style="color:#F5EFE6;text-shadow:0 1px 2px rgba(0,0,0,0.4);">F</span>
+          <div style="background:rgba(45,40,38,0.55);padding:24px 28px;border-radius:var(--radius-lg);">
+            <span class="wm-primary" style="color:#F5EFE6;font-size:42px;"><span style="color:#F5EFE6;">CL</span><span class="ee" style="color:#E8E0D2;">EE</span><span style="color:#F5EFE6;">NLY</span></span>
+          </div>
+        </div>
+        <div class="lockup-foot">
+          <span class="name">On photography · with scrim</span>
+          <span class="use">Always use a warm-charcoal scrim. Never set directly on image.</span>
+          <span class="ref">F</span>
+        </div>
+        <div class="swatch-strip">
+          <span class="hex">scrim rgba(45,40,38,0.55) min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 06 — MARK + APP ICON                            -->
+  <!-- ============================================== -->
+  <section data-screen-label="06 Mark and icon">
+    <div class="section-head">
+      <span class="num">06</span>
+      <div>
+        <h2>The mark &amp; app-icon system.</h2>
+        <p>The square mark is a single C in OPTIUniversSixtySeven, paper on walnut. No italic — too small to read at icon sizes. Used for app/PWA install, favicon, social-share fallback, and any square placement.</p>
+      </div>
+    </div>
+
+    <div class="mark-row">
+      <div class="mark-tile">
+        <div class="mark-square">C</div>
+        <div style="text-align:center;display:flex;flex-direction:column;gap:6px;">
+          <span class="spec-label">The CLEENLY mark</span>
+          <span class="mark-cap">200 × 200 · radius 28 · OPTI 152 · paper on walnut</span>
+        </div>
+      </div>
+
+      <div class="favicon-row">
+        <div class="favicon-ladder">
+          <div class="favicon-cell">
+            <div class="favicon" style="width:96px;height:96px;border-radius:18px;font-size:72px;">C</div>
+            <span class="px">512 / 256 / 192</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:64px;height:64px;border-radius:12px;font-size:48px;">C</div>
+            <span class="px">128 / 96</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:48px;height:48px;border-radius:9px;font-size:36px;">C</div>
+            <span class="px">64</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:32px;height:32px;border-radius:6px;font-size:24px;">C</div>
+            <span class="px">48 / 32</span>
+          </div>
+          <div class="favicon-cell">
+            <div class="favicon" style="width:20px;height:20px;border-radius:4px;font-size:15px;">C</div>
+            <span class="px">16</span>
+          </div>
+        </div>
+
+        <div class="favicon-foot">
+          <div class="col">
+            <h4>Radius scales with size</h4>
+            <p>Corner radius stays at 12% of the tile width. 16-radius at 128px; 4-radius at 32px. Never pure square, never circular.</p>
+          </div>
+          <div class="col">
+            <h4>One mark, never an alternate</h4>
+            <p>The C is the only mark. Do not introduce monograms, droplets, sparkles, or house silhouettes. The wordmark carries the brand; the C carries the wordmark.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 07 — IN CONTEXT                                 -->
+  <!-- ============================================== -->
+  <section data-screen-label="07 In context">
+    <div class="section-head">
+      <span class="num">07</span>
+      <div>
+        <h2>In context.</h2>
+        <p>Four canonical placements. Primary handles chrome; editorial handles closing moments. Notice that primary and editorial are never paired inside the same frame.</p>
+      </div>
+    </div>
+
+    <div class="context-grid">
+      <div class="ctx-tile">
+        <div class="ctx-header">
+          <span class="wm-primary" style="font-size:24px;">CL<span class="ee">EE</span>NLY</span>
+          <div class="nav">
+            <span>Services</span><span>Pricing</span><span>Areas</span>
+            <span class="cta">Book now</span>
+          </div>
+        </div>
+        <div class="ctx-body-fill" style="min-height:140px;"></div>
+        <div class="foot">
+          <span class="name">Marketing header</span>
+          <span class="meta">Primary · v05 · 24px</span>
+        </div>
+      </div>
+
+      <div class="ctx-tile">
+        <div class="ctx-topbar">
+          <span class="wm-primary" style="font-size:20px;">CL<span class="ee">EE</span>NLY</span>
+          <span class="step">Step 3 / 6</span>
+        </div>
+        <div class="ctx-body-fill" style="min-height:140px;"></div>
+        <div class="foot">
+          <span class="name">Booking topbar (mobile)</span>
+          <span class="meta">Primary · v05 · 20px</span>
+        </div>
+      </div>
+
+      <div class="ctx-tile">
+        <div class="ctx-footer">
+          <span class="wm-primary">CL<span class="ee">EE</span>NLY</span>
+          <div class="row"><span>Seattle · 206-555-CLEAN</span></div>
+          <div class="sign-off">
+            Sent with care from <span class="wm-edit">Clee<span class="nly">nly</span></span>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="name">Footer — primary above, editorial in sign-off</span>
+          <span class="meta">v05 + v11 · separate zones</span>
+        </div>
+      </div>
+
+      <div class="ctx-tile">
+        <div class="ctx-email">
+          <p>Your kitchen reset is confirmed for Tuesday. We'll send the cleaner's name and arrival window 24 hours before.</p>
+          <p>Thanks for choosing us.</p>
+          <p class="signed">— The team at <span class="wm-edit">Clee<span class="nly">nly</span></span></p>
+        </div>
+        <div class="foot">
+          <span class="name">Email sign-off</span>
+          <span class="meta">Editorial · v11 · 22px</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 08 — MISUSE                                     -->
+  <!-- ============================================== -->
+  <section data-screen-label="08 Misuse">
+    <div class="section-head">
+      <span class="num">08</span>
+      <div>
+        <h2>Misuse.</h2>
+        <p>Six failure modes the wordmark survives without you. Don't stretch, squish, recolor the italic moment, italicize the rest, mix the two variants, or add effects.</p>
+      </div>
+    </div>
+
+    <div class="dd-grid">
+      <div class="dd">
+        <div class="preview">
+          <span class="wm-primary wm-bad-stretch">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 01</span>
+          <span class="title">Stretch the wordmark</span>
+          <span class="desc">Never apply non-uniform scaling. Resize proportionally only.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm-primary wm-bad-squish">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 02</span>
+          <span class="title">Squish vertically</span>
+          <span class="desc">Same rule. Aspect ratio is locked at the source proportions.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm-primary wm-bad-recolor" style="font-size:44px;">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 03</span>
+          <span class="title">Recolor the EE in terracotta</span>
+          <span class="desc">The italic EE stays at foreground-soft. Never accent-colored, never highlighted.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm-bad-italicize-all">CLEENLY</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 04</span>
+          <span class="title">Italicize the whole mark</span>
+          <span class="desc">Only the EE goes italic. CL and NLY remain upright OPTIUniversSixtySeven.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm-primary wm-bad-mix">CL<span class="ee">EE</span><span class="nly-mix">nly</span></span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 05</span>
+          <span class="title">Mix v05 + v11 in one composition</span>
+          <span class="desc">The two wordmarks never appear inside the same frame. Pick one per surface.</span>
+        </div>
+      </div>
+
+      <div class="dd">
+        <div class="preview">
+          <span class="wm-primary wm-bad-shadow">CL<span class="ee">EE</span>NLY</span>
+        </div>
+        <div class="foot">
+          <span class="tag">Don't · 06</span>
+          <span class="title">Add shadow, glow, or outline</span>
+          <span class="desc">No effects. The wordmark sits flat on its surface. If contrast is poor, change the surface — not the mark.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- DOC FOOTER                                      -->
+  <!-- ============================================== -->
+  <footer class="doc-foot">
+    <div class="cell">
+      <div class="k">Files</div>
+      <div class="v">
+        <code>assets/cleenly-logo.svg</code> · primary v05<br/>
+        <code>assets/cleenly-logo-editorial.svg</code> · editorial v11<br/>
+        <code>assets/cleenly-mark.svg</code> · C mark
+      </div>
+    </div>
+    <div class="cell">
+      <div class="k">CSS contract</div>
+      <div class="v">
+        Primary: <code>.wm-primary</code> with <code>.ee</code> span<br/>
+        Editorial: <code>.wm-edit</code> with <code>.nly</code> span<br/>
+        Defined in <code>colors_and_type.css</code>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="k">Companion docs</div>
+      <div class="v">
+        <code>logo-explorations.html</code> · all 12 directions<br/>
+        <code>preview/23-logo.html</code> · review card<br/>
+        <code>preview/27-logo-font.html</code> · pairing rule
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+/* Preview card shared styles
+   Each card is a focused 700px-wide specimen.
+   Cards render OUTSIDE a titled frame, so be minimal. */
+
+@import url("../colors_and_type.css");
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  padding: 28px 32px;
+  min-height: 100vh;
+}
+
+.card-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+
+.card-mono {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 12px;
+  color: var(--color-foreground-muted);
+}
+
+.card-grid {
+  display: grid;
+  gap: 16px;
+}
+.card-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Swatch primitives */
+.swatch {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.swatch__chip {
+  height: 88px;
+  width: 100%;
+}
+.swatch__meta {
+  padding: 10px 12px;
+  background: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swatch__name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+.swatch__hex {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--color-foreground-muted);
+  letter-spacing: 0.01em;
+}
+
+/* Buttons rendered live in cards */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--motion-base) var(--motion-ease),
+              border-color var(--motion-base) var(--motion-ease),
+              transform var(--motion-base) var(--motion-ease),
+              box-shadow var(--motion-base) var(--motion-ease);
+}
+.btn--sm { height: 36px; padding: 0 20px; font-size: 13px; }
+.btn--md { height: 44px; padding: 0 28px; font-size: 15px; }
+.btn--lg { height: 56px; padding: 0 36px; font-size: 16px; }
+
+.btn--primary { background: var(--color-accent); color: #fff; }
+.btn--primary:hover { background: var(--color-accent-hover); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.btn--secondary { background: var(--color-background); color: var(--color-foreground); border-color: var(--color-border); }
+.btn--secondary:hover { background: var(--color-gray-50); border-color: var(--color-foreground); }
+.btn--ghost { background: transparent; color: var(--color-foreground); }
+.btn--ghost:hover { background: var(--color-gray-50); }
+.btn--link { background: transparent; color: var(--color-foreground); padding: 0; height: auto; text-decoration: underline; text-underline-offset: 3px; }
+.btn--link:hover { color: var(--color-accent); }
+.btn--disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }

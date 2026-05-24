@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="padding:24px 28px;">
+  <div class="card-label" style="margin-bottom:18px;">Step indicator · current = outlined walnut · done = filled signal · canonical for booking</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <script type="text/plain" id="t"></script>
+    <!-- 6 step indicator -->
+  </div>
+  <div id="indicator" style="display:flex;align-items:center;justify-content:space-between;"></div>
+  <script>
+  (function(){
+    const labels=["Service","Details","Price","Schedule","Contact","Done"];
+    const current=3;const total=6;
+    const root=document.getElementById("indicator");
+    let html="";
+    for(let step=1;step<=total;step++){
+      const done=step<current;const active=step===current;
+      const dotBg=done?"var(--color-signal)":"var(--color-background)";
+      const dotBorder=done?"var(--color-signal)":active?"var(--color-foreground)":"var(--color-border)";
+      const dotColor=done?"#FAFAF8":active?"var(--color-foreground)":"var(--color-foreground-muted)";
+      const lineColor=done?"var(--color-signal)":"var(--color-border)";
+      const inner=done?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>':step;
+      html+=`<div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="width:34px;height:34px;border-radius:9999px;border:2px solid ${dotBorder};background:${dotBg};color:${dotColor};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;">${inner}</div>
+        <span style="font-size:11px;font-weight:500;color:${active?'var(--color-foreground)':done?'var(--color-signal)':'var(--color-foreground-muted)'};">${labels[step-1]}</span>
+      </div>`;
+      if(step<total) html+=`<div style="flex:1;height:2px;margin:0 6px;align-self:flex-start;margin-top:16px;background:${lineColor};"></div>`;
+    }
+    root.innerHTML=html;
+    root.style.display="flex";root.style.alignItems="flex-start";
+  })();
+  </script>
+  <p style="margin-top:14px;font-family:monospace;font-size:11px;color:var(--color-foreground-muted);">current step outlined to avoid visual collision with selected-day chips (walnut fill)</p>
+</body></html>
