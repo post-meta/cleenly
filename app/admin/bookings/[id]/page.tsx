@@ -53,7 +53,7 @@ export default async function BookingDetailPage({
             {/* Customer & Service Details */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-background border rounded-lg p-6">
-                    <h2 className="font-semibold mb-4">Customer</h2>
+                    <h2 className="font-sans font-semibold mb-4">Customer</h2>
                     <div className="space-y-2 text-sm">
                         <p><span className="text-muted-foreground">Name:</span> {booking.customer?.full_name}</p>
                         <p><span className="text-muted-foreground">Email:</span> {booking.customer?.email}</p>
@@ -62,7 +62,7 @@ export default async function BookingDetailPage({
                     </div>
                 </div>
                 <div className="bg-background border rounded-lg p-6">
-                    <h2 className="font-semibold mb-4">Properties</h2>
+                    <h2 className="font-sans font-semibold mb-4">Properties</h2>
                     <div className="space-y-2 text-sm">
                         <p>{booking.address_line1}</p>
                         <p>{booking.city}, {booking.state} {booking.zip}</p>
@@ -73,7 +73,7 @@ export default async function BookingDetailPage({
 
             {/* Payment from Customer */}
             <div className="bg-background border rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Payment from Customer</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Payment from Customer</h2>
 
                 <div className="mb-4">
                     <div className="flex justify-between items-center mb-2">
@@ -123,7 +123,7 @@ export default async function BookingDetailPage({
             {/* Cleaner Payout - MANUAL VERSION */}
             {booking.cleaner_id && booking.cleaner && (
                 <div className="bg-background border rounded-lg p-6">
-                    <h2 className="text-lg font-semibold mb-4">Payout to Cleaner</h2>
+                    <h2 className="font-sans text-lg font-semibold mb-4">Payout to Cleaner</h2>
 
                     {!payoutExists ? (
                         // No payout set yet - show form to create one

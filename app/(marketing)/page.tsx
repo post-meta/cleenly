@@ -8,7 +8,6 @@ import { FAQ } from "@/components/marketing/faq";
 import { ServiceAreas } from "@/components/marketing/service-areas";
 import { CTA } from "@/components/marketing/cta";
 import { TrustStrip } from "@/components/marketing/trust-strip";
-import { PullQuote } from "@/components/marketing/pull-quote";
 import { JsonLd } from "@/components/shared/json-ld";
 
 import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/utils/schema-generators";
@@ -75,7 +74,6 @@ export default function HomePage() {
       <TrustStrip />
       <PricingSection />
       <WhyUs />
-      <PullQuote />
       <FAQ />
       <ServiceAreas />
       <CTA />

@@ -40,7 +40,7 @@ export function BookingTimeline({ booking }: { booking: any }) {
 
     return (
         <section className="border border-gray-200 p-6 rounded-sm">
-            <h2 className="font-semibold mb-4">Timeline</h2>
+            <h2 className="font-sans font-semibold mb-4">Timeline</h2>
 
             <div className="space-y-4">
                 {events.map((event, index) => (

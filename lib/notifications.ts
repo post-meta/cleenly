@@ -14,6 +14,8 @@ type BookingNotification = {
   service_type: string;
   bedrooms: number | string;
   bathrooms: number | string;
+  sqft_range?: string | null;
+  condition?: string | null;
   address: string;
   city?: string;
   zip?: string;
@@ -21,6 +23,9 @@ type BookingNotification = {
   preferred_time?: string | null;
   estimated_min: number;
   estimated_max: number;
+  /** Regular only: per-visit price from visit two (regular table). estimated_* is the first visit (deep table). */
+  recurring_min?: number | null;
+  recurring_max?: number | null;
   special_requests?: string | null;
   addons?: string[];
 };
@@ -91,10 +96,15 @@ async function sendAdminEmail(subject: string, html: string) {
 
 export async function notifyNewBooking(b: BookingNotification) {
   const priceRange = `${fmtPrice(b.estimated_min)}-${fmtPrice(b.estimated_max)}`;
+  const hasRecurring = b.recurring_min != null && b.recurring_max != null;
+  const recurringRange = hasRecurring
+    ? `${fmtPrice(b.recurring_min!)}-${fmtPrice(b.recurring_max!)}`
+    : null;
   const schedule = b.preferred_date
     ? `${b.preferred_date}${b.preferred_time ? ` (${b.preferred_time})` : ""}`
     : "Not specified";
   const addons = b.addons && b.addons.length ? b.addons.join(", ") : "—";
+  const home = `${b.bedrooms} bd / ${b.bathrooms} ba${b.sqft_range ? ` / ${b.sqft_range} sqft` : ""}${b.condition ? ` / ${b.condition}` : ""}`;
 
   const tg = [
     `<b>New booking — ${priceRange}</b>`,
@@ -104,7 +114,9 @@ export async function notifyNewBooking(b: BookingNotification) {
     `✉️ ${b.email}`,
     ``,
     `<b>Service:</b> ${b.service_type}`,
-    `<b>Home:</b> ${b.bedrooms} bd / ${b.bathrooms} ba`,
+    hasRecurring ? `<b>First visit (deep):</b> ${priceRange}` : "",
+    hasRecurring ? `<b>From visit two:</b> ${recurringRange} per visit` : "",
+    `<b>Home:</b> ${home}`,
     `<b>Address:</b> ${b.address}${b.city ? `, ${b.city}` : ""}${b.zip ? ` ${b.zip}` : ""}`,
     `<b>When:</b> ${schedule}`,
     `<b>Add-ons:</b> ${addons}`,
@@ -123,7 +135,9 @@ export async function notifyNewBooking(b: BookingNotification) {
       <p style="margin: 0 0 16px;">✉️ <a href="mailto:${b.email}">${b.email}</a></p>
       <table style="border-collapse: collapse; width: 100%;">
         <tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">Service</td><td style="padding: 4px 0;">${b.service_type}</td></tr>
-        <tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">Home</td><td style="padding: 4px 0;">${b.bedrooms} bd / ${b.bathrooms} ba</td></tr>
+        ${hasRecurring ? `<tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">First visit (deep)</td><td style="padding: 4px 0;">${priceRange}</td></tr>` : ""}
+        ${hasRecurring ? `<tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">From visit two</td><td style="padding: 4px 0;">${recurringRange} per visit</td></tr>` : ""}
+        <tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">Home</td><td style="padding: 4px 0;">${home}</td></tr>
         <tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">Address</td><td style="padding: 4px 0;">${b.address}${b.city ? `, ${b.city}` : ""}${b.zip ? ` ${b.zip}` : ""}</td></tr>
         <tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">When</td><td style="padding: 4px 0;">${schedule}</td></tr>
         <tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">Add-ons</td><td style="padding: 4px 0;">${addons}</td></tr>

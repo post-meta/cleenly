@@ -352,7 +352,7 @@ export default function ApplyPage() {
         {/* Step 1: Basic Info */}
         {step === 1 && (
           <div className="space-y-6">
-            <h2 className="text-xl font-semibold">Basic Information</h2>
+            <h2 className="font-sans text-xl font-semibold">Basic Information</h2>
             <div className="grid gap-4 sm:grid-cols-2">
               <Input
                 name="first_name"
@@ -419,7 +419,7 @@ export default function ApplyPage() {
         {/* Step 2: Experience */}
         {step === 2 && (
           <div className="space-y-6">
-            <h2 className="text-xl font-semibold">Experience</h2>
+            <h2 className="font-sans text-xl font-semibold">Experience</h2>
 
             <div>
               <label className="mb-3 block font-medium">
@@ -545,7 +545,7 @@ export default function ApplyPage() {
         {/* Step 3: Availability */}
         {step === 3 && (
           <div className="space-y-6">
-            <h2 className="text-xl font-semibold">Availability</h2>
+            <h2 className="font-sans text-xl font-semibold">Availability</h2>
 
             <Select
               name="hours_per_week"
@@ -644,7 +644,7 @@ export default function ApplyPage() {
         {/* Step 4: Legal */}
         {step === 4 && (
           <div className="space-y-6">
-            <h2 className="text-xl font-semibold">Legal Requirements</h2>
+            <h2 className="font-sans text-xl font-semibold">Legal Requirements</h2>
 
             <div className="space-y-4">
               <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-4 transition-colors hover:bg-muted/50">
@@ -722,7 +722,7 @@ export default function ApplyPage() {
         {/* Step 5: About */}
         {step === 5 && (
           <div className="space-y-6">
-            <h2 className="text-xl font-semibold">About You</h2>
+            <h2 className="font-sans text-xl font-semibold">About You</h2>
 
             <div>
               <label

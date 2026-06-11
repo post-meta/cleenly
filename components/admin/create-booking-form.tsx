@@ -153,7 +153,7 @@ export function CreateBookingForm({ cleaners, customers }: CreateBookingFormProp
 
             {/* Section 1: Customer */}
             <section className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Customer</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Customer</h2>
 
                 <div className="space-y-4">
                     <div>
@@ -204,7 +204,7 @@ export function CreateBookingForm({ cleaners, customers }: CreateBookingFormProp
 
             {/* Section 2: Service Details */}
             <section className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Service Details</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Service Details</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
@@ -257,7 +257,7 @@ export function CreateBookingForm({ cleaners, customers }: CreateBookingFormProp
 
             {/* Section 3: Address */}
             <section className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Address</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Address</h2>
 
                 <div className="space-y-4">
                     <Input
@@ -306,7 +306,7 @@ export function CreateBookingForm({ cleaners, customers }: CreateBookingFormProp
 
             {/* Section 4: Schedule */}
             <section className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Schedule</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Schedule</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <Input
@@ -340,7 +340,7 @@ export function CreateBookingForm({ cleaners, customers }: CreateBookingFormProp
 
             {/* Section 5: Pricing */}
             <section className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Pricing</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Pricing</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Input
@@ -370,7 +370,7 @@ export function CreateBookingForm({ cleaners, customers }: CreateBookingFormProp
 
             {/* Section 6: Assignment */}
             <section className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Assignment</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Assignment</h2>
 
                 <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
@@ -394,7 +394,7 @@ export function CreateBookingForm({ cleaners, customers }: CreateBookingFormProp
 
             {/* Section 7: Notes */}
             <section className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Notes</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Notes</h2>
 
                 <div className="space-y-4">
                     <div>

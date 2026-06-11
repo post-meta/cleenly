@@ -47,7 +47,7 @@ function QuickLink({
             className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
         >
             <Icon className="w-8 h-8 mb-4 text-gray-600" />
-            <h2 className="font-semibold text-lg mb-1">{title}</h2>
+            <h2 className="font-sans font-semibold text-lg mb-1">{title}</h2>
             <p className="text-sm text-gray-600">{description}</p>
         </Link>
     );

@@ -188,7 +188,7 @@ export function BookingForm() {
             />
           </svg>
         </div>
-        <h2 className="text-2xl font-semibold">Request received!</h2>
+        <h2 className="font-sans text-2xl font-semibold">Request received!</h2>
         <p className="mt-3 text-muted-foreground">
           We&apos;ll confirm your booking within 2 hours.
           <br />

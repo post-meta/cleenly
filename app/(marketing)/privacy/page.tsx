@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Table of Contents */}
           <nav className="mb-12 rounded-xl border border-border bg-muted/30 p-6">
-            <h2 className="mb-4 font-semibold">Table of Contents</h2>
+            <h2 className="font-sans mb-4 font-semibold">Table of Contents</h2>
             <ul className="grid gap-2 text-sm sm:grid-cols-2">
               {sections.map((section, index) => (
                 <li key={section.id}>
@@ -114,7 +114,7 @@ export default function PrivacyPolicyPage() {
           <div className="prose prose-neutral max-w-none space-y-12">
             {/* Introduction */}
             <section id="introduction">
-              <h2 className="text-xl font-semibold">1. Introduction</h2>
+              <h2 className="font-sans text-xl font-semibold">1. Introduction</h2>
               <p className="mt-4 text-muted-foreground">
                 CLEENLY (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is
                 a house cleaning company serving Greater Seattle. This Privacy
@@ -131,7 +131,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Information We Collect */}
             <section id="information-collect">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 2. Information We Collect
               </h2>
 
@@ -239,7 +239,7 @@ export default function PrivacyPolicyPage() {
 
             {/* How We Use Your Information */}
             <section id="how-we-use">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 3. How We Use Your Information
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -286,7 +286,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Information Sharing */}
             <section id="information-sharing">
-              <h2 className="text-xl font-semibold">4. Information Sharing</h2>
+              <h2 className="font-sans text-xl font-semibold">4. Information Sharing</h2>
               <p className="mt-4 text-muted-foreground">
                 We share your information only in these circumstances:
               </p>
@@ -364,7 +364,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Data Retention */}
             <section id="data-retention">
-              <h2 className="text-xl font-semibold">5. Data Retention</h2>
+              <h2 className="font-sans text-xl font-semibold">5. Data Retention</h2>
               <p className="mt-4 text-muted-foreground">
                 We retain your information for as long as necessary to provide
                 services and fulfill the purposes described in this policy:
@@ -404,7 +404,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Data Security */}
             <section id="data-security">
-              <h2 className="text-xl font-semibold">6. Data Security</h2>
+              <h2 className="font-sans text-xl font-semibold">6. Data Security</h2>
               <p className="mt-4 text-muted-foreground">
                 We take reasonable measures to protect your information:
               </p>
@@ -450,7 +450,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Your Rights */}
             <section id="your-rights">
-              <h2 className="text-xl font-semibold">7. Your Rights</h2>
+              <h2 className="font-sans text-xl font-semibold">7. Your Rights</h2>
               <p className="mt-4 text-muted-foreground">
                 Depending on your location, you may have the following rights:
               </p>
@@ -495,7 +495,7 @@ export default function PrivacyPolicyPage() {
 
             {/* CCPA */}
             <section id="ccpa">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 8. California Privacy Rights (CCPA)
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -545,7 +545,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Cookies */}
             <section id="cookies">
-              <h2 className="text-xl font-semibold">9. Cookies and Tracking</h2>
+              <h2 className="font-sans text-xl font-semibold">9. Cookies and Tracking</h2>
               <p className="mt-4 text-muted-foreground">
                 We use cookies and similar technologies to:
               </p>
@@ -577,7 +577,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Third-Party Links */}
             <section id="third-party">
-              <h2 className="text-xl font-semibold">10. Third-Party Links</h2>
+              <h2 className="font-sans text-xl font-semibold">10. Third-Party Links</h2>
               <p className="mt-4 text-muted-foreground">
                 Our website may contain links to third-party websites. We are not
                 responsible for the privacy practices of these websites. We
@@ -588,7 +588,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Children's Privacy */}
             <section id="children">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 11. Children&apos;s Privacy
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -608,7 +608,7 @@ export default function PrivacyPolicyPage() {
 
             {/* International Users */}
             <section id="international">
-              <h2 className="text-xl font-semibold">12. International Users</h2>
+              <h2 className="font-sans text-xl font-semibold">12. International Users</h2>
               <p className="mt-4 text-muted-foreground">
                 CLEENLY operates in the United States. If you are accessing our
                 services from outside the US, your information will be
@@ -619,7 +619,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Changes */}
             <section id="changes">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 13. Changes to This Policy
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -639,7 +639,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Contact */}
             <section id="contact">
-              <h2 className="text-xl font-semibold">14. Contact Us</h2>
+              <h2 className="font-sans text-xl font-semibold">14. Contact Us</h2>
               <p className="mt-4 text-muted-foreground">
                 If you have questions about this Privacy Policy or our privacy
                 practices, contact us:

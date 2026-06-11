@@ -25,8 +25,8 @@ export function ServiceAreas() {
             Our service <em className="italic text-foreground-soft font-display font-normal">areas.</em>
           </h2>
           <p className="mt-3.5 text-[17px] text-foreground-soft leading-relaxed max-w-[540px] mx-auto font-sans">
-            Same crew, same neighborhood. We assign cleaners by zip so they know
-            your building's quirks the second time around.
+            We keep your crew the same whenever we can — they learn your
+            building's quirks the second time around.
           </p>
         </div>
 

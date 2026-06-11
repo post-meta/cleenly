@@ -35,7 +35,7 @@ export function BookingActions({ booking }: { booking: any }) {
 
     return (
         <section className="border border-gray-200 p-6 rounded-sm space-y-3">
-            <h2 className="font-semibold mb-4">Actions</h2>
+            <h2 className="font-sans font-semibold mb-4">Actions</h2>
 
             {canReschedule && (
                 <Button

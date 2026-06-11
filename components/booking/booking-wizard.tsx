@@ -11,9 +11,10 @@ import {
   StepContact,
   StepConfirmation,
 } from "./steps";
-import { calculatePrice, getEstimatedDuration } from "@/lib/pricing";
+import { calculateFirstVisitPrice, getEstimatedDuration } from "@/lib/pricing";
 import { StickyPriceFooter } from "./sticky-price-footer";
 import type {
+  Addon,
   ServiceType,
   HomeCondition,
   BookingFormData,
@@ -25,6 +26,20 @@ const SERVICE_LABEL: Record<ServiceType, string> = {
   regular: "Regular Cleaning",
   deep: "Deep Cleaning",
   move_out: "Move-Out Cleaning",
+};
+
+// Whitelist for the ?service= query param. Bundle slugs (PNW protocols) map to
+// deep cleaning with the protocol pre-selected as an add-on. Unknown slugs land
+// on step 1 with nothing selected.
+const SERVICE_PARAM_MAP: Record<string, { service: ServiceType; addons?: Addon[] }> = {
+  regular: { service: "regular" },
+  deep: { service: "deep" },
+  move_out: { service: "move_out" },
+  "regular-cleaning": { service: "regular" },
+  "deep-cleaning": { service: "deep" },
+  "move-out-cleaning": { service: "move_out" },
+  "pollen-purge": { service: "deep", addons: ["pollen_purge"] },
+  "damp-season-reset": { service: "deep", addons: ["damp_season_reset"] },
 };
 
 // Generate a simple booking reference
@@ -39,16 +54,17 @@ function generateBookingRef(): string {
 
 export function BookingWizard() {
   const searchParams = useSearchParams();
-  const initialService = searchParams.get("service") as ServiceType | null;
+  const serviceParam = searchParams.get("service");
+  const initialServiceEntry = serviceParam ? SERVICE_PARAM_MAP[serviceParam] : undefined;
   const initialNeighborhood = searchParams.get("neighborhood");
   const initialCity = searchParams.get("city");
 
-  const [step, setStep] = useState(initialService ? 2 : 1);
+  const [step, setStep] = useState(initialServiceEntry ? 2 : 1);
   const [formData, setFormData] = useState<Partial<BookingFormData>>({
-    service_type: initialService || undefined,
+    service_type: initialServiceEntry?.service,
     address: initialNeighborhood ? `${initialNeighborhood}, ${initialCity || ''}` : undefined,
     condition: "average",
-    addons: [],
+    addons: initialServiceEntry?.addons ?? [],
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,6 +106,9 @@ export function BookingWizard() {
         }
         if (!formData.bathrooms) {
           newErrors.bathrooms = "Please select number of bathrooms";
+        }
+        if (!formData.sqft_range) {
+          newErrors.sqft_range = "Please select approximate square footage";
         }
         break;
       case 4:
@@ -146,17 +165,19 @@ export function BookingWizard() {
     setIsSubmitting(true);
 
     try {
-      // Calculate final price (prices are already in cents from pricing.ts)
-      const estimate = calculatePrice(
+      // First-visit price (deep table for regular) — what the customer actually pays.
+      // The server recalculates this from raw params; this is only a sanity check.
+      const { firstVisit } = calculateFirstVisitPrice(
         formData.service_type,
         formData.bedrooms,
         formData.bathrooms,
         (formData.condition || "average") as HomeCondition,
-        formData.addons || []
+        formData.addons || [],
+        formData.sqft_range
       );
 
-      const finalMin = estimate.min + estimate.addonsTotal;
-      const finalMax = estimate.max + estimate.addonsTotal;
+      const finalMin = firstVisit.min + firstVisit.addonsTotal;
+      const finalMax = firstVisit.max + firstVisit.addonsTotal;
 
       // Validate price calculation
       if (!finalMin || !finalMax || finalMin <= 0 || finalMax <= 0) {
@@ -165,10 +186,18 @@ export function BookingWizard() {
         return;
       }
 
+      // Pets checkbox is informational only — pass it to the cleaner via notes.
+      const specialRequests = [
+        formData.pets_at_home ? "Pets at home." : null,
+        formData.special_requests || null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
+
       const bookingData = {
         ...formData,
-        estimated_min: finalMin,
-        estimated_max: finalMax,
+        pets_at_home: undefined,
+        special_requests: specialRequests,
       };
 
       const response = await fetch("/api/bookings", {
@@ -182,10 +211,15 @@ export function BookingWizard() {
         throw new Error(errorData.error || "Failed to submit booking");
       }
 
+      // Confirmation shows the server-computed estimate (source of truth).
+      const result = await response.json().catch(() => null);
+      const serverMin = result?.booking?.estimated_min;
+      const serverMax = result?.booking?.estimated_max;
+
       const ref = generateBookingRef();
       setBookingRef(ref);
-      setEstimatedMin(finalMin);
-      setEstimatedMax(finalMax);
+      setEstimatedMin(typeof serverMin === "number" ? serverMin : finalMin);
+      setEstimatedMax(typeof serverMax === "number" ? serverMax : finalMax);
       setStep(6);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
@@ -204,19 +238,26 @@ export function BookingWizard() {
     formData.service_type && formData.bedrooms && formData.bathrooms
   );
   const showStickyFooter = step >= 2 && step <= 5 && canEstimate;
-  const liveEstimate = canEstimate
-    ? calculatePrice(
+  // First-visit price (deep table for regular) — what the customer actually pays.
+  const liveFirstVisit = canEstimate
+    ? calculateFirstVisitPrice(
         formData.service_type as ServiceType,
         formData.bedrooms!,
         formData.bathrooms!,
         (formData.condition || "average") as HomeCondition,
-        formData.addons || []
+        formData.addons || [],
+        formData.sqft_range
       )
     : null;
+  const liveEstimate = liveFirstVisit ? liveFirstVisit.firstVisit : null;
   const liveTotalMin = liveEstimate ? liveEstimate.min + liveEstimate.addonsTotal : 0;
   const liveTotalMax = liveEstimate ? liveEstimate.max + liveEstimate.addonsTotal : 0;
   const liveDuration = canEstimate
-    ? getEstimatedDuration(formData.service_type as ServiceType, formData.bedrooms!)
+    ? getEstimatedDuration(
+        // First regular visit is a deep clean — show the deep duration.
+        liveFirstVisit?.firstVisitIsDeep ? "deep" : (formData.service_type as ServiceType),
+        formData.bedrooms!
+      )
     : "";
   const isContactStep = step === 5;
 

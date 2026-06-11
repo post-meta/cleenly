@@ -110,6 +110,11 @@ export function StepConfirmation({
       {/* Pricing and email message */}
       <div className="mt-[18px] p-[14px_16px] rounded-md bg-surface-warm text-left text-[13px] leading-[1.55]">
         <p className="text-foreground">We&apos;ll confirm your exact price and cleaner details within 2 hours.</p>
+        <p className="mt-1.5 text-foreground-soft">
+          The number above is an estimate. Your final price won&apos;t go above
+          the top of that range without your OK. If your home needs more than
+          described, we call before we start — not after.
+        </p>
         <p className="mt-1.5 text-foreground-muted">
           Check your email at{" "}
           <span className="text-foreground font-medium">

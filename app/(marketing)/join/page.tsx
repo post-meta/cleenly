@@ -255,7 +255,7 @@ export default function JoinPage() {
       {/* How It Works */}
       <section className="py-16 md:py-24">
         <Container>
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-sans text-center text-2xl font-bold md:text-3xl">
             How it works
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-4">
@@ -280,7 +280,7 @@ export default function JoinPage() {
       {/* Benefits */}
       <section className="bg-muted/30 py-16 md:py-24">
         <Container>
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-sans text-center text-2xl font-bold md:text-3xl">
             What we offer
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -305,7 +305,7 @@ export default function JoinPage() {
       {/* Requirements */}
       <section className="py-16 md:py-24">
         <Container>
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-sans text-center text-2xl font-bold md:text-3xl">
             What we look for
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -373,7 +373,7 @@ export default function JoinPage() {
       {/* FAQ */}
       <section className="bg-muted/30 py-16 md:py-24">
         <Container size="narrow">
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-sans text-center text-2xl font-bold md:text-3xl">
             Common questions
           </h2>
           <div className="mt-12">
@@ -386,7 +386,7 @@ export default function JoinPage() {
       <section className="py-16 md:py-24">
         <Container size="narrow">
           <div className="rounded-2xl bg-foreground p-8 text-center text-background md:p-12">
-            <h2 className="text-2xl font-bold md:text-3xl">Ready to apply?</h2>
+            <h2 className="font-sans text-2xl font-bold md:text-3xl">Ready to apply?</h2>
             <p className="mt-4 text-background/80">
               Takes about 10 minutes. We&apos;ll review and get back to you
               within 2-3 business days.

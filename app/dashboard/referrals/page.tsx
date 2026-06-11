@@ -35,7 +35,7 @@ export default async function ReferralsPage() {
                         <Gift className="w-6 h-6 text-accent" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-semibold">How It Works</h2>
+                        <h2 className="font-sans text-2xl font-semibold">How It Works</h2>
                         <p className="text-gray-600">Give $25, Get $25</p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ export default async function ReferralsPage() {
 
             {/* Referral Link */}
             <div className="border border-gray-200 rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-4">Your Referral Link</h2>
+                <h2 className="font-sans text-xl font-semibold mb-4">Your Referral Link</h2>
 
                 <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
                     <div className="flex items-center gap-3">
@@ -129,7 +129,7 @@ export default async function ReferralsPage() {
 
             {/* Referral History */}
             <div className="border border-gray-200 rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-4">Referral History</h2>
+                <h2 className="font-sans text-xl font-semibold mb-4">Referral History</h2>
 
                 {stats.totalReferrals === 0 ? (
                     <div className="text-center py-12">

@@ -49,7 +49,7 @@ export function LocalFAQ({ city, service }: LocalFAQProps) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <div className="max-w-4xl mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center mb-12">
+                <h2 className="font-sans text-3xl font-bold text-center mb-12">
                     Common Questions about {serviceName} in {city.name}
                 </h2>
                 <div className="space-y-8">

@@ -9,6 +9,7 @@ interface ServiceOption {
   desc: string;
   bestFor: string;
   price: string;
+  hint?: string;
 }
 
 const services: ServiceOption[] = [
@@ -18,6 +19,7 @@ const services: ServiceOption[] = [
     desc: "Routine maintenance. Dusting, vacuuming, bathrooms, kitchen.",
     bestFor: "Weekly or bi-weekly",
     price: "From $165",
+    hint: "First visit is priced as a deep clean. From visit two: regular rate.",
   },
   {
     id: "deep",
@@ -85,6 +87,11 @@ export function StepService({ value, onChange, onNext }: StepServiceProps) {
                 <span className="text-foreground-soft">Best for: </span>
                 <span className="text-foreground font-medium">{s.bestFor}</span>
               </p>
+              {s.hint && (
+                <p className="text-[12px] text-foreground-muted mt-1.5 leading-normal">
+                  {s.hint}
+                </p>
+              )}
               {selected && (
                 <div className="absolute top-4 right-4 w-[22px] h-[22px] rounded-full bg-foreground flex items-center justify-center">
                   <svg
@@ -109,7 +116,8 @@ export function StepService({ value, onChange, onNext }: StepServiceProps) {
       <p className="mt-[18px] text-center text-[12px] text-foreground-soft">
         Not sure?{" "}
         <span className="text-foreground font-medium">
-          Regular is great for maintained homes. Deep for first-time.
+          Regular keeps a maintained home on schedule. Every first visit starts
+          at the deep-clean rate.
         </span>
       </p>
 

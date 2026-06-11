@@ -69,7 +69,7 @@ export default async function BookingDetailsPage({
                 <div className="lg:col-span-2 space-y-6">
                     {/* Date & Time */}
                     <section className="border border-gray-200 p-6 rounded-sm">
-                        <h2 className="font-semibold mb-4">Schedule</h2>
+                        <h2 className="font-sans font-semibold mb-4">Schedule</h2>
                         <div className="space-y-2">
                             <p className="text-sm">
                                 <span className="text-gray-600">Date:</span>{' '}
@@ -90,7 +90,7 @@ export default async function BookingDetailsPage({
 
                     {/* Address */}
                     <section className="border border-gray-200 p-6 rounded-sm">
-                        <h2 className="font-semibold mb-4">Location</h2>
+                        <h2 className="font-sans font-semibold mb-4">Location</h2>
                         <div className="space-y-1">
                             <p className="font-medium">{booking.addresses.street_address}</p>
                             {booking.addresses.unit && (

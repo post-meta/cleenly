@@ -33,6 +33,12 @@ export function bookingConfirmationEmail({
           <p style="margin: 0 0 8px 0;"><strong>Address:</strong> ${address}</p>
           <p style="margin: 0;"><strong>Price:</strong> $${price}</p>
         </div>
+
+        <p style="font-size: 14px; color: #525252; margin-bottom: 24px;">
+          This is an estimate. Your final price won't go above the top of your
+          quoted range without your OK. If your home needs more than described,
+          we call before we start — not after.
+        </p>
         
         <a 
           href="${magicLinkUrl}" 

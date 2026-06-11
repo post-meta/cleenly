@@ -10,15 +10,15 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
           {/* Left: text */}
           <div className="space-y-6 md:space-y-8 text-left">
-            <Eyebrow>Greater Seattle · instant booking</Eyebrow>
+            <Eyebrow>Greater Seattle · online booking</Eyebrow>
 
             <h1 className="font-display font-normal text-[48px] md:text-[64px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground max-w-[560px]">
               A cleaner home in <em className="italic text-foreground-soft font-display font-normal">three taps.</em>
             </h1>
 
             <p className="text-[19px] leading-[1.55] text-foreground-soft max-w-[480px]">
-              Vetted cleaners. Pacific Northwest standards. Same crew every time —
-              the same key under the mat, but better.
+              We bring our own supplies. Pacific Northwest standards. The same
+              crew whenever we can — the same key under the mat, but better.
             </p>
 
             <div className="flex flex-row items-center gap-3">
@@ -32,13 +32,13 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-[13px] text-foreground-muted">
-              <span className="whitespace-nowrap">Licensed · Insured · Bonded</span>
+              <span className="whitespace-nowrap">Licensed · Insured</span>
               <span className="hidden md:inline w-[1px] h-3.5 bg-border"></span>
               <span className="whitespace-nowrap">No payment until confirmed</span>
             </div>
           </div>
 
-          {/* Right: lifestyle image with rating badge */}
+          {/* Right: lifestyle image with guarantee badge */}
           <div className="relative w-full">
             <Image
               src="/hero-image.jpg"
@@ -48,7 +48,7 @@ export function Hero() {
               priority
               className="w-full h-[380px] md:h-[560px] rounded-[32px] object-cover shadow-sm block"
             />
-            {/* Floating rating badge */}
+            {/* Floating guarantee badge */}
             <div 
               className="absolute -left-4 md:-left-7 bottom-8 bg-background border border-border rounded-lg px-5 py-4 flex items-center gap-3.5 transition-all duration-300 hover:shadow-lift"
               style={{ boxShadow: "var(--shadow-lift)" }}
@@ -60,10 +60,10 @@ export function Hero() {
               </span>
               <div className="whitespace-nowrap">
                 <div className="font-display font-normal text-[22px] tracking-[-0.02em] leading-none text-foreground">
-                  <span className="tnum">4.92</span> avg. rating
+                  24-hour re-clean
                 </div>
                 <div className="text-[12px] text-foreground-muted mt-1">
-                  Across 2,400 cleanings this year
+                  Not right? We come back free
                 </div>
               </div>
             </div>

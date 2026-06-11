@@ -2,7 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import {
-  calculatePrice,
+  addonInfo,
+  calculateFirstVisitPrice,
   formatPriceRange,
   getEstimatedDuration,
   serviceIncludes,
@@ -40,16 +41,24 @@ const bathroomLabels: Record<BathroomCount, string> = {
   "3.5+": "3.5+ bath",
 };
 
-const pnwAddonsList = [
-  { id: "pollen_purge" as Addon, label: "Pollen Purge", desc: "HEPA vent flush, screen wipe, allergen-grade cloths.", price: "+$35" },
-  { id: "damp_season_reset" as Addon, label: "Damp-Season Reset", desc: "Mildew prevention, cedar-pine mop, vent re-set.", price: "+$45" },
-];
+// Labels, descriptions, and prices come from lib/pricing.ts (addonInfo) —
+// the same source the calculator uses. Only the grouping is defined here.
+const pnwAddonIds: Addon[] = ["pollen_purge", "damp_season_reset"];
+const standardAddonIds: Addon[] = ["fridge", "oven", "cabinets"];
 
-const standardAddonsList = [
-  { id: "fridge" as Addon, label: "Inside fridge", desc: "Shelves, drawers, gaskets.", price: "+$25" },
-  { id: "oven" as Addon, label: "Inside oven", desc: "Racks, glass, deep degrease.", price: "+$30" },
-  { id: "cabinets" as Addon, label: "Inside cabinets", desc: "Empty interiors only.", price: "+$25" },
-];
+const pnwAddonsList = pnwAddonIds.map((id) => ({
+  id,
+  label: addonInfo[id].label,
+  desc: addonInfo[id].description ?? "",
+  price: addonInfo[id].price,
+}));
+
+const standardAddonsList = standardAddonIds.map((id) => ({
+  id,
+  label: addonInfo[id].label,
+  desc: addonInfo[id].description ?? "",
+  price: addonInfo[id].price,
+}));
 
 interface StepPriceProps {
   data: Partial<BookingFormData>;
@@ -65,15 +74,18 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
   const condition = data.condition || "average";
   const addons = data.addons || [];
 
-  const estimate = calculatePrice(
+  const { firstVisit, recurring, firstVisitIsDeep } = calculateFirstVisitPrice(
     serviceType,
     bedrooms,
     bathrooms,
     condition as HomeCondition,
-    addons
+    addons,
+    data.sqft_range
   );
+  const estimate = firstVisit;
 
-  const duration = getEstimatedDuration(serviceType, bedrooms);
+  // First regular visit is a deep clean — show the deep duration.
+  const duration = getEstimatedDuration(firstVisitIsDeep ? "deep" : serviceType, bedrooms);
   const includes = serviceIncludes[serviceType];
 
   const handleAddonToggle = (addon: Addon) => {
@@ -99,7 +111,10 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
       {/* Summary card */}
       <div className="mt-[18px] p-[18px] rounded-xl border border-border bg-surface-warm">
         <div className="text-[12px] text-foreground-muted font-medium">
-          {serviceNames[serviceType]} · {bedroomLabels[bedrooms]} · {bathroomLabels[bathrooms]}
+          {firstVisitIsDeep
+            ? `${serviceNames[serviceType]} — first visit`
+            : serviceNames[serviceType]}{" "}
+          · {bedroomLabels[bedrooms]} · {bathroomLabels[bathrooms]}
         </div>
         <div className="tnum font-display font-normal text-[44px] tracking-tight mt-1.5 leading-none text-foreground">
           {formatPriceRange(totalMin, totalMax)}
@@ -107,6 +122,24 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
         <div className="text-[12px] text-foreground-muted mt-1.5">
           Typical duration: {duration}
         </div>
+        {firstVisitIsDeep && (
+          <div className="mt-3 pt-3 border-t border-border/60">
+            <p className="text-[12px] text-foreground-soft leading-normal">
+              Your first visit is a deep clean — your home isn&apos;t on our
+              schedule yet. From visit two the price drops.
+            </p>
+            <p className="text-[13px] text-foreground mt-1.5">
+              From visit two:{" "}
+              <span className="font-semibold tnum">
+                {formatPriceRange(
+                  recurring.min + recurring.addonsTotal,
+                  recurring.max + recurring.addonsTotal
+                )}
+              </span>{" "}
+              per visit
+            </p>
+          </div>
+        )}
       </div>
 
       {/* What's included */}
@@ -243,7 +276,9 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
 
       {/* Note */}
       <p className="mt-5 p-[12px_14px] bg-surface-warm rounded-md text-[12px] text-foreground-soft leading-normal">
-        Final price confirmed after booking. No surprises — if anything changes, we&apos;ll tell you first.
+        This is an estimate. Your final price won&apos;t go above the top of this
+        range without your OK. If your home needs more than described, we call
+        before we start — not after.
       </p>
 
       <div className="flex gap-3 mt-6">

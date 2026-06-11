@@ -10,7 +10,7 @@ export function CleanerInfo({
 }) {
     return (
         <section className="border border-gray-200 p-6 rounded-sm">
-            <h2 className="font-semibold mb-4">Your Cleaner</h2>
+            <h2 className="font-sans font-semibold mb-4">Your Cleaner</h2>
 
             <div className="flex items-start gap-4">
                 {cleaner.profile_photo ? (

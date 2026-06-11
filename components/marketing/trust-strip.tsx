@@ -1,10 +1,10 @@
 export function TrustStrip() {
   const items = [
     { icon: "shield", label: "Licensed", sub: "Washington state" },
-    { icon: "umbrella", label: "Insured", sub: "$2M general liability" },
-    { icon: "badge", label: "Bonded", sub: "Every cleaner, every job" },
-    { icon: "leaf", label: "Eco-certified", sub: "Cedar-pine cleaning system" },
-    { icon: "check", label: "Background-checked", sub: "Annual re-verification" },
+    { icon: "umbrella", label: "Insured", sub: "General liability" },
+    { icon: "tag", label: "Price upfront", sub: "The price you see is what you pay" },
+    { icon: "redo", label: "24-hour re-clean", sub: "Not right? We come back free" },
+    { icon: "box", label: "Own supplies", sub: "We bring everything" },
   ];
 
   return (
@@ -36,17 +36,24 @@ export function TrustStrip() {
                     <path d="M12 12v8a2 2 0 0 0 4 0"/>
                   </>
                 )}
-                {it.icon === "badge" && (
+                {it.icon === "tag" && (
                   <>
-                    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
-                    <path d="m9 12 2 2 4-4"/>
+                    <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+                    <circle cx="7.5" cy="7.5" r=".5" fill="#DCE5DF"/>
                   </>
                 )}
-                {it.icon === "leaf" && (
-                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2c1.7 5.3 1.8 10.8 0 16-2.3 6-7.5 7-12 5"/>
+                {it.icon === "redo" && (
+                  <>
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                  </>
                 )}
-                {it.icon === "check" && (
-                  <path d="M9 12l2 2 4-4M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                {it.icon === "box" && (
+                  <>
+                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                    <path d="m3.3 7 8.7 5 8.7-5"/>
+                    <path d="M12 22V12"/>
+                  </>
                 )}
               </svg>
               <div>

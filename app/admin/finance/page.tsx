@@ -85,7 +85,7 @@ export default async function FinancePage() {
 
             {/* Unpaid Cleaners */}
             <div className="bg-background border rounded-lg p-6">
-                <h2 className="text-lg font-semibold mb-4">Unpaid Cleaner Payouts</h2>
+                <h2 className="font-sans text-lg font-semibold mb-4">Unpaid Cleaner Payouts</h2>
 
                 {payoutsByLeaner.length === 0 ? (
                     <p className="text-muted-foreground text-sm">All caught up! 🎉</p>
@@ -144,7 +144,7 @@ export default async function FinancePage() {
             {/* Pending Customer Payments */}
             {pendingPayments && pendingPayments.length > 0 && (
                 <div className="bg-background border rounded-lg p-6">
-                    <h2 className="text-lg font-semibold mb-4">
+                    <h2 className="font-sans text-lg font-semibold mb-4">
                         Pending Customer Payments
                     </h2>
                     <div className="space-y-3">

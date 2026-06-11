@@ -10,6 +10,16 @@ const timeSlots: { id: TimeSlot; label: string; time: string }[] = [
   { id: "evening", label: "Evening", time: "4pm – 7pm" },
 ];
 
+// Timezone-safe YYYY-MM-DD from a local Date. Never use toISOString() here:
+// it converts to UTC, which shifts the date by one for Seattle evenings
+// (e.g. clicking the 11th stored the 12th).
+function toLocalDateString(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
 interface StepScheduleProps {
   data: Partial<BookingFormData>;
   onChange: (data: Partial<BookingFormData>) => void;
@@ -34,7 +44,7 @@ export function StepSchedule({
       const date = new Date(today);
       date.setDate(today.getDate() + i);
       result.push({
-        dateString: date.toISOString().split("T")[0],
+        dateString: toLocalDateString(date),
         dayName: date.toLocaleDateString("en-US", { weekday: "short" }),
         dayNum: date.getDate().toString(),
         month: date.toLocaleDateString("en-US", { month: "short" }),

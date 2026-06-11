@@ -23,8 +23,8 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
               <Logo />
             </Link>
             <p className="mt-5 max-w-[280px] text-[14px] leading-[1.6] text-foreground-soft">
-              Residential cleaning for the Greater Seattle area. Same crew, same
-              neighborhood, every time.
+              Residential cleaning for the Greater Seattle area. We keep your
+              crew the same whenever we can.
             </p>
             <div className="mt-6 flex flex-col gap-2 text-[13px] text-foreground-muted">
               <a
@@ -108,7 +108,8 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
 
         <div className="divider-warm" />
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-[12px] text-foreground-muted">
+        {/* pr-20 keeps the legal links clear of the fixed chat widget (56px button at right-4/right-6) */}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 pr-20 text-[12px] text-foreground-muted">
           <div>
             © {currentYear}{" "}
             <span className="font-display italic font-normal tracking-[-0.035em] text-[14px] text-foreground-soft">

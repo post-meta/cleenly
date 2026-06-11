@@ -108,7 +108,7 @@ interface FAQCategoryProps {
 export function FAQCategory({ title, items }: FAQCategoryProps) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold">{title}</h2>
+      <h2 className="font-sans text-xl font-semibold">{title}</h2>
       <FAQAccordion items={items} />
     </section>
   );

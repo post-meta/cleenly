@@ -2,10 +2,15 @@ import type {
   ServiceType,
   BedroomCount,
   BathroomCount,
+  SqftRange,
   HomeCondition,
   Addon,
   PriceEstimate,
 } from "@/types";
+
+// Minimum job total (in cents). No visit goes out below this —
+// drive time + setup + supplies make smaller jobs unprofitable.
+export const MIN_JOB_CENTS = 16500;
 
 // Base prices by service type and bedroom count (in cents)
 // Seattle 2026 market-aligned; aggressive premium-mid positioning.
@@ -51,6 +56,19 @@ const conditionMultiplier: Record<HomeCondition, number> = {
   clean: 1.0,
   average: 1.1,
   needs_work: 1.25,
+};
+
+// Square footage multiplier. Protects against "2 bedrooms in 2,800 sqft".
+// Keys match the existing SqftRange enum — no DB migration needed.
+// "not_sure" is no longer offered in the wizard; kept at 1.0 for old rows.
+const sqftMultiplier: Record<SqftRange, number> = {
+  under_800: 1.0,
+  "800_1200": 1.0,
+  "1200_1800": 1.1,
+  "1800_2500": 1.2,
+  "2500_3500": 1.35,
+  over_3500: 1.35,
+  not_sure: 1.0,
 };
 
 // Add-on prices (in cents)
@@ -103,13 +121,18 @@ export function calculatePrice(
   bedrooms: BedroomCount,
   bathrooms: BathroomCount,
   condition: HomeCondition = "average",
-  addons: Addon[] = []
+  addons: Addon[] = [],
+  sqftRange?: SqftRange
 ): PriceEstimate {
   const base = basePrices[serviceType][bedrooms];
   const bathMult = bathroomMultiplier[bathrooms];
   const condMult = conditionMultiplier[condition];
+  const sqftMult = sqftRange ? sqftMultiplier[sqftRange] : 1.0;
 
-  const calculated = base * bathMult * condMult;
+  let calculated = base * bathMult * condMult * sqftMult;
+
+  // Minimum job floor — addons go on top.
+  calculated = Math.max(calculated, MIN_JOB_CENTS);
 
   // Calculate addons total
   const addonsTotal = addons.reduce((sum, addon) => sum + addonPrices[addon], 0);
@@ -120,6 +143,36 @@ export function calculatePrice(
     base: Math.round(calculated),
     addonsTotal,
   };
+}
+
+export interface FirstVisitEstimate {
+  /** What the customer pays on the first visit. For regular this is the deep-clean table. */
+  firstVisit: PriceEstimate;
+  /** Per-visit price from visit two onward (regular table). For deep/move_out same as firstVisit. */
+  recurring: PriceEstimate;
+  /** True when serviceType is regular and the first visit is priced as a deep clean. */
+  firstVisitIsDeep: boolean;
+}
+
+// Every regular booking is in practice a first visit (no recurring system yet).
+// Owner decision: the first cleaning is always heavier — first visit prices by
+// the deep table, visit two onward by the regular table. Deep/move-out unchanged.
+export function calculateFirstVisitPrice(
+  serviceType: ServiceType,
+  bedrooms: BedroomCount,
+  bathrooms: BathroomCount,
+  condition: HomeCondition = "average",
+  addons: Addon[] = [],
+  sqftRange?: SqftRange
+): FirstVisitEstimate {
+  const recurring = calculatePrice(serviceType, bedrooms, bathrooms, condition, addons, sqftRange);
+
+  if (serviceType !== "regular") {
+    return { firstVisit: recurring, recurring, firstVisitIsDeep: false };
+  }
+
+  const firstVisit = calculatePrice("deep", bedrooms, bathrooms, condition, addons, sqftRange);
+  return { firstVisit, recurring, firstVisitIsDeep: true };
 }
 
 // Format price from cents to dollars

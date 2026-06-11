@@ -71,6 +71,8 @@ export interface BookingFormData {
   bathrooms?: BathroomCount;
   sqft_range?: SqftRange;
   condition?: HomeCondition;
+  /** Client-only flag. Does not affect price; merged into special_requests on submit. */
+  pets_at_home?: boolean;
   special_requests?: string;
   // Step 3
   addons?: Addon[];

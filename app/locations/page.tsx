@@ -62,7 +62,7 @@ export default function LocationsPage() {
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {Object.entries(regions).map(([regionName, regionData]) => (
                             <div key={regionName} className="border border-gray-200 rounded-[12px] p-8 bg-white hover:border-accent/40 transition-all shadow-sm">
-                                <h2 className="text-xl font-semibold mb-2 text-foreground">{regionName}</h2>
+                                <h2 className="font-sans text-xl font-semibold mb-2 text-foreground">{regionName}</h2>
                                 <p className="text-sm text-gray-500 mb-6">
                                     {regionData.description}
                                 </p>

@@ -42,12 +42,12 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Do you offer discounts for recurring cleanings?",
         answer:
-          "Yes. Weekly cleanings are typically 10-15% less per visit than one-time cleanings. Bi-weekly cleanings are 5-10% less. The discount is applied automatically when you select recurring service during booking. No coupon codes needed.",
+          "Yes. Weekly and bi-weekly visits cost less than one-time cleanings — your home stays maintained, so each visit takes less time. Mention your preferred frequency at booking and we'll confirm the recurring rate along with your first visit.",
       },
       {
         question: "How much should I tip my house cleaner?",
         answer:
-          "Tipping is not required but appreciated. If you're happy with the cleaning, 15-20% is standard. You can tip in cash directly to the cleaner or add a tip through the app after your appointment. Many customers tip $20-$40 for a regular cleaning.",
+          "Tipping is not required but appreciated. If you're happy with the cleaning, 15-20% is standard. Cash directly to your cleaner works best. Many customers tip $20-$40 for a regular cleaning.",
       },
     ],
   },
@@ -99,7 +99,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How do I book a cleaning?",
         answer:
-          "Book online at cleenly.app/book. Enter your home details (bedrooms, bathrooms), see your price, choose a date and time, and provide contact info. Takes about 2 minutes. No account required. You'll receive confirmation by email within 2 hours with cleaner details.",
+          "Book online at cleenly.app/book. Enter your home details (bedrooms, bathrooms), see your estimate, choose a date and time, and provide contact info. Takes about 2 minutes. No account required. We confirm by email, usually within a couple of hours.",
       },
       {
         question: "How far in advance do I need to book?",
@@ -181,7 +181,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "What if something is damaged during cleaning?",
         answer:
-          "All cleaners on CLEENLY carry liability insurance. If something is damaged, report it within 24 hours. Take photos and email hello@cleenly.app with details. We'll work with the cleaner and their insurance to resolve the issue. Genuine accidents are covered.",
+          "CLEENLY carries general liability insurance. If something is damaged, report it within 24 hours. Take photos and email hello@cleenly.app with details. We'll make it right. Genuine accidents are covered.",
       },
     ],
   },
@@ -197,17 +197,17 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How do I leave a review for my cleaner?",
         answer:
-          "After your cleaning, you'll receive an email with a link to leave a review. Rate your experience and write a comment if you'd like. Reviews help good cleaners get more bookings and help other customers choose. We appreciate honest feedback — positive or constructive.",
+          "We'll ask how it went after your cleaning — just reply to that email, or write us anytime at hello@cleenly.app. We read every message. Honest feedback — positive or constructive — is how we get better.",
       },
       {
         question: "Can I request the same cleaner every time?",
         answer:
-          "Yes. After your first cleaning, you can add that cleaner to your favorites. When booking future appointments, you'll see their availability first. If you set up recurring service, we'll try to assign the same cleaner each time unless they're unavailable.",
+          "Yes — just tell us at booking or by email. If you set up recurring service, we try to send the same cleaner each time; that's how cleanings get faster and better. On busy weeks we may send a teammate, and we'll tell you in advance.",
       },
       {
         question: "How do I contact my cleaner directly?",
         answer:
-          "For privacy, direct contact info isn't shared before the first appointment. On the day of cleaning, you'll be able to message your cleaner through the app for coordination (running late, access issues, etc.). After the cleaning, you can save them to favorites for future bookings.",
+          "Call or text us at (206) 641-4739, or email hello@cleenly.app — we coordinate directly with your cleaner. Running late, access issues, special instructions on cleaning day: one message to us and your cleaner knows.",
       },
     ],
   },
@@ -218,22 +218,22 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Are your cleaners background checked?",
         answer:
-          "Yes. Every cleaner who joins CLEENLY passes a background check before working in homes. This includes criminal history check and identity verification, plus reference and work history checks.",
+          "Yes. Everyone who cleans for CLEENLY is background-checked before working in homes — including the extra cleaners we bring in when the schedule fills up.",
       },
       {
         question: "Are cleaners insured?",
         answer:
-          "Yes. Our cleaners carry liability insurance. This covers accidental damage during cleaning. If something is broken or damaged, report it within 24 hours and the insurance covers legitimate claims.",
+          "Yes. CLEENLY carries general liability insurance, which covers accidental damage during cleaning. If something is broken or damaged, report it within 24 hours and we'll make it right.",
       },
       {
         question: "How do you vet cleaners?",
         answer:
-          "Our vetting process includes identity verification, background check, reference check, cleaning experience verification, and an interview. Cleaners who don't keep our quality standards don't keep working with us.",
+          "We're a small team — most cleanings are done by us personally. When we bring in extra cleaners, they're people we know and trust: background-checked, experienced, and they work alongside us before working alone. Cleaners who don't keep our quality standards don't keep working with us.",
       },
       {
         question: "Is my payment information secure?",
         answer:
-          "Yes. We use Stripe for payment processing — the same service used by Amazon, Google, and thousands of major companies. Your card details are encrypted and never stored on our servers. We're PCI compliant. You can also use Apple Pay or Google Pay.",
+          "We don't collect card details on the site — booking requires no payment information at all. You pay after the cleaning is complete, and we confirm payment options with your booking.",
       },
       {
         question: "Who has access to my home information?",
@@ -270,22 +270,22 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Do I need to create an account to book?",
         answer:
-          "No account required to book or see prices. You can complete the entire booking as a guest using just your email. Creating an account is optional but lets you: manage bookings, save favorite cleaners, view cleaning history, and rebook faster.",
+          "No account required to book or see prices. You can complete the entire booking as a guest using just your email. Creating an account is optional but lets you manage bookings and rebook faster.",
       },
       {
         question: "When am I charged for the cleaning?",
         answer:
-          "Your card is authorized when you book but not charged until after the cleaning is complete. If you cancel within the free cancellation window (24+ hours before), nothing is charged. This protects you from paying for services not received.",
+          "You don't pay anything when you book. We confirm your booking and final price first, and you pay after the cleaning is complete. Cancel 24+ hours ahead and you owe nothing.",
       },
       {
         question: "What payment methods do you accept?",
         answer:
-          "We accept all major credit cards (Visa, Mastercard, Amex, Discover), debit cards, Apple Pay, and Google Pay. Payment is processed securely through Stripe. We don't accept cash or checks for booking — though you can tip your cleaner in cash if you prefer.",
+          "We currently take Venmo, Zelle, cash, or check after the cleaning is complete. Card payments are coming soon. We'll confirm payment options together with your booking.",
       },
       {
         question: "How do I get a receipt?",
         answer:
-          "A receipt is automatically emailed after your cleaning is complete. It includes: services provided, final price, cleaner name, and date. You can also view all receipts in your account under \"Cleaning History.\" Need a receipt resent? Email hello@cleenly.app.",
+          "We email a receipt after your cleaning is complete — services provided, final price, and date. Need a receipt resent or an invoice for your records? Email hello@cleenly.app.",
       },
     ],
   },

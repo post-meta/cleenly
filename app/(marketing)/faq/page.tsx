@@ -186,7 +186,7 @@ export default function FAQPage() {
 
           {/* Quick Links */}
           <section className="mt-12 border-t border-border pt-12">
-            <h2 className="text-sm font-semibold tracking-wider uppercase text-foreground-muted mb-4">Quick Links</h2>
+            <h2 className="font-sans text-sm font-semibold tracking-wider uppercase text-foreground-muted mb-4">Quick Links</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
               <Link
                 href="/pricing"

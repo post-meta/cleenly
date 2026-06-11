@@ -99,7 +99,7 @@ export default async function PaymentsPage() {
             )}
 
             <div className="mt-8 border-t border-gray-200 pt-8">
-                <h2 className="text-xl font-semibold mb-4">Payment History</h2>
+                <h2 className="font-sans text-xl font-semibold mb-4">Payment History</h2>
                 <div className="text-center py-8 text-gray-500">
                     No payment history yet
                 </div>

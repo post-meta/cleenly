@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import type {
   BedroomCount,
   BathroomCount,
+  SqftRange,
   HomeCondition,
   BookingFormData,
 } from "@/types";
@@ -18,10 +19,23 @@ interface StepDetailsProps {
 
 const bedrooms = ["studio", "1", "2", "3", "4", "5+"];
 const bathrooms = ["1", "1.5", "2", "2.5", "3", "3.5+"];
-const conditions = [
-  { id: "clean", label: "Clean", sub: "maintained regularly" },
-  { id: "average", label: "Average", sub: "some areas need attention" },
-  { id: "needs_work", label: "Needs work", sub: "hasn't been cleaned in a while" },
+
+// "not_sure" is intentionally not offered — square footage drives the price.
+const sqftOptions: { id: SqftRange; label: string }[] = [
+  { id: "under_800", label: "Under 800 sq ft" },
+  { id: "800_1200", label: "800–1,200 sq ft" },
+  { id: "1200_1800", label: "1,200–1,800 sq ft (+10%)" },
+  { id: "1800_2500", label: "1,800–2,500 sq ft (+20%)" },
+  { id: "2500_3500", label: "2,500–3,500 sq ft (+35%)" },
+  { id: "over_3500", label: "3,500+ sq ft (+35%)" },
+];
+
+// Concrete question instead of self-graded "condition" — maps to the same
+// clean / average / needs_work values, no DB migration.
+const lastCleanedOptions: { id: HomeCondition; label: string; sub: string }[] = [
+  { id: "clean", label: "Within the last month", sub: "base price" },
+  { id: "average", label: "1–6 months ago", sub: "+10%" },
+  { id: "needs_work", label: "6+ months / never", sub: "+25%" },
 ];
 
 function FieldSelect({
@@ -85,7 +99,7 @@ export function StepDetails({
     onChange({ special_requests: e.target.value || undefined });
   };
 
-  const isValid = data.bedrooms && data.bathrooms;
+  const isValid = data.bedrooms && data.bathrooms && data.sqft_range;
 
   return (
     <div className="px-5 pb-5">
@@ -116,17 +130,30 @@ export function StepDetails({
       </div>
 
       <div className="mt-[18px]">
-        <label className="block text-[13px] font-medium mb-2 text-foreground">Home condition</label>
+        <FieldSelect
+          label="Approximate size"
+          value={data.sqft_range}
+          options={sqftOptions.map((o) => o.id)}
+          onChange={(v) => onChange({ sqft_range: v as SqftRange })}
+          formatOption={(o) => sqftOptions.find((opt) => opt.id === o)?.label ?? o}
+          error={errors.sqft_range}
+        />
+      </div>
+
+      <div className="mt-[18px]">
+        <label className="block text-[13px] font-medium mb-2 text-foreground">
+          When was your home last professionally cleaned?
+        </label>
         <div className="flex flex-col gap-2">
-          {conditions.map((c) => {
+          {lastCleanedOptions.map((c) => {
             const selected = data.condition === c.id;
             return (
               <button
                 key={c.id}
                 type="button"
-                onClick={() => onChange({ condition: c.id as HomeCondition })}
+                onClick={() => onChange({ condition: c.id })}
                 className={cn(
-                  "text-left p-[12px_14px] rounded-md border transition-all cursor-pointer",
+                  "text-left p-[12px_14px] rounded-md border transition-all cursor-pointer flex items-baseline justify-between gap-3",
                   selected
                     ? "border-2 border-foreground bg-surface-warm"
                     : "border-border bg-background hover:border-border-hover"
@@ -136,12 +163,30 @@ export function StepDetails({
                   transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
               >
-                <div className="text-[14px] font-semibold text-foreground">{c.label}</div>
-                <div className="text-[12px] text-foreground-muted mt-0.5">{c.sub}</div>
+                <span className="text-[14px] font-semibold text-foreground">{c.label}</span>
+                <span className="text-[12px] text-foreground-muted">{c.sub}</span>
               </button>
             );
           })}
         </div>
+      </div>
+
+      <div className="mt-[18px]">
+        <label className="flex items-center gap-2.5 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={!!data.pets_at_home}
+            onChange={(e) => onChange({ pets_at_home: e.target.checked })}
+            className="h-4 w-4 shrink-0 cursor-pointer"
+            style={{ accentColor: "#2D2826" }}
+          />
+          <span className="text-[14px] text-foreground">
+            Pets at home{" "}
+            <span className="text-[12px] text-foreground-muted">
+              (doesn&apos;t change the price — helps your cleaner plan)
+            </span>
+          </span>
+        </label>
       </div>
 
       <div className="mt-[18px]">
@@ -150,7 +195,7 @@ export function StepDetails({
         </label>
         <textarea
           rows={3}
-          placeholder="Pets, specific areas to focus on, access instructions…"
+          placeholder="Specific areas to focus on, access instructions…"
           value={data.special_requests || ""}
           onChange={handleTextareaChange}
           className="w-full p-[12px_14px] border border-border rounded-md font-sans text-[14px] text-foreground bg-background resize-y focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"

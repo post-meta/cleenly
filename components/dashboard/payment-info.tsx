@@ -21,7 +21,7 @@ export function PaymentInfo({
 
     return (
         <section className="border border-gray-200 p-6 rounded-sm">
-            <h2 className="font-semibold mb-4">Payment</h2>
+            <h2 className="font-sans font-semibold mb-4">Payment</h2>
 
             <div className="space-y-3">
                 <div className="flex items-center justify-between text-sm">

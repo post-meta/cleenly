@@ -83,13 +83,14 @@
   --color-error:             #ef4444;
   --color-error-hover:       #dc2626;
 
-  /* Spacing */
-  --spacing-xs:              24px;
-  --spacing-sm:              48px;
-  --spacing-md:              72px;
-  --spacing-lg:              96px;
-  --spacing-xl:              120px;
-  --spacing-2xl:             160px;
+  /* Section spacing — named "section-*" to avoid Tailwind 4 --spacing-* namespace
+     collisions (--spacing-xl would hijack max-w-xl, w-xl, size-xl, etc.) */
+  --spacing-section-xs:      24px;
+  --spacing-section-sm:      48px;
+  --spacing-section-md:      72px;
+  --spacing-section-lg:      96px;
+  --spacing-section-xl:      120px;
+  --spacing-section-2xl:     160px;
 
   /* Border radius — unified scale */
   --radius-none:             0;

@@ -7,7 +7,7 @@ export function UpcomingBookings({ bookings }: { bookings: any[] }) {
     return (
         <section>
             <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold">Upcoming Cleanings</h2>
+                <h2 className="font-sans text-xl font-semibold">Upcoming Cleanings</h2>
                 <Link href="/dashboard/bookings">
                     <Button variant="link" className="text-accent">
                         View All <ArrowRight className="w-4 h-4 ml-1" />

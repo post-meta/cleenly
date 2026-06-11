@@ -48,7 +48,7 @@ export default function BlogIndexPage() {
                                 <div className="text-xs text-gray-400 uppercase tracking-widest mb-3">
                                     {formatDate(post.publishedAt)} · {post.readingMinutes} min read
                                 </div>
-                                <h2 className="text-2xl font-semibold text-foreground group-hover:text-accent transition-colors">
+                                <h2 className="font-sans text-2xl font-semibold text-foreground group-hover:text-accent transition-colors">
                                     {post.title}
                                 </h2>
                                 <p className="mt-3 text-gray-600 leading-relaxed">

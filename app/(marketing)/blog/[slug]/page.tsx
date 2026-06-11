@@ -113,7 +113,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         {post.sections.map((section, idx) => (
                             <section key={idx}>
                                 {section.heading && (
-                                    <h2 className="text-2xl font-semibold mb-4">{section.heading}</h2>
+                                    <h2 className="font-sans text-2xl font-semibold mb-4">{section.heading}</h2>
                                 )}
                                 {section.paragraphs.map((p, pi) => (
                                     <p key={pi} className="text-gray-700 leading-relaxed mb-4">
@@ -150,7 +150,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {related.length > 0 && (
                 <section className="py-16 border-t border-border bg-muted/30">
                     <div className="max-w-3xl mx-auto px-6">
-                        <h2 className="text-2xl font-semibold mb-8">More guides</h2>
+                        <h2 className="font-sans text-2xl font-semibold mb-8">More guides</h2>
                         <div className="space-y-6">
                             {related.map((p) => (
                                 <Link

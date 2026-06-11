@@ -124,7 +124,7 @@ export default function TermsOfServicePage() {
 
           {/* Table of Contents */}
           <nav className="mb-12 rounded-xl border border-border bg-muted/30 p-6">
-            <h2 className="mb-4 font-semibold">Table of Contents</h2>
+            <h2 className="font-sans mb-4 font-semibold">Table of Contents</h2>
             <ul className="grid gap-2 text-sm sm:grid-cols-2">
               {sections.map((section, index) => (
                 <li key={section.id}>
@@ -148,7 +148,7 @@ export default function TermsOfServicePage() {
           <div className="prose prose-neutral max-w-none space-y-12">
             {/* 1. Introduction */}
             <section id="introduction">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 1. Introduction and Acceptance
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -171,7 +171,7 @@ export default function TermsOfServicePage() {
 
             {/* 2. Description of Service */}
             <section id="service">
-              <h2 className="text-xl font-semibold">2. Description of Service</h2>
+              <h2 className="font-sans text-xl font-semibold">2. Description of Service</h2>
               <p className="mt-4 text-muted-foreground">
                 CLEENLY provides house cleaning services in the Greater Seattle
                 area. Through our website, customers can:
@@ -195,7 +195,7 @@ export default function TermsOfServicePage() {
 
             {/* 3. User Eligibility */}
             <section id="eligibility">
-              <h2 className="text-xl font-semibold">3. User Eligibility</h2>
+              <h2 className="font-sans text-xl font-semibold">3. User Eligibility</h2>
               <p className="mt-4 text-muted-foreground">
                 To use CLEENLY, you must:
               </p>
@@ -218,7 +218,7 @@ export default function TermsOfServicePage() {
 
             {/* 4. Account Registration */}
             <section id="account">
-              <h2 className="text-xl font-semibold">4. Account Registration</h2>
+              <h2 className="font-sans text-xl font-semibold">4. Account Registration</h2>
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">Account Creation:</strong>{" "}
                 Creating an account is optional for booking but required for
@@ -246,7 +246,7 @@ export default function TermsOfServicePage() {
 
             {/* 5. Booking and Service */}
             <section id="booking">
-              <h2 className="text-xl font-semibold">5. Booking and Service</h2>
+              <h2 className="font-sans text-xl font-semibold">5. Booking and Service</h2>
               <h3 className="mt-6 font-medium">Booking Process</h3>
               <ol className="mt-3 list-decimal space-y-2 pl-6 text-muted-foreground">
                 <li>
@@ -293,7 +293,7 @@ export default function TermsOfServicePage() {
 
             {/* 6. Cancellation Policy */}
             <section id="cancellation">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 6. Cancellation Policy
                 <span className="ml-2 rounded bg-foreground px-2 py-1 text-xs text-background">
                   IMPORTANT
@@ -378,7 +378,7 @@ export default function TermsOfServicePage() {
 
             {/* 7. Rescheduling Policy */}
             <section id="rescheduling">
-              <h2 className="text-xl font-semibold">7. Rescheduling Policy</h2>
+              <h2 className="font-sans text-xl font-semibold">7. Rescheduling Policy</h2>
               <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
                   <strong className="text-foreground">
@@ -402,7 +402,7 @@ export default function TermsOfServicePage() {
 
             {/* 8. Payment Terms */}
             <section id="payment">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 8. Payment Terms
                 <span className="ml-2 rounded bg-foreground px-2 py-1 text-xs text-background">
                   IMPORTANT
@@ -447,7 +447,7 @@ export default function TermsOfServicePage() {
 
             {/* 9. Refund Policy */}
             <section id="refunds">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 9. Refund Policy
                 <span className="ml-2 rounded bg-foreground px-2 py-1 text-xs text-background">
                   IMPORTANT
@@ -519,7 +519,7 @@ export default function TermsOfServicePage() {
 
             {/* 10. Service Guarantee */}
             <section id="guarantee">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 10. Service Guarantee
                 <span className="ml-2 rounded bg-foreground px-2 py-1 text-xs text-background">
                   IMPORTANT
@@ -552,7 +552,7 @@ export default function TermsOfServicePage() {
 
             {/* 11. User Responsibilities */}
             <section id="responsibilities">
-              <h2 className="text-xl font-semibold">11. User Responsibilities</h2>
+              <h2 className="font-sans text-xl font-semibold">11. User Responsibilities</h2>
               <p className="mt-4 text-muted-foreground">
                 As a CLEENLY customer, you agree to:
               </p>
@@ -596,7 +596,7 @@ export default function TermsOfServicePage() {
 
             {/* 12. Damage and Liability */}
             <section id="damage">
-              <h2 className="text-xl font-semibold">12. Damage and Liability</h2>
+              <h2 className="font-sans text-xl font-semibold">12. Damage and Liability</h2>
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">Insurance:</strong>{" "}
                 Our cleaners carry liability insurance that covers accidental
@@ -626,7 +626,7 @@ export default function TermsOfServicePage() {
 
             {/* 13. Intellectual Property */}
             <section id="ip">
-              <h2 className="text-xl font-semibold">13. Intellectual Property</h2>
+              <h2 className="font-sans text-xl font-semibold">13. Intellectual Property</h2>
               <p className="mt-4 text-muted-foreground">
                 The CLEENLY website, logo, designs, and content are owned by
                 CLEENLY and protected by copyright and trademark laws. By
@@ -638,7 +638,7 @@ export default function TermsOfServicePage() {
 
             {/* 14. Prohibited Conduct */}
             <section id="prohibited">
-              <h2 className="text-xl font-semibold">14. Prohibited Conduct</h2>
+              <h2 className="font-sans text-xl font-semibold">14. Prohibited Conduct</h2>
               <p className="mt-4 text-muted-foreground">You agree not to:</p>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>Use CLEENLY for any unlawful purpose</li>
@@ -663,7 +663,7 @@ export default function TermsOfServicePage() {
 
             {/* 16. Dispute Resolution */}
             <section id="disputes">
-              <h2 className="text-xl font-semibold">15. Dispute Resolution</h2>
+              <h2 className="font-sans text-xl font-semibold">15. Dispute Resolution</h2>
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">Informal Resolution:</strong>{" "}
                 Before initiating formal proceedings, you agree to contact
@@ -687,7 +687,7 @@ export default function TermsOfServicePage() {
 
             {/* 17. Governing Law */}
             <section id="governing-law">
-              <h2 className="text-xl font-semibold">16. Governing Law</h2>
+              <h2 className="font-sans text-xl font-semibold">16. Governing Law</h2>
               <p className="mt-4 text-muted-foreground">
                 These Terms are governed by the laws of the State of Washington,
                 without regard to conflict of law principles. Any legal action
@@ -697,7 +697,7 @@ export default function TermsOfServicePage() {
 
             {/* 18. Limitation of Liability */}
             <section id="liability">
-              <h2 className="text-xl font-semibold">
+              <h2 className="font-sans text-xl font-semibold">
                 17. Limitation of Liability
               </h2>
               <div className="mt-4 rounded-lg border border-border bg-muted/50 p-4 text-sm text-muted-foreground">
@@ -723,7 +723,7 @@ export default function TermsOfServicePage() {
 
             {/* 19. Indemnification */}
             <section id="indemnification">
-              <h2 className="text-xl font-semibold">18. Indemnification</h2>
+              <h2 className="font-sans text-xl font-semibold">18. Indemnification</h2>
               <p className="mt-4 text-muted-foreground">
                 You agree to indemnify, defend, and hold harmless CLEENLY, its
                 officers, directors, employees, and agents from any claims,
@@ -736,7 +736,7 @@ export default function TermsOfServicePage() {
 
             {/* 20. Termination */}
             <section id="termination">
-              <h2 className="text-xl font-semibold">19. Termination</h2>
+              <h2 className="font-sans text-xl font-semibold">19. Termination</h2>
               <p className="mt-4 text-muted-foreground">
                 <strong className="text-foreground">By You:</strong> You may stop
                 using CLEENLY at any time. To delete your account, email
@@ -760,7 +760,7 @@ export default function TermsOfServicePage() {
 
             {/* 21. General Provisions */}
             <section id="general">
-              <h2 className="text-xl font-semibold">20. General Provisions</h2>
+              <h2 className="font-sans text-xl font-semibold">20. General Provisions</h2>
               <ul className="mt-4 space-y-4 text-muted-foreground">
                 <li>
                   <strong className="text-foreground">Entire Agreement:</strong>{" "}

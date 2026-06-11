@@ -26,7 +26,7 @@ export default async function SettingsPage() {
                         <User className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold">Profile Information</h2>
+                        <h2 className="font-sans text-xl font-semibold">Profile Information</h2>
                         <p className="text-sm text-gray-600">Update your personal details</p>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ export default async function SettingsPage() {
                         <Lock className="w-5 h-5 text-gray-600" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold">Password & Security</h2>
+                        <h2 className="font-sans text-xl font-semibold">Password & Security</h2>
                         <p className="text-sm text-gray-600">Manage your password</p>
                     </div>
                 </div>
@@ -136,7 +136,7 @@ export default async function SettingsPage() {
                         <Bell className="w-5 h-5 text-gray-600" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold">Notifications</h2>
+                        <h2 className="font-sans text-xl font-semibold">Notifications</h2>
                         <p className="text-sm text-gray-600">Choose how you want to be notified</p>
                     </div>
                 </div>
@@ -198,7 +198,7 @@ export default async function SettingsPage() {
                         <Trash2 className="w-5 h-5 text-red-600" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold text-red-900">Danger Zone</h2>
+                        <h2 className="font-sans text-xl font-semibold text-red-900">Danger Zone</h2>
                         <p className="text-sm text-red-700">Irreversible actions</p>
                     </div>
                 </div>
