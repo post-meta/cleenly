@@ -44,5 +44,4 @@ export const SERVICE_TYPES = {
 export const TIME_SLOTS = [
   { id: "morning", label: "Morning", time: "8am – 12pm" },
   { id: "afternoon", label: "Afternoon", time: "12pm – 4pm" },
-  { id: "evening", label: "Evening", time: "4pm – 8pm" },
 ] as const;

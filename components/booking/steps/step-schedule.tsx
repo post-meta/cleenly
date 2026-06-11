@@ -4,10 +4,11 @@ import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import type { TimeSlot, BookingFormData } from "@/types";
 
+// Evening removed 2026-06-10: can't reliably staff 4pm+ visits.
+// TimeSlot type keeps "evening" for legacy bookings already in the DB.
 const timeSlots: { id: TimeSlot; label: string; time: string }[] = [
   { id: "morning", label: "Morning", time: "8am – 12pm" },
   { id: "afternoon", label: "Afternoon", time: "12pm – 4pm" },
-  { id: "evening", label: "Evening", time: "4pm – 7pm" },
 ];
 
 // Timezone-safe YYYY-MM-DD from a local Date. Never use toISOString() here:

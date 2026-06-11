@@ -1,0 +1,14 @@
+name = "cleenly-voice-agent"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+
+# Secrets (set via `wrangler secret put <NAME>` — see README.md):
+#   TWILIO_AUTH_TOKEN
+#   ANTHROPIC_API_KEY
+#   TELEGRAM_BOT_TOKEN
+#   ADMIN_TELEGRAM_CHAT_ID
+#   SUPABASE_URL
+#   SUPABASE_SERVICE_ROLE_KEY
+
+[observability]
+enabled = true

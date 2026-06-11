@@ -200,7 +200,7 @@ export default function AboutPage() {
                   <span className="font-semibold text-foreground">3.</span>
                   <span>
                     <strong className="text-foreground">Pick a time</strong> —
-                    morning, afternoon, or evening
+                    morning or afternoon
                   </span>
                 </li>
                 <li className="flex gap-3">

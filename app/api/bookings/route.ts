@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { notifyNewBooking } from "@/lib/notifications";
+import {
+  notifyCustomerBookingReceived,
+  notifyNewBooking,
+} from "@/lib/notifications";
 import { calculateFirstVisitPrice } from "@/lib/pricing";
+import {
+  MARKETING_SMS_CONSENT_TEXT,
+  TRANSACTIONAL_SMS_CONSENT_TEXT,
+} from "@/lib/consent";
 import type {
   Addon,
   BathroomCount,
@@ -34,7 +41,8 @@ const VALID_ADDONS: Addon[] = [
   "pollen_purge",
   "damp_season_reset",
 ];
-const VALID_TIME_SLOTS: TimeSlot[] = ["morning", "afternoon", "evening"];
+// "evening" removed 2026-06-10 — slot no longer offered (can't reliably staff 4pm+).
+const VALID_TIME_SLOTS: TimeSlot[] = ["morning", "afternoon"];
 
 function isOneOf<T extends string>(value: unknown, allowed: T[]): value is T {
   return typeof value === "string" && (allowed as string[]).includes(value);
@@ -110,35 +118,56 @@ export async function POST(request: NextRequest) {
 
     const supabase = createAdminClient();
 
-    // TODO: re-enable sms_opt_in DB write after migration 20260501100000_add_sms_opt_in_to_bookings.sql is applied.
-    // The checkbox in step-contact.tsx still captures consent and is shown to A2P 10DLC Trust Hub via screenshot.
-    // const smsOptIn = !!body.sms_opt_in;
+    // A2P 10DLC consent flags (migration 20260501100000 applied 2026-06-10).
+    const smsOptIn = !!body.sms_opt_in;
+    const marketingSmsOptIn = !!body.marketing_sms_opt_in;
 
-    const { data, error } = await supabase
+    const bookingRow = {
+      email: body.email,
+      phone: body.phone,
+      name: body.name,
+      service_type: body.service_type,
+      bedrooms: body.bedrooms,
+      bathrooms: body.bathrooms,
+      sqft_range: body.sqft_range || null,
+      condition,
+      special_requests: body.special_requests || null,
+      addons,
+      address: body.address,
+      city: body.city || "Seattle",
+      zip: body.zip || null,
+      access_instructions: body.access_instructions || null,
+      preferred_date: body.preferred_date || null,
+      preferred_time: body.preferred_time || null,
+      estimated_min: estimatedMin,
+      estimated_max: estimatedMax,
+      status: "new",
+    };
+
+    let { data, error } = await supabase
       .from("bookings")
       .insert({
-        email: body.email,
-        phone: body.phone,
-        name: body.name,
-        service_type: body.service_type,
-        bedrooms: body.bedrooms,
-        bathrooms: body.bathrooms,
-        sqft_range: body.sqft_range || null,
-        condition,
-        special_requests: body.special_requests || null,
-        addons,
-        address: body.address,
-        city: body.city || "Seattle",
-        zip: body.zip || null,
-        access_instructions: body.access_instructions || null,
-        preferred_date: body.preferred_date || null,
-        preferred_time: body.preferred_time || null,
-        estimated_min: estimatedMin,
-        estimated_max: estimatedMax,
-        status: "new",
+        ...bookingRow,
+        sms_opt_in: smsOptIn,
+        sms_opt_in_at: smsOptIn ? new Date().toISOString() : null,
       })
       .select()
       .single();
+
+    // Graceful fallback: if the sms_opt_in columns are missing in this environment
+    // (e.g. preview DB without the migration), retry without them.
+    // The booking must never fail because of consent bookkeeping.
+    if (error && error.code === "PGRST204") {
+      console.warn(
+        "bookings.sms_opt_in columns missing, retrying insert without them:",
+        error.message
+      );
+      ({ data, error } = await supabase
+        .from("bookings")
+        .insert(bookingRow)
+        .select()
+        .single());
+    }
 
     if (error) {
       console.error("Supabase error:", error);
@@ -148,7 +177,50 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    notifyNewBooking({
+    // A2P 10DLC consent log — one row per ticked checkbox, exact on-screen text.
+    // Wrapped so a missing table / any failure never breaks the booking.
+    if (smsOptIn || marketingSmsOptIn) {
+      try {
+        const ip =
+          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+        const userAgent = request.headers.get("user-agent") || null;
+
+        const consentRows = [];
+        if (smsOptIn) {
+          consentRows.push({
+            phone: body.phone,
+            email: body.email,
+            consent_type: "transactional_sms",
+            consent_text: TRANSACTIONAL_SMS_CONSENT_TEXT,
+            ip,
+            user_agent: userAgent,
+            booking_id: data.id,
+          });
+        }
+        if (marketingSmsOptIn) {
+          consentRows.push({
+            phone: body.phone,
+            email: body.email,
+            consent_type: "marketing_sms",
+            consent_text: MARKETING_SMS_CONSENT_TEXT,
+            ip,
+            user_agent: userAgent,
+            booking_id: data.id,
+          });
+        }
+
+        const { error: consentError } = await supabase
+          .from("consent_log")
+          .insert(consentRows);
+        if (consentError) {
+          console.warn("consent_log insert failed:", consentError.message);
+        }
+      } catch (e) {
+        console.warn("consent_log insert threw:", e);
+      }
+    }
+
+    const notificationPayload = {
       id: data.id,
       name: data.name,
       email: data.email,
@@ -169,7 +241,13 @@ export async function POST(request: NextRequest) {
       recurring_max: firstVisitIsDeep ? recurring.max + recurring.addonsTotal : null,
       special_requests: data.special_requests,
       addons: data.addons,
-    }).catch((e) => console.error("notifyNewBooking failed:", e));
+    };
+    notifyNewBooking(notificationPayload).catch((e) =>
+      console.error("notifyNewBooking failed:", e)
+    );
+    notifyCustomerBookingReceived(notificationPayload).catch((e) =>
+      console.error("notifyCustomerBookingReceived failed:", e)
+    );
 
     return NextResponse.json({ success: true, booking: data });
   } catch (error) {

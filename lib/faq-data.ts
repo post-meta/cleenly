@@ -119,7 +119,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "What time slots are available?",
         answer:
-          "Cleaning appointments are available 7 days a week. Time slots include: Morning (8am-12pm), Afternoon (12pm-4pm), and Evening (4pm-7pm). Your cleaner will arrive within your selected window. Exact arrival time is confirmed the day before.",
+          "Cleaning appointments are available 7 days a week. Time slots: Morning (8am-12pm) and Afternoon (12pm-4pm). Your cleaner will arrive within your selected window. Exact arrival time is confirmed the day before.",
       },
     ],
   },

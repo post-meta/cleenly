@@ -41,33 +41,3 @@ export async function sendMagicLinkEmail({
     `,
   });
 }
-
-export async function sendBookingConfirmationEmail({
-  email,
-  booking,
-  magicLinkUrl,
-}: {
-  email: string;
-  booking: any;
-  magicLinkUrl: string;
-}) {
-  const { bookingConfirmationEmail } = await import('@/lib/email-templates/booking-confirmation');
-
-  const html = bookingConfirmationEmail({
-    name: booking.guest_name || 'Guest',
-    serviceType: booking.service_type,
-    date: booking.scheduled_date,
-    time: booking.scheduled_time,
-    address: 'Address', // You might need to fetch address details
-    price: booking.price_quoted || 0,
-    magicLinkUrl,
-  });
-
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  await resend.emails.send({
-    from: 'CLEENLY <noreply@cleenly.app>',
-    to: email,
-    subject: 'Your Cleaning is Confirmed',
-    html,
-  });
-}

@@ -1,6 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import {
+  MARKETING_SMS_CONSENT_TEXT,
+  TRANSACTIONAL_SMS_CONSENT_TEXT,
+} from "@/lib/consent";
 import type { BookingFormData } from "@/types";
 
 interface StepContactProps {
@@ -81,6 +85,10 @@ export function StepContact({
 
   const handleSmsOptIn = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ sms_opt_in: e.target.checked });
+  };
+
+  const handleMarketingSmsOptIn = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange({ marketing_sms_opt_in: e.target.checked });
   };
 
   const isValid = data.name && data.email && data.phone && data.address;
@@ -176,7 +184,27 @@ export function StepContact({
           }}
         />
         <span className="text-[12px] leading-[1.5] text-foreground font-sans">
-          I agree to receive SMS notifications about my booking from CLEENLY. Message and data rates may apply. Reply STOP to unsubscribe.
+          {TRANSACTIONAL_SMS_CONSENT_TEXT}
+        </span>
+      </label>
+
+      {/* Marketing SMS opt-in checkbox — default UNCHECKED (express written consent, TCPA) */}
+      <label className="mt-2.5 flex gap-2.5 p-[12px_14px] border border-border rounded-md items-start cursor-pointer hover:border-border-hover transition-colors">
+        <input
+          id="marketing_sms_opt_in"
+          name="marketing_sms_opt_in"
+          type="checkbox"
+          checked={!!data.marketing_sms_opt_in}
+          onChange={handleMarketingSmsOptIn}
+          className="mt-0.5"
+          style={{
+            width: "16px",
+            height: "16px",
+            accentColor: "#2D2826",
+          }}
+        />
+        <span className="text-[12px] leading-[1.5] text-foreground font-sans">
+          {MARKETING_SMS_CONSENT_TEXT}
         </span>
       </label>
 

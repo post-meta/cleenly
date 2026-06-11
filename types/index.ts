@@ -88,6 +88,8 @@ export interface BookingFormData {
   zip?: string;
   access_instructions?: string;
   sms_opt_in?: boolean;
+  /** Marketing SMS consent. Default false — express written consent (TCPA), never pre-checked. */
+  marketing_sms_opt_in?: boolean;
 }
 
 export interface PriceEstimate {

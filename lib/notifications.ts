@@ -155,6 +155,62 @@ export async function notifyNewBooking(b: BookingNotification) {
   ]);
 }
 
+/**
+ * Customer-facing "request received" email. Honest request-flow language:
+ * the booking is NOT confirmed yet — we confirm by email after review.
+ */
+export async function notifyCustomerBookingReceived(b: BookingNotification) {
+  if (!RESEND_API_KEY) {
+    console.warn("[notify] customer email skipped: missing RESEND_API_KEY");
+    return;
+  }
+  const priceRange = `${fmtPrice(b.estimated_min)}–${fmtPrice(b.estimated_max)}`;
+  const hasRecurring = b.recurring_min != null && b.recurring_max != null;
+  const recurringRange = hasRecurring
+    ? `${fmtPrice(b.recurring_min!)}–${fmtPrice(b.recurring_max!)}`
+    : null;
+  const firstName = b.name.trim().split(/\s+/)[0] || "there";
+  const schedule = b.preferred_date
+    ? `${b.preferred_date}${b.preferred_time ? `, ${b.preferred_time}` : ""}`
+    : "—";
+  const home = `${b.bedrooms} bd / ${b.bathrooms} ba`;
+
+  const row = (label: string, value: string) =>
+    `<tr><td style="padding: 6px 12px 6px 0; color: #8C8073; vertical-align: top;">${label}</td><td style="padding: 6px 0; color: #2D2826;">${value}</td></tr>`;
+
+  const html = `
+    <div style="font-family: -apple-system, 'Segoe UI', sans-serif; max-width: 560px; margin: 0 auto; color: #2D2826; background: #FAFAF8; padding: 32px 24px;">
+      <p style="margin: 0 0 16px; font-size: 16px;">Hi ${firstName},</p>
+      <p style="margin: 0 0 16px; font-size: 16px;">We got your request. Here's what you sent us:</p>
+      <table style="border-collapse: collapse; width: 100%; font-size: 15px; margin: 0 0 16px;">
+        ${row("Service", b.service_type.replace(/_/g, "-"))}
+        ${row("Home", home)}
+        ${row("Address", `${b.address}${b.city ? `, ${b.city}` : ""}`)}
+        ${row("Preferred time", schedule)}
+        ${hasRecurring ? row("First visit (deep standard)", priceRange) : row("Estimate", priceRange)}
+        ${hasRecurring && recurringRange ? row("From visit two", `${recurringRange} per visit`) : ""}
+      </table>
+      <p style="margin: 0 0 16px; font-size: 15px;">This is an estimate, not a final price. Your final price won't go above the top of this range without your OK — if your home needs more than described, we call before we start.</p>
+      <p style="margin: 0 0 16px; font-size: 15px;">We'll confirm your time by email, usually within a couple of hours.</p>
+      <p style="margin: 0 0 4px; font-size: 15px;">Questions? Just reply to this email, or call or text <a href="tel:+12066414739" style="color: #2D2826;">(206) 641-4739</a>.</p>
+      <p style="margin: 24px 0 0; font-size: 15px;">— The CLEENLY team</p>
+    </div>
+  `;
+
+  try {
+    const resend = new Resend(RESEND_API_KEY);
+    await resend.emails.send({
+      from: "CLEENLY <noreply@cleenly.app>",
+      replyTo: SUPPORT_EMAIL,
+      to: b.email,
+      subject: "We got your cleaning request",
+      html,
+    });
+  } catch (err) {
+    console.error("[notify] customer email exception:", err);
+  }
+}
+
 export async function notifyNewApplication(a: ApplicationNotification) {
   const tg = [
     `<b>New cleaner application</b>`,

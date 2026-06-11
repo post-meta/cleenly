@@ -138,7 +138,7 @@ Customers book online at cleenly.app/book. The flow is:
 1. Pick service type
 2. Enter home details (bedrooms, bathrooms, square footage, when it was last professionally cleaned)
 3. See your estimate range on screen
-4. Pick date and time (morning 8am–12pm, afternoon 12pm–4pm, evening 4pm–8pm)
+4. Pick date and time (morning 8am–12pm or afternoon 12pm–4pm)
 5. Enter contact info and address
 6. Confirm
 

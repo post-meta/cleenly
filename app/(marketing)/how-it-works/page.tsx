@@ -139,9 +139,9 @@ export default function HowItWorksPage() {
                 Pick your <em className="italic text-foreground-soft font-display">time slot</em>
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Choose a date and time window that works for you. Morning, afternoon,
-                or evening—we work around your schedule. We'll confirm availability
-                within 2 hours of your request.
+                Choose a date and time window that works for you. Morning or
+                afternoon—we work around your schedule. We'll confirm availability,
+                usually within a couple of hours.
               </p>
               <ul className="space-y-4 mb-6">
                 {[
@@ -156,7 +156,7 @@ export default function HowItWorksPage() {
                 ))}
               </ul>
               <div className="text-sm text-muted-foreground font-medium">
-                Morning (8am-12pm) • Afternoon (12-4pm) • Evening (4-8pm)
+                Morning (8am-12pm) • Afternoon (12-4pm)
               </div>
             </div>
           </div>
