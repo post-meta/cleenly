@@ -21,12 +21,12 @@ export function Hero() {
               crew whenever we can — the same key under the mat, but better.
             </p>
 
-            <div className="flex flex-row items-center gap-3">
-              <Button size="lg" asChild>
+            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+              <Button size="lg" className="w-full whitespace-nowrap sm:w-auto" asChild>
                 <Link href="/book">Book a cleaning</Link>
               </Button>
 
-              <Button size="lg" variant="secondary" asChild>
+              <Button size="lg" variant="secondary" className="w-full whitespace-nowrap sm:w-auto" asChild>
                 <Link href="/services">See services</Link>
               </Button>
             </div>
