@@ -6,6 +6,70 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || SUPPORT_EMAIL;
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 
+// --- SMS (Twilio) ---
+// All SMS is env-gated: nothing sends until both creds AND a sender are set.
+// US delivery requires an APPROVED A2P 10DLC campaign on the sender — until then
+// leave the *_SMS_* sender vars unset so these no-op safely.
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || "";
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || "";
+// Sender: prefer a Messaging Service SID (handles sender pool + A2P), fall back to a raw From number.
+const TWILIO_MESSAGING_SERVICE_SID = process.env.TWILIO_MESSAGING_SERVICE_SID || "";
+const TWILIO_SMS_FROM = process.env.TWILIO_SMS_FROM || "";
+// Comma-separated E.164 numbers for owner alerts (Eugene, Inna).
+const ADMIN_SMS_RECIPIENTS = (process.env.ADMIN_SMS_RECIPIENTS || "")
+  .split(",")
+  .map((n) => n.trim())
+  .filter(Boolean);
+// Master switch for customer-facing SMS (keep off until A2P campaign approved).
+const CLIENT_SMS_ENABLED = process.env.CLIENT_SMS_ENABLED === "true";
+
+function smsConfigured() {
+  return Boolean(
+    TWILIO_ACCOUNT_SID &&
+      TWILIO_AUTH_TOKEN &&
+      (TWILIO_MESSAGING_SERVICE_SID || TWILIO_SMS_FROM)
+  );
+}
+
+/** Send one SMS via Twilio REST. No-ops (warns) if unconfigured. Never throws. */
+async function sendSms(to: string, body: string) {
+  if (!smsConfigured()) {
+    console.warn("[notify] SMS skipped: Twilio not configured");
+    return;
+  }
+  if (!to) return;
+  try {
+    const params = new URLSearchParams();
+    params.set("To", to);
+    params.set("Body", body);
+    if (TWILIO_MESSAGING_SERVICE_SID) {
+      params.set("MessagingServiceSid", TWILIO_MESSAGING_SERVICE_SID);
+    } else {
+      params.set("From", TWILIO_SMS_FROM);
+    }
+    const res = await fetch(
+      `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`,
+      {
+        method: "POST",
+        headers: {
+          Authorization:
+            "Basic " +
+            Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString(
+              "base64"
+            ),
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      }
+    );
+    if (!res.ok) {
+      console.error("[notify] Twilio SMS error:", res.status, await res.text());
+    }
+  } catch (err) {
+    console.error("[notify] Twilio SMS exception:", err);
+  }
+}
+
 type BookingNotification = {
   id: string;
   name: string;
@@ -149,9 +213,14 @@ export async function notifyNewBooking(b: BookingNotification) {
     </div>
   `;
 
+  // Owner SMS alert (Eugene + Inna) — short, links to admin. Env-gated.
+  const smsLine = `New booking ${priceRange} — ${b.name}, ${b.bedrooms}bd/${b.bathrooms}ba, ${schedule}. ${b.phone}`;
+  const adminSms = ADMIN_SMS_RECIPIENTS.map((to) => sendSms(to, smsLine));
+
   await Promise.allSettled([
     sendTelegram(tg),
     sendAdminEmail(`New booking: ${b.name} — ${priceRange}`, emailHtml),
+    ...adminSms,
   ]);
 }
 
