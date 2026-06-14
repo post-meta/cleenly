@@ -12,9 +12,15 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 // leave the *_SMS_* sender vars unset so these no-op safely.
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || "";
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || "";
+// Prefer an API Key (SK SID + secret) over the account Auth Token — revocable + scoped.
+const TWILIO_API_KEY_SID = process.env.TWILIO_API_KEY_SID || "";
+const TWILIO_API_KEY_SECRET = process.env.TWILIO_API_KEY_SECRET || "";
+// Basic-auth pair: API Key if present, else Account SID + Auth Token. The REST URL always uses the AC… account SID.
+const TWILIO_AUTH_USER = TWILIO_API_KEY_SID || TWILIO_ACCOUNT_SID;
+const TWILIO_AUTH_PASS = TWILIO_API_KEY_SID ? TWILIO_API_KEY_SECRET : TWILIO_AUTH_TOKEN;
 // Sender: prefer a Messaging Service SID (handles sender pool + A2P), fall back to a raw From number.
 const TWILIO_MESSAGING_SERVICE_SID = process.env.TWILIO_MESSAGING_SERVICE_SID || "";
-const TWILIO_SMS_FROM = process.env.TWILIO_SMS_FROM || "";
+const TWILIO_SMS_FROM = process.env.TWILIO_SMS_FROM || process.env.TWILIO_PHONE_NUMBER || "";
 // Comma-separated E.164 numbers for owner alerts (Eugene, Inna).
 const ADMIN_SMS_RECIPIENTS = (process.env.ADMIN_SMS_RECIPIENTS || "")
   .split(",")
@@ -26,7 +32,8 @@ const CLIENT_SMS_ENABLED = process.env.CLIENT_SMS_ENABLED === "true";
 function smsConfigured() {
   return Boolean(
     TWILIO_ACCOUNT_SID &&
-      TWILIO_AUTH_TOKEN &&
+      TWILIO_AUTH_USER &&
+      TWILIO_AUTH_PASS &&
       (TWILIO_MESSAGING_SERVICE_SID || TWILIO_SMS_FROM)
   );
 }
@@ -54,7 +61,7 @@ async function sendSms(to: string, body: string) {
         headers: {
           Authorization:
             "Basic " +
-            Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString(
+            Buffer.from(`${TWILIO_AUTH_USER}:${TWILIO_AUTH_PASS}`).toString(
               "base64"
             ),
           "Content-Type": "application/x-www-form-urlencoded",
