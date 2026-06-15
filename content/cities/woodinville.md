@@ -6,15 +6,15 @@ House cleaning in Woodinville, Washington. We serve wine country estates with ac
 
 ## Regular Cleaning
 
-Regular cleaning in Woodinville costs $100-$220 for most homes. We clean wine country estates, Hollywood Hill homes, and townhomes near downtown. Woodinville deals with dust from gravel driveways and unpaved roads, seasonal pollen from vineyards and orchards, and large homes that take forever to clean yourself. Our regular cleaning handles it. Serving Downtown Woodinville, Hollywood Hill, Wellington, and Wine Country.
+Regular cleaning in Woodinville keeps most homes maintained. We clean wine country estates, Hollywood Hill homes, and townhomes near downtown. Woodinville deals with dust from gravel driveways and unpaved roads, seasonal pollen from vineyards and orchards, and large homes that take forever to clean yourself. Our regular cleaning handles it. Serving Downtown Woodinville, Hollywood Hill, Wellington, and Wine Country. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Woodinville costs $150-$350 for most homes. We get inside appliances, into baseboards, and everywhere that vineyard pollen and gravel dust accumulate. Woodinville homes often have natural wood and stone that need specific products. We use pH-neutral cleaners on stone and appropriate products for wood — no generic spray on your wine cellar floors.
+Deep cleaning in Woodinville resets a home top to bottom. We get inside appliances, into baseboards, and everywhere that vineyard pollen and gravel dust accumulate. Woodinville homes often have natural wood and stone that need specific products. We use pH-neutral cleaners on stone and appropriate products for wood — no generic spray on your wine cellar floors. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Woodinville costs $200-$450 depending on home size. We clean to inspection standards for the main residence. Guest houses or separate structures can be quoted separately. Woodinville properties vary widely — let us know your full situation when booking. Serving all Woodinville areas.
+Move-out cleaning in Woodinville is built to pass the inspection. We clean to inspection standards for the main residence. Guest houses or separate structures can be quoted separately. Woodinville properties vary widely — let us know your full situation when booking. Serving all Woodinville areas. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

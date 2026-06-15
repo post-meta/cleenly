@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 import type { ServiceType } from "@/types";
 
 interface ServiceOption {
@@ -18,22 +19,22 @@ const services: ServiceOption[] = [
     name: "Regular Cleaning",
     desc: "Routine maintenance. Dusting, vacuuming, bathrooms, kitchen.",
     bestFor: "Weekly or bi-weekly",
-    price: "From $165",
-    hint: "First visit is priced as a deep clean. From visit two: regular rate.",
+    price: `From $${PRICE_DISPLAY.firstClean.from}`,
+    hint: "First visit is priced as a deep clean. From visit two: lighter recurring rate.",
   },
   {
     id: "deep",
     name: "Deep Cleaning",
     desc: "Regular, plus inside appliances, baseboards, detailed work.",
     bestFor: "First time or seasonal refresh",
-    price: "From $250",
+    price: `From $${PRICE_DISPLAY.firstClean.from}`,
   },
   {
     id: "move_out",
     name: "Move-Out Cleaning",
     desc: "Complete cleaning to landlord standards. Get your deposit back.",
     bestFor: "End of lease",
-    price: "From $320",
+    price: `From $${PRICE_DISPLAY.moveOut.from}`,
   },
 ];
 

@@ -6,15 +6,15 @@ House cleaning in Seattle, Washington. We clean Craftsman homes in Ballard, mode
 
 ## Regular Cleaning
 
-Regular cleaning in Seattle costs $100-$200 for most homes. We clean classic Craftsman homes, modern skinny homes, and apartments in neighborhoods from Ballard to Beacon Hill. Seattle homes deal with urban soot, moisture-prone bathrooms, and dust that settles in tight spaces. Our regular cleaning handles the basics so you don't have to. Serving Capitol Hill, Fremont, Queen Anne, University District, West Seattle, Columbia City, Wallingford, Green Lake, and more.
+Regular cleaning in Seattle keeps most homes maintained. We clean classic Craftsman homes, modern skinny homes, and apartments in neighborhoods from Ballard to Beacon Hill. Seattle homes deal with urban soot, moisture-prone bathrooms, and dust that settles in tight spaces. Our regular cleaning handles the basics so you don't have to. Serving Capitol Hill, Fremont, Queen Anne, University District, West Seattle, Columbia City, Wallingford, Green Lake, and more. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Seattle costs $150-$300 for most homes. We get into baseboards, window tracks, inside appliances, and the corners that regular cleaning skips. Seattle's older homes collect grime in places you forget about — behind radiators, under claw-foot tubs, in original built-ins. We clean them properly. Amazon and healthcare workers who value their free time over scrubbing floors book deep cleaning when things have gotten away from them.
+Deep cleaning in Seattle resets a home top to bottom. We get into baseboards, window tracks, inside appliances, and the corners that regular cleaning skips. Seattle's older homes collect grime in places you forget about — behind radiators, under claw-foot tubs, in original built-ins. We clean them properly. Amazon and healthcare workers who value their free time over scrubbing floors book deep cleaning when things have gotten away from them. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Seattle costs $200-$400 depending on size and condition. We clean to landlord inspection standards — inside cabinets, appliances, closets, window tracks, and walls spot-cleaned. Seattle rentals often have older features that need detailed attention. We help you get your deposit back. Serving all Seattle neighborhoods from Ballard to Rainier Valley.
+Move-out cleaning in Seattle is built to pass the inspection. We clean to landlord inspection standards — inside cabinets, appliances, closets, window tracks, and walls spot-cleaned. Seattle rentals often have older features that need detailed attention. We help you get your deposit back. Serving all Seattle neighborhoods from Ballard to Rainier Valley. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

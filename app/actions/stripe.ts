@@ -74,14 +74,14 @@ export async function createBookingInvoice({
   const name = booking.name || booking.guest_name || undefined;
   if (!email) return { error: "Booking has no customer email" };
 
-  const serviceType = String(booking.service_type) as keyof typeof HOURLY_RATE_CENTS;
-  const rate = HOURLY_RATE_CENTS[serviceType] ?? HOURLY_RATE_CENTS.regular;
+  const serviceType = String(booking.service_type);
+  const rate = HOURLY_RATE_CENTS; // single rate per cleaner-hour
 
   const usingOverride =
     typeof amountOverrideCents === "number" && amountOverrideCents > 0;
   const amountCents = usingOverride
     ? Math.round(amountOverrideCents as number)
-    : calculateHourlyTotalCents(serviceType, hours);
+    : calculateHourlyTotalCents(hours);
 
   if (!amountCents || amountCents < 50) {
     return { error: "Amount too small (Stripe minimum is $0.50)" };

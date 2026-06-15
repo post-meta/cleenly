@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ServiceData } from '@/lib/data/services';
+import { PRICE_DISPLAY } from '@/lib/pricing';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { Button } from '@/components/ui/button';
 
@@ -59,11 +60,11 @@ export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
                 >
                     {priceDisplay}
                 </span>
-                <span className="text-[14px] text-foreground-muted">starting</span>
+                <span className="text-[14px] text-foreground-muted">estimate</span>
             </div>
 
             <p className="mt-1 text-[14px] text-foreground-muted">
-                {service.duration} · supplies included
+                {service.duration} · billed by the hour, ${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour · supplies included
             </p>
 
             {service.checklist && service.checklist.length > 0 && (
@@ -104,7 +105,7 @@ export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
                             },
                             "offers": {
                                 "@type": "Offer",
-                                "price": service.priceRange.split("-")[0].replace("$", ""),
+                                "price": priceDisplay.replace(/[$,]/g, ""),
                                 "priceCurrency": "USD"
                             }
                         })

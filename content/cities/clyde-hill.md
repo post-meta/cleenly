@@ -6,15 +6,15 @@ House cleaning in Clyde Hill, Washington. We serve large established homes on sp
 
 ## Regular Cleaning
 
-Regular cleaning in Clyde Hill costs $120-$240 for most homes. We clean established homes on spacious lots, renovated mid-century properties, and custom builds. Clyde Hill deals with mature landscaping that brings pollen and debris, older homes with original features, and maintaining the high neighborhood standard. Our regular cleaning keeps everything as it should be. Serving all Clyde Hill.
+Regular cleaning in Clyde Hill keeps most homes maintained. We clean established homes on spacious lots, renovated mid-century properties, and custom builds. Clyde Hill deals with mature landscaping that brings pollen and debris, older homes with original features, and maintaining the high neighborhood standard. Our regular cleaning keeps everything as it should be. Serving all Clyde Hill. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Clyde Hill costs $180-$350 for most homes. We get inside appliances, into baseboards, window sills, and everywhere that pollen and dust accumulate in these larger homes. Clyde Hill homeowners care about their properties — we match that care with thorough, detailed work.
+Deep cleaning in Clyde Hill resets a home top to bottom. We get inside appliances, into baseboards, window sills, and everywhere that pollen and dust accumulate in these larger homes. Clyde Hill homeowners care about their properties — we match that care with thorough, detailed work. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Clyde Hill costs $250-$450 depending on home size. We clean to the standards buyers and landlords expect in this neighborhood — inside cabinets, appliances, closets, and detailed work throughout. Serving all Clyde Hill, often combined with nearby Bellevue areas.
+Move-out cleaning in Clyde Hill is built to pass the inspection. We clean to the standards buyers and landlords expect in this neighborhood — inside cabinets, appliances, closets, and detailed work throughout. Serving all Clyde Hill, often combined with nearby Bellevue areas. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

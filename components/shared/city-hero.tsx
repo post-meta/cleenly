@@ -4,6 +4,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { getCityHeroVariant } from "@/lib/data/city-hero-variants";
+import { PRICE_DISPLAY } from "@/lib/pricing";
+
+// Pick the canonical "from" price for a service from the single source of truth.
+// Move-related services price on the move-out table; everything else on the
+// first/deep table. Recurring-style maintenance uses the recurring floor.
+function fromPriceForService(serviceName: string): number {
+    const name = serviceName.toLowerCase();
+    if (name.includes("move-out") || name.includes("move out") || name.includes("post-construction")) {
+        return PRICE_DISPLAY.moveOut.from;
+    }
+    if (name.includes("bi-weekly") || name.includes("recurring")) {
+        return PRICE_DISPLAY.recurring.from;
+    }
+    return PRICE_DISPLAY.firstClean.from;
+}
 
 interface CityHeroProps {
     cityName: string;
@@ -63,12 +78,13 @@ interface ServiceHeroProps {
     cityName: string;
     serviceName: string;
     introText: string;
-    priceRange: string;
+    /** Deprecated: hero now derives the "from" price from PRICE_DISPLAY by service. Accepted for call-site compatibility. */
+    priceRange?: string;
     citySlug: string;
     heroImage?: string;
 }
 
-export function ServiceHero({ cityName, serviceName, introText, priceRange, citySlug, heroImage }: ServiceHeroProps) {
+export function ServiceHero({ cityName, serviceName, introText, citySlug, heroImage }: ServiceHeroProps) {
     const imageSrc = heroImage || "/hero-image.jpg";
     return (
         <section className="relative flex min-h-[70vh] items-center overflow-hidden animate-fadeInUp bg-background py-16 md:py-0">
@@ -89,7 +105,7 @@ export function ServiceHero({ cityName, serviceName, introText, priceRange, city
                 <div className="col-span-12 space-y-8 md:col-span-6 flex flex-col justify-center order-2 md:order-2">
                     {/* TODO: per-service italic phrases pending sign-off (Chunk E). Typography in font-display, no italic phrase yet. */}
                     <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground">
-                        {serviceName} in {cityName} — starting at {priceRange.split('-')[0]}
+                        {serviceName} in {cityName} — from ${fromPriceForService(serviceName)}
                     </h1>
 
                     <p className="text-lg md:text-xl text-gray-600 leading-relaxed">

@@ -7,11 +7,12 @@ import { PricingTables } from "@/components/marketing/pricing-tables";
 import { PricingFactors } from "@/components/marketing/pricing-factors";
 import { PricingChecklists } from "@/components/marketing/pricing-checklists";
 import { PricingFAQ } from "@/components/marketing/pricing-faq";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "House Cleaning Prices Seattle | From $165 | CLEENLY",
+  title: "House Cleaning Prices Seattle | From $185 | CLEENLY",
   description:
-    "Seattle house cleaning prices: Regular cleaning $165-$300, Deep cleaning $250-$450, Move-out $320-$560. See what's included. Get your exact price in 30 seconds.",
+    "Seattle house cleaning prices: first/deep clean $290–650 for most homes, move-out $585–885, recurring from $185. Upfront estimate, billed by the hour at $75/cleaner-hour. Get your price in 30 seconds.",
   keywords: [
     "house cleaning prices seattle",
     "cleaning service cost seattle",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "House Cleaning Prices Seattle | CLEENLY",
     description:
-      "Seattle house cleaning prices: Regular $165-$300, Deep $250-$450, Move-out $320-$560. Get your exact price.",
+      "Seattle house cleaning prices: first/deep clean $290–650, move-out $585–885, recurring from $185. Upfront estimate, billed by the hour. Get your price.",
     type: "website",
     url: "https://cleenly.app/pricing",
   },
@@ -51,38 +52,38 @@ const serviceSchema = {
     itemListElement: [
       {
         "@type": "Offer",
-        name: "Regular Cleaning",
+        name: "First / Deep Cleaning",
         description:
-          "Routine house cleaning including dusting, vacuuming, mopping, bathroom and kitchen cleaning",
+          "Thorough first or deep cleaning including inside appliances, baseboards, and hard-to-reach areas. Upfront estimate; final price billed by the hour at $75 per cleaner-hour.",
         priceSpecification: {
           "@type": "PriceSpecification",
-          price: "165-300",
+          price: "290-1120",
           priceCurrency: "USD",
-          unitText: "per cleaning",
+          unitText: "estimate, billed hourly at $75/cleaner-hour",
         },
       },
       {
         "@type": "Offer",
-        name: "Deep Cleaning",
+        name: "Recurring Cleaning",
         description:
-          "Thorough cleaning including inside appliances, baseboards, and hard-to-reach areas",
+          "Ongoing maintenance cleaning from visit two onward. Upfront estimate; final price billed by the hour at $75 per cleaner-hour.",
         priceSpecification: {
           "@type": "PriceSpecification",
-          price: "250-450",
+          price: "185-305",
           priceCurrency: "USD",
-          unitText: "per cleaning",
+          unitText: "estimate, billed hourly at $75/cleaner-hour",
         },
       },
       {
         "@type": "Offer",
         name: "Move-Out Cleaning",
         description:
-          "Complete cleaning to landlord standards for security deposit return",
+          "Complete cleaning to landlord standards for security deposit return. Upfront estimate; final price billed by the hour at $75 per cleaner-hour.",
         priceSpecification: {
           "@type": "PriceSpecification",
-          price: "320-560",
+          price: "380-1295",
           priceCurrency: "USD",
-          unitText: "per cleaning",
+          unitText: "estimate, billed hourly at $75/cleaner-hour",
         },
       },
     ],
@@ -98,7 +99,7 @@ const faqSchema = {
       name: "How much does house cleaning cost in Seattle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "House cleaning in Seattle costs $165-$750 depending on home size and cleaning type. Regular cleaning: $165-$300. Deep cleaning: $250-$450. Move-out cleaning: $320-$560.",
+        text: "House cleaning in Seattle costs from $185 depending on home size and cleaning type. A first or deep clean runs $290–350 for a 1-bed up to $935–1,120 for a 5+ bed. Move-out cleaning runs $380–455 up to $1,080–1,295. Recurring maintenance starts at $185. You see an upfront estimate; the final price is billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before charging.",
       },
     },
     {
@@ -130,7 +131,7 @@ const faqSchema = {
       name: "Do you charge hourly or flat rate?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We charge flat rates based on your home size and cleaning type. You see the exact price before booking. No hourly surprises.",
+        text: "You see an upfront estimate range based on your home size and cleaning type. The final price is billed by the hour — $75 per cleaner-hour, $185 minimum — for the actual time your home takes, and we confirm it with you before charging. The estimate is what we expect the final to be.",
       },
     },
     {
@@ -138,7 +139,7 @@ const faqSchema = {
       name: "Are there any hidden fees?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No hidden fees. The price you see at booking is the price you pay. We may suggest add-ons (like inside fridge or oven) but you decide what's included.",
+        text: "No hidden fees. We bill the actual cleaner-hours worked at $75 per cleaner-hour, never more than what the work takes, and we confirm the final price before charging. We may suggest add-ons (like inside fridge or oven) but you decide what's included.",
       },
     },
   ],
@@ -187,11 +188,18 @@ export default function PricingPage() {
               House Cleaning <em className="italic text-foreground-soft font-display">Prices</em> in Seattle
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
-              House cleaning in Seattle costs $165-$750 depending on your home
-              size and cleaning type. Regular cleaning for a 2-3 bedroom home
-              runs $200-$340. Deep cleaning costs $335-$460. Move-out cleaning
-              ranges from $420-$600. Below you&apos;ll find detailed pricing by
-              service type and what&apos;s included in each.
+              House cleaning in Seattle starts at ${PRICE_DISPLAY.minJob}. A
+              first or deep clean for a 2-3 bedroom home runs{" "}
+              {PRICE_DISPLAY.firstClean.bySize["2"]} to{" "}
+              {PRICE_DISPLAY.firstClean.bySize["3"]}. Move-out cleaning for the
+              same home runs {PRICE_DISPLAY.moveOut.bySize["2"]} to{" "}
+              {PRICE_DISPLAY.moveOut.bySize["3"]}. Recurring maintenance starts
+              at {PRICE_DISPLAY.recurring.bySize["1"]}. You see an upfront
+              estimate; the final price is billed by the hour — $
+              {PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, $
+              {PRICE_DISPLAY.minJob} minimum — and confirmed with you before
+              charging. Below you&apos;ll find detailed pricing by service type
+              and what&apos;s included in each.
             </p>
             <div className="mt-8">
               <Button size="lg" asChild>

@@ -10,11 +10,11 @@ Regular cleaning in Bellevue covers Downtown high-rises, Somerset estates, and e
 
 ## Deep Cleaning
 
-Deep cleaning in Bellevue costs $150-$300 for most homes. We get inside appliances, behind furniture, into baseboards, and everywhere dust and grime accumulate. Bellevue homes often have delicate marble and natural stone that need specific products — we use pH-neutral cleaners only. No shortcuts on high-end finishes. Tech executives and downtown condo owners book deep cleaning when they need everything reset to perfect.
+Deep cleaning in Bellevue resets a home top to bottom. We get inside appliances, behind furniture, into baseboards, and everywhere dust and grime accumulate. Bellevue homes often have delicate marble and natural stone that need specific products — we use pH-neutral cleaners only. No shortcuts on high-end finishes. Tech executives and downtown condo owners book deep cleaning when they need everything reset to perfect. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Bellevue costs $200-$400 depending on home size. We clean to pass the inspection — inside all cabinets, appliances, closets, window tracks, and detailed work on every surface. Bellevue landlords and property managers have high standards. We meet them. Serving all Bellevue neighborhoods from Downtown to Factoria.
+Move-out cleaning in Bellevue is built to pass the inspection. We clean to pass the inspection — inside all cabinets, appliances, closets, window tracks, and detailed work on every surface. Bellevue landlords and property managers have high standards. We meet them. Serving all Bellevue neighborhoods from Downtown to Factoria. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Clock, DollarSign, Shield, Check } from "lucide-react";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 
 export const metadata = {
   title: "How It Works — Cleenly",
@@ -15,11 +16,11 @@ const FAQ = [
   },
   {
     question: "Do I need to provide supplies?",
-    answer: "Nope. We bring everything needed for a professional clean.",
+    answer: "Nope. We bring all supplies and equipment.",
   },
   {
     question: "How do I know my cleaner is qualified?",
-    answer: "All cleaners are background-checked and rated by other customers.",
+    answer: "Everyone who cleans for us is background-checked. We're a small team, so most cleanings are done by us personally.",
   },
   {
     question: "What if I'm not satisfied?",
@@ -70,9 +71,11 @@ export default function HowItWorksPage() {
                 ))}
               </ul>
               <div className="p-4 rounded-lg bg-muted border border-border text-sm text-muted-foreground">
-                Most Greater Seattle homes: $280-460 for a thorough 3-4 hour clean.
+                A first clean for most Greater Seattle homes estimates around{" "}
+                {PRICE_DISPLAY.firstClean.bySize["2"]} for a 2-bedroom and{" "}
+                {PRICE_DISPLAY.firstClean.bySize["3"]} for a 3-bedroom.
                 <br />
-                Flat rate, not hourly — you pay for the result, not the clock.
+                {PRICE_DISPLAY.framing}
               </div>
             </div>
           </div>
@@ -92,14 +95,14 @@ export default function HowItWorksPage() {
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Our calculator shows you a price range immediately—no waiting for callbacks,
-                no mystery quotes. What you see is what you'll pay, give or take 15% after
-                we review the details.
+                no mystery quotes. The final price is based on the actual time it takes,
+                billed by the hour, and we confirm it with you before charging.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Transparent pricing: $50-60/hour, all supplies included",
-                  "Final price confirmed within 15% after details review",
-                  "No hidden fees, no upsells, no surprises"
+                  `Billed by the hour: $${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, all supplies included`,
+                  `Estimate range up front, $${PRICE_DISPLAY.minJob} minimum job`,
+                  "Final price confirmed with you before we charge"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="h-5 w-5 text-foreground shrink-0 mt-0.5" />
@@ -112,16 +115,19 @@ export default function HowItWorksPage() {
         </Container>
       </section>
 
-      {/* Comparison Callout */}
+      {/* Pricing Callout */}
       <section className="py-16 bg-muted border-y border-border">
         <Container size="narrow" className="text-center">
           <div className="max-w-2xl mx-auto space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg font-medium">
-              <div className="text-muted-foreground md:text-right">Traditional services: $75/hr + "additional fees"</div>
-              <div className="text-foreground md:text-left">Cleenly: $50-60/hr, everything included</div>
+              <div className="text-muted-foreground md:text-right">One rate, no add-on fees</div>
+              <div className="text-foreground md:text-left">
+                ${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, supplies included
+              </div>
             </div>
             <p className="text-xl font-semibold text-foreground">
-              Save $20-30 per hour. On a 3-hour clean, that's $60-90 in your pocket.
+              You get an estimate range up front. The final price is the actual cleaner-hours
+              worked at ${PRICE_DISPLAY.ratePerCleanerHour}/hour (${PRICE_DISPLAY.minJob} minimum), confirmed before we charge.
             </p>
           </div>
         </Container>
@@ -175,15 +181,15 @@ export default function HowItWorksPage() {
                 Your home <em className="italic text-foreground-soft font-display">gets cleaned</em>
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Your assigned cleaner arrives on time with all supplies and equipment.
-                After the cleaning, you can rate the service and leave feedback.
+                Your cleaner arrives on time with all supplies and equipment.
+                We confirm the final price with you before charging.
                 Not satisfied? We'll make it right.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Our cleaners are background-checked and carry liability insurance",
+                  "Background-checked and covered by liability insurance",
                   "We bring all supplies and equipment",
-                  "Rate the cleaning and help us improve",
+                  "Final price confirmed before we charge",
                   "Something off? Tell us within 24 hours. We come back to fix it, free."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -220,7 +226,7 @@ export default function HowItWorksPage() {
         <Container>
           <div className="text-center mb-16">
             <h2 className="font-display font-normal text-[36px] md:text-[44px] tracking-[-0.015em] text-foreground">
-              Why professionals choose <em className="italic text-foreground-soft font-display">Cleenly</em>
+              Why people choose <em className="italic text-foreground-soft font-display">Cleenly</em>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
@@ -230,8 +236,8 @@ export default function HowItWorksPage() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-foreground">Honest pricing</h3>
               <p className="text-muted-foreground leading-relaxed">
-                $50-60/hour with no hidden fees. You know exactly what you're
-                paying before you book.
+                ${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, no hidden fees. You get an upfront
+                estimate, and we confirm the final price before charging.
               </p>
             </div>
             <div className="p-8 bg-white rounded-xl shadow-sm border border-border">
@@ -248,10 +254,10 @@ export default function HowItWorksPage() {
               <div className="flex justify-center mb-6 text-accent">
                 <Shield className="h-10 w-10" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-foreground">Quality guaranteed</h3>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">We fix it free</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Vetted cleaners, full supplies included, and we make it right
-                if you're not happy.
+                Background-checked cleaners, full supplies included, and if
+                something's not right we come back within 24 hours.
               </p>
             </div>
           </div>
