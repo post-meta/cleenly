@@ -6,15 +6,15 @@ House cleaning in Edmonds, Washington. We serve waterfront homes near the marina
 
 ## Regular Cleaning
 
-Regular cleaning in Edmonds costs $100-$200 for most homes. We clean waterfront homes near the ferry, classic homes in the Bowl, and newer builds toward Esperance. Edmonds deals with salt air and moisture near the waterfront, older homes with detailed millwork, and high standards from homeowners who take pride in the town. Our regular cleaning maintains it. Serving Downtown Edmonds, the Bowl, Perrinville, Esperance, and Meadowdale.
+Regular cleaning in Edmonds keeps most homes maintained. We clean waterfront homes near the ferry, classic homes in the Bowl, and newer builds toward Esperance. Edmonds deals with salt air and moisture near the waterfront, older homes with detailed millwork, and high standards from homeowners who take pride in the town. Our regular cleaning maintains it. Serving Downtown Edmonds, the Bowl, Perrinville, Esperance, and Meadowdale. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Edmonds costs $150-$300 for most homes. We get inside appliances, into baseboards, and everywhere that salt air and dust accumulate. Edmonds has detailed woodwork and trim in many homes — we dust carefully around built-ins and millwork. Retirees who want homes guest-ready and ferry commuters to Seattle book deep cleaning when everything needs to be perfect.
+Deep cleaning in Edmonds resets a home top to bottom. We get inside appliances, into baseboards, and everywhere that salt air and dust accumulate. Edmonds has detailed woodwork and trim in many homes — we dust carefully around built-ins and millwork. Retirees who want homes guest-ready and ferry commuters to Seattle book deep cleaning when everything needs to be perfect. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Edmonds costs $200-$400 depending on home size. We clean to the standards buyers and landlords expect in this town — inside cabinets, appliances, closets, and detailed work throughout. Serving all Edmonds neighborhoods.
+Move-out cleaning in Edmonds is built to pass the inspection. We clean to the standards buyers and landlords expect in this town — inside cabinets, appliances, closets, and detailed work throughout. Serving all Edmonds neighborhoods. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

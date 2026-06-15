@@ -1,7 +1,7 @@
 export const SITE_NAME = "Cleenly";
 export const SITE_TAGLINE = "We clean. You live.";
 export const SITE_DESCRIPTION =
-  "Book cleaning services in Greater Seattle area. Choose your cleaner, see the price, book online.";
+  "Book cleaning services in Greater Seattle area. See your price, pick a time, book online.";
 
 export const SITE_URL = "https://cleenly.app";
 export const SERVICE_AREA = "Greater Seattle";

@@ -6,17 +6,17 @@ const faqs = [
   {
     question: "Do you charge by the hour or flat rate?",
     answer:
-      "Flat rate. You see the exact price before you book based on your home details. No hourly uncertainty.",
+      "You see an upfront estimate based on your home details. We bill the final price by the hour — $75 per cleaner-hour, $185 minimum — for the actual time your home takes, and we confirm it with you before charging. The estimate is what we expect the final to be.",
   },
   {
     question: "Are there any hidden fees?",
     answer:
-      "No. The price shown at booking is what you pay. We may suggest optional add-ons, but you decide.",
+      "No. We bill the actual cleaner-hours worked at $75 per cleaner-hour, never more than what the work takes, and we confirm the final before charging. We may suggest optional add-ons, but you decide.",
   },
   {
-    question: "Do you offer discounts for recurring cleanings?",
+    question: "Do recurring cleanings cost less?",
     answer:
-      "Yes. Weekly cleanings are typically 10-15% less than one-time cleanings. Bi-weekly cleanings are 5-10% less.",
+      "Yes. From your second visit onward, a maintained home takes fewer hours, so recurring cleanings cost less than the first. A 1-2 bedroom home is typically $185-$225 per recurring visit.",
   },
   {
     question: "What if my home needs more work than expected?",

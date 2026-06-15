@@ -48,7 +48,7 @@ export default async function CityPage({ params }: PageProps) {
     const faqs = content.localFAQs.length > 0 ? content.localFAQs : [
         {
             question: `How much does house cleaning cost in ${city.name}?`,
-            answer: `Rates in ${city.name} depend on home size and condition. Regular cleaning typically runs $100-$200, deep cleaning $150-$300, and move-out cleaning $200-$400. The booking calculator shows your exact price before you book.`
+            answer: `Rates in ${city.name} depend on home size and condition. First and deep cleans start from $200, move-out cleans from $280. We bill by the hour — $75 per cleaner-hour, $185 minimum — and show you an upfront estimate before you book, then confirm the final price with you before charging.`
         },
         {
             question: "Are your cleaners insured?",

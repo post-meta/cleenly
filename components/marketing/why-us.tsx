@@ -19,7 +19,7 @@ const reasons = [
   {
     title: "Price upfront",
     description:
-      "You see your exact price before you book. No \"starting at\" games, no quote calls.",
+      "You see a real estimate before you book — no bait pricing, no quote calls.",
   },
   {
     title: "Two ways to book",

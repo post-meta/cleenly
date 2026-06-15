@@ -6,15 +6,15 @@ House cleaning in Everett, Washington. We serve historic homes near downtown and
 
 ## Regular Cleaning
 
-Regular cleaning in Everett costs $100-$180 for most homes. We clean historic homes downtown, newer builds at Silver Lake, and apartments throughout. Everett deals with industrial dust from Boeing and the port, older homes with deferred maintenance, and moisture from waterfront areas. Our regular cleaning handles it. Serving Downtown Everett, Bayside, Delta, Riverside, Silver Lake, and Pinehurst.
+Regular cleaning in Everett keeps most homes maintained. We clean historic homes downtown, newer builds at Silver Lake, and apartments throughout. Everett deals with industrial dust from Boeing and the port, older homes with deferred maintenance, and moisture from waterfront areas. Our regular cleaning handles it. Serving Downtown Everett, Bayside, Delta, Riverside, Silver Lake, and Pinehurst. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Everett costs $140-$280 for most homes. We get inside appliances, into baseboards, and everywhere that industrial dust and moisture accumulate. Everett has beautiful historic homes and practical newer construction — we know both. Boeing workers and healthcare professionals at Providence book deep cleaning when the home needs a reset.
+Deep cleaning in Everett resets a home top to bottom. We get inside appliances, into baseboards, and everywhere that industrial dust and moisture accumulate. Everett has beautiful historic homes and practical newer construction — we know both. Boeing workers and healthcare professionals at Providence book deep cleaning when the home needs a reset. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Everett costs $180-$350 depending on home size and condition. We clean to landlord inspection standards — inside cabinets, appliances, closets, and detailed work throughout. Older homes and newer apartments have different needs. We handle both. Serving all Everett neighborhoods.
+Move-out cleaning in Everett is built to pass the inspection. We clean to landlord inspection standards — inside cabinets, appliances, closets, and detailed work throughout. Older homes and newer apartments have different needs. We handle both. Serving all Everett neighborhoods. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

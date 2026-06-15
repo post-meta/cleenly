@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 
 const services = [
   {
@@ -7,36 +8,41 @@ const services = [
     name: "Regular Cleaning",
     desc: "Routine maintenance. Dusting, vacuuming, bathrooms, kitchen.",
     bestFor: "Weekly or bi-weekly cleaning",
-    price: "From $165",
+    // First visit is priced as a deep clean (heavier first clean).
+    price: `From $${PRICE_DISPLAY.firstClean.from}`,
     img: "/lifestyle-living-2.jpg",
     slug: "regular-cleaning",
+    href: "/book?service=regular-cleaning",
   },
   {
     id: "deep",
     name: "Deep Cleaning",
     desc: "Everything in regular plus inside appliances, baseboards, detailed work.",
     bestFor: "First time, seasonal refresh, or overdue cleaning",
-    price: "From $250",
+    price: `From $${PRICE_DISPLAY.firstClean.from}`,
     img: "/service-deep.jpg",
     slug: "deep-cleaning",
+    href: "/book?service=deep-cleaning",
   },
   {
     id: "move-out",
     name: "Move-Out Cleaning",
     desc: "Complete cleaning to landlord standards. Get your deposit back.",
     bestFor: "End of lease, selling, or move-in prep",
-    price: "From $320",
+    price: `From $${PRICE_DISPLAY.moveOut.from}`,
     img: "/service-move-out.jpg",
     slug: "move-out-cleaning",
+    href: "/book?service=move-out-cleaning",
   },
   {
     id: "airbnb",
     name: "Airbnb Turnover",
     desc: "Same-day turnaround between guests. Linens, restocking, photo-ready.",
     bestFor: "Short-term hosts in Seattle metro",
-    price: "From $125",
+    price: `From $${PRICE_DISPLAY.minJob}`,
     img: "/service-airbnb.jpg",
     slug: "airbnb-turnover",
+    href: "/book",
   },
 ];
 
@@ -52,8 +58,9 @@ export function Services() {
             </h2>
           </div>
           <p className="text-[18px] leading-[1.55] text-foreground-soft max-w-[460px] lg:mb-2">
-            Each service is a defined checklist, a typical duration, and a known
-            price range. No call-outs. No surprises after we arrive.
+            Each service is a defined checklist, a typical duration, and an
+            upfront estimate. We bill the final price by the hour — $75 per
+            cleaner-hour, $185 minimum — and confirm it before charging.
           </p>
         </div>
 
@@ -93,7 +100,7 @@ export function Services() {
                     Best for: <span className="text-foreground font-medium">{s.bestFor}</span>
                   </span>
                   <Link
-                    href={`/book?service=${s.slug}`}
+                    href={s.href}
                     className="text-[13px] font-semibold text-accent hover:text-accent-hover transition-colors"
                   >
                     Book →

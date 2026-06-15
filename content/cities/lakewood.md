@@ -6,15 +6,15 @@ House cleaning in Lakewood, Washington. We serve military family housing near JB
 
 ## Regular Cleaning
 
-Regular cleaning in Lakewood costs $100-$170 for most homes. We clean military family housing, established homes near the lakes, and apartments throughout. Lakewood deals with frequent move-in/move-out cleaning for military relocations, rental properties needing turnover cleaning, and practical homes needing practical service. Our regular cleaning delivers. Serving Lakewood Towne Center, Lake City, Tillicum, and American Lake areas.
+Regular cleaning in Lakewood keeps most homes maintained. We clean military family housing, established homes near the lakes, and apartments throughout. Lakewood deals with frequent move-in/move-out cleaning for military relocations, rental properties needing turnover cleaning, and practical homes needing practical service. Our regular cleaning delivers. Serving Lakewood Towne Center, Lake City, Tillicum, and American Lake areas. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Lakewood costs $140-$260 for most homes. We get inside appliances, into baseboards, and everywhere that needs thorough attention. Lakewood is practical — we focus on doing the job well at a fair price. Military families and working households book deep cleaning when time finally allows.
+Deep cleaning in Lakewood resets a home top to bottom. We get inside appliances, into baseboards, and everywhere that needs thorough attention. Lakewood is practical — we focus on doing the job well at a fair price. Military families and working households book deep cleaning when time finally allows. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Lakewood costs $180-$320 depending on home size. We clean to inspection standards — inside cabinets, appliances, closets, and detailed work throughout. Military families on PCS orders need efficient, reliable service on tight timelines. We understand and deliver. Serving all Lakewood.
+Move-out cleaning in Lakewood is built to pass the inspection. We clean to inspection standards — inside cabinets, appliances, closets, and detailed work throughout. Military families on PCS orders need efficient, reliable service on tight timelines. We understand and deliver. Serving all Lakewood. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

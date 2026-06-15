@@ -6,15 +6,15 @@ House cleaning in Redmond, Washington. We serve tech-campus-adjacent homes near 
 
 ## Regular Cleaning
 
-Regular cleaning in Redmond costs $100-$200 for most homes. We clean homes near Microsoft campus, single-family homes in Education Hill, and townhomes in Overlake. Redmond deals with construction dust from the constant building boom, pollen from the Sammamish River Trail corridor, and pet hair from very dog-friendly households. Our regular cleaning handles it. Serving Downtown Redmond, Education Hill, Overlake, Idylwood, Grass Lawn, and Bear Creek.
+Regular cleaning in Redmond keeps most homes maintained. We clean homes near Microsoft campus, single-family homes in Education Hill, and townhomes in Overlake. Redmond deals with construction dust from the constant building boom, pollen from the Sammamish River Trail corridor, and pet hair from very dog-friendly households. Our regular cleaning handles it. Serving Downtown Redmond, Education Hill, Overlake, Idylwood, Grass Lawn, and Bear Creek. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Redmond costs $150-$300 for most homes. We get inside appliances, into baseboards, window tracks, and vents where construction dust and pollen accumulate. Redmond homes are newer with modern finishes — engineered hardwood, quartz counters, open floor plans. We adjust our approach for these materials. Microsoft employees and young tech families book deep cleaning when they finally have time to notice the dust.
+Deep cleaning in Redmond resets a home top to bottom. We get inside appliances, into baseboards, window tracks, and vents where construction dust and pollen accumulate. Redmond homes are newer with modern finishes — engineered hardwood, quartz counters, open floor plans. We adjust our approach for these materials. Microsoft employees and young tech families book deep cleaning when they finally have time to notice the dust. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Redmond costs $200-$400 depending on home size. We clean to pass inspection — inside all cabinets, appliances, closets, and every surface detailed. Redmond's newer homes and apartments have specific finish requirements. We know them. Serving all Redmond neighborhoods from Downtown to Overlake to Bear Creek.
+Move-out cleaning in Redmond is built to pass the inspection. We clean to pass inspection — inside all cabinets, appliances, closets, and every surface detailed. Redmond's newer homes and apartments have specific finish requirements. We know them. Serving all Redmond neighborhoods from Downtown to Overlake to Bear Creek. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 
