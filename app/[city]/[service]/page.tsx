@@ -173,7 +173,7 @@ export default async function CityServicePage({ params }: PageProps) {
                             </p>
                             <div className="bg-accent/5 p-8 rounded-[12px] border-l-4 border-accent">
                                 <p className="text-gray-700 font-medium">
-                                    {content?.whyChoose || `${service.name} for homes in ${city.name}. We're a small Greater Seattle team. Liability insurance. 24-hour re-clean if something isn't right.`}
+                                    {`${service.name} across ${city.name}${city.neighborhoods?.length ? ` — ${city.neighborhoods.slice(0, 3).join(', ')} and beyond` : ''}. You see an upfront estimate, we bill by the hour and confirm the final price before charging, and if something isn't right we come back within 24 hours.`}
                                 </p>
                             </div>
                         </div>
