@@ -248,7 +248,7 @@ export const services: ServiceData[] = [
         bestFor: ['Post-illness or postpartum', 'Recovering from a hard stretch', 'Heavy soil from any cause', 'When a regular clean isn\'t enough'],
         faqs: [
             { question: 'Will you judge me for the state of the home?', answer: "No. We've seen everything and we don't comment. Tell us what you'd like us to focus on. The rest stays private." },
-            { question: 'How fast can you come?', answer: "We often have same-day or next-day availability. Text or call us — say it's a restorative clean and we'll find a slot." },
+            { question: 'How fast can you come?', answer: "We often have same-day or next-day availability. Text us — say it's a restorative clean and we'll find a slot." },
             { question: "What if I don't want anyone to see certain rooms?", answer: "Tell us before we start. We skip what you say to skip — closed doors, specific drawers, anything. No questions." }
         ]
     },
