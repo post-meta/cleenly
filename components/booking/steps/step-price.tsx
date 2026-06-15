@@ -5,7 +5,6 @@ import {
   addonInfo,
   calculateFirstVisitPrice,
   formatPriceRange,
-  getEstimatedDuration,
   serviceIncludes,
 } from "@/lib/pricing";
 import type {
@@ -84,8 +83,6 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
   );
   const estimate = firstVisit;
 
-  // First regular visit is a deep clean — show the deep duration.
-  const duration = getEstimatedDuration(firstVisitIsDeep ? "deep" : serviceType, bedrooms);
   const includes = serviceIncludes[serviceType];
 
   const handleAddonToggle = (addon: Addon) => {
@@ -118,9 +115,6 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
         </div>
         <div className="tnum font-display font-normal text-[44px] tracking-tight mt-1.5 leading-none text-foreground">
           {formatPriceRange(totalMin, totalMax)}
-        </div>
-        <div className="text-[12px] text-foreground-muted mt-1.5">
-          Typical duration: {duration}
         </div>
         {firstVisitIsDeep && (
           <div className="mt-3 pt-3 border-t border-border/60">

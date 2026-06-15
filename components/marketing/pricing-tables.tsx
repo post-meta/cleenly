@@ -1,33 +1,32 @@
-import { Container } from "@/components/ui/container";
 import { PRICE_DISPLAY } from "@/lib/pricing";
 
 // First-visit (priced as a deep clean — market standard for a heavier first
 // clean). All numbers come from the single source of truth in lib/pricing.ts.
 const firstCleanPricing = [
-  { size: "1 bedroom", price: PRICE_DISPLAY.firstClean.bySize["1"], duration: "2-3 hours" },
-  { size: "2 bedroom", price: PRICE_DISPLAY.firstClean.bySize["2"], duration: "3-4 hours" },
-  { size: "3 bedroom", price: PRICE_DISPLAY.firstClean.bySize["3"], duration: "3-5 hours" },
-  { size: "4 bedroom", price: PRICE_DISPLAY.firstClean.bySize["4"], duration: "4-6 hours" },
-  { size: "5+ bedroom", price: PRICE_DISPLAY.firstClean.bySize["5+"], duration: "5-7 hours" },
+  { size: "1 bedroom", price: PRICE_DISPLAY.firstClean.bySize["1"] },
+  { size: "2 bedroom", price: PRICE_DISPLAY.firstClean.bySize["2"] },
+  { size: "3 bedroom", price: PRICE_DISPLAY.firstClean.bySize["3"] },
+  { size: "4 bedroom", price: PRICE_DISPLAY.firstClean.bySize["4"] },
+  { size: "5+ bedroom", price: PRICE_DISPLAY.firstClean.bySize["5+"] },
 ];
 
 const recurringPricing = [
-  { size: "1 bedroom", price: PRICE_DISPLAY.recurring.bySize["1"], duration: "1-2 hours" },
-  { size: "2 bedroom", price: PRICE_DISPLAY.recurring.bySize["2"], duration: "1-2 hours" },
-  { size: "3 bedroom", price: PRICE_DISPLAY.recurring.bySize["3"], duration: "2-3 hours" },
-  { size: "4 bedroom", price: PRICE_DISPLAY.recurring.bySize["4"], duration: "2-3 hours" },
+  { size: "1 bedroom", price: PRICE_DISPLAY.recurring.bySize["1"] },
+  { size: "2 bedroom", price: PRICE_DISPLAY.recurring.bySize["2"] },
+  { size: "3 bedroom", price: PRICE_DISPLAY.recurring.bySize["3"] },
+  { size: "4 bedroom", price: PRICE_DISPLAY.recurring.bySize["4"] },
 ];
 
 const moveOutPricing = [
-  { size: "1 bedroom", price: PRICE_DISPLAY.moveOut.bySize["1"], duration: "3-4 hours" },
-  { size: "2 bedroom", price: PRICE_DISPLAY.moveOut.bySize["2"], duration: "4-5 hours" },
-  { size: "3 bedroom", price: PRICE_DISPLAY.moveOut.bySize["3"], duration: "5-6 hours" },
-  { size: "4 bedroom", price: PRICE_DISPLAY.moveOut.bySize["4"], duration: "5-7 hours" },
-  { size: "5+ bedroom", price: PRICE_DISPLAY.moveOut.bySize["5+"], duration: "6-8 hours" },
+  { size: "1 bedroom", price: PRICE_DISPLAY.moveOut.bySize["1"] },
+  { size: "2 bedroom", price: PRICE_DISPLAY.moveOut.bySize["2"] },
+  { size: "3 bedroom", price: PRICE_DISPLAY.moveOut.bySize["3"] },
+  { size: "4 bedroom", price: PRICE_DISPLAY.moveOut.bySize["4"] },
+  { size: "5+ bedroom", price: PRICE_DISPLAY.moveOut.bySize["5+"] },
 ];
 
 interface PricingTableProps {
-  data: { size: string; price: string; duration: string }[];
+  data: { size: string; price: string }[];
 }
 
 function PricingTable({ data }: PricingTableProps) {
@@ -42,9 +41,6 @@ function PricingTable({ data }: PricingTableProps) {
             <th className="px-4 py-3 text-left text-sm font-semibold md:px-6">
               Estimate
             </th>
-            <th className="hidden px-4 py-3 text-left text-sm font-semibold sm:table-cell md:px-6">
-              Duration
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -56,9 +52,6 @@ function PricingTable({ data }: PricingTableProps) {
               <td className="px-4 py-3 text-sm md:px-6">{row.size}</td>
               <td className="px-4 py-3 text-sm font-medium md:px-6">
                 {row.price}
-              </td>
-              <td className="hidden px-4 py-3 text-sm text-muted-foreground sm:table-cell md:px-6">
-                {row.duration}
               </td>
             </tr>
           ))}
@@ -97,7 +90,7 @@ export function PricingTables() {
         </div>
         <p className="mt-3 text-sm text-muted-foreground">
           Estimates assume a typical home in average condition. More bathrooms,
-          larger square footage, or heavier buildup add hours.
+          larger square footage, or heavier buildup raise the estimate.
         </p>
       </div>
 
@@ -130,7 +123,7 @@ export function PricingTables() {
         </div>
         <p className="mt-3 text-sm text-muted-foreground">
           Estimates assume an empty or mostly empty home. Homes with heavy
-          buildup take more hours.
+          buildup raise the estimate.
         </p>
       </div>
     </section>
