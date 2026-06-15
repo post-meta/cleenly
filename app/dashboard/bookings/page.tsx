@@ -17,21 +17,19 @@ export default async function BookingsPage({
     // Build query based on status
     let query = supabase
         .from('bookings')
-        .select('*, addresses(*), cleaners(*)')
+        .select('*, addresses(*), cleaners!assigned_cleaner_id(*)')
         .eq('user_id', session.user?.id);
 
-    const today = new Date().toISOString().split('T')[0];
-
+    // Filter by status, not scheduled_date — new requests have no scheduled_date
+    // yet (only preferred_date), so a date filter would hide them entirely.
     if (status === 'upcoming') {
         query = query
-            .gte('scheduled_date', today)
             .in('status', ['new', 'pending', 'confirmed', 'in_progress'])
-            .order('scheduled_date', { ascending: true });
+            .order('created_at', { ascending: false });
     } else if (status === 'past') {
         query = query
-            .lt('scheduled_date', today)
             .eq('status', 'completed')
-            .order('scheduled_date', { ascending: false });
+            .order('created_at', { ascending: false });
     } else if (status === 'cancelled') {
         query = query
             .eq('status', 'cancelled')

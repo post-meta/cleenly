@@ -8,13 +8,14 @@ export default async function DashboardPage() {
     const session = await auth();
     if (!session) redirect('/login');
 
-    // Fetch upcoming bookings
+    // Upcoming = anything not yet completed/cancelled. New requests have no
+    // scheduled_date yet (only preferred_date), so we filter by status, not date.
     const { data: upcomingBookings } = await supabase
         .from('bookings')
-        .select('*, addresses(*), cleaners(*)')
+        .select('*, addresses(*), cleaners!assigned_cleaner_id(*)')
         .eq('user_id', session.user?.id)
-        .gte('scheduled_date', new Date().toISOString().split('T')[0])
-        .order('scheduled_date', { ascending: true })
+        .in('status', ['new', 'pending', 'confirmed', 'in_progress'])
+        .order('created_at', { ascending: false })
         .limit(3);
 
     return (

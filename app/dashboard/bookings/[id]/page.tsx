@@ -36,7 +36,7 @@ export default async function BookingDetailsPage({
 
     const { data: booking } = await supabase
         .from('bookings')
-        .select('*, addresses(*), cleaners(*), payments(*), reviews(*)')
+        .select('*, addresses(*), cleaners!assigned_cleaner_id(*), payments(*), reviews(*)')
         .eq('id', params.id)
         .eq('user_id', session.user?.id)
         .single();
