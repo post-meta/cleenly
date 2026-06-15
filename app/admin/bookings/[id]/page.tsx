@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { RecordPaymentForm } from '@/components/admin/record-payment-form';
 import { CreatePayoutForm } from '@/components/admin/create-payout-form';
 import { MarkPayoutPaidForm } from '@/components/admin/mark-payout-paid-form';
+import { InvoiceCustomerForm } from '@/components/admin/invoice-customer-form';
 
 export default async function BookingDetailPage({
     params,
@@ -78,17 +79,17 @@ export default async function BookingDetailPage({
                 <div className="mb-4">
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-muted-foreground">Status</span>
-                        <span className={`font-medium ${totalPaid >= booking.price_final
+                        <span className={`font-medium ${booking.price_final && totalPaid >= booking.price_final
                                 ? 'text-green-600'
                                 : 'text-yellow-600'
                             }`}>
-                            {totalPaid >= booking.price_final ? '✓ Paid' : '⚠ Pending'}
+                            {booking.price_final && totalPaid >= booking.price_final ? '✓ Paid' : '⚠ Pending'}
                         </span>
                     </div>
                     <div className="flex justify-between items-center">
                         <span className="text-muted-foreground">Amount Paid</span>
                         <span className="font-semibold">
-                            ${totalPaid} / ${booking.price_final}
+                            ${(totalPaid / 100).toFixed(2)} / ${((booking.price_final || 0) / 100).toFixed(2)}
                         </span>
                     </div>
                 </div>
@@ -106,12 +107,19 @@ export default async function BookingDetailPage({
                                     <span className="mx-2">•</span>
                                     <span className="capitalize">{payment.method}</span>
                                 </div>
-                                <span className="font-medium">${payment.amount_paid}</span>
+                                <span className="font-medium">${(Number(payment.amount_paid || 0) / 100).toFixed(2)}</span>
                             </div>
                         ))}
                     </div>
                 )}
 
+                {/* Primary billing path: hourly Stripe invoice after the work is done. */}
+                <InvoiceCustomerForm
+                    bookingId={booking.id}
+                    serviceType={booking.service_type}
+                />
+
+                {/* Manual reconciliation (cash / Venmo / Zelle / check) — pre-existing. */}
                 {totalPaid < booking.price_final && (
                     <RecordPaymentForm
                         bookingId={booking.id}

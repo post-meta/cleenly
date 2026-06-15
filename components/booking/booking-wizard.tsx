@@ -18,6 +18,7 @@ import type {
   ServiceType,
   HomeCondition,
   BookingFormData,
+  SavedAddress,
 } from "@/types";
 
 const TOTAL_STEPS = 6;
@@ -52,7 +53,13 @@ function generateBookingRef(): string {
   return result;
 }
 
-export function BookingWizard() {
+export function BookingWizard({
+  savedAddresses = [],
+  defaultContact,
+}: {
+  savedAddresses?: SavedAddress[];
+  defaultContact?: { name?: string; email?: string; phone?: string };
+} = {}) {
   const searchParams = useSearchParams();
   const serviceParam = searchParams.get("service");
   const initialServiceEntry = serviceParam ? SERVICE_PARAM_MAP[serviceParam] : undefined;
@@ -65,6 +72,10 @@ export function BookingWizard() {
     address: initialNeighborhood ? `${initialNeighborhood}, ${initialCity || ''}` : undefined,
     condition: "average",
     addons: initialServiceEntry?.addons ?? [],
+    // Prefill contact for logged-in customers (editable).
+    name: defaultContact?.name,
+    email: defaultContact?.email,
+    phone: defaultContact?.phone,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -312,6 +323,7 @@ export function BookingWizard() {
           onBack={goBack}
           isSubmitting={isSubmitting}
           errors={errors}
+          savedAddresses={savedAddresses}
         />
       )}
 

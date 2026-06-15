@@ -1,9 +1,10 @@
 import { auth } from '@/auth';
 import { supabase } from '@/lib/supabase';
 import { redirect } from 'next/navigation';
-import { Plus, MapPin, Home, Trash2, Star } from 'lucide-react';
+import { Plus, MapPin, Home, Star } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { AddressCardActions } from '@/components/dashboard/address-card-actions';
 
 export default async function AddressesPage() {
     const session = await auth();
@@ -93,27 +94,7 @@ export default async function AddressesPage() {
                                 </div>
                             </div>
 
-                            <div className="mt-4 flex items-center gap-2">
-                                <Link
-                                    href={`/dashboard/addresses/${address.id}/edit`}
-                                    className="text-sm text-accent hover:underline"
-                                >
-                                    Edit
-                                </Link>
-                                {!address.is_default && (
-                                    <>
-                                        <span className="text-gray-300">•</span>
-                                        <button className="text-sm text-gray-600 hover:text-foreground">
-                                            Set as Default
-                                        </button>
-                                    </>
-                                )}
-                                <span className="text-gray-300 ml-auto">•</span>
-                                <button className="text-sm text-red-600 hover:text-red-700 flex items-center gap-1">
-                                    <Trash2 className="w-3 h-3" />
-                                    Delete
-                                </button>
-                            </div>
+                            <AddressCardActions addressId={address.id} isDefault={address.is_default} />
                         </div>
                     ))}
                 </div>

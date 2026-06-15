@@ -12,6 +12,27 @@ import type {
 // drive time + setup + supplies make smaller jobs unprofitable.
 export const MIN_JOB_CENTS = 16500;
 
+// Post-service hourly billing rates (cents per hour) — CURRENT STAGE.
+// The booking wizard shows a price RANGE estimate; the real price is billed by
+// the hour AFTER the work is done (admin enters hours -> Stripe invoice).
+// When the business scales and pricing is calibrated, this moves to a fixed
+// area-based calculator (see actual_duration data collected per job).
+export const HOURLY_RATE_CENTS: Record<ServiceType, number> = {
+  regular: 5000, // $50/hr
+  deep: 6000, // $60/hr
+  move_out: 6000, // $60/hr
+};
+
+// Final billable amount in cents from hours worked. No floor here on purpose —
+// the admin sees the computed total and can override before sending the invoice.
+export function calculateHourlyTotalCents(
+  serviceType: ServiceType,
+  hours: number
+): number {
+  const rate = HOURLY_RATE_CENTS[serviceType] ?? HOURLY_RATE_CENTS.regular;
+  return Math.round(hours * rate);
+}
+
 // Base prices by service type and bedroom count (in cents)
 // Seattle 2026 market-aligned; aggressive premium-mid positioning.
 const basePrices: Record<ServiceType, Record<BedroomCount, number>> = {

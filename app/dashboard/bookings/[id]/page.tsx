@@ -6,6 +6,7 @@ import { BookingActions } from '@/components/dashboard/booking-actions';
 import { BookingTimeline } from '@/components/dashboard/booking-timeline';
 import { CleanerInfo } from '@/components/dashboard/cleaner-info';
 import { PaymentInfo } from '@/components/dashboard/payment-info';
+import { ReviewForm } from '@/components/dashboard/review-form';
 
 function StatusBadge({ status }: { status: string }) {
     const styles = ({
@@ -35,7 +36,7 @@ export default async function BookingDetailsPage({
 
     const { data: booking } = await supabase
         .from('bookings')
-        .select('*, addresses(*), cleaners(*), payments(*)')
+        .select('*, addresses(*), cleaners(*), payments(*), reviews(*)')
         .eq('id', params.id)
         .eq('user_id', session.user?.id)
         .single();
@@ -74,12 +75,14 @@ export default async function BookingDetailsPage({
                             <p className="text-sm">
                                 <span className="text-gray-600">Date:</span>{' '}
                                 <span className="font-medium">
-                                    {format(new Date(booking.scheduled_date), 'EEEE, MMMM d, yyyy')}
+                                    {booking.scheduled_date || booking.preferred_date
+                                        ? format(new Date(booking.scheduled_date || booking.preferred_date), 'EEEE, MMMM d, yyyy')
+                                        : 'To be scheduled'}
                                 </span>
                             </p>
                             <p className="text-sm">
                                 <span className="text-gray-600">Time:</span>{' '}
-                                <span className="font-medium">{booking.scheduled_time}</span>
+                                <span className="font-medium capitalize">{booking.scheduled_time || booking.preferred_time || 'To be scheduled'}</span>
                             </p>
                             <p className="text-sm">
                                 <span className="text-gray-600">Duration:</span>{' '}
@@ -88,22 +91,33 @@ export default async function BookingDetailsPage({
                         </div>
                     </section>
 
-                    {/* Address */}
+                    {/* Address — saved address join when present, else the booking's own text fields (guest bookings). */}
                     <section className="border border-gray-200 p-6 rounded-sm">
                         <h2 className="font-sans font-semibold mb-4">Location</h2>
                         <div className="space-y-1">
-                            <p className="font-medium">{booking.addresses.street_address}</p>
-                            {booking.addresses.unit && (
-                                <p className="text-sm text-gray-600">Unit {booking.addresses.unit}</p>
+                            {booking.addresses ? (
+                                <>
+                                    <p className="font-medium">{booking.addresses.street_address}</p>
+                                    {booking.addresses.unit && (
+                                        <p className="text-sm text-gray-600">Unit {booking.addresses.unit}</p>
+                                    )}
+                                    <p className="text-sm text-gray-600">
+                                        {booking.addresses.city}, {booking.addresses.state} {booking.addresses.zip_code}
+                                    </p>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="font-medium">{booking.address || 'Address on file'}</p>
+                                    <p className="text-sm text-gray-600">
+                                        {[booking.city, booking.zip].filter(Boolean).join(', ')}
+                                    </p>
+                                </>
                             )}
-                            <p className="text-sm text-gray-600">
-                                {booking.addresses.city}, {booking.addresses.state} {booking.addresses.zip_code}
-                            </p>
                         </div>
-                        {booking.addresses.special_instructions && (
+                        {(booking.addresses?.special_instructions || booking.access_instructions) && (
                             <div className="mt-4 pt-4 border-t">
                                 <p className="text-xs text-gray-600 mb-1">Special Instructions:</p>
-                                <p className="text-sm">{booking.addresses.special_instructions}</p>
+                                <p className="text-sm">{booking.addresses?.special_instructions || booking.access_instructions}</p>
                             </div>
                         )}
                     </section>
@@ -115,6 +129,11 @@ export default async function BookingDetailsPage({
 
                     {/* Timeline */}
                     <BookingTimeline booking={booking} />
+
+                    {/* Review — available once the cleaning is completed */}
+                    {booking.status === 'completed' && (
+                        <ReviewForm bookingId={booking.id} existing={booking.reviews?.[0] || null} />
+                    )}
                 </div>
 
                 {/* Sidebar */}

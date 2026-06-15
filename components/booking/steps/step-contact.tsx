@@ -5,7 +5,7 @@ import {
   MARKETING_SMS_CONSENT_TEXT,
   TRANSACTIONAL_SMS_CONSENT_TEXT,
 } from "@/lib/consent";
-import type { BookingFormData } from "@/types";
+import type { BookingFormData, SavedAddress } from "@/types";
 
 interface StepContactProps {
   data: Partial<BookingFormData>;
@@ -14,6 +14,7 @@ interface StepContactProps {
   onBack: () => void;
   isSubmitting: boolean;
   errors?: Record<string, string>;
+  savedAddresses?: SavedAddress[];
 }
 
 interface FieldProps {
@@ -75,6 +76,7 @@ export function StepContact({
   onBack,
   isSubmitting,
   errors = {},
+  savedAddresses = [],
 }: StepContactProps) {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -134,6 +136,51 @@ export function StepContact({
           error={errors.phone}
           autoComplete="tel"
         />
+
+        {savedAddresses.length > 0 && (
+          <div>
+            <label className="block text-[13px] font-medium mb-1.5 text-foreground">
+              Use a saved address
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {savedAddresses.map((a) => {
+                const composed = a.unit ? `${a.street_address}, ${a.unit}` : a.street_address;
+                const selected = data.address === composed;
+                return (
+                  <button
+                    key={a.id}
+                    type="button"
+                    onClick={() =>
+                      onChange({
+                        address: composed,
+                        city: a.city || undefined,
+                        zip: a.zip_code || undefined,
+                        access_instructions:
+                          data.access_instructions || a.special_instructions || undefined,
+                      })
+                    }
+                    className={cn(
+                      "text-left p-3 border rounded-md transition-colors",
+                      selected
+                        ? "border-accent bg-accent/5"
+                        : "border-border hover:border-border-hover"
+                    )}
+                  >
+                    <div className="text-[13px] font-medium text-foreground">
+                      {a.label || "Saved address"}
+                      {a.is_default ? " · Default" : ""}
+                    </div>
+                    <div className="text-[12px] text-foreground-muted truncate">
+                      {composed}
+                      {a.city ? `, ${a.city}` : ""}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-[12px] text-foreground-muted mt-1.5">…or type a new one below.</p>
+          </div>
+        )}
 
         <Field
           label="Service address"

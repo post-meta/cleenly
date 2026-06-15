@@ -13,7 +13,19 @@ export default auth((req) => {
         return NextResponse.redirect(new URL('/login', nextUrl));
     }
 
-    return NextResponse.next();
+    const res = NextResponse.next();
+
+    // Capture a referral code from ?ref= into a cookie so it survives until signup.
+    const ref = nextUrl.searchParams.get('ref');
+    if (ref) {
+        res.cookies.set('cleenly_ref', ref.toUpperCase().slice(0, 16), {
+            maxAge: 60 * 60 * 24 * 30, // 30 days
+            path: '/',
+            sameSite: 'lax',
+        });
+    }
+
+    return res;
 });
 
 export const config = {

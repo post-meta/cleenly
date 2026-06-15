@@ -8,7 +8,8 @@ import {
     MapPin,
     CreditCard,
     Settings,
-    Gift
+    Gift,
+    MessageSquare
 } from 'lucide-react';
 
 const navItems = [
@@ -31,6 +32,11 @@ const navItems = [
         label: 'Referrals',
         href: '/dashboard/referrals',
         icon: Gift,
+    },
+    {
+        label: 'Help & Feedback',
+        href: '/dashboard/feedback',
+        icon: MessageSquare,
     },
     {
         label: 'Settings',

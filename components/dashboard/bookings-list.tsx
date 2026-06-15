@@ -6,19 +6,55 @@ import { Button } from '@/components/ui/button';
 type Booking = {
     id: string;
     service_type: string;
-    scheduled_date: string;
-    scheduled_time: string;
+    scheduled_date?: string | null;
+    scheduled_time?: string | null;
+    preferred_date?: string | null;
+    preferred_time?: string | null;
     status: string;
-    price_final: number;
-    addresses: {
+    price_final?: number | null;
+    estimated_min?: number | null;
+    estimated_max?: number | null;
+    address?: string | null;
+    city?: string | null;
+    zip?: string | null;
+    addresses?: {
         street_address: string;
         city: string;
-    };
+    } | null;
     cleaners?: {
-        name: string;
+        name?: string;
+        full_name?: string;
         profile_photo?: string;
-    };
+        photo_url?: string;
+    } | null;
 };
+
+const SERVICE_LABELS: Record<string, string> = {
+    regular: 'Regular Cleaning',
+    deep: 'Deep Cleaning',
+    move_out: 'Move-Out Cleaning',
+};
+
+function whenLabel(b: Booking): string {
+    const d = b.scheduled_date || b.preferred_date;
+    const time = b.scheduled_time || b.preferred_time;
+    if (!d) return 'To be scheduled';
+    const datePart = format(new Date(d), 'MMM d, yyyy');
+    return time ? `${datePart} • ${time}` : datePart;
+}
+
+function addressLabel(b: Booking): string {
+    if (b.addresses) return `${b.addresses.street_address}, ${b.addresses.city}`;
+    return [b.address, b.city].filter(Boolean).join(', ') || 'Address on file';
+}
+
+function priceLabel(b: Booking): string {
+    if (b.price_final) return `$${(b.price_final / 100).toFixed(0)}`;
+    if (b.estimated_min && b.estimated_max) {
+        return `~$${(b.estimated_min / 100).toFixed(0)}–${(b.estimated_max / 100).toFixed(0)}`;
+    }
+    return '—';
+}
 
 export function BookingsList({ bookings }: { bookings: Booking[] }) {
     if (bookings.length === 0) {
@@ -42,11 +78,9 @@ export function BookingsList({ bookings }: { bookings: Booking[] }) {
 }
 
 function BookingCard({ booking }: { booking: Booking }) {
-    const serviceTypeLabel = {
-        regular: 'Regular Cleaning',
-        deep: 'Deep Cleaning',
-        move_out: 'Move-Out Cleaning',
-    }[booking.service_type] || booking.service_type;
+    const serviceTypeLabel = SERVICE_LABELS[booking.service_type] || booking.service_type;
+    const cleanerName = booking.cleaners?.full_name || booking.cleaners?.name;
+    const cleanerPhoto = booking.cleaners?.photo_url || booking.cleaners?.profile_photo;
 
     return (
         <Link
@@ -57,9 +91,9 @@ function BookingCard({ booking }: { booking: Booking }) {
                 <div>
                     <h3 className="font-semibold text-lg">{serviceTypeLabel}</h3>
                     <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1 capitalize">
                             <Calendar className="w-4 h-4" />
-                            {format(new Date(booking.scheduled_date), 'MMM d, yyyy')} • {booking.scheduled_time}
+                            {whenLabel(booking)}
                         </span>
                     </div>
                 </div>
@@ -67,19 +101,19 @@ function BookingCard({ booking }: { booking: Booking }) {
                 <StatusBadge status={booking.status} />
             </div>
 
-            {booking.cleaners && (
+            {cleanerName && (
                 <div className="flex items-center gap-3 mb-4">
-                    {booking.cleaners.profile_photo ? (
+                    {cleanerPhoto ? (
                         <img
-                            src={booking.cleaners.profile_photo}
-                            alt={booking.cleaners.name}
+                            src={cleanerPhoto}
+                            alt={cleanerName}
                             className="w-10 h-10 rounded-full object-cover"
                         />
                     ) : (
                         <div className="w-10 h-10 rounded-full bg-gray-200" />
                     )}
                     <div>
-                        <p className="text-sm font-medium">{booking.cleaners.name}</p>
+                        <p className="text-sm font-medium">{cleanerName}</p>
                     </div>
                 </div>
             )}
@@ -87,12 +121,12 @@ function BookingCard({ booking }: { booking: Booking }) {
             <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                 <div className="text-sm text-gray-600 flex items-center gap-1">
                     <MapPin className="w-4 h-4" />
-                    {booking.addresses.street_address}, {booking.addresses.city}
+                    {addressLabel(booking)}
                 </div>
 
                 <div className="flex items-center gap-1 font-semibold">
                     <DollarSign className="w-4 h-4" />
-                    {(booking.price_final / 100).toFixed(0)}
+                    {priceLabel(booking).replace('$', '')}
                 </div>
             </div>
         </Link>
@@ -101,6 +135,7 @@ function BookingCard({ booking }: { booking: Booking }) {
 
 function StatusBadge({ status }: { status: string }) {
     const styles = {
+        new: 'bg-yellow-100 text-yellow-700',
         pending: 'bg-yellow-100 text-yellow-700',
         confirmed: 'bg-green-100 text-green-700',
         in_progress: 'bg-blue-100 text-blue-700',

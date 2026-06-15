@@ -25,7 +25,7 @@ export default async function BookingsPage({
     if (status === 'upcoming') {
         query = query
             .gte('scheduled_date', today)
-            .in('status', ['pending', 'confirmed'])
+            .in('status', ['new', 'pending', 'confirmed', 'in_progress'])
             .order('scheduled_date', { ascending: true });
     } else if (status === 'past') {
         query = query

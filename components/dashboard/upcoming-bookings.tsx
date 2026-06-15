@@ -32,16 +32,19 @@ export function UpcomingBookings({ bookings }: { bookings: any[] }) {
                         </div>
 
                         <div className="space-y-2 text-sm text-gray-600">
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 capitalize">
                                 <Calendar className="w-4 h-4" />
                                 <span>
-                                    {format(new Date(booking.scheduled_date), 'MMM d')} • {booking.scheduled_time}
+                                    {booking.scheduled_date || booking.preferred_date
+                                        ? format(new Date(booking.scheduled_date || booking.preferred_date), 'MMM d')
+                                        : 'TBD'}
+                                    {(booking.scheduled_time || booking.preferred_time) && ` • ${booking.scheduled_time || booking.preferred_time}`}
                                 </span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <MapPin className="w-4 h-4" />
                                 <span className="truncate">
-                                    {booking.addresses.street_address}
+                                    {booking.addresses?.street_address || booking.address || 'Address on file'}
                                 </span>
                             </div>
                         </div>

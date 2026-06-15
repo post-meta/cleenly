@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   notifyCustomerBookingReceived,
@@ -118,6 +119,25 @@ export async function POST(request: NextRequest) {
 
     const supabase = createAdminClient();
 
+    // Link to an account when possible: an active session, otherwise an existing
+    // user with this email. Stays null for true guests — reconciled later on
+    // sign-up / sign-in by linkGuestBookingsToUser.
+    let userId: string | null = null;
+    try {
+      const session = await auth();
+      if (session?.user?.id) userId = session.user.id as string;
+    } catch {
+      /* not logged in — fine */
+    }
+    if (!userId) {
+      const { data: existingUser } = await supabase
+        .from("users")
+        .select("id")
+        .eq("email", body.email)
+        .maybeSingle();
+      if (existingUser) userId = existingUser.id;
+    }
+
     // A2P 10DLC consent flags (migration 20260501100000 applied 2026-06-10).
     const smsOptIn = !!body.sms_opt_in;
     const marketingSmsOptIn = !!body.marketing_sms_opt_in;
@@ -142,6 +162,7 @@ export async function POST(request: NextRequest) {
       estimated_min: estimatedMin,
       estimated_max: estimatedMax,
       status: "new",
+      user_id: userId,
     };
 
     let { data, error } = await supabase

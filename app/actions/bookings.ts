@@ -2,6 +2,7 @@
 
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+import { qualifyReferralOnCompletion } from '@/lib/referrals/credits';
 
 export interface CreateBookingData {
     // Customer
@@ -294,6 +295,12 @@ export async function updateBookingStatus(id: string, status: string) {
 
     revalidatePath('/admin/bookings');
     revalidatePath(`/admin/bookings/${id}`);
+
+    // Referral attribution: a referred customer's first completed cleaning rewards the referrer.
+    if (status === 'completed' && booking?.user_id) {
+        await qualifyReferralOnCompletion(booking.user_id, id);
+    }
+
     return { data: booking, error: null };
 }
 

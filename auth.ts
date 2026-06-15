@@ -6,6 +6,7 @@ import Google from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import { sendMagicLinkEmail } from '@/lib/email';
 import { supabase } from '@/lib/supabase';
+import { linkGuestBookingsToUser } from '@/lib/account/link-bookings';
 import crypto from 'crypto';
 
 const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
@@ -216,4 +217,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             },
         }),
     ],
+    events: {
+        // On every sign-in (any provider), attach prior guest bookings made
+        // with this email so they appear in the customer's dashboard.
+        async signIn({ user }) {
+            await linkGuestBookingsToUser(user.id, user.email);
+        },
+    },
 });

@@ -4,6 +4,9 @@ import { Container } from "@/components/ui/container";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
 import { BookingWizard } from "@/components/booking";
+import { auth } from "@/auth";
+import { supabase } from "@/lib/supabase";
+import type { SavedAddress } from "@/types";
 
 export const metadata: Metadata = {
   title: "Book Premium House Cleaning | CLEENLY",
@@ -31,7 +34,34 @@ function BookingWizardFallback() {
   );
 }
 
-export default function BookPage() {
+export default async function BookPage() {
+  // Logged-in customers get their saved addresses + contact prefilled.
+  const session = await auth();
+  const uid = (session?.user as { id?: string } | undefined)?.id;
+
+  let savedAddresses: SavedAddress[] = [];
+  let defaultContact: { name?: string; email?: string; phone?: string } | undefined;
+
+  if (uid) {
+    const [addrRes, userRes] = await Promise.all([
+      supabase
+        .from("addresses")
+        .select("id, label, street_address, unit, city, state, zip_code, special_instructions, is_default")
+        .eq("user_id", uid)
+        .order("is_default", { ascending: false })
+        .order("created_at", { ascending: false }),
+      supabase.from("users").select("name, email, phone").eq("id", uid).single(),
+    ]);
+    savedAddresses = (addrRes.data as SavedAddress[]) || [];
+    if (userRes.data) {
+      defaultContact = {
+        name: userRes.data.name || undefined,
+        email: userRes.data.email || undefined,
+        phone: userRes.data.phone || undefined,
+      };
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
@@ -47,7 +77,7 @@ export default function BookPage() {
           </div>
           <div className="bg-white rounded-2xl border border-border shadow-soft p-6 md:p-10">
             <Suspense fallback={<BookingWizardFallback />}>
-              <BookingWizard />
+              <BookingWizard savedAddresses={savedAddresses} defaultContact={defaultContact} />
             </Suspense>
           </div>
         </Container>

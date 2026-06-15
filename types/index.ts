@@ -99,6 +99,19 @@ export interface PriceEstimate {
   addonsTotal: number;
 }
 
+/** A customer's saved service address (dashboard addresses table). */
+export interface SavedAddress {
+  id: string;
+  label?: string | null;
+  street_address: string;
+  unit?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip_code?: string | null;
+  special_instructions?: string | null;
+  is_default?: boolean;
+}
+
 // Supabase DB Types
 import { Database } from './supabase';
 

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
 import { supabase } from '@/lib/supabase';
+import { linkGuestBookingsToUser } from '@/lib/account/link-bookings';
+import { applyReferralOnSignup } from '@/lib/referrals/credits';
 import { Resend } from 'resend';
 import { getWelcomeEmailHtml, getWelcomeEmailText } from '@/lib/email-templates/welcome';
 
@@ -62,6 +64,13 @@ export async function POST(request: NextRequest) {
                 { status: 500 }
             );
         }
+
+        // Attach any guest bookings placed with this email before signup.
+        await linkGuestBookingsToUser(newUser.id, email);
+
+        // Referral attribution: ?ref= code from the body or the cookie set by middleware.
+        const refCode = (body.ref as string | undefined) || request.cookies.get('cleenly_ref')?.value || null;
+        await applyReferralOnSignup(newUser.id, email, refCode);
 
         // Send welcome email
         try {
