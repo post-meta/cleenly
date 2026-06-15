@@ -3,7 +3,7 @@ import { Logo } from "./logo";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { footerConfig, getFooterCities } from "@/lib/data/footer-config";
 import { getCityBySlug } from "@/lib/data/cities";
-import { PHONE_DISPLAY, PHONE_TEL_HREF, SUPPORT_EMAIL } from "@/lib/constants";
+import { PHONE_DISPLAY, PHONE_SMS_HREF, SUPPORT_EMAIL } from "@/lib/constants";
 
 interface FooterProps {
   currentCity?: string;
@@ -34,10 +34,10 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
                 {SUPPORT_EMAIL}
               </a>
               <a
-                href={PHONE_TEL_HREF}
+                href={PHONE_SMS_HREF}
                 className="text-foreground-muted no-underline hover:text-foreground transition-colors"
               >
-                {PHONE_DISPLAY}
+                Text {PHONE_DISPLAY}
               </a>
             </div>
           </div>

@@ -24,7 +24,7 @@ const reasons = [
   {
     title: "Two ways to book",
     description:
-      "Book online in 2 minutes — that's the easiest path. Or call us if you'd rather talk to someone.",
+      "Book online in 2 minutes — that's the easiest path. Or text us if you'd rather reach a person.",
   },
   {
     title: "Easy rescheduling",
