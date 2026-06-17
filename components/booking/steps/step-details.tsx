@@ -21,21 +21,24 @@ const bedrooms = ["studio", "1", "2", "3", "4", "5+"];
 const bathrooms = ["1", "1.5", "2", "2.5", "3", "3.5+"];
 
 // "not_sure" is intentionally not offered — square footage drives the price.
+// Per-option price deltas are intentionally NOT shown: surfacing how each
+// choice raises the price mid-wizard depresses conversion and defers the
+// transaction. The final estimate is revealed once on the price step.
 const sqftOptions: { id: SqftRange; label: string }[] = [
   { id: "under_800", label: "Under 800 sq ft" },
   { id: "800_1200", label: "800–1,200 sq ft" },
-  { id: "1200_1800", label: "1,200–1,800 sq ft (+10%)" },
-  { id: "1800_2500", label: "1,800–2,500 sq ft (+20%)" },
-  { id: "2500_3500", label: "2,500–3,500 sq ft (+35%)" },
-  { id: "over_3500", label: "3,500+ sq ft (+35%)" },
+  { id: "1200_1800", label: "1,200–1,800 sq ft" },
+  { id: "1800_2500", label: "1,800–2,500 sq ft" },
+  { id: "2500_3500", label: "2,500–3,500 sq ft" },
+  { id: "over_3500", label: "3,500+ sq ft" },
 ];
 
 // Concrete question instead of self-graded "condition" — maps to the same
-// clean / average / needs_work values, no DB migration.
-const lastCleanedOptions: { id: HomeCondition; label: string; sub: string }[] = [
-  { id: "clean", label: "Within the last month", sub: "base price" },
-  { id: "average", label: "1–6 months ago", sub: "+10%" },
-  { id: "needs_work", label: "6+ months / never", sub: "+25%" },
+// clean / average / needs_work values, no DB migration. No price deltas shown.
+const lastCleanedOptions: { id: HomeCondition; label: string }[] = [
+  { id: "clean", label: "Within the last month" },
+  { id: "average", label: "1–6 months ago" },
+  { id: "needs_work", label: "6+ months / never" },
 ];
 
 function FieldSelect({
@@ -153,7 +156,7 @@ export function StepDetails({
                 type="button"
                 onClick={() => onChange({ condition: c.id })}
                 className={cn(
-                  "text-left p-[12px_14px] rounded-md border transition-all cursor-pointer flex items-baseline justify-between gap-3",
+                  "text-left p-[12px_14px] rounded-md border transition-all cursor-pointer flex items-baseline gap-3",
                   selected
                     ? "border-2 border-foreground bg-surface-warm"
                     : "border-border bg-background hover:border-border-hover"
@@ -164,7 +167,6 @@ export function StepDetails({
                 }}
               >
                 <span className="text-[14px] font-semibold text-foreground">{c.label}</span>
-                <span className="text-[12px] text-foreground-muted">{c.sub}</span>
               </button>
             );
           })}

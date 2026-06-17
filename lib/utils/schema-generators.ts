@@ -1,7 +1,34 @@
 import { CityData } from '@/lib/data/cities';
 import { ServiceData } from '@/lib/data/services';
+import { PRICE_DISPLAY } from '@/lib/pricing';
 
 const BASE_URL = 'https://cleenly.app';
+
+// Canonical "from" price for a service, from the single source of truth
+// (lib/pricing). Move-related work prices on the move-out table; recurring
+// maintenance on the recurring floor; everything else on the first/deep table.
+function serviceFromPrice(service: ServiceData): number {
+    const name = service.name.toLowerCase();
+    if (name.includes('move-out') || name.includes('move out') || name.includes('post-construction')) {
+        return PRICE_DISPLAY.moveOut.from;
+    }
+    if (name.includes('bi-weekly') || name.includes('recurring')) {
+        return PRICE_DISPLAY.recurring.from;
+    }
+    return PRICE_DISPLAY.firstClean.from;
+}
+
+// Hourly priceSpecification reused across Service offers — final price is the
+// actual cleaner-hours worked at the single rate, not a flat fee or "starting at".
+function hourlyPriceSpecification() {
+    return {
+        "@type": "UnitPriceSpecification",
+        "price": PRICE_DISPLAY.ratePerCleanerHour,
+        "priceCurrency": "USD",
+        "unitText": "cleaner-hour",
+        "minPrice": PRICE_DISPLAY.minJob
+    };
+}
 
 /**
  * Service Schema для страницы город+услуга
@@ -40,10 +67,11 @@ export function generateServiceSchema(city: CityData, service: ServiceData) {
             "longitude": city.coordinates.lng
         },
         "offers": {
-            "@type": "AggregateOffer",
-            "lowPrice": service.priceMin,
-            "highPrice": service.priceMax,
-            "priceCurrency": "USD"
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": serviceFromPrice(service),
+            "priceSpecification": hourlyPriceSpecification(),
+            "description": `Upfront estimate from $${serviceFromPrice(service)}. Final price is the actual cleaner-hours worked at $${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour ($${PRICE_DISPLAY.minJob} minimum), confirmed before charging.`
         },
         "url": `${BASE_URL}/${city.slug}/${service.slug}`
     };
@@ -116,10 +144,11 @@ export function generateGenericServiceSchema(service: ServiceData, allCities: Ci
             "containedInPlace": { "@type": "State", "name": "Washington" }
         })),
         "offers": {
-            "@type": "AggregateOffer",
-            "lowPrice": service.priceMin,
-            "highPrice": service.priceMax,
-            "priceCurrency": "USD"
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": serviceFromPrice(service),
+            "priceSpecification": hourlyPriceSpecification(),
+            "description": `Upfront estimate from $${serviceFromPrice(service)}. Final price is the actual cleaner-hours worked at $${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour ($${PRICE_DISPLAY.minJob} minimum), confirmed before charging.`
         },
         "url": `${BASE_URL}/services/${service.slug}`
     };

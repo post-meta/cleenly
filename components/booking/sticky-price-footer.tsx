@@ -5,7 +5,6 @@ import { formatPriceRange } from "@/lib/pricing";
 interface StickyPriceFooterProps {
   priceMin: number;
   priceMax: number;
-  duration: string;
   serviceName: string;
   onContinue: () => void;
   continueLabel?: string;
@@ -16,7 +15,6 @@ interface StickyPriceFooterProps {
 export function StickyPriceFooter({
   priceMin,
   priceMax,
-  duration,
   serviceName,
   onContinue,
   continueLabel,
@@ -43,9 +41,6 @@ export function StickyPriceFooter({
             className="tnum font-display font-normal text-[24px] leading-none text-foreground mt-0.5"
           >
             {formatPriceRange(priceMin, priceMax)}
-          </span>
-          <span className="text-[11px] text-foreground-muted mt-0.5">
-            {duration}
           </span>
         </div>
 

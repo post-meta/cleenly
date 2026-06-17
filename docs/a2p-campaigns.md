@@ -6,8 +6,8 @@ Prepared 2026-06-10 for Twilio Trust Hub submission.
 
 | Field | Value |
 |---|---|
-| Legal entity | Post Meta LLC |
-| EIN | 92-2989002 |
+| Legal entity | Pro Craft Cleaning LLC |
+| EIN | 92-1181226 |
 | Brand tier | Standard |
 | DBA / brand name in messages | CLEENLY |
 | Website | https://cleenly.app |
@@ -29,7 +29,7 @@ Prepared 2026-06-10 for Twilio Trust Hub submission.
 
 ### Use-case description (paste into Trust Hub)
 
-> CLEENLY is a residential cleaning company in Greater Seattle operated by Post Meta LLC. This campaign sends transactional messages to customers who booked a cleaning at cleenly.app/book and checked an explicit SMS-consent checkbox: booking confirmations with the price estimate, appointment reminders the day before, cleaner-arrival notifications, and post-service receipts. Messages are tied to a specific booking the customer initiated. No marketing content is sent on this campaign.
+> CLEENLY is a residential cleaning company in Greater Seattle operated by Pro Craft Cleaning LLC (dba CLEENLY). This campaign sends transactional messages to customers who booked a cleaning at cleenly.app/book and checked an explicit SMS-consent checkbox: booking confirmations with the price estimate, appointment reminders the day before, cleaner-arrival notifications, and post-service receipts. Messages are tied to a specific booking the customer initiated. No marketing content is sent on this campaign.
 
 ### Opt-in flow description (paste into Trust Hub)
 
@@ -60,7 +60,7 @@ Prepared 2026-06-10 for Twilio Trust Hub submission.
 
 ### Use-case description (paste into Trust Hub)
 
-> CLEENLY sends occasional promotional messages to existing customers who gave express written consent via a second, separate, unchecked checkbox at booking: seasonal cleaning offers (spring Pollen Purge, fall Damp-Season Reset), short seasonal home-care tips, and win-back offers for past customers. Frequency: no more than 2 messages per month. Every message includes opt-out language. Audience is exclusively customers who completed a booking on cleenly.app and opted in to marketing.
+> CLEENLY (operated by Pro Craft Cleaning LLC, dba CLEENLY) sends occasional promotional messages to existing customers who gave express written consent via a second, separate, unchecked checkbox at booking: seasonal cleaning offers (spring Pollen Purge, fall Damp-Season Reset), short seasonal home-care tips, and win-back offers for past customers. Frequency: no more than 2 messages per month. Every message includes opt-out language. Audience is exclusively customers who completed a booking on cleenly.app and opted in to marketing.
 
 ### Opt-in flow description (paste into Trust Hub)
 
@@ -91,4 +91,4 @@ Same capture as Campaign 1 — both checkboxes appear in one frame. Annotate (ar
 - **Consent evidence**: `consent_log` table (Supabase project `onhrawahtfiuqzovglkb`) — exportable on carrier audit. RLS on, service-role access only.
 - **Do not** send marketing to numbers whose only consent row is `transactional_sms`.
 - **Message length**: keep ≤160 chars (single SMS segment); all samples above comply.
-- Brand registration uses Post Meta LLC EIN 92-2989002, Standard tier (no vetting required for these volumes; upgrade if daily volume grows past Standard caps).
+- Brand registration uses Pro Craft Cleaning LLC EIN 92-1181226, Standard tier (no vetting required for these volumes; upgrade if daily volume grows past Standard caps).

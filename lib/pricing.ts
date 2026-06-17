@@ -8,91 +8,124 @@ import type {
   PriceEstimate,
 } from "@/types";
 
-// Minimum job total (in cents). No visit goes out below this —
-// drive time + setup + supplies make smaller jobs unprofitable.
-export const MIN_JOB_CENTS = 16500;
+// ============================================================================
+// CLEENLY PRICING — SINGLE SOURCE OF TRUTH
+// ----------------------------------------------------------------------------
+// Market-calibrated for Greater Seattle (2025-26 research: Simply Clean,
+// NW Maids, Seattle Green Maids, Rain City Maids, Thumbtack).
+//
+// ONE rate per cleaner-hour. Price varies by HOURS, which vary by service,
+// home size, bathrooms, condition, and square footage. The estimate range
+// shown up front is hours × rate — i.e. the estimate EQUALS what gets billed.
+// Final price is the actual hours worked × the same rate. No flat-rate fiction,
+// no "starting at $X" floor that can't be reached.
+// ============================================================================
 
-// Post-service hourly billing rates (cents per hour) — CURRENT STAGE.
-// The booking wizard shows a price RANGE estimate; the real price is billed by
-// the hour AFTER the work is done (admin enters hours -> Stripe invoice).
-// When the business scales and pricing is calibrated, this moves to a fixed
-// area-based calculator (see actual_duration data collected per job).
-export const HOURLY_RATE_CENTS: Record<ServiceType, number> = {
-  regular: 5000, // $50/hr
-  deep: 6000, // $60/hr
-  move_out: 6000, // $60/hr
+// $75 per cleaner-hour. Seattle pro market is $60-80/cleaner-hour (NW Maids
+// posts $65); we sit premium-mid. A standard job is a two-cleaner team, so the
+// hour figures below are TOTAL cleaner-hours (man-hours), not wall-clock.
+export const HOURLY_RATE_CENTS = 7500;
+
+// Minimum job total (cents). Covers drive time, setup, and supplies; below this
+// a two-person visit isn't worth dispatching.
+export const MIN_JOB_CENTS = 18500;
+
+// ── CANONICAL MARKETING DISPLAY — single source for every price shown on site ──
+// Market-calibrated (Greater Seattle 2025-26), matches the engine above at
+// average condition / a representative home. Import this everywhere instead of
+// hardcoding prices, so a recalibration propagates and nothing drifts.
+export const PRICE_DISPLAY = {
+  ratePerCleanerHour: 75,
+  minJob: 185,
+  // A first-time clean is priced as a deep clean (heavier first visit — market standard).
+  firstClean: {
+    from: 200,
+    bySize: {
+      "1": "$290–350",
+      "2": "$440–530",
+      "3": "$545–650",
+      "4": "$685–825",
+      "5+": "$935–1,120",
+    } as Record<string, string>,
+  },
+  moveOut: {
+    from: 280,
+    bySize: {
+      "1": "$380–455",
+      "2": "$585–705",
+      "3": "$740–885",
+      "4": "$815–975",
+      "5+": "$1,080–1,295",
+    } as Record<string, string>,
+  },
+  // Lighter ongoing maintenance, from visit two onward.
+  recurring: {
+    from: 185,
+    bySize: {
+      "1": "$185–220",
+      "2": "$190–225",
+      "3": "$220–260",
+      "4": "$255–305",
+    } as Record<string, string>,
+  },
+  // Honest one-line framing — reuse where copy describes how pricing works.
+  framing:
+    "You see an upfront estimate. We bill the final price by the hour — $75 per cleaner-hour, $185 minimum — and confirm it with you before charging.",
+} as const;
+
+// Central estimated cleaner-hours for a FIRST / DEEP clean, by service & size.
+// A first cleaning is always heavier than ongoing maintenance — market standard
+// that the first clean runs ~2x a recurring visit. "regular" first visit is
+// priced on the deep table (no recurring system live yet); recurring (visit 2+)
+// uses the lighter table further down.
+const baseManHours: Record<ServiceType, Record<BedroomCount, number>> = {
+  regular: { studio: 2.9, "1": 3.5, "2": 4.5, "3": 5.3, "4": 6.4, "5+": 7.8 },
+  deep: { studio: 2.9, "1": 3.5, "2": 4.5, "3": 5.3, "4": 6.4, "5+": 7.8 },
+  move_out: { studio: 3.8, "1": 4.6, "2": 6.0, "3": 7.2, "4": 7.6, "5+": 9.0 },
 };
 
-// Final billable amount in cents from hours worked. No floor here on purpose —
-// the admin sees the computed total and can override before sending the invoice.
-export function calculateHourlyTotalCents(
-  serviceType: ServiceType,
-  hours: number
-): number {
-  const rate = HOURLY_RATE_CENTS[serviceType] ?? HOURLY_RATE_CENTS.regular;
-  return Math.round(hours * rate);
-}
-
-// Base prices by service type and bedroom count (in cents)
-// Seattle 2026 market-aligned; aggressive premium-mid positioning.
-const basePrices: Record<ServiceType, Record<BedroomCount, number>> = {
-  regular: {
-    studio: 14000,
-    "1": 16500,
-    "2": 20000,
-    "3": 24000,
-    "4": 30000,
-    "5+": 36000,
-  },
-  deep: {
-    studio: 20000,
-    "1": 25000,
-    "2": 33500,
-    "3": 40000,
-    "4": 48000,
-    "5+": 59000,
-  },
-  move_out: {
-    studio: 25000,
-    "1": 32000,
-    "2": 42000,
-    "3": 52000,
-    "4": 62000,
-    "5+": 75000,
-  },
+// Lighter ongoing maintenance (visit 2+) — maintains an already-clean home.
+// Roughly half the first-visit hours; near-flat by bedroom (a clean home is
+// quick regardless of bathrooms/sqft), tuned to the Seattle recurring market
+// (~$165 1BR, $183 2BR, $213 3BR, $233 4BR).
+const recurringManHours: Record<BedroomCount, number> = {
+  studio: 2.0,
+  "1": 2.2,
+  "2": 2.5,
+  "3": 2.9,
+  "4": 3.4,
+  "5+": 4.3,
 };
 
-// Bathroom multiplier
+// Bathroom multiplier — more bathrooms = more time.
 const bathroomMultiplier: Record<BathroomCount, number> = {
   "1": 1.0,
-  "1.5": 1.1,
-  "2": 1.15,
-  "2.5": 1.2,
-  "3": 1.25,
-  "3.5+": 1.35,
+  "1.5": 1.08,
+  "2": 1.13,
+  "2.5": 1.18,
+  "3": 1.23,
+  "3.5+": 1.3,
 };
 
-// Condition multiplier
+// Condition multiplier (first/deep clean). A messier home takes longer.
 const conditionMultiplier: Record<HomeCondition, number> = {
   clean: 1.0,
   average: 1.1,
-  needs_work: 1.25,
+  needs_work: 1.22,
 };
 
-// Square footage multiplier. Protects against "2 bedrooms in 2,800 sqft".
-// Keys match the existing SqftRange enum — no DB migration needed.
-// "not_sure" is no longer offered in the wizard; kept at 1.0 for old rows.
+// Square footage multiplier — protects against "2 bedrooms in 2,800 sqft".
 const sqftMultiplier: Record<SqftRange, number> = {
   under_800: 1.0,
   "800_1200": 1.0,
-  "1200_1800": 1.1,
-  "1800_2500": 1.2,
-  "2500_3500": 1.35,
-  over_3500: 1.35,
+  "1200_1800": 1.05,
+  "1800_2500": 1.1,
+  "2500_3500": 1.18,
+  over_3500: 1.22,
   not_sure: 1.0,
 };
 
-// Add-on prices (in cents)
+// Add-on prices (cents) — flat, on top of the hourly estimate.
 export const addonPrices: Record<Addon, number> = {
   fridge: 2500,
   oven: 2000,
@@ -102,7 +135,7 @@ export const addonPrices: Record<Addon, number> = {
   damp_season_reset: 8500,
 };
 
-// Addon display info
+// Add-on display info
 export const addonInfo: Record<Addon, { label: string; price: string; description?: string }> = {
   fridge: {
     label: "Inside refrigerator",
@@ -136,7 +169,13 @@ export const addonInfo: Record<Addon, { label: string; price: string; descriptio
   },
 };
 
-// Calculate price range
+// Turn cleaner-hours into a {min,max} price band, floored at the job minimum.
+function priceFromHours(hours: number): { min: number; max: number } {
+  const calc = Math.max(hours * HOURLY_RATE_CENTS, MIN_JOB_CENTS);
+  return { min: Math.round(calc), max: Math.round(calc * 1.2) };
+}
+
+// First/deep clean estimate for a given configuration.
 export function calculatePrice(
   serviceType: ServiceType,
   bedrooms: BedroomCount,
@@ -145,39 +184,45 @@ export function calculatePrice(
   addons: Addon[] = [],
   sqftRange?: SqftRange
 ): PriceEstimate {
-  const base = basePrices[serviceType][bedrooms];
-  const bathMult = bathroomMultiplier[bathrooms];
-  const condMult = conditionMultiplier[condition];
-  const sqftMult = sqftRange ? sqftMultiplier[sqftRange] : 1.0;
+  const hours =
+    baseManHours[serviceType][bedrooms] *
+    bathroomMultiplier[bathrooms] *
+    conditionMultiplier[condition] *
+    (sqftRange ? sqftMultiplier[sqftRange] : 1.0);
 
-  let calculated = base * bathMult * condMult * sqftMult;
-
-  // Minimum job floor — addons go on top.
-  calculated = Math.max(calculated, MIN_JOB_CENTS);
-
-  // Calculate addons total
+  const { min, max } = priceFromHours(hours);
   const addonsTotal = addons.reduce((sum, addon) => sum + addonPrices[addon], 0);
 
-  return {
-    min: Math.round(calculated),
-    max: Math.round(calculated * 1.2),
-    base: Math.round(calculated),
-    addonsTotal,
-  };
+  return { min, max, base: min, addonsTotal };
+}
+
+// Ongoing maintenance (visit 2+) estimate. A maintained home is quick and
+// predictable, so it's driven by bedroom count alone (no condition/bath/sqft
+// compounding) — that's what keeps it near the market recurring rate.
+function calculateRecurringPrice(
+  bedrooms: BedroomCount,
+  _bathrooms: BathroomCount,
+  addons: Addon[] = [],
+  _sqftRange?: SqftRange
+): PriceEstimate {
+  const { min, max } = priceFromHours(recurringManHours[bedrooms]);
+  const addonsTotal = addons.reduce((sum, addon) => sum + addonPrices[addon], 0);
+
+  return { min, max, base: min, addonsTotal };
 }
 
 export interface FirstVisitEstimate {
-  /** What the customer pays on the first visit. For regular this is the deep-clean table. */
+  /** What the customer pays on the first visit. For regular this is the deep table. */
   firstVisit: PriceEstimate;
-  /** Per-visit price from visit two onward (regular table). For deep/move_out same as firstVisit. */
+  /** Per-visit price from visit two onward (lighter maintenance). Deep/move-out = same as firstVisit. */
   recurring: PriceEstimate;
   /** True when serviceType is regular and the first visit is priced as a deep clean. */
   firstVisitIsDeep: boolean;
 }
 
 // Every regular booking is in practice a first visit (no recurring system yet).
-// Owner decision: the first cleaning is always heavier — first visit prices by
-// the deep table, visit two onward by the regular table. Deep/move-out unchanged.
+// The first cleaning is always heavier — first visit prices on the deep table;
+// visit two onward uses the lighter maintenance table. Deep/move-out unchanged.
 export function calculateFirstVisitPrice(
   serviceType: ServiceType,
   bedrooms: BedroomCount,
@@ -186,14 +231,20 @@ export function calculateFirstVisitPrice(
   addons: Addon[] = [],
   sqftRange?: SqftRange
 ): FirstVisitEstimate {
-  const recurring = calculatePrice(serviceType, bedrooms, bathrooms, condition, addons, sqftRange);
-
   if (serviceType !== "regular") {
-    return { firstVisit: recurring, recurring, firstVisitIsDeep: false };
+    const flat = calculatePrice(serviceType, bedrooms, bathrooms, condition, addons, sqftRange);
+    return { firstVisit: flat, recurring: flat, firstVisitIsDeep: false };
   }
 
   const firstVisit = calculatePrice("deep", bedrooms, bathrooms, condition, addons, sqftRange);
+  const recurring = calculateRecurringPrice(bedrooms, bathrooms, addons, sqftRange);
   return { firstVisit, recurring, firstVisitIsDeep: true };
+}
+
+// Final billable amount (cents) from actual cleaner-hours worked. Single rate;
+// no floor here — the admin sees the total and can override before invoicing.
+export function calculateHourlyTotalCents(hours: number): number {
+  return Math.round(hours * HOURLY_RATE_CENTS);
 }
 
 // Format price from cents to dollars
@@ -206,39 +257,16 @@ export function formatPriceRange(min: number, max: number): string {
   return `${formatPrice(min)} - ${formatPrice(max)}`;
 }
 
-// Get estimated duration based on service and home size
+// Estimated wall-clock duration (a two-cleaner team works ~2x faster than the
+// man-hour figure). Derived from the same hours that drive price.
 export function getEstimatedDuration(
   serviceType: ServiceType,
   bedrooms: BedroomCount
 ): string {
-  const durations: Record<ServiceType, Record<BedroomCount, string>> = {
-    regular: {
-      studio: "1-1.5 hours",
-      "1": "1.5-2 hours",
-      "2": "2-2.5 hours",
-      "3": "2.5-3.5 hours",
-      "4": "3-4 hours",
-      "5+": "4-5 hours",
-    },
-    deep: {
-      studio: "2-2.5 hours",
-      "1": "2.5-3 hours",
-      "2": "3-4 hours",
-      "3": "3.5-5 hours",
-      "4": "4-6 hours",
-      "5+": "5-7 hours",
-    },
-    move_out: {
-      studio: "2-3 hours",
-      "1": "3-4 hours",
-      "2": "4-5 hours",
-      "3": "5-6 hours",
-      "4": "5-7 hours",
-      "5+": "6-8 hours",
-    },
-  };
-
-  return durations[serviceType][bedrooms];
+  const manHours = baseManHours[serviceType][bedrooms];
+  const lo = Math.max(1, Math.floor(manHours / 2));
+  const hi = Math.ceil(manHours / 2) + 1;
+  return `${lo}-${hi} hours`;
 }
 
 // What's included by service type

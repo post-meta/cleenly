@@ -11,7 +11,7 @@ import {
   StepContact,
   StepConfirmation,
 } from "./steps";
-import { calculateFirstVisitPrice, getEstimatedDuration } from "@/lib/pricing";
+import { calculateFirstVisitPrice } from "@/lib/pricing";
 import { StickyPriceFooter } from "./sticky-price-footer";
 import type {
   Addon,
@@ -263,13 +263,6 @@ export function BookingWizard({
   const liveEstimate = liveFirstVisit ? liveFirstVisit.firstVisit : null;
   const liveTotalMin = liveEstimate ? liveEstimate.min + liveEstimate.addonsTotal : 0;
   const liveTotalMax = liveEstimate ? liveEstimate.max + liveEstimate.addonsTotal : 0;
-  const liveDuration = canEstimate
-    ? getEstimatedDuration(
-        // First regular visit is a deep clean — show the deep duration.
-        liveFirstVisit?.firstVisitIsDeep ? "deep" : (formData.service_type as ServiceType),
-        formData.bedrooms!
-      )
-    : "";
   const isContactStep = step === 5;
 
   return (
@@ -340,7 +333,6 @@ export function BookingWizard({
         <StickyPriceFooter
           priceMin={liveTotalMin}
           priceMax={liveTotalMax}
-          duration={liveDuration}
           serviceName={SERVICE_LABEL[formData.service_type as ServiceType]}
           onContinue={isContactStep ? handleSubmit : goNext}
           isFinalStep={isContactStep}

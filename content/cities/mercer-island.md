@@ -6,15 +6,15 @@ House cleaning in Mercer Island, Washington. We serve waterfront estates, establ
 
 ## Regular Cleaning
 
-Regular cleaning in Mercer Island costs $120-$250 for most homes. We clean waterfront estates, interior mid-century homes, and newer luxury builds. Mercer Island deals with waterfront humidity and salt air near the shores, older homes with detailed features, and high expectations from homeowners who take pride in their homes. Our regular cleaning maintains that standard. Serving North End, South End, Town Center, and all island neighborhoods.
+Regular cleaning in Mercer Island keeps most homes maintained. We clean waterfront estates, interior mid-century homes, and newer luxury builds. Mercer Island deals with waterfront humidity and salt air near the shores, older homes with detailed features, and high expectations from homeowners who take pride in their homes. Our regular cleaning maintains that standard. Serving North End, South End, Town Center, and all island neighborhoods. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Mercer Island costs $180-$350 for most homes. We get inside appliances, into baseboards, detailed millwork, and everywhere that humidity and dust accumulate. Mercer Island homes often have original hardwood and intricate built-ins that need careful attention. Executives who expect precision and established families with high-maintenance homes book deep cleaning when everything needs to be perfect.
+Deep cleaning in Mercer Island resets a home top to bottom. We get inside appliances, into baseboards, detailed millwork, and everywhere that humidity and dust accumulate. Mercer Island homes often have original hardwood and intricate built-ins that need careful attention. Executives who expect precision and established families with high-maintenance homes book deep cleaning when everything needs to be perfect. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Mercer Island costs $250-$500 depending on home size. We clean to the highest standards — inside cabinets, appliances, closets, and detailed work on finishes that matter. Mercer Island sellers and landlords expect perfection. We deliver it. Serving all Mercer Island.
+Move-out cleaning in Mercer Island is built to pass the inspection. We clean to the highest standards — inside cabinets, appliances, closets, and detailed work on finishes that matter. Mercer Island sellers and landlords expect perfection. We deliver it. Serving all Mercer Island. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

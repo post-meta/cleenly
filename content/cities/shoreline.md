@@ -6,15 +6,15 @@ House cleaning in Shoreline, Washington. We serve mid-century ramblers throughou
 
 ## Regular Cleaning
 
-Regular cleaning in Shoreline costs $100-$190 for most homes. We clean mid-century ramblers, newer townhomes, and waterfront homes near Richmond Beach. Shoreline deals with older homes with original features that need careful cleaning, moss and moisture from tree cover, and tight lots with limited parking. Our regular cleaning handles it. Serving Richmond Beach, Ridgecrest, Echo Lake, Innis Arden, and Hillwood.
+Regular cleaning in Shoreline keeps most homes maintained. We clean mid-century ramblers, newer townhomes, and waterfront homes near Richmond Beach. Shoreline deals with older homes with original features that need careful cleaning, moss and moisture from tree cover, and tight lots with limited parking. Our regular cleaning handles it. Serving Richmond Beach, Ridgecrest, Echo Lake, Innis Arden, and Hillwood. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
 
 ## Deep Cleaning
 
-Deep cleaning in Shoreline costs $150-$290 for most homes. We get inside appliances, into baseboards, and everywhere that moisture and dust accumulate in these older homes. Shoreline has beautiful 1960s hardwood and tile — we use appropriate products and techniques. Seattle workers who wanted more space and families with kids in Shoreline schools book deep cleaning when things need a reset.
+Deep cleaning in Shoreline resets a home top to bottom. We get inside appliances, into baseboards, and everywhere that moisture and dust accumulate in these older homes. Shoreline has beautiful 1960s hardwood and tile — we use appropriate products and techniques. Seattle workers who wanted more space and families with kids in Shoreline schools book deep cleaning when things need a reset. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Shoreline costs $200-$380 depending on home size. We clean to landlord inspection standards — inside cabinets, appliances, closets, and detailed work on older finishes. Serving all Shoreline neighborhoods.
+Move-out cleaning in Shoreline is built to pass the inspection. We clean to landlord inspection standards — inside cabinets, appliances, closets, and detailed work on older finishes. Serving all Shoreline neighborhoods. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
 
 ## Why Choose
 

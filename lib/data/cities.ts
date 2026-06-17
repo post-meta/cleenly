@@ -19,16 +19,13 @@ export interface CityData {
     indexable?: boolean;
 }
 
-// Indexable cities — keep this list in sync with content/cities/<slug>.md depth.
-// Adding a city here without bespoke MD content will reintroduce thin-content
-// duplicates in GSC. See cleenly.md → Recent Sessions → 2026-05-23 SEO triage.
-const INDEXABLE_CITY_SLUGS = new Set([
-    'seattle',
-    'bellevue',
-    'kirkland',
-    'tacoma',
-    'edmonds',
-]);
+// Indexability — ALL cities are indexable (2026-06-14, data-driven reversal of
+// the 2026-05-23 noindex experiment). GSC Search Analytics showed the supposedly
+// "thin" non-bespoke cities were in fact indexed AND ranking top-10 for long-tail
+// local queries (e.g. /renton/move-in-cleaning pos 3, /everett/deep-cleaning pos 9)
+// — they produce essentially ALL of the site's organic clicks. noindex would have
+// removed that traffic once Google recrawled. We keep every city indexed and
+// deepen content over time rather than hiding pages that already rank.
 
 export const cities: CityData[] = [
     // === SEATTLE ===
@@ -367,19 +364,18 @@ export const cities: CityData[] = [
 export const getCityBySlug = (slug: string): CityData | undefined => {
     const city = cities.find(c => c.slug === slug);
     if (!city) return undefined;
-    return { ...city, indexable: INDEXABLE_CITY_SLUGS.has(city.slug) };
+    return { ...city, indexable: true };
 };
 
 export const getAllCitySlugs = (): string[] => {
     return cities.map(c => c.slug);
 };
 
-export const isCityIndexable = (slug: string): boolean => {
-    return INDEXABLE_CITY_SLUGS.has(slug);
+// All cities are indexable — see the note above.
+export const isCityIndexable = (_slug: string): boolean => {
+    return true;
 };
 
 export const getIndexableCities = (): CityData[] => {
-    return cities
-        .filter(c => INDEXABLE_CITY_SLUGS.has(c.slug))
-        .map(c => ({ ...c, indexable: true }));
+    return cities.map(c => ({ ...c, indexable: true }));
 };

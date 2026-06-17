@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { NAV_LINKS, PHONE_DISPLAY, PHONE_TEL_HREF } from "@/lib/constants";
-import { Menu, X, Phone } from "lucide-react";
+import { NAV_LINKS, PHONE_DISPLAY, PHONE_SMS_HREF } from "@/lib/constants";
+import { Menu, X, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { useSession, signOut } from "next-auth/react";
@@ -36,11 +36,11 @@ export function Header() {
           ))}
 
           <a
-            href={PHONE_TEL_HREF}
+            href={PHONE_SMS_HREF}
             className="flex items-center gap-1.5 text-[14px] font-medium text-foreground no-underline hover:text-accent transition-colors"
           >
-            <Phone className="h-4 w-4" />
-            {PHONE_DISPLAY}
+            <MessageSquare className="h-4 w-4" />
+            Text {PHONE_DISPLAY}
           </a>
 
           {!isLoading && (
@@ -122,12 +122,12 @@ export function Header() {
             ))}
 
             <a
-              href={PHONE_TEL_HREF}
+              href={PHONE_SMS_HREF}
               className="flex items-center gap-2 text-[18px] font-medium text-foreground no-underline hover:text-accent transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              <Phone className="h-5 w-5" />
-              {PHONE_DISPLAY}
+              <MessageSquare className="h-5 w-5" />
+              Text {PHONE_DISPLAY}
             </a>
 
             <div className="mt-2 flex flex-col gap-5">

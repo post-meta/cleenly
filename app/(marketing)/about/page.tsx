@@ -229,14 +229,14 @@ export default function AboutPage() {
             <div className="mt-8 space-y-8">
               <div>
                 <h3 className="text-lg font-semibold">
-                  Price on screen = price you pay
+                  An honest estimate, confirmed before you&apos;re charged
                 </h3>
                 <p className="mt-2 text-muted-foreground">
-                  When you see $200, you pay $200. Not $200 &quot;starting
-                  at&quot; that becomes $280 after mysterious add-ons. If
-                  something changes the price (you want inside the oven cleaned,
-                  home is bigger than expected), we tell you before you&apos;re
-                  charged.
+                  You see a real price range before you book — based on your
+                  home, not a teaser. The final price is billed by the hour and
+                  we confirm it with you before charging. If something changes it
+                  (you want inside the oven cleaned, the home is bigger than
+                  described), we tell you before, never after.
                 </p>
               </div>
 

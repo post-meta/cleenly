@@ -5,12 +5,9 @@ import { Button } from '@/components/ui/button';
 import { createBookingInvoice } from '@/app/actions/stripe';
 import { Loader2, ExternalLink } from 'lucide-react';
 
-// Hourly rates in DOLLARS, mirrored from lib/pricing.ts HOURLY_RATE_CENTS.
-const HOURLY_RATE: Record<string, number> = {
-    regular: 50,
-    deep: 60,
-    move_out: 60,
-};
+// Single market-calibrated rate per cleaner-hour (mirrors lib/pricing.ts).
+// Price varies by hours, not by service.
+const RATE_PER_CLEANER_HOUR = 75;
 
 export function InvoiceCustomerForm({
     bookingId,
@@ -24,7 +21,7 @@ export function InvoiceCustomerForm({
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<{ url?: string | null; error?: string } | null>(null);
 
-    const rate = HOURLY_RATE[serviceType] ?? 50;
+    const rate = RATE_PER_CLEANER_HOUR;
     const hoursNum = parseFloat(hours);
     const computed = !isNaN(hoursNum) ? hoursNum * rate : 0;
     const overrideNum = parseFloat(override);
@@ -57,13 +54,13 @@ export function InvoiceCustomerForm({
                 <h3 className="font-medium text-sm">Bill customer (hourly)</h3>
                 <p className="text-xs text-muted-foreground mt-1">
                     {serviceType === 'regular' ? 'Regular' : serviceType === 'deep' ? 'Deep' : 'Move-out'} ·
-                    ${rate}/hr. Enter hours worked — Stripe emails the customer a hosted invoice to pay.
+                    ${rate}/cleaner-hour. Enter total cleaner-hours (e.g. 2 cleaners × 3h = 6) — Stripe emails the customer a hosted invoice to pay.
                 </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-xs font-medium mb-1">Hours worked</label>
+                    <label className="block text-xs font-medium mb-1">Cleaner-hours (total)</label>
                     <input
                         type="number"
                         step="0.25"

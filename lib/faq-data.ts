@@ -17,32 +17,32 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How much does house cleaning cost in Seattle?",
         answer:
-          "House cleaning in Seattle costs $165-$750 depending on home size and cleaning type. Regular cleaning for a 2-3 bedroom home runs $200-$240. Deep cleaning costs $335-$400. Move-out cleaning ranges from $420-$520. CLEENLY shows you the exact price before you book — no surprises.",
+          "It depends on home size, condition, and cleaning type. A first clean (priced as a deep clean) runs about $290–350 for a 1-bedroom, $440–530 for a 2-bedroom, and $545–650 for a 3-bedroom. Recurring visits from your second clean on are lighter — roughly $185–260 for most homes. You see an upfront estimate range when you book; the final price is based on actual time, billed at $75 per cleaner-hour ($185 minimum), and we confirm it with you before charging.",
       },
       {
         question: "How much does deep cleaning cost?",
         answer:
-          "Deep cleaning in Seattle costs $250-$590 for most homes. A 2-bedroom apartment typically costs $335-$380. A 3-bedroom house runs $400-$450. Larger homes (4+ bedrooms) cost $480-$590. Price includes inside appliances, baseboards, and detailed cleaning of all surfaces.",
+          "Deep cleaning estimates run about $290–350 for a 1-bedroom, $440–530 for a 2-bedroom, $545–650 for a 3-bedroom, and $685–825 for a 4-bedroom typical home in average condition. A first clean is priced as a deep clean. These are estimate ranges — the final price is based on actual time at $75 per cleaner-hour ($185 minimum), confirmed before charging. Deep cleaning covers inside appliances, baseboards, and detailed cleaning of all surfaces.",
       },
       {
         question: "How much is move-out cleaning in Seattle?",
         answer:
-          "Move-out cleaning in Seattle costs $320-$680 depending on home size. A 1-bedroom apartment runs $320-$380. A 2-3 bedroom home costs $420-$520. This includes cleaning to landlord inspection standards — inside cabinets, appliances, and all surfaces to help you get your deposit back.",
+          "Move-out estimates run about $380–455 for a 1-bedroom, $585–705 for a 2-bedroom, $740–885 for a 3-bedroom, and $815–975 for a 4-bedroom. This covers cleaning to landlord inspection standards — inside cabinets, appliances, and all surfaces to help you get your deposit back. The estimate is a range; the final price is based on actual time at $75 per cleaner-hour ($185 minimum), confirmed with you before charging.",
       },
       {
         question: "Do you charge by the hour or flat rate?",
         answer:
-          "CLEENLY uses flat-rate pricing based on your home size and cleaning type. You see the exact price before booking. No hourly surprises — the price shown is the price you pay. This makes it easier to budget and eliminates uncertainty about final cost.",
+          "By the hour. We give you an upfront estimate range based on your home size and cleaning type, then bill the final price on actual cleaner-hours worked — $75 per cleaner-hour, with a $185 minimum job. A standard visit is a two-cleaner team. The estimate is usually close to the final, and we confirm the final price with you before charging — never any surprise total after the fact.",
       },
       {
         question: "Are there any hidden fees?",
         answer:
-          "No hidden fees. The price you see at booking is the price you pay. We may suggest optional add-ons (like inside refrigerator or oven cleaning) but you decide what's included. There are no surprise charges, service fees, or taxes added later.",
+          "No hidden fees. You get an upfront estimate range, and the final price is based on actual cleaner-hours at $75 per cleaner-hour ($185 minimum) — we confirm it with you before charging. We may suggest optional add-ons (like inside refrigerator or oven cleaning) but you decide what's included. No surprise service fees or taxes added later.",
       },
       {
         question: "Do you offer discounts for recurring cleanings?",
         answer:
-          "Yes. Weekly and bi-weekly visits cost less than one-time cleanings — your home stays maintained, so each visit takes less time. Mention your preferred frequency at booking and we'll confirm the recurring rate along with your first visit.",
+          "Yes. Weekly and bi-weekly visits cost less than a first clean — your home stays maintained, so each visit takes less time. From your second visit on, most homes run about $185–260 per visit. Mention your preferred frequency at booking and we'll confirm the recurring estimate along with your first visit.",
       },
       {
         question: "How much should I tip my house cleaner?",
@@ -78,7 +78,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Do you clean inside the refrigerator and oven?",
         answer:
-          "Inside refrigerator and oven are included in deep cleaning and move-out cleaning. For regular cleaning, they're available as add-ons ($20-$25 each). If you want these included, select the add-on during booking or request a deep cleaning which covers them automatically.",
+          "Inside refrigerator and oven are included in deep cleaning and move-out cleaning. For regular cleaning, they're available as add-ons (inside refrigerator +$25, inside oven +$20). If you want these included, select the add-on during booking or request a deep cleaning which covers them automatically.",
       },
       {
         question: "Do you do laundry?",
