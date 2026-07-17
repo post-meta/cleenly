@@ -8,9 +8,11 @@ import { InvoiceCustomerForm } from '@/components/admin/invoice-customer-form';
 export default async function BookingDetailPage({
     params,
 }: {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }) {
     const supabase = await createClient();
+
+    const { id } = await params;
 
     const { data: booking } = await supabase
         .from('bookings')
@@ -21,7 +23,7 @@ export default async function BookingDetailPage({
       payments(*),
       payouts:cleaner_payouts(*)
     `)
-        .eq('id', params.id)
+        .eq('id', id)
         .single();
 
     if (!booking) notFound();

@@ -7,12 +7,13 @@ import { BookingFilters } from '@/components/dashboard/booking-filters';
 export default async function BookingsPage({
     searchParams,
 }: {
-    searchParams: { status?: string };
+    searchParams: Promise<{ status?: string }>;
 }) {
     const session = await auth();
     if (!session) redirect('/login');
 
-    const status = searchParams.status || 'upcoming';
+    const { status: statusParam } = await searchParams;
+    const status = statusParam || 'upcoming';
 
     // Build query based on status
     let query = supabase

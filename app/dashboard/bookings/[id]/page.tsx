@@ -29,15 +29,17 @@ function StatusBadge({ status }: { status: string }) {
 export default async function BookingDetailsPage({
     params,
 }: {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }) {
     const session = await auth();
     if (!session) redirect('/login');
 
+    const { id } = await params;
+
     const { data: booking } = await supabase
         .from('bookings')
         .select('*, addresses(*), cleaners!assigned_cleaner_id(*), payments(*), reviews(*)')
-        .eq('id', params.id)
+        .eq('id', id)
         .eq('user_id', session.user?.id)
         .single();
 

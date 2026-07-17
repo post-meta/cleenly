@@ -5,15 +5,17 @@ import { AddressForm } from '@/components/dashboard/address-form';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 
-export default async function EditAddressPage({ params }: { params: { id: string } }) {
+export default async function EditAddressPage({ params }: { params: Promise<{ id: string }> }) {
     const session = await auth();
     if (!session) redirect('/login');
     const uid = (session.user as { id?: string } | undefined)?.id;
 
+    const { id } = await params;
+
     const { data: address } = await supabase
         .from('addresses')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .eq('user_id', uid)
         .single();
 
