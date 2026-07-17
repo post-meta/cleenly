@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client'; // Keep if used elsewhere, but not used now in this component
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader2 } from 'lucide-react';
@@ -10,12 +9,11 @@ import { Loader2 } from 'lucide-react';
 import { saveAddressAction } from '@/app/dashboard/addresses/actions';
 
 interface AddressFormProps {
-    userId: string;
     initialData?: any;
     onSuccess?: () => void;
 }
 
-export function AddressForm({ userId, initialData, onSuccess }: AddressFormProps) {
+export function AddressForm({ initialData, onSuccess }: AddressFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -43,7 +41,7 @@ export function AddressForm({ userId, initialData, onSuccess }: AddressFormProps
         setError('');
 
         try {
-            const result = await saveAddressAction(userId, formData, initialData?.id);
+            const result = await saveAddressAction(formData, initialData?.id);
 
             if (result.error) {
                 setError(result.error);

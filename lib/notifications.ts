@@ -287,6 +287,60 @@ export async function notifyCustomerBookingReceived(b: BookingNotification) {
   }
 }
 
+type CancellationNotification = {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string | null;
+  service_type: string;
+  scheduled_date?: string | null;
+  preferred_date?: string | null;
+  preferred_time?: string | null;
+};
+
+export async function notifyBookingCancelled(b: CancellationNotification) {
+  const when =
+    b.scheduled_date || b.preferred_date
+      ? `${b.scheduled_date || b.preferred_date}${b.preferred_time ? ` (${b.preferred_time})` : ""}`
+      : "Not scheduled";
+
+  const tg = [
+    `<b>❌ Booking cancelled by customer</b>`,
+    ``,
+    `<b>${b.name}</b>`,
+    b.phone ? `📞 ${b.phone}` : "",
+    `✉️ ${b.email}`,
+    ``,
+    `<b>Service:</b> ${b.service_type}`,
+    `<b>When:</b> ${when}`,
+    ``,
+    `<a href="${SITE_URL}/admin/bookings/${b.id}">Open in admin →</a>`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const emailHtml = `
+    <div style="font-family: -apple-system, sans-serif; max-width: 600px;">
+      <h2 style="margin: 0 0 16px;">Booking cancelled by customer</h2>
+      <p style="margin: 0 0 8px;"><strong>${b.name}</strong> — ${b.email}</p>
+      <p style="margin: 0 0 4px;">Service: ${b.service_type}</p>
+      <p style="margin: 0 0 16px;">When: ${when}</p>
+      <p style="margin: 24px 0 0;">
+        <a href="${SITE_URL}/admin/bookings/${b.id}" style="background: #0a0a0a; color: #fff; padding: 10px 16px; text-decoration: none; border-radius: 4px;">Open in admin</a>
+      </p>
+    </div>
+  `;
+
+  const smsLine = `Cancelled: ${b.name}, ${b.service_type}, ${when}`;
+  const adminSms = ADMIN_SMS_RECIPIENTS.map((to) => sendSms(to, smsLine));
+
+  await Promise.allSettled([
+    sendTelegram(tg),
+    sendAdminEmail(`Booking cancelled: ${b.name}`, emailHtml),
+    ...adminSms,
+  ]);
+}
+
 export async function notifyNewApplication(a: ApplicationNotification) {
   const tg = [
     `<b>New cleaner application</b>`,

@@ -35,7 +35,7 @@ export default async function EditAddressPage({ params }: { params: { id: string
             </div>
 
             <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
-                <AddressForm userId={uid!} initialData={address} />
+                <AddressForm initialData={address} />
             </div>
         </div>
     );

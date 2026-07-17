@@ -43,25 +43,41 @@ export async function setDefaultAddress(addressId: string): Promise<{ success: t
     return { success: true };
 }
 
-export async function saveAddressAction(userId: string, formData: any, addressId?: string) {
+export async function saveAddressAction(formData: any, addressId?: string) {
     try {
-        if (formData.is_default) {
+        // Identity comes from the session — never from the client.
+        const uid = await currentUserId();
+        if (!uid) return { error: 'You are not signed in' };
+
+        if (addressId && !(await ownsAddress(addressId, uid))) {
+            return { error: 'Address not found' };
+        }
+
+        // Whitelist columns — the raw client object must not reach the DB.
+        const payload = {
+            label: formData.label ?? '',
+            street_address: formData.street_address ?? '',
+            unit: formData.unit || null,
+            city: formData.city ?? '',
+            state: formData.state ?? 'WA',
+            zip_code: formData.zip_code ?? '',
+            special_instructions: formData.special_instructions || null,
+            is_default: !!formData.is_default,
+            user_id: uid,
+        };
+
+        if (payload.is_default) {
             // Reset other default addresses for this user
             const { error: resetError } = await supabase
                 .from('addresses')
                 .update({ is_default: false })
-                .eq('user_id', userId);
+                .eq('user_id', uid);
 
             if (resetError) {
                 console.error('Error resetting default addresses:', resetError);
                 // We continue anyway, the current one will be set as default
             }
         }
-
-        const payload = {
-            ...formData,
-            user_id: userId,
-        };
 
         let result;
         if (addressId) {

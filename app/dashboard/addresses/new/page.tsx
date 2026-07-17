@@ -26,7 +26,7 @@ export default async function NewAddressPage() {
             </div>
 
             <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
-                <AddressForm userId={session.user?.id!} />
+                <AddressForm />
             </div>
         </div>
     );
