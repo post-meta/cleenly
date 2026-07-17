@@ -25,6 +25,12 @@ import type {
 const MAX_TOOL_ITERATIONS = 4;
 const MAX_TURNS = 60; // hard cap on history growth for very long calls
 
+// Hard wall-clock cap: hang up runaway or abusive calls so a caller can't hold
+// the (paid) ConversationRelay line open indefinitely. Twilio bills per minute.
+const MAX_CALL_MS = 7 * 60 * 1000;
+const TIME_CAP_MESSAGE =
+  "I need to wrap up this call now. Please text this number or email hello at cleenly dot app and we'll be glad to help you further. Goodbye.";
+
 const SPOKEN_ERROR =
   "Sorry, I'm having trouble right now. Please text us at this number or email hello at cleenly dot app, and we'll get back to you shortly.";
 
@@ -51,6 +57,8 @@ class RelaySession {
   private startedAt = Date.now();
   private abort: AbortController | null = null;
   private transcriptSent = false;
+  private ended = false;
+  private durationTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private readonly socket: WebSocket,
@@ -80,11 +88,22 @@ class RelaySession {
         this.callerNumber = msg.from;
         this.callSid = msg.callSid;
         this.startedAt = Date.now();
+        this.durationTimer = setTimeout(
+          () => this.endCall("duration_cap", TIME_CAP_MESSAGE),
+          MAX_CALL_MS,
+        );
         break;
 
       case "prompt": {
+        if (this.ended) break;
         // Ignore partial transcriptions; act on the final utterance only.
         if (msg.last === false) break;
+        // Belt-and-suspenders time cap for active callers, in case the timer
+        // above didn't fire (Workers can evict an idle isolate).
+        if (Date.now() - this.startedAt >= MAX_CALL_MS) {
+          this.endCall("duration_cap", TIME_CAP_MESSAGE);
+          break;
+        }
         const text = (msg.voicePrompt ?? "").trim();
         if (!text) break;
         this.transcript.push({ role: "caller", text });
@@ -114,6 +133,7 @@ class RelaySession {
 
   /** One caller utterance → one (possibly multi-step, tool-using) agent turn. */
   private async runTurn(callerText: string): Promise<void> {
+    if (this.ended) return;
     // A new utterance supersedes any in-flight generation.
     this.abort?.abort();
     const abort = new AbortController();
@@ -152,13 +172,27 @@ class RelaySession {
         const toolUses = content.filter((b): b is ToolUseBlock => b.type === "tool_use");
         if (toolUses.length === 0) break;
 
+        const endReq = toolUses.find((t) => t.name === "end_call");
         const results: UserContentBlock[] = [];
         for (const tu of toolUses) {
+          if (tu.name === "end_call") {
+            results.push({ type: "tool_result", tool_use_id: tu.id, content: "Call will end now." });
+            continue;
+          }
           const { result, isError } = await runTool(this.env, tu.name, tu.input);
           this.transcript.push({ role: "system", text: `[tool ${tu.name} → ${result.slice(0, 300)}]` });
           results.push({ type: "tool_result", tool_use_id: tu.id, content: result, is_error: isError });
         }
         this.messages.push({ role: "user", content: results });
+
+        if (endReq) {
+          // The model already streamed any closing line this turn; flush the
+          // end-of-turn marker so TTS plays it, then hang up.
+          const reason = typeof endReq.input.reason === "string" ? endReq.input.reason : "agent_ended";
+          this.sendToken("", true);
+          this.endCall(reason);
+          return;
+        }
       }
 
       this.sendToken("", true); // end of agent turn — Twilio resumes listening
@@ -186,11 +220,40 @@ class RelaySession {
     }
   }
 
+  /** Speak an optional closing line, then hang up via ConversationRelay `end`. */
+  private endCall(reason: string, spoken?: string): void {
+    if (this.ended) return;
+    this.ended = true;
+    if (this.durationTimer) {
+      clearTimeout(this.durationTimer);
+      this.durationTimer = null;
+    }
+    this.abort?.abort();
+    if (spoken) {
+      this.transcript.push({ role: "agent", text: spoken });
+      this.sendToken(spoken, false);
+      this.sendToken("", true);
+    }
+    this.transcript.push({ role: "system", text: `[call ended: ${reason}]` });
+    // Give TTS a few seconds to finish any closing line before cutting the line.
+    setTimeout(() => {
+      try {
+        this.socket.send(JSON.stringify({ type: "end", handoffData: JSON.stringify({ reason }) }));
+      } catch {
+        // Socket already closing — nothing to do.
+      }
+    }, 5000);
+  }
+
   /** Call ended — ship the full transcript to Eugene. */
   private onClose(): void {
     if (this.transcriptSent) return;
     this.transcriptSent = true;
     this.abort?.abort();
+    if (this.durationTimer) {
+      clearTimeout(this.durationTimer);
+      this.durationTimer = null;
+    }
 
     const durationSec = Math.round((Date.now() - this.startedAt) / 1000);
     const lines = this.transcript.map((e) => {

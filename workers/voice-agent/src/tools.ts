@@ -40,6 +40,25 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
       required: ["summary", "callback_number"],
     },
   },
+  {
+    name: "end_call",
+    description:
+      "Hang up the phone call. Use this when: the caller is abusive, threatening, or trolling; " +
+      "the caller stays off-topic after you have redirected them once; the call is an obvious " +
+      "robocall, spam, or dead air with no real request; or the conversation is genuinely finished " +
+      "(the caller said goodbye or 'that's all'). Say one short closing line BEFORE calling this. " +
+      "Never use it while the caller still has a real cleaning question.",
+    input_schema: {
+      type: "object",
+      properties: {
+        reason: {
+          type: "string",
+          description: "Short reason, one of: done, off_topic, abuse, spam.",
+        },
+      },
+      required: ["reason"],
+    },
+  },
 ];
 
 /** Keep only digits, then take the last 10 (US numbers). */
@@ -137,6 +156,10 @@ export async function runTool(
           typeof input.callback_number === "string" ? input.callback_number : "(unknown)";
         return { result: await escalate(env, summary, callback), isError: false };
       }
+      case "end_call":
+        // Handled by the relay session (it hangs up); this is a defensive
+        // fallback so a stray call never surfaces as an "unknown tool".
+        return { result: "Ending the call.", isError: false };
       default:
         return { result: `Unknown tool: ${name}`, isError: true };
     }
