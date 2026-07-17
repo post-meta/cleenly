@@ -24,7 +24,7 @@ const pageSchema = {
   description:
     "CLEENLY terms of service, cancellation policy, and booking rules",
   url: "https://cleenly.app/terms",
-  dateModified: "2025-12-01",
+  dateModified: "2026-07-16",
 };
 
 const breadcrumbSchema = {
@@ -90,7 +90,7 @@ export default function TermsOfServicePage() {
           <div className="mb-8">
             <h1 className="text-3xl font-bold md:text-4xl">Terms of Service</h1>
             <p className="mt-4 text-sm text-muted-foreground">
-              Last Updated: December 2025
+              Last Updated: July 2026
             </p>
           </div>
 
@@ -258,11 +258,12 @@ export default function TermsOfServicePage() {
                   provide
                 </li>
                 <li>
-                  You confirm the booking and provide payment information
+                  You submit the request — no card or payment information is
+                  required to book
                 </li>
-                <li>CLEENLY matches you with an available cleaner</li>
                 <li>
-                  You receive confirmation with cleaner details and final price
+                  We review your request and confirm your time by email, usually
+                  within a couple of hours
                 </li>
               </ol>
 
@@ -306,7 +307,7 @@ export default function TermsOfServicePage() {
                     More than 24 hours before appointment
                   </p>
                   <ul className="mt-2 text-sm text-muted-foreground">
-                    <li>✓ Full refund</li>
+                    <li>✓ No charge — nothing is billed</li>
                     <li>✓ No cancellation fee</li>
                     <li>✓ Cancel online or email hello@cleenly.app</li>
                   </ul>
@@ -317,8 +318,7 @@ export default function TermsOfServicePage() {
                     12-24 hours before appointment
                   </p>
                   <ul className="mt-2 text-sm text-muted-foreground">
-                    <li>• 50% cancellation fee may apply</li>
-                    <li>• Remaining 50% refunded</li>
+                    <li>• A cancellation fee of up to 50% of the estimate may be invoiced</li>
                     <li>• This compensates the cleaner who reserved time</li>
                   </ul>
                 </div>
@@ -328,8 +328,7 @@ export default function TermsOfServicePage() {
                     Less than 12 hours before appointment
                   </p>
                   <ul className="mt-2 text-sm text-muted-foreground">
-                    <li>• Full charge may apply</li>
-                    <li>• No refund</li>
+                    <li>• Up to the full estimate may be invoiced</li>
                     <li>• Cleaner has already committed their time</li>
                   </ul>
                 </div>
@@ -337,15 +336,14 @@ export default function TermsOfServicePage() {
                 <div className="rounded-lg border border-error/50 bg-error/10 p-4">
                   <p className="font-medium text-error">No-Show</p>
                   <ul className="mt-2 text-sm text-muted-foreground">
-                    <li>• Full charge applies</li>
-                    <li>• No refund</li>
+                    <li>• The full estimate may be invoiced</li>
                   </ul>
                 </div>
               </div>
 
               <h3 className="mt-6 font-medium">How to Cancel</h3>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
-                <li>Use the cancellation link in your confirmation email</li>
+                <li>Log into your account and cancel from your bookings</li>
                 <li>
                   Email{" "}
                   <a
@@ -356,7 +354,7 @@ export default function TermsOfServicePage() {
                   </a>{" "}
                   with your booking reference
                 </li>
-                <li>Log into your account and cancel from booking history</li>
+                <li>Text us at (206) 641-4739</li>
               </ul>
 
               <h3 className="mt-6 font-medium">Exceptions</h3>
@@ -370,9 +368,9 @@ export default function TermsOfServicePage() {
               <h3 className="mt-6 font-medium">CLEENLY Cancellations</h3>
               <p className="mt-2 text-muted-foreground">
                 In rare cases, CLEENLY may need to cancel your booking (cleaner
-                illness, emergency, etc.). If this happens, you receive a full
-                refund, we will attempt to reschedule or find an alternative
-                cleaner, and we will notify you as soon as possible.
+                illness, emergency, etc.). If this happens, you are not charged
+                anything, we will attempt to reschedule, and we will notify you
+                as soon as possible.
               </p>
             </section>
 
@@ -410,32 +408,29 @@ export default function TermsOfServicePage() {
               </h2>
               <ul className="mt-4 space-y-4 text-muted-foreground">
                 <li>
-                  <strong className="text-foreground">Payment Method:</strong> We
-                  accept major credit cards, debit cards, Apple Pay, and Google
-                  Pay. Payment is processed securely through Stripe.
+                  <strong className="text-foreground">Pay after the clean:</strong>{" "}
+                  No card is required to book. After your cleaning is completed,
+                  we email you an invoice. Payment is processed securely through
+                  Stripe and accepts major credit and debit cards.
                 </li>
                 <li>
-                  <strong className="text-foreground">Authorization:</strong>{" "}
-                  Your payment method is authorized when you book. You are not
-                  charged until after the cleaning is completed.
+                  <strong className="text-foreground">How the price is set:</strong>{" "}
+                  Your booking shows an estimate range. The final invoice is based
+                  on actual cleaner-hours worked at $75 per cleaner-hour ($185
+                  minimum). It will not exceed the top of your estimate range
+                  without your approval — if your home needs more time than
+                  described, we contact you before we proceed.
                 </li>
                 <li>
-                  <strong className="text-foreground">Final Charge:</strong> The
-                  final charge is processed within 24 hours of service
-                  completion. It may differ from the estimate if service scope
-                  changed, home conditions required extra time, or you approved
-                  additional charges.
-                </li>
-                <li>
-                  <strong className="text-foreground">Declined Payment:</strong>{" "}
-                  If your payment method is declined, you must provide a valid
-                  alternative within 48 hours or your booking may be cancelled.
+                  <strong className="text-foreground">Payment is due:</strong>{" "}
+                  Invoices are due upon receipt. If an invoice remains unpaid
+                  after 7 days, we may follow up and pause future bookings until
+                  it is settled.
                 </li>
                 <li>
                   <strong className="text-foreground">Tips:</strong> Tips are
-                  optional but appreciated. You can tip in cash or through our
-                  website after service completion. 100% of tips go to the
-                  cleaner.
+                  optional but appreciated. Cash works best. 100% of tips go to
+                  the cleaner.
                 </li>
                 <li>
                   <strong className="text-foreground">Disputes:</strong> If you

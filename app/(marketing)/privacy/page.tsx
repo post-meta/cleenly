@@ -166,7 +166,7 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li>
                   <strong className="text-foreground">Communications:</strong>{" "}
-                  Messages you send us or your cleaner through our website
+                  Messages you send us through our website, email, or text
                 </li>
                 <li>
                   <strong className="text-foreground">Preferences:</strong>{" "}
@@ -248,8 +248,8 @@ export default function PrivacyPolicyPage() {
               <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
                   <strong className="text-foreground">Provide Services:</strong>{" "}
-                  Process bookings, match you with cleaners, facilitate cleaning
-                  appointments
+                  Process bookings, schedule your cleaning, and coordinate the
+                  visit
                 </li>
                 <li>
                   <strong className="text-foreground">Communicate:</strong> Send
