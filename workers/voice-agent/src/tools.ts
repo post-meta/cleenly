@@ -41,6 +41,25 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
     },
   },
   {
+    name: "send_booking_link",
+    description:
+      "Text the caller a link to the Cleenly booking page so they can see their estimate and book. " +
+      "Prefer this over reading the website address aloud: whenever the caller is interested in pricing, " +
+      "an estimate, or booking, offer to text them the link, and once they agree call this tool. " +
+      "Use the caller's own phone number from the call context unless they give a different one.",
+    input_schema: {
+      type: "object",
+      properties: {
+        phone: {
+          type: "string",
+          description:
+            "Phone number to text, any format. Default to the caller's number from the call context.",
+        },
+      },
+      required: ["phone"],
+    },
+  },
+  {
     name: "end_call",
     description:
       "Hang up the phone call. Use this when: the caller is abusive, threatening, or trolling; " +
@@ -127,6 +146,41 @@ async function lookupBooking(env: Env, phoneRaw: string): Promise<string> {
   });
 }
 
+const BOOKING_URL = "https://cleenly.app/book";
+const BOOKING_SMS_BODY =
+  `CLEENLY: Here's your link to see your cleaning estimate and pick a time — ${BOOKING_URL}. ` +
+  `Questions? Just reply. Reply STOP to opt out.`;
+
+/** Text the caller the booking link via the Twilio Messaging Service. */
+async function sendBookingLink(env: Env, phoneRaw: string): Promise<string> {
+  const last10 = normalizePhone(phoneRaw);
+  if (last10.length < 10) {
+    return "That number looks incomplete — ask the caller to confirm the number to text.";
+  }
+  const to = `+1${last10}`;
+
+  const url = `https://api.twilio.com/2010-04-01/Accounts/${env.TWILIO_ACCOUNT_SID}/Messages.json`;
+  const auth = btoa(`${env.TWILIO_ACCOUNT_SID}:${env.TWILIO_AUTH_TOKEN}`);
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${auth}`,
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      To: to,
+      MessagingServiceSid: env.TWILIO_MESSAGING_SERVICE_SID,
+      Body: BOOKING_SMS_BODY,
+    }),
+  });
+
+  if (!res.ok) {
+    console.error("Booking-link SMS failed:", res.status, await res.text().catch(() => ""));
+    return "Could not send the text right now. Offer to escalate to Eugene, or tell the caller they can also book at cleenly dot app slash book.";
+  }
+  return `Booking link texted to ${to}. Tell the caller: I just texted you the link — tap it to see your estimate and pick a time.`;
+}
+
 async function escalate(env: Env, summary: string, callbackNumber: string): Promise<string> {
   const ok = await sendTelegram(
     env,
@@ -149,6 +203,10 @@ export async function runTool(
       case "lookup_booking": {
         const phone = typeof input.phone === "string" ? input.phone : "";
         return { result: await lookupBooking(env, phone), isError: false };
+      }
+      case "send_booking_link": {
+        const phone = typeof input.phone === "string" ? input.phone : "";
+        return { result: await sendBookingLink(env, phone), isError: false };
       }
       case "escalate": {
         const summary = typeof input.summary === "string" ? input.summary : "(no summary)";

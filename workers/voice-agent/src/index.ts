@@ -7,6 +7,7 @@
  *   GET  /relay         ConversationRelay WebSocket (one socket per call)
  *   POST /connect-done  <Connect action> callback when the relay session ends
  *   POST /sms           Inbound SMS webhook → forward to Eugene in Telegram
+ *   GET  /ringback.wav  Ringback tone played by <Play> before the greeting
  *   GET  /health        Plain 200 for monitoring
  */
 import { handleRelayUpgrade } from "./relay";
@@ -15,6 +16,7 @@ import {
   connectRelayTwiml,
   fallbackTwiml,
   readFormParams,
+  ringbackResponse,
   twimlResponse,
   validateTwilioSignature,
 } from "./twilio";
@@ -35,6 +37,8 @@ export default {
         return handleSms(request, env, ctx, url);
       case "/health":
         return new Response("ok");
+      case "/ringback.wav":
+        return ringbackResponse();
       default:
         return new Response("Not found", { status: 404 });
     }

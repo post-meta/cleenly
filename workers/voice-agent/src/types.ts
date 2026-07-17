@@ -12,6 +12,10 @@ export interface Env {
   SUPABASE_URL: string;
   /** Supabase service-role key (server-side only, bypasses RLS). */
   SUPABASE_SERVICE_ROLE_KEY: string;
+  /** Twilio account SID — for the Messages REST API (booking-link SMS). */
+  TWILIO_ACCOUNT_SID: string;
+  /** Twilio Messaging Service SID (MG…) used as the SMS sender. */
+  TWILIO_MESSAGING_SERVICE_SID: string;
 }
 
 // ---------------------------------------------------------------------------
