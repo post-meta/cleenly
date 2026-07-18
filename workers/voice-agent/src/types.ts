@@ -16,6 +16,8 @@ export interface Env {
   TWILIO_ACCOUNT_SID: string;
   /** Twilio Messaging Service SID (MG…) used as the SMS sender. */
   TWILIO_MESSAGING_SERVICE_SID: string;
+  /** Resend API key (send-only) — for emailing the booking link. */
+  RESEND_API_KEY: string;
 }
 
 // ---------------------------------------------------------------------------

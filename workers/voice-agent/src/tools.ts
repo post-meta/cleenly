@@ -40,11 +40,11 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
       required: ["summary", "callback_number"],
     },
   },
-  // send_booking_link is DISABLED until the A2P 10DLC campaign is approved —
-  // outbound SMS is carrier-filtered (error 30034) before then, so the agent
-  // would promise a text that never arrives. The tool implementation and its
-  // runTool case remain below; re-add this definition + the prompt lines once
-  // A2P is live. Until then the agent reads the booking URL aloud instead.
+  // Booking-link delivery is DORMANT — the agent reads the URL aloud to new
+  // callers (product decision: wait for SMS). SMS (send_booking_link) is
+  // blocked by A2P 10DLC vetting (error 30034); email (email_booking_link)
+  // works but spoken emails transcribe poorly. Both implementations + their
+  // runTool cases stay below; re-enable SMS as the primary once A2P verifies.
   {
     name: "end_call",
     description:
@@ -167,6 +167,47 @@ async function sendBookingLink(env: Env, phoneRaw: string): Promise<string> {
   return `Booking link texted to ${to}. Tell the caller: I just texted you the link — tap it to see your estimate and pick a time.`;
 }
 
+const BOOKING_EMAIL_SUBJECT = "Your Cleenly booking link";
+
+function bookingEmailHtml(): string {
+  return `<div style="font-family:-apple-system,'Segoe UI',sans-serif;max-width:520px;margin:0 auto;color:#2D2826;padding:24px;">
+    <p style="font-size:16px;margin:0 0 16px;">Thanks for calling Cleenly!</p>
+    <p style="font-size:15px;margin:0 0 20px;">Here's your link to see your cleaning estimate and pick a time:</p>
+    <p style="margin:0 0 24px;"><a href="${BOOKING_URL}" style="background:#D97757;color:#FAFAF8;text-decoration:none;padding:12px 20px;border-radius:8px;font-size:15px;display:inline-block;">See my estimate &amp; book</a></p>
+    <p style="font-size:14px;color:#8C8073;margin:0;">Or open ${BOOKING_URL}. Questions? Reply here, or call or text (206) 641-4739.</p>
+  </div>`;
+}
+
+/** Email the caller the booking link via Resend. No A2P gate (unlike SMS). */
+async function sendBookingLinkEmail(env: Env, emailRaw: string): Promise<string> {
+  const email = emailRaw.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return "That email doesn't look complete — ask the caller to spell it out again, letter by letter.";
+  }
+  if (!env.RESEND_API_KEY) {
+    return "Email isn't configured right now. Read the booking address aloud instead: cleenly dot app slash book.";
+  }
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "CLEENLY <noreply@cleenly.app>",
+      to: [email],
+      reply_to: "hello@cleenly.app",
+      subject: BOOKING_EMAIL_SUBJECT,
+      html: bookingEmailHtml(),
+    }),
+  });
+  if (!res.ok) {
+    console.error("Booking-link email failed:", res.status, await res.text().catch(() => ""));
+    return "Could not send the email right now. Read the booking address aloud instead — cleenly dot app slash book — or offer to escalate to Eugene.";
+  }
+  return `Booking link emailed to ${email}. Tell the caller: I just emailed you the link — check your inbox, and your spam folder, for a message from Cleenly.`;
+}
+
 async function escalate(env: Env, summary: string, callbackNumber: string): Promise<string> {
   const ok = await sendTelegram(
     env,
@@ -193,6 +234,10 @@ export async function runTool(
       case "send_booking_link": {
         const phone = typeof input.phone === "string" ? input.phone : "";
         return { result: await sendBookingLink(env, phone), isError: false };
+      }
+      case "email_booking_link": {
+        const email = typeof input.email === "string" ? input.email : "";
+        return { result: await sendBookingLinkEmail(env, email), isError: false };
       }
       case "escalate": {
         const summary = typeof input.summary === "string" ? input.summary : "(no summary)";
