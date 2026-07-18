@@ -40,25 +40,11 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
       required: ["summary", "callback_number"],
     },
   },
-  {
-    name: "send_booking_link",
-    description:
-      "Text the caller a link to the Cleenly booking page so they can see their estimate and book. " +
-      "Prefer this over reading the website address aloud: whenever the caller is interested in pricing, " +
-      "an estimate, or booking, offer to text them the link, and once they agree call this tool. " +
-      "Use the caller's own phone number from the call context unless they give a different one.",
-    input_schema: {
-      type: "object",
-      properties: {
-        phone: {
-          type: "string",
-          description:
-            "Phone number to text, any format. Default to the caller's number from the call context.",
-        },
-      },
-      required: ["phone"],
-    },
-  },
+  // send_booking_link is DISABLED until the A2P 10DLC campaign is approved —
+  // outbound SMS is carrier-filtered (error 30034) before then, so the agent
+  // would promise a text that never arrives. The tool implementation and its
+  // runTool case remain below; re-add this definition + the prompt lines once
+  // A2P is live. Until then the agent reads the booking URL aloud instead.
   {
     name: "end_call",
     description:
