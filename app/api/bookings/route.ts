@@ -256,12 +256,15 @@ export async function POST(request: NextRequest) {
       special_requests: data.special_requests,
       addons: data.addons,
     };
-    notifyNewBooking(notificationPayload).catch((e) =>
-      console.error("notifyNewBooking failed:", e)
-    );
-    notifyCustomerBookingReceived(notificationPayload).catch((e) =>
-      console.error("notifyCustomerBookingReceived failed:", e)
-    );
+    // Await both notifications before responding. On Vercel serverless the
+    // function is frozen once the response is sent, so fire-and-forget sends
+    // (especially the slower Resend emails) get cut off mid-flight and never
+    // arrive. allSettled never rejects — a failing channel is logged inside
+    // each notifier and must not fail the booking.
+    await Promise.allSettled([
+      notifyNewBooking(notificationPayload),
+      notifyCustomerBookingReceived(notificationPayload),
+    ]);
 
     return NextResponse.json({ success: true, booking: data });
   } catch (error) {
