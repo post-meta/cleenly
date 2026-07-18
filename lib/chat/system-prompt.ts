@@ -98,10 +98,10 @@ SERVICES (10 total)
    Heavy-duty after renovation. HEPA vacuuming, wall dusting, inside cabinets, fixture sticker removal. NOT included: hauling heavy debris, exterior pressure washing.
 
 11. The Damp-Season Reset (Pacific Northwest Protocol) — from $285, 3.5–4.5 hours
-   A full deep cleaning plus the damp-season protocol. October to March, Seattle homes fight water. On top of the complete deep clean: mold colonies behind toilets, mildew at window seals, mud captured in entry-point fibers, the slow rot where caulking meets ceramic, window-seal moisture audit, proactive caulking/grout notes. Pet-safe, plant-based products throughout. The protocol alone can be added to any cleaning in the booking calculator for +$85. NOT included: mold remediation behind walls, structural moisture repair, HVAC duct cleaning.
+   A full deep cleaning plus the damp-season protocol. October to March, Seattle homes fight water. On top of the complete deep clean: mold colonies behind toilets, mildew at window seals, mud captured in entry-point fibers, the slow rot where caulking meets ceramic, window-seal moisture audit, proactive caulking/grout notes. Pet-safe, plant-based products throughout. NOT included: mold remediation behind walls, structural moisture repair, HVAC duct cleaning.
 
 12. The Pollen Purge (Pacific Northwest Protocol) — from $295, 3.5–4.5 hours
-   A full deep cleaning plus the pollen protocol. March to June, the lush PNW spring brings a quiet invasion. On top of the complete deep clean: HEPA-filtration vacuuming on all soft surfaces, surface dust protocol with microfiber, return-air vent attention, fabric refresh on curtains/throws/soft furnishings, window-track and sill detail. Pet-safe, plant-based products throughout. The protocol alone can be added to any cleaning in the booking calculator for +$95. NOT included: HVAC duct cleaning, carpet shampooing, air-purifier rental.
+   A full deep cleaning plus the pollen protocol. March to June, the lush PNW spring brings a quiet invasion. On top of the complete deep clean: HEPA-filtration vacuuming on all soft surfaces, surface dust protocol with microfiber, return-air vent attention, fabric refresh on curtains/throws/soft furnishings, window-track and sill detail. Pet-safe, plant-based products throughout. NOT included: HVAC duct cleaning, carpet shampooing, air-purifier rental.
 
 PRICING LOGIC
 
@@ -111,7 +111,7 @@ The estimate depends on:
 - Bathrooms: 1, 1.5, 2, 2.5, 3, or 3.5+
 - Square footage: under 800, 800–1,200, 1,200–1,800 (+10%), 1,800–2,500 (+20%), 2,500+ (+35%)
 - When the home was last professionally cleaned: within the last month (base), 1–6 months ago (+10%), 6+ months or never (+25%)
-- Add-ons (extra charges): inside refrigerator (+$25), inside oven (+$20), inside cabinets (+$30), laundry per load (+$25), Pollen Purge protocol (+$95), Damp-Season Reset protocol (+$85)
+- Add-ons (extra charges): inside refrigerator (+$25), inside oven (+$20), inside cabinets (+$30), laundry per load (+$25)
 
 Rate: $75 per cleaner-hour, typically a two-cleaner team. The final price is the actual cleaner-hours worked × $75.
 
@@ -193,7 +193,7 @@ Q: How long does a cleaning take?
 A: Regular: 2–3 hours. Deep: 3–5 hours. Move-out: 4–6 hours. Depends on home size.
 
 Q: Can I add extras like inside the oven?
-A: Yes — add-ons appear in the booking calculator: inside oven $20, inside fridge $25, inside cabinets $30, laundry $25/load, Pollen Purge protocol $95, Damp-Season Reset protocol $85. Interior windows are included in standard cleaning time. For homes with many large windows, mention it in special requests and we'll quote a custom add-on. We only reach what a step stool can reach — anything higher needs a specialized window service.
+A: Yes — add-ons appear in the booking calculator: inside oven $20, inside fridge $25, inside cabinets $30, laundry $25/load. Interior windows are included in standard cleaning time. For homes with many large windows, mention it in special requests and we'll quote a custom add-on. We only reach what a step stool can reach — anything higher needs a specialized window service.
 
 Q: Pets — how do you handle hair?
 A: We use rubber tools on upholstery and rugs to lift embedded pet hair. Tell us in the booking notes if you have pets so we plan extra time.

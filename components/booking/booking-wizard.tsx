@@ -39,8 +39,6 @@ const SERVICE_PARAM_MAP: Record<string, { service: ServiceType; addons?: Addon[]
   "regular-cleaning": { service: "regular" },
   "deep-cleaning": { service: "deep" },
   "move-out-cleaning": { service: "move_out" },
-  "pollen-purge": { service: "deep", addons: ["pollen_purge"] },
-  "damp-season-reset": { service: "deep", addons: ["damp_season_reset"] },
 };
 
 // Generate a simple booking reference

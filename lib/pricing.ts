@@ -131,8 +131,6 @@ export const addonPrices: Record<Addon, number> = {
   oven: 2000,
   cabinets: 3000,
   laundry: 2500,
-  pollen_purge: 9500,
-  damp_season_reset: 8500,
 };
 
 // Add-on display info
@@ -156,16 +154,6 @@ export const addonInfo: Record<Addon, { label: string; price: string; descriptio
     label: "Laundry (wash, dry, fold)",
     price: "+$25/load",
     description: "Washing, tumble drying, and neat folding of one load of linens/clothes.",
-  },
-  pollen_purge: {
-    label: "The Pollen Purge Protocol",
-    price: "+$95",
-    description: "HEPA return-air vent vacuuming, window sill/track detailing, and deep anti-allergen fabric/upholstery dusting.",
-  },
-  damp_season_reset: {
-    label: "Damp-Season Mold Reset",
-    price: "+$85",
-    description: "Targeted eco-mold prevention spray, deep bathroom tile/grout steam scrub, and sill sanitation.",
   },
 };
 

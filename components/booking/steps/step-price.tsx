@@ -42,15 +42,7 @@ const bathroomLabels: Record<BathroomCount, string> = {
 
 // Labels, descriptions, and prices come from lib/pricing.ts (addonInfo) —
 // the same source the calculator uses. Only the grouping is defined here.
-const pnwAddonIds: Addon[] = ["pollen_purge", "damp_season_reset"];
 const standardAddonIds: Addon[] = ["fridge", "oven", "cabinets"];
-
-const pnwAddonsList = pnwAddonIds.map((id) => ({
-  id,
-  label: addonInfo[id].label,
-  desc: addonInfo[id].description ?? "",
-  price: addonInfo[id].price,
-}));
 
 const standardAddonsList = standardAddonIds.map((id) => ({
   id,
@@ -161,68 +153,9 @@ export function StepPrice({ data, onChange, onNext, onBack }: StepPriceProps) {
 
       {/* Add-ons Section */}
       <div className="mt-[22px] pt-[18px] border-t border-border/60">
-        {/* Signature PNW Protocols */}
+        {/* Extras */}
         <div>
-          <div className="flex items-center gap-2">
-            <h3 className="text-[16px] font-semibold text-foreground">Signature PNW Protocols</h3>
-            <span className="bg-signal-soft text-signal text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider">
-              Recommended
-            </span>
-          </div>
-          <p className="text-[12px] text-foreground-muted mt-1">
-            Sanitation systems optimized for Western Washington seasons.
-          </p>
-          <div className="mt-3 grid grid-cols-2 gap-2.5">
-            {pnwAddonsList.map((a) => {
-              const isSelected = addons.includes(a.id);
-              return (
-                <label
-                  key={a.id}
-                  className={cn(
-                    "p-3 rounded-xl border transition-all cursor-pointer flex flex-col gap-2 select-none relative",
-                    isSelected
-                      ? "border-2 border-signal bg-[rgba(220,229,223,0.25)]"
-                      : "border-border bg-background hover:border-border-hover"
-                  )}
-                  style={{
-                    transitionDuration: "220ms",
-                    transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-                  }}
-                >
-                  <div className="flex gap-2">
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      onChange={() => handleAddonToggle(a.id)}
-                      className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-signal"
-                      style={{ accentColor: "#2D4A3E" }}
-                    />
-                    <div>
-                      <div className="text-[13px] font-semibold text-foreground leading-tight">
-                        {a.label}
-                      </div>
-                      <div className="text-[11px] text-foreground-soft mt-1 leading-normal">
-                        {a.desc}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="pt-2 mt-auto border-t border-border/50 flex justify-between items-center">
-                    <span className="bg-signal-soft text-signal text-[9px] font-semibold px-1.5 py-0.5 rounded uppercase tracking-wider">
-                      PNW
-                    </span>
-                    <span className="text-[12px] font-semibold text-signal">
-                      {a.price}
-                    </span>
-                  </div>
-                </label>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Standard Extras */}
-        <div className="mt-5">
-          <h3 className="text-[16px] font-semibold text-foreground">Standard extras</h3>
+          <h3 className="text-[16px] font-semibold text-foreground">Add-ons</h3>
           <div className="mt-3 grid grid-cols-2 gap-2.5">
             {standardAddonsList.map((a) => {
               const isSelected = addons.includes(a.id);

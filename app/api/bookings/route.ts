@@ -34,14 +34,7 @@ const VALID_SQFT_RANGES: SqftRange[] = [
   "over_3500",
   "not_sure",
 ];
-const VALID_ADDONS: Addon[] = [
-  "fridge",
-  "oven",
-  "cabinets",
-  "laundry",
-  "pollen_purge",
-  "damp_season_reset",
-];
+const VALID_ADDONS: Addon[] = ["fridge", "oven", "cabinets", "laundry"];
 // "evening" removed 2026-06-10 — slot no longer offered (can't reliably staff 4pm+).
 const VALID_TIME_SLOTS: TimeSlot[] = ["morning", "afternoon"];
 
