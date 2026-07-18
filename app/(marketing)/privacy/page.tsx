@@ -64,6 +64,7 @@ const sections = [
   { id: "children", title: "Children's Privacy" },
   { id: "international", title: "International Users" },
   { id: "changes", title: "Changes to This Policy" },
+  { id: "sms-messaging", title: "SMS/Text Messaging" },
   { id: "contact", title: "Contact Us" },
 ];
 
@@ -359,6 +360,18 @@ export default function PrivacyPolicyPage() {
                   We do not sell, rent, or trade your personal information to
                   third parties for marketing purposes.
                 </p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  <strong className="text-foreground">
+                    Mobile information:
+                  </strong>{" "}
+                  We do not sell or share your mobile phone number, SMS opt-in,
+                  or consent information with third parties or affiliates for
+                  their own marketing or promotional purposes. Information
+                  collected for text messaging is used only to send the messages
+                  you requested, and is shared only with our messaging provider
+                  (our SMS carrier) strictly to deliver those messages on our
+                  behalf.
+                </p>
               </div>
             </section>
 
@@ -637,9 +650,56 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
+            {/* SMS / Text Messaging */}
+            <section id="sms-messaging">
+              <h2 className="font-sans text-xl font-semibold">
+                14. SMS/Text Messaging
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                If you provide your phone number and opt in, we send you SMS text
+                messages about your cleaning. Opting in to text messages is
+                optional and is never a condition of booking or purchase.
+              </p>
+              <ul className="mt-3 list-disc space-y-2 pl-6 text-muted-foreground">
+                <li>
+                  <strong className="text-foreground">Types of messages:</strong>{" "}
+                  booking confirmations, appointment reminders, cleaner-arrival
+                  notifications, and service receipts. If you separately opt in,
+                  occasional promotional offers and seasonal cleaning tips (no
+                  more than about twice a month).
+                </li>
+                <li>
+                  <strong className="text-foreground">Frequency:</strong> message
+                  frequency varies based on your bookings and activity.
+                </li>
+                <li>
+                  <strong className="text-foreground">Cost:</strong> message and
+                  data rates may apply, charged by your mobile carrier.
+                </li>
+                <li>
+                  <strong className="text-foreground">Opt out:</strong> reply STOP
+                  to any message to stop receiving texts. Reply HELP, or email{" "}
+                  <a
+                    href="mailto:hello@cleenly.app"
+                    className="text-foreground underline"
+                  >
+                    hello@cleenly.app
+                  </a>
+                  , for help.
+                </li>
+              </ul>
+              <p className="mt-4 text-muted-foreground">
+                We do not sell or share your mobile phone number or your SMS
+                opt-in and consent information with third parties or affiliates
+                for their marketing or promotional purposes. This information is
+                used only to deliver the messages you requested and is shared
+                only with our messaging provider to send them on our behalf.
+              </p>
+            </section>
+
             {/* Contact */}
             <section id="contact">
-              <h2 className="font-sans text-xl font-semibold">14. Contact Us</h2>
+              <h2 className="font-sans text-xl font-semibold">15. Contact Us</h2>
               <p className="mt-4 text-muted-foreground">
                 If you have questions about this Privacy Policy or our privacy
                 practices, contact us:

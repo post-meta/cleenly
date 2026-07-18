@@ -66,6 +66,7 @@ const sections = [
   { id: "liability", title: "Limitation of Liability" },
   { id: "indemnification", title: "Indemnification" },
   { id: "termination", title: "Termination" },
+  { id: "sms-messaging", title: "SMS/Text Messaging Program" },
   { id: "general", title: "General Provisions" },
 ];
 
@@ -753,9 +754,68 @@ export default function TermsOfServicePage() {
               </p>
             </section>
 
+            {/* 20. SMS / Text Messaging Program */}
+            <section id="sms-messaging">
+              <h2 className="font-sans text-xl font-semibold">
+                20. SMS/Text Messaging Program
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                By providing your mobile phone number and opting in, you agree to
+                receive SMS text messages from CLEENLY (operated by Pro Craft
+                Cleaning LLC). These terms govern that program. Opting in is
+                optional and is never a condition of purchasing any goods or
+                services.
+              </p>
+              <ul className="mt-4 space-y-4 text-muted-foreground">
+                <li>
+                  <strong className="text-foreground">Program:</strong> We send
+                  transactional messages about your cleaning — booking
+                  confirmations, appointment reminders, cleaner-arrival
+                  notifications, and service receipts. With your separate express
+                  consent, we may also send occasional promotional offers and
+                  seasonal cleaning tips.
+                </li>
+                <li>
+                  <strong className="text-foreground">Frequency:</strong> Message
+                  frequency varies depending on your bookings and activity.
+                </li>
+                <li>
+                  <strong className="text-foreground">Cost:</strong> Message and
+                  data rates may apply. Check with your mobile carrier for
+                  details.
+                </li>
+                <li>
+                  <strong className="text-foreground">Opt out and help:</strong>{" "}
+                  Reply STOP at any time to stop receiving messages. Reply HELP,
+                  or email{" "}
+                  <a
+                    href="mailto:hello@cleenly.app"
+                    className="text-foreground underline"
+                  >
+                    hello@cleenly.app
+                  </a>
+                  , for help.
+                </li>
+                <li>
+                  <strong className="text-foreground">Carriers:</strong> Mobile
+                  carriers are not liable for delayed or undelivered messages.
+                </li>
+                <li>
+                  <strong className="text-foreground">Your data:</strong> We
+                  handle your mobile number and consent information as described
+                  in our{" "}
+                  <Link href="/privacy" className="text-foreground underline">
+                    Privacy Policy
+                  </Link>
+                  . We do not sell or share your mobile opt-in information with
+                  third parties for their marketing purposes.
+                </li>
+              </ul>
+            </section>
+
             {/* 21. General Provisions */}
             <section id="general">
-              <h2 className="font-sans text-xl font-semibold">20. General Provisions</h2>
+              <h2 className="font-sans text-xl font-semibold">21. General Provisions</h2>
               <ul className="mt-4 space-y-4 text-muted-foreground">
                 <li>
                   <strong className="text-foreground">Entire Agreement:</strong>{" "}
