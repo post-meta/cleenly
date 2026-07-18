@@ -139,17 +139,26 @@ export function ChatWidget() {
 
             {/* Chat panel */}
             {isOpen && (
-                <div className="fixed inset-x-0 bottom-0 md:inset-x-auto md:bottom-6 md:right-6 z-50 flex h-[80vh] md:h-[600px] w-full md:w-[400px] flex-col rounded-t-2xl md:rounded-2xl bg-background border border-border shadow-2xl">
+                <div className="fixed inset-x-0 bottom-0 md:inset-x-auto md:bottom-6 md:right-6 z-50 flex h-[80vh] md:h-[600px] w-full md:w-[400px] flex-col overflow-hidden rounded-t-2xl md:rounded-2xl bg-background border border-border shadow-2xl">
                     {/* Header */}
-                    <div className="flex items-center justify-between border-b border-border px-5 py-4">
+                    <div className="flex items-center justify-between bg-accent px-5 py-4">
                         <div>
-                            <div className="font-semibold text-foreground">CLEENLY</div>
-                            <div className="text-xs text-muted-foreground">Services, pricing, booking</div>
+                            <div className="flex items-center gap-2">
+                                <span className="font-semibold text-background">CLEENLY</span>
+                                <span className="flex items-center gap-1.5 text-[11px] font-medium text-background/90">
+                                    <span className="relative flex h-2 w-2">
+                                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-300 opacity-75"></span>
+                                        <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400"></span>
+                                    </span>
+                                    Online
+                                </span>
+                            </div>
+                            <div className="text-xs text-background/80">Services, pricing, booking</div>
                         </div>
                         <button
                             onClick={() => setIsOpen(false)}
                             aria-label="Close chat"
-                            className="text-muted-foreground hover:text-foreground"
+                            className="text-background/80 hover:text-background"
                         >
                             <X className="h-5 w-5" />
                         </button>
