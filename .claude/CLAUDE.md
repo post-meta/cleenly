@@ -111,12 +111,15 @@ PNW Protocol services are climate-specific (`isClimateTier: true`) and render wi
 
 ## Pricing Logic (lib/pricing.ts)
 
-Multipliers:
-- bedrooms: 1=0.8x, 2=1.0x, 3=1.15x, 4=1.35x, 5+=1.6x
-- bathrooms: 1=0.9x, 2=1.0x, 3=1.15x, 4+=1.3x
-- condition: standard=1.0x, needs-extra-work=1.25x
+Hours-driven model: estimated cleaner-hours × $75/cleaner-hour, floored at the $185 minimum (`MIN_JOB_CENTS = 18500`). The shown estimate range = the actual invoice. `PRICE_DISPLAY` is the single source of truth for displayed "from" prices and by-size ranges.
 
-Price calculated client-side, **ALWAYS validated server-side** before charge.
+- Base cleaner-hours: absolute per bedroom in `baseManHours[serviceType][bedrooms]` (regular/deep/move_out).
+- `bathroomMultiplier`: 1=1.0, 1.5=1.05, 2=1.0… up to 3.5+=1.3.
+- `conditionMultiplier`: clean=1.0, average=1.1, needs_work=1.22.
+- `sqftMultiplier`: under_800/800_1200=1.0, 1200_1800=1.05, 1800_2500=1.1, 2500_3500=1.18, over_3500=1.22.
+- Add-ons (`addonPrices`, flat cents): fridge $25, oven $20, cabinets $30, laundry $25.
+
+Estimated client-side, **ALWAYS recomputed server-side** in `/api/bookings` before it's stored. Keep the voice agent prompt, chat system-prompt, and `public/llms.txt` in sync when pricing changes.
 
 ---
 

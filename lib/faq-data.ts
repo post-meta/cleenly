@@ -109,7 +109,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Can I request a specific cleaner?",
         answer:
-          "Yes. Once you've had a cleaning, you can request the same cleaner for future appointments. During booking, you'll see if your preferred cleaner is available. If they're not, you can choose another cleaner or wait for their next opening.",
+          "Yes. Once you've had a cleaning, you can request the same cleaner for future appointments — just tell us when you book or by email, and we'll send them whenever they're available. We can't guarantee the same person every visit, but we keep it consistent when we can.",
       },
       {
         question: "Can I book a same-day cleaning?",
@@ -176,7 +176,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How long does a cleaning take?",
         answer:
-          "Time depends on home size and cleaning type. Regular cleaning: 1.5-3 hours. Deep cleaning: 3-5 hours. Move-out cleaning: 4-7 hours. A typical 3-bedroom regular cleaning takes about 2.5 hours. First-time cleanings usually take longer than recurring visits.",
+          "Time depends on home size and cleaning type. Regular cleaning: 2-3 hours. Deep cleaning: 3-5 hours. Move-out cleaning: 4-6 hours. A typical 3-bedroom regular cleaning takes about 2.5 hours. First-time cleanings usually take longer than recurring visits.",
       },
       {
         question: "What if something is damaged during cleaning?",

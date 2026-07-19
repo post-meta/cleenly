@@ -1,30 +1,39 @@
 # CLEENLY
 
-> CLEENLY is a house cleaning booking platform serving Seattle and the Greater Eastside (Washington State). Customers can book cleaning services online, see prices before booking, and choose their preferred cleaner.
+> CLEENLY is a small house cleaning company serving the Greater Seattle area (Washington State), operated by Pro Craft Cleaning LLC. Customers book online, see an upfront estimate before booking, and pay after the cleaning is complete — no payment is taken at booking.
 
-## Services
-- Regular Cleaning: routine maintenance cleaning for homes
-- Deep Cleaning: thorough cleaning including appliances, baseboards, and hard-to-reach areas
-- Move-Out Cleaning: landlord-ready cleaning to help get security deposits back
+## How pricing works
+- Billed by the hour: $75 per cleaner-hour, typically a two-cleaner team.
+- Minimum job: $185.
+- The booking calculator shows an upfront estimate range based on service, home size, bathrooms, condition, and square footage. The final price is the actual cleaner-hours worked, confirmed before charging.
 
-## Service Areas
-Seattle, Bellevue, Kirkland, Redmond, Renton, Kent, Tacoma, Everett, and surrounding cities in Washington State.
+## Services & starting prices (estimates, not quotes)
+- Regular Cleaning — recurring maintenance, from $185 (the first visit is priced as a deep clean)
+- Deep Cleaning — from $290
+- Move-Out Cleaning — from $380
+- Move-In Cleaning — from $380
+- Bi-Weekly Service — from $185
+- Home Organization — from $185
+- Pre-Event Cleaning — from $235
+- Restorative Cleaning — from $320
+- Airbnb Turnover — from $185
+- Post-Construction — from $420
 
-## Pricing
-- Regular Cleaning: $100-$200 depending on home size
-- Deep Cleaning: $150-$300 depending on home size
-- Move-Out Cleaning: $200-$400 depending on home size
+## Service area
+Greater Seattle metro, from Everett in the north to Tacoma and Lakewood in the south — including Seattle, the Eastside (Bellevue, Kirkland, Redmond, Sammamish, Issaquah), the south end (Renton, Kent, Federal Way, Auburn, Burien, Tukwila), Shoreline, Edmonds, Lynnwood, Everett, Tacoma, and Lakewood. Tacoma is our home base.
 
-## Key Pages
-- Home: /
-- Pricing: /pricing
-- About: /about
-- Book Now: /book
-- How It Works: /how-it-works
+## Payment
+No payment at booking. After the cleaning we email an invoice. We currently accept Venmo, Zelle, cash, or check; card payments are coming soon.
+
+## Key pages
+- Home: https://cleenly.app/
+- Pricing: https://cleenly.app/pricing
+- Services: https://cleenly.app/services
+- How it works: https://cleenly.app/how-it-works
+- Book: https://cleenly.app/book
+- FAQ: https://cleenly.app/faq
 
 ## Contact
-- Website: https://cleenly.com
-- Email: hello@cleenly.com
-
-## Last Updated
-December 2025
+- Website: https://cleenly.app
+- Email: hello@cleenly.app
+- Phone / text: (206) 641-4739

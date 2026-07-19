@@ -42,7 +42,7 @@ const bathroomLabels: Record<BathroomCount, string> = {
 
 // Labels, descriptions, and prices come from lib/pricing.ts (addonInfo) —
 // the same source the calculator uses. Only the grouping is defined here.
-const standardAddonIds: Addon[] = ["fridge", "oven", "cabinets"];
+const standardAddonIds: Addon[] = ["fridge", "oven", "cabinets", "laundry"];
 
 const standardAddonsList = standardAddonIds.map((id) => ({
   id,

@@ -78,13 +78,15 @@ interface ServiceHeroProps {
     cityName: string;
     serviceName: string;
     introText: string;
-    /** Deprecated: hero now derives the "from" price from PRICE_DISPLAY by service. Accepted for call-site compatibility. */
+    /** The service's real "from" floor (service.priceMin) — keeps the hero in sync with the page + JSON-LD. */
+    fromPrice: number;
+    /** Deprecated: no longer used; accepted for call-site compatibility. */
     priceRange?: string;
     citySlug: string;
     heroImage?: string;
 }
 
-export function ServiceHero({ cityName, serviceName, introText, citySlug, heroImage }: ServiceHeroProps) {
+export function ServiceHero({ cityName, serviceName, introText, citySlug, heroImage, fromPrice }: ServiceHeroProps) {
     const imageSrc = heroImage || "/hero-image.jpg";
     return (
         <section className="relative flex min-h-[70vh] items-center overflow-hidden animate-fadeInUp bg-background py-16 md:py-0">
@@ -105,7 +107,7 @@ export function ServiceHero({ cityName, serviceName, introText, citySlug, heroIm
                 <div className="col-span-12 space-y-8 md:col-span-6 flex flex-col justify-center order-2 md:order-2">
                     {/* TODO: per-service italic phrases pending sign-off (Chunk E). Typography in font-display, no italic phrase yet. */}
                     <h1 className="font-display font-normal text-[44px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground">
-                        {serviceName} in {cityName} — from ${fromPriceForService(serviceName)}
+                        {serviceName} in {cityName} — from ${fromPrice}
                     </h1>
 
                     <p className="text-lg md:text-xl text-gray-600 leading-relaxed">

@@ -39,7 +39,7 @@ export const PRICE_DISPLAY = {
   minJob: 185,
   // A first-time clean is priced as a deep clean (heavier first visit — market standard).
   firstClean: {
-    from: 200,
+    from: 290,
     bySize: {
       "1": "$290–350",
       "2": "$440–530",
@@ -49,7 +49,7 @@ export const PRICE_DISPLAY = {
     } as Record<string, string>,
   },
   moveOut: {
-    from: 280,
+    from: 380,
     bySize: {
       "1": "$380–455",
       "2": "$585–705",

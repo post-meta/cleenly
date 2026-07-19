@@ -157,7 +157,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    notifyNewApplication({
+    // Await the notification: on Vercel serverless the function is frozen once
+    // the response is sent, so a fire-and-forget send (especially the slower
+    // Resend email) gets cut off and the owner never gets the alert. Swallow
+    // errors so a failed notification never fails the application submit.
+    await notifyNewApplication({
       id: data.id,
       first_name: data.first_name,
       last_name: data.last_name,

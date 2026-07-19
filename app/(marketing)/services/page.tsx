@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Sparkles, Home, Truck } from "lucide-react";
 
 export const metadata: Metadata = {
-    title: 'Cleaning Services Seattle | Regular, Deep, Move-Out | CLEENLY',
-    description: 'House cleaning in Greater Seattle. First and deep cleans from $200, move-out from $280 — an upfront estimate, billed by the hour. Book online.',
+    title: 'House Cleaning Services in Greater Seattle | CLEENLY',
+    description: 'House cleaning in Greater Seattle — regular, deep, move-in/out, and specialty cleans. First and deep cleans from $290, move-out from $380, billed by the hour. Book online.',
     alternates: {
         canonical: 'https://cleenly.app/services',
     },
@@ -51,7 +51,7 @@ export default function ServicesPage() {
                         </h1>
 
                         <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
-                            Three service levels designed for your home's needs. From routine maintenance to deep refreshing, we've got you covered.
+                            From routine maintenance to deep, move-out, and specialty cleans — choose the service that fits your home.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">

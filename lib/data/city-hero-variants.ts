@@ -31,10 +31,10 @@ const VARIANTS: Record<string, CityHeroVariant> = {
 };
 
 const CITY_GROUPS: Record<string, string[]> = {
-    eastside: ["bellevue", "redmond", "kirkland", "sammamish", "mercer-island", "medina", "clyde-hill", "issaquah"],
+    eastside: ["bellevue", "redmond", "kirkland", "sammamish", "mercer-island", "medina", "clyde-hill", "issaquah", "bothell", "woodinville"],
     southSound: ["tacoma", "lakewood", "federal-way", "kent", "auburn", "renton"],
     seattle: ["seattle", "shoreline", "burien", "tukwila"],
-    northSound: ["everett", "edmonds", "lynnwood", "bothell", "woodinville"],
+    northSound: ["everett", "edmonds", "lynnwood"],
 };
 
 export function getCityHeroVariant(citySlug?: string): CityHeroVariant {

@@ -5,8 +5,11 @@ import { Clock, DollarSign, Shield, Check } from "lucide-react";
 import { PRICE_DISPLAY } from "@/lib/pricing";
 
 export const metadata = {
-  title: "How It Works — Cleenly",
+  title: "How It Works | CLEENLY",
   description: "From dirty to clean in four simple steps. No phone calls, no guesswork, no hassle.",
+  alternates: {
+    canonical: "https://cleenly.app/how-it-works",
+  },
 };
 
 const FAQ = [

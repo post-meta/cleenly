@@ -4,18 +4,11 @@ import { PRICE_DISPLAY } from '@/lib/pricing';
 
 const BASE_URL = 'https://cleenly.app';
 
-// Canonical "from" price for a service, from the single source of truth
-// (lib/pricing). Move-related work prices on the move-out table; recurring
-// maintenance on the recurring floor; everything else on the first/deep table.
+// Each service's real "from" floor comes straight from its own priceMin in
+// lib/data/services.ts (the single source of truth), so the JSON-LD Offer price
+// matches the price shown on the page instead of a bucketed approximation.
 function serviceFromPrice(service: ServiceData): number {
-    const name = service.name.toLowerCase();
-    if (name.includes('move-out') || name.includes('move out') || name.includes('post-construction')) {
-        return PRICE_DISPLAY.moveOut.from;
-    }
-    if (name.includes('bi-weekly') || name.includes('recurring')) {
-        return PRICE_DISPLAY.recurring.from;
-    }
-    return PRICE_DISPLAY.firstClean.from;
+    return service.priceMin ?? PRICE_DISPLAY.firstClean.from;
 }
 
 // Hourly priceSpecification reused across Service offers — final price is the

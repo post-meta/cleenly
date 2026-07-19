@@ -411,8 +411,8 @@ export default function TermsOfServicePage() {
                 <li>
                   <strong className="text-foreground">Pay after the clean:</strong>{" "}
                   No card is required to book. After your cleaning is completed,
-                  we email you an invoice. Payment is processed securely through
-                  Stripe and accepts major credit and debit cards.
+                  we email you an invoice. We currently accept Venmo, Zelle,
+                  cash, or check; card payments are coming soon.
                 </li>
                 <li>
                   <strong className="text-foreground">How the price is set:</strong>{" "}

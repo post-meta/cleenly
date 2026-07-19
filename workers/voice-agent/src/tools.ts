@@ -126,7 +126,7 @@ async function lookupBooking(env: Env, phoneRaw: string): Promise<string> {
     city: match.city,
     scheduled_date: match.preferred_date ?? "not set yet",
     time_slot: match.preferred_time ?? "not set yet",
-    estimate_range: `$${match.estimated_min}-$${match.estimated_max}`,
+    estimate_range: `$${Math.round(match.estimated_min / 100)}-$${Math.round(match.estimated_max / 100)}`,
     status: match.status,
     booked_on: match.created_at,
   });

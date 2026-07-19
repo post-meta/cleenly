@@ -355,7 +355,7 @@ export async function notifyNewApplication(a: ApplicationNotification) {
     `<b>Areas:</b> ${a.service_areas.join(", ")}`,
     a.has_experience ? `<b>Experience:</b> ${a.years_experience ?? "yes"} yr` : `<b>Experience:</b> none`,
     ``,
-    `<a href="${SITE_URL}/admin/applications/${a.id}">Open in admin →</a>`,
+    `<a href="${SITE_URL}/admin/cleaners">Open in admin →</a>`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -374,7 +374,7 @@ export async function notifyNewApplication(a: ApplicationNotification) {
         <tr><td style="padding: 4px 8px 4px 0; color: #6b7280;">Experience</td><td style="padding: 4px 0;">${a.has_experience ? `${a.years_experience ?? "yes"} yr` : "none"}</td></tr>
       </table>
       <p style="margin: 24px 0 0;">
-        <a href="${SITE_URL}/admin/applications/${a.id}" style="background: #0a0a0a; color: #fff; padding: 10px 16px; text-decoration: none; border-radius: 4px;">Open in admin</a>
+        <a href="${SITE_URL}/admin/cleaners" style="background: #0a0a0a; color: #fff; padding: 10px 16px; text-decoration: none; border-radius: 4px;">Open in admin</a>
       </p>
     </div>
   `;

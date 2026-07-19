@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { cities, getCityBySlug, isCityIndexable } from '@/lib/data/cities';
-import { services, getServiceBySlug } from '@/lib/data/services';
+import { services, getServiceBySlug, ServiceData } from '@/lib/data/services';
 import { JsonLd } from '@/components/shared/json-ld';
 import {
     generateServiceSchema,
@@ -20,18 +20,11 @@ interface PageProps {
     params: Promise<{ city: string; service: string }>;
 }
 
-// Canonical "from" price for a service, pulled from the single source of truth
-// (lib/pricing). Move-related work prices on the move-out table; recurring
-// maintenance on the recurring floor; everything else on the first/deep table.
-function serviceFromPrice(serviceName: string): number {
-    const name = serviceName.toLowerCase();
-    if (name.includes('move-out') || name.includes('move out') || name.includes('post-construction')) {
-        return PRICE_DISPLAY.moveOut.from;
-    }
-    if (name.includes('bi-weekly') || name.includes('recurring')) {
-        return PRICE_DISPLAY.recurring.from;
-    }
-    return PRICE_DISPLAY.firstClean.from;
+// Each service's real "from" floor comes from its own priceMin in
+// lib/data/services.ts (single source of truth), so the visible estimate, the
+// title/meta, and the JSON-LD Offer all agree with the service's real range.
+function serviceFromPrice(service: ServiceData): number {
+    return service.priceMin ?? PRICE_DISPLAY.firstClean.from;
 }
 
 // Генерируем все комбинации при билде
@@ -54,8 +47,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const indexable = isCityIndexable(city.slug);
 
     return {
-        title: `${service.name} ${city.name} WA | from $${serviceFromPrice(service.name)} | CLEENLY`,
-        description: `${service.name} in ${city.name}, Washington. From $${serviceFromPrice(service.name)}, billed by the hour at $${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour ($${PRICE_DISPLAY.minJob} min). Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online in 2 minutes.`,
+        title: `${service.name} ${city.name} WA | from $${serviceFromPrice(service)} | CLEENLY`,
+        description: `${service.name} in ${city.name}, Washington. From $${serviceFromPrice(service)}, billed by the hour at $${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour ($${PRICE_DISPLAY.minJob} min). Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online in 2 minutes.`,
         alternates: {
             canonical: `https://cleenly.app/${city.slug}/${service.slug}`,
         },
@@ -105,6 +98,7 @@ export default async function CityServicePage({ params }: PageProps) {
             <ServiceHero
                 cityName={city.name}
                 serviceName={service.name}
+                fromPrice={service.priceMin ?? serviceFromPrice(service)}
                 introText={serviceIntro || `House ${service.name.toLowerCase()} in ${city.name}. You see an upfront estimate, then we bill by the hour — $${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, $${PRICE_DISPLAY.minJob} minimum — and confirm the final price before charging.`}
                 citySlug={city.slug}
                 heroImage={service.heroImage}
@@ -131,7 +125,7 @@ export default async function CityServicePage({ params }: PageProps) {
                             </div>
                             <div className="flex justify-between items-center py-4 border-b border-gray-50">
                                 <span className="text-gray-600">Estimate from</span>
-                                <span className="text-2xl font-semibold text-accent">${serviceFromPrice(service.name)}</span>
+                                <span className="text-2xl font-semibold text-accent">${serviceFromPrice(service)}</span>
                             </div>
                             <div className="flex justify-between items-center py-4">
                                 <span className="text-gray-600">Rate</span>

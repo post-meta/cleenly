@@ -110,7 +110,7 @@ export function StepSchedule({
       {/* Time Selection */}
       <div className="mt-[22px]">
         <label className="block text-[13px] font-medium mb-2.5 text-foreground">Select a time slot</label>
-        <div className="grid grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-2 gap-2.5">
           {timeSlots.map((slot) => {
             const sel = data.preferred_time === slot.id;
             return (

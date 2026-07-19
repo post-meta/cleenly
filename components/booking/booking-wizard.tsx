@@ -29,9 +29,11 @@ const SERVICE_LABEL: Record<ServiceType, string> = {
   move_out: "Move-Out Cleaning",
 };
 
-// Whitelist for the ?service= query param. Bundle slugs (PNW protocols) map to
-// deep cleaning with the protocol pre-selected as an add-on. Unknown slugs land
-// on step 1 with nothing selected.
+// Whitelist for the ?service= query param. The calculator only computes the
+// three base types (regular/deep/move_out); every marketed specialty service
+// maps to its nearest base type and pre-selects it so its "Book" CTA never
+// dead-ends. Admin confirms the specialty specifics after the request comes in.
+// Unknown slugs land on step 1 with nothing selected.
 const SERVICE_PARAM_MAP: Record<string, { service: ServiceType; addons?: Addon[] }> = {
   regular: { service: "regular" },
   deep: { service: "deep" },
@@ -39,6 +41,13 @@ const SERVICE_PARAM_MAP: Record<string, { service: ServiceType; addons?: Addon[]
   "regular-cleaning": { service: "regular" },
   "deep-cleaning": { service: "deep" },
   "move-out-cleaning": { service: "move_out" },
+  "move-in-cleaning": { service: "move_out" },
+  "bi-weekly-service": { service: "regular" },
+  "home-organization": { service: "deep" },
+  "pre-event-cleaning": { service: "deep" },
+  "restorative-cleaning": { service: "deep" },
+  "airbnb-turnover": { service: "regular" },
+  "post-construction": { service: "move_out" },
 };
 
 // Generate a simple booking reference

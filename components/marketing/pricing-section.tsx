@@ -3,11 +3,9 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { getServiceBySlug } from "@/lib/data/services";
 
 const STANDARD_SLUGS = ["regular-cleaning", "deep-cleaning", "move-out-cleaning"];
-const PROTOCOL_SLUGS = ["damp-season-reset", "pollen-purge"];
 
 export function PricingSection() {
     const standard = STANDARD_SLUGS.map(getServiceBySlug).filter((s): s is NonNullable<typeof s> => Boolean(s));
-    const protocols = PROTOCOL_SLUGS.map(getServiceBySlug).filter((s): s is NonNullable<typeof s> => Boolean(s));
 
     return (
         <section className="pricing py-20 md:py-28 bg-background">
@@ -25,25 +23,11 @@ export function PricingSection() {
                 <div className="mb-6">
                     <Eyebrow>Standard</Eyebrow>
                 </div>
-                <div className="grid md:grid-cols-3 gap-6 mb-16 md:mb-20">
+                <div className="grid md:grid-cols-3 gap-6">
                     {standard.map((service) => (
                         <ServiceCard key={service.slug} service={service} />
                     ))}
                 </div>
-
-                {/* Pacific Northwest Protocols */}
-                {protocols.length > 0 && (
-                    <>
-                        <div className="mb-6">
-                            <Eyebrow tone="signal">Pacific Northwest Protocols</Eyebrow>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            {protocols.map((service) => (
-                                <ServiceCard key={service.slug} service={service} />
-                            ))}
-                        </div>
-                    </>
-                )}
             </div>
         </section>
     );

@@ -162,8 +162,8 @@ export default function PrivacyPolicyPage() {
                   <strong className="text-foreground">
                     Payment Information:
                   </strong>{" "}
-                  Credit card or payment method details (processed securely by
-                  Stripe)
+                  How you'd like to pay after the cleaning (Venmo, Zelle, cash,
+                  or check). We do not collect card numbers on the site.
                 </li>
                 <li>
                   <strong className="text-foreground">Communications:</strong>{" "}
@@ -433,8 +433,9 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li>
                   <strong className="text-foreground">Payment Security:</strong>{" "}
-                  Payment information is processed by Stripe (PCI-DSS compliant)
-                  and never stored on our servers
+                  We don't collect or store card numbers on the site. If we add
+                  card payments, they'll be handled by a PCI-DSS-compliant
+                  processor (Stripe) and never stored on our servers.
                 </li>
                 <li>
                   <strong className="text-foreground">Access Controls:</strong>{" "}

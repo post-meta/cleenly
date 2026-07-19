@@ -100,20 +100,14 @@ SERVICES (10 total)
 10. Post-Construction — $420–$950, 5–10 hours
    Heavy-duty after renovation. HEPA vacuuming, wall dusting, inside cabinets, fixture sticker removal. NOT included: hauling heavy debris, exterior pressure washing.
 
-11. The Damp-Season Reset (Pacific Northwest Protocol) — from $285, 3.5–4.5 hours
-   A full deep cleaning plus the damp-season protocol. October to March, Seattle homes fight water. On top of the complete deep clean: mold colonies behind toilets, mildew at window seals, mud captured in entry-point fibers, the slow rot where caulking meets ceramic, window-seal moisture audit, proactive caulking/grout notes. Pet-safe, plant-based products throughout. NOT included: mold remediation behind walls, structural moisture repair, HVAC duct cleaning.
-
-12. The Pollen Purge (Pacific Northwest Protocol) — from $295, 3.5–4.5 hours
-   A full deep cleaning plus the pollen protocol. March to June, the lush PNW spring brings a quiet invasion. On top of the complete deep clean: HEPA-filtration vacuuming on all soft surfaces, surface dust protocol with microfiber, return-air vent attention, fabric refresh on curtains/throws/soft furnishings, window-track and sill detail. Pet-safe, plant-based products throughout. NOT included: HVAC duct cleaning, carpet shampooing, air-purifier rental.
-
 PRICING LOGIC
 
 The estimate depends on:
 - Service type (above)
 - Bedrooms: studio, 1, 2, 3, 4, or 5+
 - Bathrooms: 1, 1.5, 2, 2.5, 3, or 3.5+
-- Square footage: under 800, 800–1,200, 1,200–1,800 (+10%), 1,800–2,500 (+20%), 2,500+ (+35%)
-- When the home was last professionally cleaned: within the last month (base), 1–6 months ago (+10%), 6+ months or never (+25%)
+- Square footage: under 800 (base), 800–1,200 (base), 1,200–1,800 (+5%), 1,800–2,500 (+10%), 2,500–3,500 (+18%), over 3,500 (+22%)
+- When the home was last professionally cleaned: within the last month (base), 1–6 months ago (+10%), 6+ months or never (+22%)
 - Add-ons (extra charges): inside refrigerator (+$25), inside oven (+$20), inside cabinets (+$30), laundry per load (+$25)
 
 Rate: $75 per cleaner-hour, typically a two-cleaner team. The final price is the actual cleaner-hours worked × $75.
