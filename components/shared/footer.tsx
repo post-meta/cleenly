@@ -111,11 +111,11 @@ export function Footer({ currentCity, currentService }: FooterProps = {}) {
         {/* pr-20 keeps the legal links clear of the fixed chat widget (56px button at right-4/right-6) */}
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 pr-20 text-[12px] text-foreground-muted">
           <div>
-            © {currentYear}{" "}
+            © {currentYear} Pro Craft Cleaning LLC (dba{" "}
             <span className="font-display italic font-normal tracking-[-0.035em] text-[14px] text-foreground-soft">
-              Cleenly
+              CLEENLY
             </span>
-            , Inc. · Licensed in Washington state.
+            ). Greater Seattle, Washington.
           </div>
           <div className="flex gap-[18px]">
             {footerConfig.legal.map((item) => (
