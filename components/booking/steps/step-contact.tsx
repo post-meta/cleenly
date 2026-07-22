@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   MARKETING_SMS_CONSENT_TEXT,
@@ -254,6 +255,27 @@ export function StepContact({
           {MARKETING_SMS_CONSENT_TEXT}
         </span>
       </label>
+
+      {/* Legal links shown at the point of SMS opt-in — required for A2P 10DLC carrier review */}
+      <p className="mt-2.5 text-[12px] leading-[1.5] text-foreground-muted">
+        Message frequency varies. Message and data rates may apply. See our{" "}
+        <Link
+          href="/privacy"
+          target="_blank"
+          className="underline hover:text-foreground transition-colors"
+        >
+          Privacy Policy
+        </Link>{" "}
+        and{" "}
+        <Link
+          href="/terms"
+          target="_blank"
+          className="underline hover:text-foreground transition-colors"
+        >
+          Terms of Service
+        </Link>
+        .
+      </p>
 
       {errors.form && (
         <p className="mt-2 text-center text-sm text-error">{errors.form}</p>
