@@ -28,7 +28,7 @@ const pageSchema = {
     "@type": "WebSite",
     "@id": "https://cleenly.app/#WebSite",
   },
-  dateModified: "2025-12-01",
+  dateModified: "2026-07-22",
 };
 
 const breadcrumbSchema = {
@@ -90,7 +90,7 @@ export default function PrivacyPolicyPage() {
           <div className="mb-8">
             <h1 className="text-3xl font-bold md:text-4xl">Privacy Policy</h1>
             <p className="mt-4 text-sm text-muted-foreground">
-              Last Updated: December 2025
+              Last Updated: July 2026
             </p>
           </div>
 

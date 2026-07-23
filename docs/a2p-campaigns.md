@@ -49,8 +49,8 @@ Prepared 2026-06-10 for Twilio Trust Hub submission.
 ### Sample messages
 
 1. `CLEENLY: We got your booking for Tue, Jun 23, morning slot. Deep cleaning, 2 bed/2 bath, estimate $240-$290. We confirm within 2 hours. Reply STOP to opt out.` (158)
-2. `CLEENLY: Reminder - your cleaning is tomorrow, 9-11 am arrival window. Need to reschedule? Reply here or call (425) 230-5957.` (125)
-3. `CLEENLY: Your cleaner is on the way. Arrival in about 25 minutes. Access instructions received. Questions? (425) 230-5957.` (122)
+2. `CLEENLY: Reminder - your cleaning is tomorrow, 9-11 am arrival window. Need to reschedule? Reply here or call (206) 641-4739.` (125)
+3. `CLEENLY: Your cleaner is on the way. Arrival in about 25 minutes. Access instructions received. Questions? (206) 641-4739.` (122)
 4. `CLEENLY: All done. Final price: $260. Receipt sent to your email. Not right? We fix it within 24 hrs - just reply here.` (119)
 5. `CLEENLY: Confirmed - Sat, Jun 27, afternoon (1-3 pm arrival). Final price confirmed before any charge. Reply HELP for help, STOP to opt out.` (140)
 
@@ -86,7 +86,7 @@ Same capture as Campaign 1 — both checkboxes appear in one frame. Annotate (ar
 
 ## Operational notes
 
-- **STOP/HELP**: enable Twilio **Advanced Opt-Out** on the Messaging Service for +1 425 230 5957. Default keywords (STOP, UNSTOP, HELP) + custom HELP response: `CLEENLY support: reply here or call (425) 230-5957. cleenly.app`.
+- **STOP/HELP**: enable Twilio **Advanced Opt-Out** on the Messaging Service for +1 425 230 5957. Default keywords (STOP, UNSTOP, HELP) + custom HELP response: `CLEENLY support: reply here or call (206) 641-4739. cleenly.app`.
 - **Two campaigns, one number**: both campaigns can share +1 425 230 5957; opt-outs apply per number, so a STOP halts both — acceptable for a single-number setup.
 - **Consent evidence**: `consent_log` table (Supabase project `onhrawahtfiuqzovglkb`) — exportable on carrier audit. RLS on, service-role access only.
 - **Do not** send marketing to numbers whose only consent row is `transactional_sms`.
