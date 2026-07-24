@@ -145,7 +145,7 @@ Base prices by service type and bedroom count (in cents):
       "@type": "ReserveAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://cleenly.com/book"
+        "urlTemplate": "https://cleenly.app/book"
       }
     }
   }

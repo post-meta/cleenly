@@ -104,7 +104,7 @@ STRIPE_WEBHOOK_SECRET=whsec_...
 Используем **Resend** (уже в dependencies):
 ```env
 RESEND_API_KEY=re_...
-RESEND_FROM_EMAIL=bookings@cleenly.com
+RESEND_FROM_EMAIL=bookings@cleenly.app
 ```
 
 **Тестирование:**

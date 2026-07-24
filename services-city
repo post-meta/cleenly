@@ -619,7 +619,7 @@ export function JsonLd({ data }: JsonLdProps) {
 import { CityData } from '@/lib/data/cities';
 import { ServiceData } from '@/lib/data/services';
 
-const BASE_URL = 'https://cleenly.com';
+const BASE_URL = 'https://cleenly.app';
 
 /**
  * Service Schema для страницы город+услуга
@@ -636,7 +636,7 @@ export function generateServiceSchema(city: CityData, service: ServiceData) {
       "@id": `${BASE_URL}/#LocalBusiness`,
       "name": "CLEENLY",
       "telephone": "+1-XXX-XXX-XXXX",
-      "email": "hello@cleenly.com",
+      "email": "hello@cleenly.app",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Seattle",
@@ -715,7 +715,7 @@ export function generateLocalBusinessSchema(city: CityData) {
     "description": `House cleaning services in ${city.name}, WA. Regular cleaning, deep cleaning, and move-out cleaning.`,
     "url": BASE_URL,
     "telephone": "+1-XXX-XXX-XXXX",
-    "email": "hello@cleenly.com",
+    "email": "hello@cleenly.app",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": city.name,
@@ -758,7 +758,7 @@ export const metadata: Metadata = {
   title: 'Cleaning Services Seattle | Regular, Deep, Move-Out | CLEENLY',
   description: 'Professional home cleaning services in Greater Seattle. Regular cleaning from $100, deep cleaning from $150, move-out cleaning from $200. Book online.',
   alternates: {
-    canonical: 'https://cleenly.com/services',
+    canonical: 'https://cleenly.app/services',
   },
 };
 
@@ -767,7 +767,7 @@ export default function ServicesPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.com" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.app" },
       { "@type": "ListItem", "position": 2, "name": "Services" }
     ]
   };
@@ -888,7 +888,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${service.name} Seattle | ${service.priceRange} | CLEENLY`,
     description: `${service.shortDescription} Serving Seattle, Bellevue, Kirkland, and Greater Eastside. ${service.priceRange}. Book online.`,
     alternates: {
-      canonical: `https://cleenly.com/services/${service.slug}`,
+      canonical: `https://cleenly.app/services/${service.slug}`,
     },
   };
 }
@@ -911,8 +911,8 @@ export default function ServiceDetailPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.com" },
-      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://cleenly.com/services" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.app" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://cleenly.app/services" },
       { "@type": "ListItem", "position": 3, "name": service.name }
     ]
   };
@@ -1070,7 +1070,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `House Cleaning ${city.name} WA | Book Online | CLEENLY`,
     description: `Professional house cleaning in ${city.name}. Regular cleaning, deep cleaning, and move-out cleaning. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online.`,
     alternates: {
-      canonical: `https://cleenly.com/${city.slug}`,
+      canonical: `https://cleenly.app/${city.slug}`,
     },
   };
 }
@@ -1081,7 +1081,7 @@ export default function CityPage({ params }: PageProps) {
 
   const localBusinessSchema = generateLocalBusinessSchema(city);
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', url: 'https://cleenly.com' },
+    { name: 'Home', url: 'https://cleenly.app' },
     { name: city.name }
   ]);
 
@@ -1234,7 +1234,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${service.name} ${city.name} WA | ${service.priceRange} | CLEENLY`,
     description: `${service.name} in ${city.name}, Washington. ${service.priceRange}. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online in 2 minutes.`,
     alternates: {
-      canonical: `https://cleenly.com/${city.slug}/${service.slug}`,
+      canonical: `https://cleenly.app/${city.slug}/${service.slug}`,
     },
   };
 }
@@ -1252,8 +1252,8 @@ export default function CityServicePage({ params }: PageProps) {
   const serviceSchema = generateServiceSchema(city, service);
   const faqSchema = generateFAQSchema(localFaqs);
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', url: 'https://cleenly.com' },
-    { name: city.name, url: `https://cleenly.com/${city.slug}` },
+    { name: 'Home', url: 'https://cleenly.app' },
+    { name: city.name, url: `https://cleenly.app/${city.slug}` },
     { name: service.name }
   ]);
 

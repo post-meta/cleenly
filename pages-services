@@ -104,7 +104,7 @@
 
 ### Пример: /bellevue/deep-cleaning
 
-**URL:** `cleenly.com/bellevue/deep-cleaning`
+**URL:** `cleenly.app/bellevue/deep-cleaning`
 
 **Title:** `Deep Cleaning Bellevue WA | $150-$300 | Book Online | CLEENLY`
 
@@ -173,7 +173,7 @@ A: Yes, we deep clean apartments throughout Bellevue...
   "description": "Professional deep cleaning service in Bellevue WA",
   "provider": {
     "@type": "LocalBusiness",
-    "@id": "https://cleenly.com/#LocalBusiness",
+    "@id": "https://cleenly.app/#LocalBusiness",
     "name": "CLEENLY"
   },
   "areaServed": {

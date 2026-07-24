@@ -55,7 +55,7 @@ export const footerConfig = {
   ],
   
   contact: {
-    email: 'hello@cleenly.com',
+    email: 'hello@cleenly.app',
   },
 };
 
@@ -294,7 +294,7 @@ export const metadata: Metadata = {
   title: 'Service Areas | House Cleaning in 22 Seattle Cities | CLEENLY',
   description: 'CLEENLY serves 22 cities across Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Tacoma, Everett, and more. Find house cleaning in your area.',
   alternates: {
-    canonical: 'https://cleenly.com/locations',
+    canonical: 'https://cleenly.app/locations',
   },
 };
 ```
@@ -346,7 +346,7 @@ export const metadata: Metadata = {
   title: 'Service Areas | House Cleaning in 22 Seattle Cities | CLEENLY',
   description: 'CLEENLY serves 22 cities across Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Tacoma, Everett, and more. Find house cleaning in your area.',
   alternates: {
-    canonical: 'https://cleenly.com/locations',
+    canonical: 'https://cleenly.app/locations',
   },
 };
 
@@ -355,7 +355,7 @@ export default function LocationsPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.com" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cleenly.app" },
       { "@type": "ListItem", "position": 2, "name": "Locations" }
     ]
   };
@@ -485,7 +485,7 @@ export default function LocationsPage() {
 │                                                                         │
 │  ───────────────────────────────────────────────────────────────────────│
 │                                                                         │
-│  hello@cleenly.com                          © 2025 CLEENLY · Privacy · Terms │
+│  hello@cleenly.app                          © 2025 CLEENLY · Privacy · Terms │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
@@ -519,7 +519,7 @@ export default function LocationsPage() {
 │                             │
 │  ───────────────────────────│
 │                             │
-│  hello@cleenly.com          │
+│  hello@cleenly.app          │
 │  © 2025 CLEENLY             │
 │  Privacy · Terms            │
 │                             │

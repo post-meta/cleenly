@@ -92,4 +92,4 @@ Recruitment content with:
 - CTA to join
 
 ### Contact
-Email: hello@cleenly.com
+Email: hello@cleenly.app
