@@ -16,8 +16,8 @@ export const regions = {
         cities: ['edmonds', 'lynnwood', 'everett'],
     },
     'Pierce County': {
-        description: 'Tacoma and south Sound',
-        cities: ['tacoma', 'lakewood'],
+        description: 'Tacoma, Gig Harbor and south Sound',
+        cities: ['tacoma', 'lakewood', 'gig-harbor'],
     },
 };
 

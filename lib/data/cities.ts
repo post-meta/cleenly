@@ -339,7 +339,7 @@ export const cities: CityData[] = [
         coordinates: { lat: 47.2529, lng: -122.4443 },
         zipCodes: ['98402', '98403', '98404', '98405', '98406', '98407', '98408', '98409', '98418', '98422', '98465'],
         neighborhoods: ['Downtown Tacoma', 'Stadium District', 'Proctor', 'North End', 'West End', 'South Tacoma', '6th Avenue', 'Old Town'],
-        nearbyAreas: ['lakewood', 'university-place', 'fircrest', 'federal-way'],
+        nearbyAreas: ['lakewood', 'gig-harbor', 'university-place', 'federal-way'],
         description: 'Serving all Tacoma neighborhoods from the North End to South Tacoma.',
         wikipediaUrl: 'https://en.wikipedia.org/wiki/Tacoma,_Washington',
         landmarks: ['Museum of Glass', 'Point Defiance Park', 'Tacoma Dome'],
@@ -358,6 +358,20 @@ export const cities: CityData[] = [
         wikipediaUrl: 'https://en.wikipedia.org/wiki/Lakewood,_Washington',
         landmarks: ['Lakewold Gardens', 'Thornewood Castle', 'American Lake'],
         professions: ['military personnel', 'families']
+    },
+    {
+        slug: 'gig-harbor',
+        name: 'Gig Harbor',
+        county: 'Pierce County',
+        state: 'WA',
+        coordinates: { lat: 47.3293, lng: -122.5804 },
+        zipCodes: ['98329', '98332', '98335'],
+        neighborhoods: ['Downtown Gig Harbor', 'Harborview', 'Peacock Hill', 'Canterwood', 'Rosedale', 'Artondale', 'Crescent Valley', 'Purdy', 'Fox Island'],
+        nearbyAreas: ['tacoma', 'lakewood'],
+        description: 'Serving Gig Harbor from the downtown waterfront to Canterwood and Rosedale.',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Gig_Harbor,_Washington',
+        landmarks: ['Gig Harbor Marina', 'Harbor History Museum', 'Skansie Brothers Park', 'Tacoma Narrows Bridge'],
+        professions: ['boat owners', 'Tacoma commuters', 'families', 'retirees']
     },
 ];
 

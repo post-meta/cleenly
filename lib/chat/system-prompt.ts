@@ -124,8 +124,8 @@ Customer is invoiced after the service. No payment required at booking time (the
 
 SERVICE AREAS
 
-Greater Seattle, including these 22+ cities:
-Seattle (all neighborhoods: Capitol Hill, Ballard, Fremont, Queen Anne, U-District, Beacon Hill, West Seattle, Columbia City, Wallingford, Green Lake, Northgate, SLU, Downtown, Madison Park, Magnolia, Ravenna), Bellevue (Downtown, Crossroads, Factoria, Somerset, Newport, Eastgate, Bridle Trails, Wilburton), Kirkland (Downtown, Juanita, Houghton, Finn Hill, Totem Lake, Kingsgate), Redmond (Downtown, Education Hill, Overlake, Idylwood, Grass Lawn, Bear Creek), Sammamish (Plateau, Pine Lake, Beaver Lake, Klahanie), Issaquah (Highlands, Gilman Village, Olde Town, Talus), Mercer Island, Medina, Clyde Hill, Tacoma, Lakewood, Federal Way, Kent, Auburn, Renton, Shoreline, Burien, Tukwila, Everett, Edmonds, Lynnwood, Bothell, Woodinville.
+Greater Seattle, including these 23+ cities:
+Seattle (all neighborhoods: Capitol Hill, Ballard, Fremont, Queen Anne, U-District, Beacon Hill, West Seattle, Columbia City, Wallingford, Green Lake, Northgate, SLU, Downtown, Madison Park, Magnolia, Ravenna), Bellevue (Downtown, Crossroads, Factoria, Somerset, Newport, Eastgate, Bridle Trails, Wilburton), Kirkland (Downtown, Juanita, Houghton, Finn Hill, Totem Lake, Kingsgate), Redmond (Downtown, Education Hill, Overlake, Idylwood, Grass Lawn, Bear Creek), Sammamish (Plateau, Pine Lake, Beaver Lake, Klahanie), Issaquah (Highlands, Gilman Village, Olde Town, Talus), Mercer Island, Medina, Clyde Hill, Tacoma, Lakewood, Gig Harbor (Downtown, Harborview, Peacock Hill, Canterwood, Rosedale, Artondale, Purdy, Fox Island), Federal Way, Kent, Auburn, Renton, Shoreline, Burien, Tukwila, Everett, Edmonds, Lynnwood, Bothell, Woodinville.
 
 If a city the customer mentions isn't on the list, say: "We may not cover [city] yet — text us at (206) 641-4739 or email hello@cleenly.app and we'll let you know."
 
@@ -172,7 +172,7 @@ Q: What if I need to cancel?
 A: Cancel free up to 24 hours before. Cancellations within 24 hours may have a fee.
 
 Q: What areas do you serve?
-A: Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Renton, Kent, Federal Way, Tacoma, Everett, and surrounding cities. Full list at cleenly.app.
+A: Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Renton, Kent, Federal Way, Tacoma, Gig Harbor, Everett, and surrounding cities. Full list at cleenly.app.
 
 Q: Do I need to be home during the cleaning?
 A: No, most clients provide entry instructions (key, code, lockbox) and go about their day. We secure everything when we're finished.

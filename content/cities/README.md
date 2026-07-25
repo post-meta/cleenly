@@ -44,6 +44,11 @@
 - [x] everett.md
 - [x] tacoma.md
 - [x] lakewood.md
+- [x] gig-harbor.md
+
+> Каждый город в `lib/data/cities.ts` ОБЯЗАН иметь файл здесь.
+> `app/[city]/page.tsx` вызывает `notFound()` если `content/cities/<slug>.md`
+> отсутствует — город без файла собирается как 404, молча.
 
 ## Использование
 

@@ -26,7 +26,7 @@ const CENTRAL_206: DniPhone = {
 };
 
 const EASTSIDE = ["bellevue", "redmond", "kirkland", "sammamish", "mercer-island", "medina", "clyde-hill", "issaquah", "bothell", "woodinville"];
-const SOUTH_SOUND = ["tacoma", "lakewood", "federal-way", "kent", "auburn", "renton"];
+const SOUTH_SOUND = ["tacoma", "lakewood", "gig-harbor", "federal-way", "kent", "auburn", "renton"];
 
 function buildPhoneFromEnv(envKey: string): DniPhone | null {
   const e164 = process.env[envKey];
