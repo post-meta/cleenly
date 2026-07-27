@@ -25,6 +25,39 @@ export default auth((req) => {
         });
     }
 
+    // First-touch campaign attribution. The visit that carries the UTM tags is
+    // rarely the visit that books, so park them in a cookie and let
+    // /api/bookings copy them onto the row.
+    //
+    // First touch wins: a visitor who arrives from post-03, leaves, and comes
+    // back through the bio link is credited to post-03. Overwriting on the last
+    // touch would credit the bio link for every booking the posts produced.
+    if (!req.cookies.get('cleenly_attr')) {
+        const p = nextUrl.searchParams;
+        const attr: Record<string, string> = {};
+        for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+            const v = p.get(key);
+            if (v) attr[key] = v.slice(0, 64);
+        }
+        if (Object.keys(attr).length > 0) {
+            attr.landing_path = nextUrl.pathname.slice(0, 200);
+            // Host only — a full referrer URL can carry the other site's own query string.
+            const referer = req.headers.get('referer');
+            if (referer) {
+                try {
+                    attr.referrer = new URL(referer).host.slice(0, 200);
+                } catch {
+                    /* malformed Referer header — skip it rather than store garbage */
+                }
+            }
+            res.cookies.set('cleenly_attr', JSON.stringify(attr), {
+                maxAge: 60 * 60 * 24 * 30, // 30 days
+                path: '/',
+                sameSite: 'lax',
+            });
+        }
+    }
+
     return res;
 });
 

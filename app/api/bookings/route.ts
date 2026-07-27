@@ -10,6 +10,7 @@ import {
   MARKETING_SMS_CONSENT_TEXT,
   TRANSACTIONAL_SMS_CONSENT_TEXT,
 } from "@/lib/consent";
+import { readAttribution } from "@/lib/attribution";
 import type {
   Addon,
   BathroomCount,
@@ -158,22 +159,27 @@ export async function POST(request: NextRequest) {
       user_id: userId,
     };
 
+    // First-touch campaign attribution from the cleenly_attr cookie. Empty for
+    // direct, organic and phone-led bookings, which is most of them.
+    const attribution = readAttribution(request);
+
     let { data, error } = await supabase
       .from("bookings")
       .insert({
         ...bookingRow,
+        ...attribution,
         sms_opt_in: smsOptIn,
         sms_opt_in_at: smsOptIn ? new Date().toISOString() : null,
       })
       .select()
       .single();
 
-    // Graceful fallback: if the sms_opt_in columns are missing in this environment
-    // (e.g. preview DB without the migration), retry without them.
-    // The booking must never fail because of consent bookkeeping.
+    // Graceful fallback: if the sms_opt_in or utm columns are missing in this
+    // environment (e.g. preview DB without the migration), retry without them.
+    // The booking must never fail because of consent or marketing bookkeeping.
     if (error && error.code === "PGRST204") {
       console.warn(
-        "bookings.sms_opt_in columns missing, retrying insert without them:",
+        "bookings.sms_opt_in / utm columns missing, retrying insert without them:",
         error.message
       );
       ({ data, error } = await supabase
