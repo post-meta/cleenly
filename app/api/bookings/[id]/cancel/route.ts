@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { supabase } from "@/lib/supabase";
 import { notifyBookingCancelled } from "@/lib/notifications";
+import { sendBookingSms } from "@/lib/sms/bookings";
 
 // A booking can be cancelled by the customer until work starts.
 const CANCELLABLE_STATUSES = ["new", "pending", "confirmed"];
@@ -21,7 +22,7 @@ export async function POST(
   const { data: booking } = await supabase
     .from("bookings")
     .select(
-      "id, user_id, status, name, email, phone, service_type, scheduled_date, preferred_date, preferred_time"
+      "id, user_id, status, name, email, phone, service_type, scheduled_date, scheduled_time, preferred_date, preferred_time, sms_opt_in"
     )
     .eq("id", id)
     .single();
@@ -51,7 +52,11 @@ export async function POST(
     );
   }
 
-  await notifyBookingCancelled(booking);
+  // Owner alert and the customer's own confirmation of the change they made.
+  await Promise.allSettled([
+    notifyBookingCancelled(booking),
+    sendBookingSms(booking, "booking_cancelled"),
+  ]);
 
   return NextResponse.json({ success: true });
 }

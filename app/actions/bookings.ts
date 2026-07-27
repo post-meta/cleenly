@@ -3,6 +3,7 @@
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
 import { qualifyReferralOnCompletion } from '@/lib/referrals/credits';
+import { sendBookingSms } from '@/lib/sms/bookings';
 
 export interface CreateBookingData {
     // Customer
@@ -212,6 +213,14 @@ export async function createBooking(data: CreateBookingData) {
 }
 
 export async function updateBooking(id: string, data: Partial<CreateBookingData>) {
+    // Read the current schedule first: a date or time change is what the
+    // customer gets texted about, and we can only tell by comparing.
+    const { data: before } = await supabase
+        .from('bookings')
+        .select('scheduled_date, scheduled_time')
+        .eq('id', id)
+        .single();
+
     const updatePayload: Record<string, any> = {};
 
     if (data.serviceType !== undefined) {
@@ -263,6 +272,14 @@ export async function updateBooking(id: string, data: Partial<CreateBookingData>
         return { error: error.message, data: null };
     }
 
+    // Schedule moved: tell the customer the new slot, nothing else.
+    const dateChanged =
+        booking?.scheduled_date !== before?.scheduled_date ||
+        booking?.scheduled_time !== before?.scheduled_time;
+    if (dateChanged && booking?.scheduled_date) {
+        await sendBookingSms(booking, 'booking_rescheduled');
+    }
+
     revalidatePath('/admin/bookings');
     revalidatePath(`/admin/bookings/${id}`);
     return { data: booking, error: null };
@@ -295,6 +312,15 @@ export async function updateBookingStatus(id: string, status: string) {
 
     revalidatePath('/admin/bookings');
     revalidatePath(`/admin/bookings/${id}`);
+
+    // Customer SMS on the two statuses they care about. 'completed' and
+    // 'pending_payment' stay silent on purpose — nothing to tell them there.
+    if (booking && (status === 'confirmed' || status === 'cancelled')) {
+        await sendBookingSms(
+            booking,
+            status === 'confirmed' ? 'booking_confirmed' : 'booking_cancelled'
+        );
+    }
 
     // Referral attribution: a referred customer's first completed cleaning rewards the referrer.
     if (status === 'completed' && booking?.user_id) {

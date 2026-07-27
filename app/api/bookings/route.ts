@@ -5,6 +5,7 @@ import {
   notifyCustomerBookingReceived,
   notifyNewBooking,
 } from "@/lib/notifications";
+import { sendBookingSms } from "@/lib/sms/bookings";
 import { calculateFirstVisitPrice } from "@/lib/pricing";
 import {
   MARKETING_SMS_CONSENT_TEXT,
@@ -170,6 +171,10 @@ export async function POST(request: NextRequest) {
         ...attribution,
         sms_opt_in: smsOptIn,
         sms_opt_in_at: smsOptIn ? new Date().toISOString() : null,
+        marketing_sms_opt_in: marketingSmsOptIn,
+        marketing_sms_opt_in_at: marketingSmsOptIn
+          ? new Date().toISOString()
+          : null,
       })
       .select()
       .single();
@@ -270,6 +275,17 @@ export async function POST(request: NextRequest) {
     await Promise.allSettled([
       notifyNewBooking(notificationPayload),
       notifyCustomerBookingReceived(notificationPayload),
+      // Customer SMS: only when the isolated consent checkbox was ticked.
+      sendBookingSms(
+        {
+          id: data.id,
+          phone: data.phone,
+          sms_opt_in: smsOptIn,
+          preferred_date: data.preferred_date,
+          preferred_time: data.preferred_time,
+        },
+        "booking_received"
+      ),
     ]);
 
     return NextResponse.json({ success: true, booking: data });
