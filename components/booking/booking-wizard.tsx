@@ -12,6 +12,7 @@ import {
   StepConfirmation,
 } from "./steps";
 import { calculateFirstVisitPrice } from "@/lib/pricing";
+import { trackBookingStarted } from "@/lib/analytics";
 import { StickyPriceFooter } from "./sticky-price-footer";
 import type {
   Addon,
@@ -94,6 +95,11 @@ export function BookingWizard({
   useEffect(() => {
     setErrors({});
   }, [step]);
+
+  // One begin_checkout per wizard mount — the sticky CTA fires book_click separately.
+  useEffect(() => {
+    trackBookingStarted("wizard");
+  }, []);
 
   const updateFormData = (data: Partial<BookingFormData>) => {
     setFormData((prev) => ({ ...prev, ...data }));

@@ -8,6 +8,7 @@ import { Menu, X, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { useSession, signOut } from "next-auth/react";
+import { trackPhoneClick } from "@/lib/analytics";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,6 +38,7 @@ export function Header() {
 
           <a
             href={PHONE_SMS_HREF}
+            onClick={() => trackPhoneClick("sms")}
             className="flex items-center gap-1.5 text-[14px] font-medium text-foreground no-underline hover:text-accent transition-colors"
           >
             <MessageSquare className="h-4 w-4" />
@@ -124,7 +126,10 @@ export function Header() {
             <a
               href={PHONE_SMS_HREF}
               className="flex items-center gap-2 text-[18px] font-medium text-foreground no-underline hover:text-accent transition-colors"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                trackPhoneClick("sms");
+                setIsMenuOpen(false);
+              }}
             >
               <MessageSquare className="h-5 w-5" />
               Text {PHONE_DISPLAY}
