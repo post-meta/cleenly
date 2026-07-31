@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
 import { qualifyReferralOnCompletion } from '@/lib/referrals/credits';
 import { sendBookingSms } from '@/lib/sms/bookings';
+import { requireAdmin } from '@/lib/auth/admin';
 
 export interface CreateBookingData {
     // Customer
@@ -48,6 +49,7 @@ export async function getBookings(filters?: {
     dateFrom?: string;
     dateTo?: string;
 }) {
+    await requireAdmin();
     let query = supabase
         .from('bookings')
         .select(`
@@ -91,6 +93,7 @@ export async function getBookings(filters?: {
 }
 
 export async function getBooking(id: string) {
+    await requireAdmin();
     const { data, error } = await supabase
         .from('bookings')
         .select(`
@@ -115,6 +118,7 @@ export async function getBooking(id: string) {
 }
 
 export async function createBooking(data: CreateBookingData) {
+    await requireAdmin();
     const {
         customerId,
         customerName,
@@ -213,6 +217,7 @@ export async function createBooking(data: CreateBookingData) {
 }
 
 export async function updateBooking(id: string, data: Partial<CreateBookingData>) {
+    await requireAdmin();
     // Read the current schedule first: a date or time change is what the
     // customer gets texted about, and we can only tell by comparing.
     const { data: before } = await supabase
@@ -286,6 +291,7 @@ export async function updateBooking(id: string, data: Partial<CreateBookingData>
 }
 
 export async function updateBookingStatus(id: string, status: string) {
+    await requireAdmin();
     const updatePayload: Record<string, any> = { status };
 
     // Set timestamps based on status
@@ -331,6 +337,7 @@ export async function updateBookingStatus(id: string, status: string) {
 }
 
 export async function getCustomers(search?: string) {
+    await requireAdmin();
     let query = supabase
         .from('users')
         .select('id, name, email, phone')
@@ -353,6 +360,7 @@ export async function getCustomers(search?: string) {
 
 // Get payments for a booking to calculate payment status
 export async function getBookingPayments(bookingId: string) {
+    await requireAdmin();
     const { data, error } = await supabase
         .from('payments')
         .select('*')

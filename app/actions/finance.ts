@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
+import { requireAdmin } from '@/lib/auth/admin';
 
 export async function recordPayment({
     bookingId,
@@ -18,6 +19,7 @@ export async function recordPayment({
     transactionId?: string;
     checkNumber?: string;
 }) {
+    await requireAdmin();
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -78,6 +80,7 @@ export async function createPayout({
     amountToPay: number;
     notes?: string;
 }) {
+    await requireAdmin();
     const supabase = await createClient();
 
     const { error } = await supabase
@@ -107,6 +110,7 @@ export async function markPayoutPaid({
     method: string;
     transactionId?: string;
 }) {
+    await requireAdmin();
     const supabase = await createClient();
 
     // Get payout to know amount
@@ -139,6 +143,7 @@ export async function markMultiplePayoutsPaid(
     method: string,
     transactionId?: string
 ) {
+    await requireAdmin();
     const supabase = await createClient();
 
     // Fetch payouts to get current amounts

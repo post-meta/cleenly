@@ -1,10 +1,17 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { isAdmin } from '@/lib/auth/admin';
 
-export default function AdminLayout({
+export default async function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    // The middleware only enforces "signed in", so a customer account reaches
+    // these pages otherwise. 404 rather than redirect — no reason to advertise
+    // that an admin area exists.
+    if (!(await isAdmin())) notFound();
+
     return (
         <div className="flex flex-col min-h-screen">
             <header className="border-b bg-white">

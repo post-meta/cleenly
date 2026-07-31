@@ -5,6 +5,7 @@ import { auth } from '@/auth';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { sendMarketingBlast, type BlastResult } from '@/lib/sms/marketing';
 import { clientSmsEnabled } from '@/lib/sms/client';
+import { isAdmin } from '@/lib/auth/admin';
 
 /**
  * Admin gate for anything that sends to customers.
@@ -16,28 +17,8 @@ import { clientSmsEnabled } from '@/lib/sms/client';
  */
 async function assertAdmin(): Promise<{ ok: true } | { ok: false; error: string }> {
     const session = await auth();
-    const email = session?.user?.email?.toLowerCase();
-    if (!email) return { ok: false, error: 'Not signed in.' };
-
-    const allowlist = (process.env.ADMIN_EMAILS || '')
-        .split(',')
-        .map((e) => e.trim().toLowerCase())
-        .filter(Boolean);
-
-    if (allowlist.includes(email)) return { ok: true };
-
-    try {
-        const supabase = createAdminClient();
-        const { data } = await supabase
-            .from('users')
-            .select('role')
-            .eq('email', email)
-            .maybeSingle();
-        if (data?.role === 'admin') return { ok: true };
-    } catch (err) {
-        console.error('[sms] admin check failed:', err);
-    }
-
+    if (!session?.user?.email) return { ok: false, error: 'Not signed in.' };
+    if (await isAdmin()) return { ok: true };
     return { ok: false, error: 'Admin access required.' };
 }
 

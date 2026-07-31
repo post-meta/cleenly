@@ -2,6 +2,7 @@
 
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+import { requireAdmin } from '@/lib/auth/admin';
 
 export interface CreateCleanerData {
     fullName: string;
@@ -16,6 +17,7 @@ export interface UpdateCleanerData extends Partial<CreateCleanerData> {
 }
 
 export async function getCleaners() {
+    await requireAdmin();
     const { data, error } = await supabase
         .from('cleaners')
         .select('*')
@@ -30,6 +32,7 @@ export async function getCleaners() {
 }
 
 export async function getActiveCleaners() {
+    await requireAdmin();
     const { data, error } = await supabase
         .from('cleaners')
         .select('*')
@@ -45,6 +48,7 @@ export async function getActiveCleaners() {
 }
 
 export async function getCleaner(id: string) {
+    await requireAdmin();
     const { data, error } = await supabase
         .from('cleaners')
         .select('*')
@@ -60,6 +64,7 @@ export async function getCleaner(id: string) {
 }
 
 export async function createCleaner(data: CreateCleanerData) {
+    await requireAdmin();
     const { fullName, phone, email, photoUrl, notes } = data;
 
     if (!fullName?.trim()) {
@@ -96,6 +101,7 @@ export async function createCleaner(data: CreateCleanerData) {
 }
 
 export async function updateCleaner(id: string, data: UpdateCleanerData) {
+    await requireAdmin();
     const updatePayload: Record<string, any> = {};
 
     if (data.fullName !== undefined) {
@@ -134,10 +140,12 @@ export async function updateCleaner(id: string, data: UpdateCleanerData) {
 }
 
 export async function toggleCleanerActive(id: string, isActive: boolean) {
+    await requireAdmin();
     return updateCleaner(id, { isActive });
 }
 
 export async function deleteCleaner(id: string) {
+    await requireAdmin();
     // Soft delete - just deactivate
     return toggleCleanerActive(id, false);
 }

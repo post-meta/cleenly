@@ -6,6 +6,7 @@ import { getStripe } from "@/lib/stripe/client";
 import { HOURLY_RATE_CENTS, calculateHourlyTotalCents } from "@/lib/pricing";
 import { redeemCreditForBooking } from "@/lib/referrals/credits";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from '@/lib/auth/admin';
 
 const SERVICE_LABELS: Record<string, string> = {
   regular: "Regular cleaning",
@@ -45,6 +46,7 @@ export async function createBookingInvoice({
   | { error: string }
 > {
   // 1. Admin-only.
+  await requireAdmin();
   const ssr = await createClient();
   const {
     data: { user },
