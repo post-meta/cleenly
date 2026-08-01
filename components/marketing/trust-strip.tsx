@@ -1,8 +1,8 @@
 export function TrustStrip() {
   const items = [
-    { icon: "shield", label: "Licensed", sub: "Washington state" },
+    { icon: "shield", label: "On time", sub: "We arrive in the window we gave you" },
     { icon: "umbrella", label: "Insured", sub: "General liability" },
-    { icon: "tag", label: "Price upfront", sub: "The price you see is what you pay" },
+    { icon: "tag", label: "Price upfront", sub: "Never more than your estimate" },
     { icon: "redo", label: "24-hour re-clean", sub: "Not right? We come back free" },
     { icon: "box", label: "Own supplies", sub: "We bring everything" },
   ];

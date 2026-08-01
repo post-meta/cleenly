@@ -233,8 +233,8 @@ export default function AboutPage() {
                 </h3>
                 <p className="mt-2 text-muted-foreground">
                   You see a real price range before you book — based on your
-                  home, not a teaser. The final price is billed by the hour and
-                  we confirm it with you before charging. If something changes it
+                  home, not a teaser. The final price never goes above the top of
+                  that range, and we confirm it with you before charging. If something changes it
                   (you want inside the oven cleaned, the home is bigger than
                   described), we tell you before, never after.
                 </p>

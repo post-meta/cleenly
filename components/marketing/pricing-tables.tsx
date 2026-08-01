@@ -68,12 +68,11 @@ export function PricingTables() {
         Pricing by <em className="italic text-foreground-soft font-display">Service Type</em>
       </h2>
       <p className="mt-4 text-muted-foreground">
-        These are upfront estimates for the Seattle metro area including
-        Bellevue, Kirkland, Redmond, and surrounding cities. The final price is
-        billed by the hour — ${PRICE_DISPLAY.ratePerCleanerHour} per
-        cleaner-hour, ${PRICE_DISPLAY.minJob} minimum — for the actual time your
-        home takes, and we confirm it with you before charging. The estimate is
-        what we expect the final to be.
+        These are upfront estimates for the Greater Seattle area, from Everett
+        down through Seattle and the Eastside to Tacoma and Gig Harbor. The
+        minimum job is ${PRICE_DISPLAY.minJob}. Your final price never goes
+        above the top of your estimate, and we confirm it with you before
+        charging.
       </p>
 
       {/* First / Deep Cleaning */}

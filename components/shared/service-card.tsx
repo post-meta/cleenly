@@ -64,7 +64,7 @@ export function ServiceCard({ service, citySlug, cityName }: ServiceCardProps) {
             </div>
 
             <p className="mt-1 text-[14px] text-foreground-muted">
-                {service.duration} · billed by the hour, ${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour · supplies included
+                {service.duration} · never more than your estimate · supplies included
             </p>
 
             {service.checklist && service.checklist.length > 0 && (

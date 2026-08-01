@@ -3,9 +3,9 @@
 > CLEENLY is a small house cleaning company serving the Greater Seattle area (Washington State), operated by Pro Craft Cleaning LLC. Customers book online, see an upfront estimate before booking, and pay after the cleaning is complete — no payment is taken at booking.
 
 ## How pricing works
-- Billed by the hour: $75 per cleaner-hour, typically a two-cleaner team.
-- Minimum job: $185.
-- The booking calculator shows an upfront estimate range based on service, home size, bathrooms, condition, and square footage. The final price is the actual cleaner-hours worked, confirmed before charging.
+- You are quoted a price for the job, not an open-ended rate. Minimum job: $185.
+- The booking calculator shows an upfront estimate range based on service, home size, bathrooms, condition, and square footage.
+- The final price never goes above the top of that estimate, and we confirm it with you before charging.
 
 ## Services & starting prices (estimates, not quotes)
 - Regular Cleaning — recurring maintenance, from $185 (the first visit is priced as a deep clean)

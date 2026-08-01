@@ -59,8 +59,8 @@ export function Services() {
           </div>
           <p className="text-[18px] leading-[1.55] text-foreground-soft max-w-[460px] lg:mb-2">
             Each service is a defined checklist, a typical duration, and an
-            upfront estimate. We bill the final price by the hour — $75 per
-            cleaner-hour, $185 minimum — and confirm it before charging.
+            upfront estimate. The final price never goes above the top of that
+            estimate, and we confirm it with you before charging.
           </p>
         </div>
 

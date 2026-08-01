@@ -12,7 +12,7 @@ import { PRICE_DISPLAY } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "House Cleaning Prices Seattle | From $185 | CLEENLY",
   description:
-    "Seattle house cleaning prices: first/deep clean $290–650 for most homes, move-out $585–885, recurring from $185. Upfront estimate, billed by the hour at $75/cleaner-hour. Get your price in 30 seconds.",
+    "Seattle house cleaning prices: first/deep clean $290–650 for most homes, move-out $585–885, recurring from $185. Upfront estimate, never more than the top of it. See your price in 2 minutes.",
   keywords: [
     "house cleaning prices seattle",
     "cleaning service cost seattle",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "House Cleaning Prices Seattle | CLEENLY",
     description:
-      "Seattle house cleaning prices: first/deep clean $290–650, move-out $585–885, recurring from $185. Upfront estimate, billed by the hour. Get your price.",
+      "Seattle house cleaning prices: first/deep clean $290–650, move-out $585–885, recurring from $185. Upfront estimate, never more than the top of it.",
     type: "website",
     url: "https://cleenly.app/pricing",
   },
@@ -54,36 +54,36 @@ const serviceSchema = {
         "@type": "Offer",
         name: "First / Deep Cleaning",
         description:
-          "Thorough first or deep cleaning including inside appliances, baseboards, and hard-to-reach areas. Upfront estimate; final price billed by the hour at $75 per cleaner-hour.",
+          "Thorough first or deep cleaning including inside appliances, baseboards, and hard-to-reach areas. Upfront estimate; the final price never goes above the top of it.",
         priceSpecification: {
           "@type": "PriceSpecification",
           price: "290-1120",
           priceCurrency: "USD",
-          unitText: "estimate, billed hourly at $75/cleaner-hour",
+          unitText: "estimate for the job",
         },
       },
       {
         "@type": "Offer",
         name: "Recurring Cleaning",
         description:
-          "Ongoing maintenance cleaning from visit two onward. Upfront estimate; final price billed by the hour at $75 per cleaner-hour.",
+          "Ongoing maintenance cleaning from visit two onward. Upfront estimate; the final price never goes above the top of it.",
         priceSpecification: {
           "@type": "PriceSpecification",
           price: "185-305",
           priceCurrency: "USD",
-          unitText: "estimate, billed hourly at $75/cleaner-hour",
+          unitText: "estimate for the job",
         },
       },
       {
         "@type": "Offer",
         name: "Move-Out Cleaning",
         description:
-          "Complete cleaning to landlord standards for security deposit return. Upfront estimate; final price billed by the hour at $75 per cleaner-hour.",
+          "Complete cleaning to landlord standards for security deposit return. Upfront estimate; the final price never goes above the top of it.",
         priceSpecification: {
           "@type": "PriceSpecification",
           price: "380-1295",
           priceCurrency: "USD",
-          unitText: "estimate, billed hourly at $75/cleaner-hour",
+          unitText: "estimate for the job",
         },
       },
     ],
@@ -99,7 +99,7 @@ const faqSchema = {
       name: "How much does house cleaning cost in Seattle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "House cleaning in Seattle costs from $185 depending on home size and cleaning type. A first or deep clean runs $290–350 for a 1-bed up to $935–1,120 for a 5+ bed. Move-out cleaning runs $380–455 up to $1,080–1,295. Recurring maintenance starts at $185. You see an upfront estimate; the final price is billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before charging.",
+        text: "House cleaning in Seattle costs from $185 depending on home size and cleaning type. A first or deep clean runs $290–350 for a 1-bed up to $935–1,120 for a 5+ bed. Move-out cleaning runs $380–455 up to $1,080–1,295. Recurring maintenance starts at $185. You see an upfront estimate before you book, and the final price never goes above the top of it.",
       },
     },
     {
@@ -128,10 +128,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Do you charge hourly or flat rate?",
+      name: "How is my price set?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You see an upfront estimate range based on your home size and cleaning type. The final price is billed by the hour — $75 per cleaner-hour, $185 minimum — for the actual time your home takes, and we confirm it with you before charging. The estimate is what we expect the final to be.",
+        text: "By your home — its size, its bathrooms, its condition, and the service you pick. The booking calculator turns that into an estimate before you commit, the minimum job is $185, and your final price never goes above the top of that estimate.",
       },
     },
     {
@@ -139,7 +139,7 @@ const faqSchema = {
       name: "Are there any hidden fees?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No hidden fees. We bill the actual cleaner-hours worked at $75 per cleaner-hour, never more than what the work takes, and we confirm the final price before charging. We may suggest add-ons (like inside fridge or oven) but you decide what's included.",
+        text: "No hidden fees. The estimate you see covers the clean, your final price never goes above the top of it, and we confirm before charging. We may suggest add-ons (like inside fridge or oven) but you decide what's included.",
       },
     },
   ],
@@ -195,11 +195,9 @@ export default function PricingPage() {
               same home runs {PRICE_DISPLAY.moveOut.bySize["2"]} to{" "}
               {PRICE_DISPLAY.moveOut.bySize["3"]}. Recurring maintenance starts
               at {PRICE_DISPLAY.recurring.bySize["1"]}. You see an upfront
-              estimate; the final price is billed by the hour — $
-              {PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, $
-              {PRICE_DISPLAY.minJob} minimum — and confirmed with you before
-              charging. Below you&apos;ll find detailed pricing by service type
-              and what&apos;s included in each.
+              estimate before you book, and the final price never goes above
+              the top of it. Below you&apos;ll find detailed pricing by service
+              type and what&apos;s included in each.
             </p>
             <div className="mt-8">
               <Button size="lg" asChild>
@@ -226,8 +224,8 @@ export default function PricingPage() {
               Get Your <em className="italic text-foreground-soft font-display font-normal">Exact Price</em>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Price depends on your specific home. Get your exact quote in about
-              30 seconds — no account required.
+              Price depends on your specific home. See your estimate in 2 minutes
+              — no account required.
             </p>
             <div className="mt-8">
               <Button size="lg" asChild>

@@ -13,12 +13,12 @@ export function Hero() {
             <Eyebrow>Greater Seattle · online booking</Eyebrow>
 
             <h1 className="font-display font-normal text-[48px] md:text-[64px] lg:text-[72px] leading-[1.05] tracking-[-0.025em] text-foreground max-w-[560px]">
-              A cleaner home in <em className="italic text-foreground-soft font-display font-normal">three taps.</em>
+              A cleaner home, <em className="italic text-foreground-soft font-display font-normal">on the day you booked it.</em>
             </h1>
 
             <p className="text-[19px] leading-[1.55] text-foreground-soft max-w-[480px]">
-              We bring our own supplies. Pacific Northwest standards. The same
-              crew whenever we can — the same key under the mat, but better.
+              We arrive in the window we gave you, bring our own supplies, and
+              finish the job before we leave. The same crew whenever we can.
             </p>
 
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
@@ -32,9 +32,9 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-[13px] text-foreground-muted">
-              <span className="whitespace-nowrap">Licensed · Insured</span>
+              <span className="whitespace-nowrap">Insured · Own supplies</span>
               <span className="hidden md:inline w-[1px] h-3.5 bg-border"></span>
-              <span className="whitespace-nowrap">No payment until confirmed</span>
+              <span className="whitespace-nowrap">You pay after the clean</span>
             </div>
           </div>
 

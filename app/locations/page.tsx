@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
     title: 'Service Areas | House Cleaning in 23 Seattle Cities | CLEENLY',
-    description: 'CLEENLY serves 23 cities across Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Tacoma, Gig Harbor, Everett, and more. Find house cleaning in your area.',
+    description: 'CLEENLY serves 24 cities across Greater Seattle: Seattle, Bellevue, Kirkland, Redmond, Tacoma, Gig Harbor, Everett, and more. Find house cleaning in your area.',
     alternates: {
         canonical: 'https://cleenly.app/locations',
     },

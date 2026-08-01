@@ -33,13 +33,13 @@ export const blogPosts: BlogPost[] = [
             {
                 paragraphs: [
                     "Most renters going through a move-out clean spend the most effort on the wrong areas. Not because the wrong areas are dirty — they're often the cleanest. But because the cleaning industry sells \"deep clean\" as an exhaustive checklist, and your landlord isn't grading the same checklist your cleaner is.",
-                    "Here's what we've found across hundreds of move-out cleanings in Greater Seattle: landlords have a short, predictable list, and most of it has nothing to do with what online checklists emphasize.",
+                    "Landlords work from a short, predictable list, and most of it has nothing to do with what online checklists emphasize.",
                 ],
             },
             {
                 heading: "What landlords actually inspect",
                 paragraphs: [
-                    "Property managers and landlords work fast. A typical inspection is 15-30 minutes for a 1-2 bedroom unit. They aren't running a white-glove test — they're checking specific failure points that come up in their tenant turnover logs.",
+                    "Property managers and landlords work fast. A typical inspection is 15-30 minutes for a 1-2 bedroom unit. They aren't running a white-glove test — they're checking the same handful of failure points, in the same order, every time.",
                 ],
                 bullets: [
                     "Kitchen: inside oven, inside fridge, inside microwave, top of range hood, around the burners, the seal around the dishwasher, the inside of the dishwasher",
@@ -67,7 +67,7 @@ export const blogPosts: BlogPost[] = [
             {
                 heading: "The two things that swing deposits",
                 paragraphs: [
-                    "If you only have time to focus on two areas before move-out, focus on these two — they account for most disputed deposit cases:",
+                    "If you only have time to focus on two areas before move-out, focus on these two — they are what a walkthrough lingers on:",
                     "First: the kitchen. The inside of the oven, the inside of the fridge, and grease on the range hood. These are visible, slow to clean, and create the strongest impression in the first 60 seconds of a walkthrough. A spotless kitchen sets the tone for the entire inspection.",
                     "Second: the bathroom grout and shower. Hard-water buildup, mildew at the bottom of the shower wall, and discolored grout are the things landlords photograph for deposit deductions because they're documented and unambiguous. A scrub here pays for itself.",
                 ],
@@ -86,7 +86,7 @@ export const blogPosts: BlogPost[] = [
                 heading: "When to hire a cleaner vs. do it yourself",
                 paragraphs: [
                     "If you're moving with help and have a free day, doing the move-out cleaning yourself can save $200-$400. The areas that take the longest are the oven, fridge, and bathroom grout — budget 4-5 hours for a 2-bedroom.",
-                    "Hire a cleaner if: the unit hasn't been deep-cleaned in 6+ months, you have a tight move-out window, you have pets (pet hair is the most-cited deposit deduction), or you have a security deposit larger than the cost of cleaning. Math is straightforward — if cleaning costs less than the deposit you might lose, hire.",
+                    "Hire a cleaner if: the unit hasn't been deep-cleaned in 6+ months, you have a tight move-out window, you have pets (pet hair is the hardest thing on the list to fully remove without the right tool), or you have a security deposit larger than the cost of cleaning. Math is straightforward — if cleaning costs less than the deposit you might lose, hire.",
                 ],
             },
         ],
@@ -154,10 +154,10 @@ export const blogPosts: BlogPost[] = [
     {
         slug: "pet-hair-where-it-actually-hides",
         title: "Pet hair: where it actually hides and why most cleaners miss it",
-        excerpt: "Pet hair is the most-cited reason customers say a clean was \"not bad, but not great.\" The reason is geometry — most cleaners only get the easy 80%. Here's where the missed 20% lives.",
+        excerpt: "Pet hair is why a clean can look finished and still feel unfinished. The reason is geometry — a standard vacuum pass gets the easy part. Here's where the rest of it lives.",
         publishedAt: "2026-05-01",
         readingMinutes: 4,
-        shortVersion: "Pet hair hides in five places that vacuums skip without specific technique: under the lower edge of upholstered furniture, in the seam between cushions, on the sides of bedding, embedded in rug fibers (not on top), and around the legs of dining chairs. A cleaning that doesn't address those five areas will look fine but feel disappointing within two days.",
+        shortVersion: "Pet hair hides in five places that vacuums skip without specific technique: under the lower edge of upholstered furniture, in the seam between cushions, on the sides of bedding, embedded in rug fibers (not on top), and around the legs of dining chairs. A cleaning that skips those five areas looks finished and feels unfinished as soon as you sit down on the couch.",
         sections: [
             {
                 paragraphs: [
@@ -196,7 +196,7 @@ export const blogPosts: BlogPost[] = [
             },
             {
                 paragraphs: [
-                    "Pet-owners who add this single line to their booking notes — \"please use a rubber tool on the couch and rug\" — get noticeably better results.",
+                    "If you have pets, add one line to your booking notes: \"please use a rubber tool on the couch and rug.\" It gets the right tool in the door instead of leaving it to chance.",
                 ],
             },
         ],

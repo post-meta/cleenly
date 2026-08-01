@@ -4,14 +4,14 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "Do you charge by the hour or flat rate?",
+    question: "How is my price set?",
     answer:
-      "You see an upfront estimate based on your home details. We bill the final price by the hour — $75 per cleaner-hour, $185 minimum — for the actual time your home takes, and we confirm it with you before charging. The estimate is what we expect the final to be.",
+      "By your home — its size, its bathrooms, its condition, and the service you pick. The booking calculator turns that into an estimate before you commit, the minimum job is $185, and your final price never goes above the top of that estimate.",
   },
   {
     question: "Are there any hidden fees?",
     answer:
-      "No. We bill the actual cleaner-hours worked at $75 per cleaner-hour, never more than what the work takes, and we confirm the final before charging. We may suggest optional add-ons, but you decide.",
+      "None. The estimate you see covers the clean, and we confirm the final with you before charging. We may suggest optional add-ons, but you decide.",
   },
   {
     question: "Do recurring cleanings cost less?",

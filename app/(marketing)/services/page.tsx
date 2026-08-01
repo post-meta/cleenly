@@ -7,7 +7,7 @@ import { Sparkles, Home, Truck } from "lucide-react";
 
 export const metadata: Metadata = {
     title: 'House Cleaning Services in Greater Seattle | CLEENLY',
-    description: 'House cleaning in Greater Seattle — regular, deep, move-in/out, and specialty cleans. First and deep cleans from $290, move-out from $380, billed by the hour. Book online.',
+    description: 'House cleaning in Greater Seattle — regular, deep, move-in/out, and specialty cleans. First and deep cleans from $290, move-out from $380. Upfront estimate, never more than the top of it. Book online.',
     alternates: {
         canonical: 'https://cleenly.app/services',
     },

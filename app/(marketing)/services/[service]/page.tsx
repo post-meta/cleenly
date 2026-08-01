@@ -199,7 +199,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                         ))}
                     </div>
                     <p className="mt-6 text-gray-400">
-                        We serve 20+ cities across Greater Seattle.{' '}
+                        We serve 24 cities across Greater Seattle.{' '}
                         <Link href="/services" className="text-black underline underline-offset-4 hover:no-underline">
                             View all locations →
                         </Link>

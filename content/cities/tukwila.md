@@ -6,15 +6,15 @@ House cleaning in Tukwila, Washington. We serve older homes in Riverton, condos 
 
 ## Regular Cleaning
 
-Regular cleaning in Tukwila keeps most homes maintained. We clean older homes in Riverton, apartments near Southcenter, and homes on Tukwila Hill. Tukwila deals with traffic dust and pollution from major highways, industrial grime in some areas, and rental properties that need regular attention. Our regular cleaning keeps it maintained. Serving Riverton, Allentown, Tukwila Hill, and near Southcenter. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
+Regular cleaning in Tukwila keeps most homes maintained. We clean older homes in Riverton, apartments near Southcenter, and homes on Tukwila Hill. Tukwila deals with traffic dust and pollution from major highways, industrial grime in some areas, and rental properties that need regular attention. Our regular cleaning keeps it maintained. Serving Riverton, Allentown, Tukwila Hill, and near Southcenter. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price never goes above the top of it.
 
 ## Deep Cleaning
 
-Deep cleaning in Tukwila resets a home top to bottom. We get inside appliances, into baseboards, and everywhere that highway dust and grime accumulate. Tukwila is practical — we focus on doing the job well. Retail workers and immigrant families book deep cleaning when they need thorough work at a fair price. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
+Deep cleaning in Tukwila resets a home top to bottom. We get inside appliances, into baseboards, and everywhere that highway dust and grime accumulate. Tukwila is practical — we focus on doing the job well. Retail workers and immigrant families book deep cleaning when they need thorough work at a fair price. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom, and you see your exact estimate before booking. The final price never goes above the top of that estimate.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Tukwila is built to pass the inspection. We clean to landlord inspection standards — inside cabinets, appliances, closets, and detailed work throughout. We help you get your deposit back. Serving all Tukwila residential areas. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
+Move-out cleaning in Tukwila is built to pass the inspection. We clean to landlord inspection standards — inside cabinets, appliances, closets, and detailed work throughout. We help you get your deposit back. Serving all Tukwila residential areas. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom; you'll see your exact estimate in the booking form. The final price never goes above the top of it.
 
 ## Why Choose
 

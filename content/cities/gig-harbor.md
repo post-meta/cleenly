@@ -6,15 +6,15 @@ House cleaning in Gig Harbor, Washington. We cross the Narrows Bridge for waterf
 
 ## Regular Cleaning
 
-Regular cleaning in Gig Harbor keeps a home level between deeper resets. We work in harbor-view homes, gated properties in Canterwood, and houses on wooded lots in Rosedale and Crescent Valley. Two things show up here that don't inland: salt-air film on glass and window tracks, and grit tracked in from gravel drives and boat gear. We handle both on every visit. Serving Downtown Gig Harbor, Harborview, Peacock Hill, Artondale, Purdy, and Fox Island. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
+Regular cleaning in Gig Harbor keeps a home level between deeper resets. We work in harbor-view homes, gated properties in Canterwood, and houses on wooded lots in Rosedale and Crescent Valley. Two things show up here that don't inland: salt-air film on glass and window tracks, and grit tracked in from gravel drives and boat gear. We handle both on every visit. Serving Downtown Gig Harbor, Harborview, Peacock Hill, Artondale, Purdy, and Fox Island. Recurring visits start from $185; you'll see a transparent estimate for your home in the booking form before you commit, and the final price never goes above the top of it.
 
 ## Deep Cleaning
 
-Deep cleaning in Gig Harbor resets a home top to bottom. We get inside appliances, into baseboards, and through the window tracks and sills where marine damp leaves mildew. Homes on larger Artondale and Rosedale lots collect more from outside than a city house does, and the damp season runs long here. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
+Deep cleaning in Gig Harbor resets a home top to bottom. We get inside appliances, into baseboards, and through the window tracks and sills where marine damp leaves mildew. Homes on larger Artondale and Rosedale lots collect more from outside than a city house does, and the damp season runs long here. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom, and you see your exact estimate before booking. The final price never goes above the top of that estimate.
 
 ## Move-Out Cleaning
 
-Move-out cleaning in Gig Harbor is built to pass the inspection. We clean inside cabinets, appliances, and closets, and we do the detail work landlords and buyers actually check. Waterfront and second-home turnovers often happen on someone else's schedule — give us the date and we work to it. Serving all of Gig Harbor and Fox Island. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280); you'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
+Move-out cleaning in Gig Harbor is built to pass the inspection. We clean inside cabinets, appliances, and closets, and we do the detail work landlords and buyers actually check. Waterfront and second-home turnovers often happen on someone else's schedule — give us the date and we work to it. Serving all of Gig Harbor and Fox Island. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom; you'll see your exact estimate in the booking form. The final price never goes above the top of it.
 
 ## Why Choose
 
@@ -32,7 +32,7 @@ Yes. Book it as an Airbnb turnover and give us the checkout and check-in times. 
 
 ### What do you do about salt-air film on windows?
 
-We clean interior glass, sills, and tracks on every visit. Exterior window washing is a separate trade and we don't take it on.
+We clean interior glass, sills, and tracks on every visit. Exterior window washing is its own trade, and a specialist will do it better than we would.
 
 ### Do you serve Fox Island and Purdy?
 

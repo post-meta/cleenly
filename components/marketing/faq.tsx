@@ -10,7 +10,7 @@ const faqs = [
     id: "cost",
     question: "How much does house cleaning cost in Seattle?",
     answer:
-      "For a 2-bedroom home: a first or deep clean runs about $440–530, move-out $585–705, and ongoing recurring visits $190–225. We bill by the hour ($75 per cleaner-hour, $185 minimum); the booking calculator shows your estimate before you book.",
+      "For a 2-bedroom home: a first or deep clean runs about $440–530, move-out $585–705, and ongoing recurring visits $190–225. The minimum job is $185. The booking calculator shows your estimate before you book, and the final price never goes above the top of it.",
   },
   {
     id: "included",

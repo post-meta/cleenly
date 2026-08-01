@@ -17,27 +17,27 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How much does house cleaning cost in Seattle?",
         answer:
-          "It depends on home size, condition, and cleaning type. A first clean (priced as a deep clean) runs about $290–350 for a 1-bedroom, $440–530 for a 2-bedroom, and $545–650 for a 3-bedroom. Recurring visits from your second clean on are lighter — roughly $185–260 for most homes. You see an upfront estimate range when you book; the final price is based on actual time, billed at $75 per cleaner-hour ($185 minimum), and we confirm it with you before charging.",
+          "It depends on home size, condition, and cleaning type. A first clean (priced as a deep clean) runs about $290–350 for a 1-bedroom, $440–530 for a 2-bedroom, and $545–650 for a 3-bedroom. Recurring visits from your second clean on are lighter — roughly $185–260 for most homes. You see an upfront estimate range when you book, the minimum job is $185, and the final price never goes above the top of that range.",
       },
       {
         question: "How much does deep cleaning cost?",
         answer:
-          "Deep cleaning estimates run about $290–350 for a 1-bedroom, $440–530 for a 2-bedroom, $545–650 for a 3-bedroom, and $685–825 for a 4-bedroom typical home in average condition. A first clean is priced as a deep clean. These are estimate ranges — the final price is based on actual time at $75 per cleaner-hour ($185 minimum), confirmed before charging. Deep cleaning covers inside appliances, baseboards, and detailed cleaning of all surfaces.",
+          "Deep cleaning estimates run about $290–350 for a 1-bedroom, $440–530 for a 2-bedroom, $545–650 for a 3-bedroom, and $685–825 for a 4-bedroom typical home in average condition. A first clean is priced as a deep clean. These are estimate ranges — your final price never goes above the top of yours, and we confirm it before charging. Deep cleaning covers inside appliances, baseboards, and detailed cleaning of all surfaces.",
       },
       {
         question: "How much is move-out cleaning in Seattle?",
         answer:
-          "Move-out estimates run about $380–455 for a 1-bedroom, $585–705 for a 2-bedroom, $740–885 for a 3-bedroom, and $815–975 for a 4-bedroom. This covers cleaning to landlord inspection standards — inside cabinets, appliances, and all surfaces to help you get your deposit back. The estimate is a range; the final price is based on actual time at $75 per cleaner-hour ($185 minimum), confirmed with you before charging.",
+          "Move-out estimates run about $380–455 for a 1-bedroom, $585–705 for a 2-bedroom, $740–885 for a 3-bedroom, and $815–975 for a 4-bedroom. This covers cleaning to landlord inspection standards — inside cabinets, appliances, and all surfaces to help you get your deposit back. The estimate is a range; your final price never goes above the top of it, and we confirm it with you before charging.",
       },
       {
-        question: "Do you charge by the hour or flat rate?",
+        question: "How is my price set?",
         answer:
-          "By the hour. We give you an upfront estimate range based on your home size and cleaning type, then bill the final price on actual cleaner-hours worked — $75 per cleaner-hour, with a $185 minimum job. A standard visit is a two-cleaner team. The estimate is usually close to the final, and we confirm the final price with you before charging — never any surprise total after the fact.",
+          "By your home — its size, its bathrooms, its condition, and the service you pick. The booking calculator turns that into an upfront estimate range before you commit. The minimum job is $185, a standard visit is a two-cleaner team, and your final price never goes above the top of your estimate.",
       },
       {
         question: "Are there any hidden fees?",
         answer:
-          "No hidden fees. You get an upfront estimate range, and the final price is based on actual cleaner-hours at $75 per cleaner-hour ($185 minimum) — we confirm it with you before charging. We may suggest optional add-ons (like inside refrigerator or oven cleaning) but you decide what's included. No surprise service fees or taxes added later.",
+          "No hidden fees. You get an upfront estimate range, your final price never goes above the top of it, and we confirm it with you before charging. We may suggest optional add-ons (like inside refrigerator or oven cleaning) but you decide what's included. No surprise service fees or taxes added later.",
       },
       {
         question: "Do you offer discounts for recurring cleanings?",
@@ -216,9 +216,9 @@ export const faqCategories: FAQCategory[] = [
     id: "trust",
     items: [
       {
-        question: "Are your cleaners background checked?",
+        question: "Will the cleaner show up when you said?",
         answer:
-          "Yes. Everyone who cleans for CLEENLY is background-checked before working in homes — including the extra cleaners we bring in when the schedule fills up.",
+          "Yes. We book a window and we arrive inside it. If traffic or a job before yours changes anything, you hear it from us before the window opens, not after it closes.",
       },
       {
         question: "Are cleaners insured?",
@@ -228,7 +228,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "How do you vet cleaners?",
         answer:
-          "We're a small team — most cleanings are done by us personally. When we bring in extra cleaners, they're people we know and trust: background-checked, experienced, and they work alongside us before working alone. Cleaners who don't keep our quality standards don't keep working with us.",
+          "We're a small team — most cleanings are done by us personally. When we bring in extra cleaners, they're people we know and have worked with: experienced, and they work alongside us before they work alone. Everyone is held to the same finish, and we check the work.",
       },
       {
         question: "Is my payment information secure?",

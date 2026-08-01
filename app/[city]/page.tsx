@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { AccordionFAQ } from '@/components/shared/accordion-faq';
 import { Footer } from '@/components/shared/footer';
 import { getCityContent } from '@/lib/utils/content-parser';
+import { PRICE_DISPLAY } from '@/lib/pricing';
 import { ServiceCard } from '@/components/shared/service-card';
 import { ServiceCarousel } from '@/components/shared/service-carousel';
 
@@ -48,7 +49,7 @@ export default async function CityPage({ params }: PageProps) {
     const faqs = content.localFAQs.length > 0 ? content.localFAQs : [
         {
             question: `How much does house cleaning cost in ${city.name}?`,
-            answer: `Rates in ${city.name} depend on home size and condition. First and deep cleans start from $200, move-out cleans from $280. We bill by the hour — $75 per cleaner-hour, $185 minimum — and show you an upfront estimate before you book, then confirm the final price with you before charging.`
+            answer: `Rates in ${city.name} depend on home size and condition. First and deep cleans start from $${PRICE_DISPLAY.firstClean.from}, move-out cleans from $${PRICE_DISPLAY.moveOut.from}, and recurring visits from $${PRICE_DISPLAY.recurring.from}. You see an upfront estimate before you book, and the final price never goes above the top of it.`
         },
         {
             question: "Are your cleaners insured?",

@@ -11,14 +11,13 @@ function serviceFromPrice(service: ServiceData): number {
     return service.priceMin ?? PRICE_DISPLAY.firstClean.from;
 }
 
-// Hourly priceSpecification reused across Service offers — final price is the
-// actual cleaner-hours worked at the single rate, not a flat fee or "starting at".
+// priceSpecification reused across Service offers. Public copy quotes a price
+// for the job, so the schema states the minimum and the estimate floor rather
+// than a rate per hour.
 function hourlyPriceSpecification() {
     return {
-        "@type": "UnitPriceSpecification",
-        "price": PRICE_DISPLAY.ratePerCleanerHour,
+        "@type": "PriceSpecification",
         "priceCurrency": "USD",
-        "unitText": "cleaner-hour",
         "minPrice": PRICE_DISPLAY.minJob
     };
 }
@@ -64,7 +63,7 @@ export function generateServiceSchema(city: CityData, service: ServiceData) {
             "priceCurrency": "USD",
             "price": serviceFromPrice(service),
             "priceSpecification": hourlyPriceSpecification(),
-            "description": `Upfront estimate from $${serviceFromPrice(service)}. Final price is the actual cleaner-hours worked at $${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour ($${PRICE_DISPLAY.minJob} minimum), confirmed before charging.`
+            "description": `Upfront estimate from $${serviceFromPrice(service)}. The final price never goes above the top of your estimate, and we confirm it before charging.`
         },
         "url": `${BASE_URL}/${city.slug}/${service.slug}`
     };
@@ -141,7 +140,7 @@ export function generateGenericServiceSchema(service: ServiceData, allCities: Ci
             "priceCurrency": "USD",
             "price": serviceFromPrice(service),
             "priceSpecification": hourlyPriceSpecification(),
-            "description": `Upfront estimate from $${serviceFromPrice(service)}. Final price is the actual cleaner-hours worked at $${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour ($${PRICE_DISPLAY.minJob} minimum), confirmed before charging.`
+            "description": `Upfront estimate from $${serviceFromPrice(service)}. The final price never goes above the top of your estimate, and we confirm it before charging.`
         },
         "url": `${BASE_URL}/services/${service.slug}`
     };
@@ -150,32 +149,46 @@ export function generateGenericServiceSchema(service: ServiceData, allCities: Ci
 /**
  * LocalBusiness Schema для страницы города
  */
-export function generateLocalBusinessSchema(city: CityData) {
+// CLEENLY is a service-area business: the crew travels, there is no storefront
+// a customer walks into. The declared locality is the home base (Tacoma, as
+// stated in public/llms.txt), and every city we actually cover is listed in
+// areaServed so Google can match the site to the Google Business Profile
+// instead of guessing from a single city name.
+const HOME_BASE = {
+    locality: "Tacoma",
+    region: "WA",
+    lat: 47.2529,
+    lng: -122.4443,
+} as const;
+
+export function generateLocalBusinessSchema(city: CityData, allCities?: CityData[]) {
+    const served = (allCities ?? [city]).map(c => ({
+        "@type": "City",
+        "name": `${c.name}, WA`
+    }));
+
     return {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": `${BASE_URL}/#LocalBusiness`,
         "name": "CLEENLY",
         "alternateName": "Pro Craft Cleaning",
-        "description": `House cleaning services in ${city.name}, WA. Regular cleaning, deep cleaning, and move-out cleaning.`,
+        "description": "House cleaning across Greater Seattle — from Everett in the north through Seattle and the Eastside to Tacoma, Lakewood, and Gig Harbor. Regular cleaning, deep cleaning, and move-out cleaning.",
         "url": BASE_URL,
         "telephone": "+1-206-641-4739",
         "email": "hello@cleenly.app",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": city.name,
-            "addressRegion": "WA",
+            "addressLocality": HOME_BASE.locality,
+            "addressRegion": HOME_BASE.region,
             "addressCountry": "US"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": city.coordinates.lat,
-            "longitude": city.coordinates.lng
+            "latitude": HOME_BASE.lat,
+            "longitude": HOME_BASE.lng
         },
-        "areaServed": {
-            "@type": "City",
-            "name": city.name
-        },
+        "areaServed": served,
         "priceRange": "$$",
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",

@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     return {
         title: `${service.name} ${city.name} WA | from $${serviceFromPrice(service)} | CLEENLY`,
-        description: `${service.name} in ${city.name}, Washington. From $${serviceFromPrice(service)}, billed by the hour at $${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour ($${PRICE_DISPLAY.minJob} min). Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online in 2 minutes.`,
+        description: `${service.name} in ${city.name}, Washington. From $${serviceFromPrice(service)} — an upfront estimate, and the final price never goes above the top of it. Serving ${city.neighborhoods.slice(0, 3).join(', ')}. Book online in 2 minutes.`,
         alternates: {
             canonical: `https://cleenly.app/${city.slug}/${service.slug}`,
         },
@@ -99,7 +99,7 @@ export default async function CityServicePage({ params }: PageProps) {
                 cityName={city.name}
                 serviceName={service.name}
                 fromPrice={service.priceMin ?? serviceFromPrice(service)}
-                introText={serviceIntro || `House ${service.name.toLowerCase()} in ${city.name}. You see an upfront estimate, then we bill by the hour — $${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, $${PRICE_DISPLAY.minJob} minimum — and confirm the final price before charging.`}
+                introText={serviceIntro || `House ${service.name.toLowerCase()} in ${city.name}. You see an upfront estimate before you book, and the final price never goes above the top of it.`}
                 citySlug={city.slug}
                 heroImage={service.heroImage}
             />
@@ -112,7 +112,7 @@ export default async function CityServicePage({ params }: PageProps) {
                             <h2 className="font-display font-normal text-[28px] md:text-[32px] tracking-[-0.015em] text-foreground mb-2">
                                 Pricing for <em className="italic text-foreground-soft font-display font-normal">{city.name}</em>
                             </h2>
-                            <p className="text-gray-500 text-sm">You see an upfront estimate, then we bill by the hour — ${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, ${PRICE_DISPLAY.minJob} minimum — and confirm the final price before charging.</p>
+                            <p className="text-gray-500 text-sm">You see an upfront estimate before you book. The final price never goes above the top of it, and we confirm it with you before charging.</p>
                         </div>
                         <div className="p-8">
                             <div className="flex justify-between items-center py-4 border-b border-gray-50">
@@ -128,8 +128,8 @@ export default async function CityServicePage({ params }: PageProps) {
                                 <span className="text-2xl font-semibold text-accent">${serviceFromPrice(service)}</span>
                             </div>
                             <div className="flex justify-between items-center py-4">
-                                <span className="text-gray-600">Rate</span>
-                                <span className="font-semibold text-foreground">${PRICE_DISPLAY.ratePerCleanerHour}/cleaner-hour</span>
+                                <span className="text-gray-600">Minimum job</span>
+                                <span className="font-semibold text-foreground">${PRICE_DISPLAY.minJob}</span>
                             </div>
                         </div>
                     </div>
@@ -205,7 +205,7 @@ export default async function CityServicePage({ params }: PageProps) {
                         Book your <em className="italic text-white/90 font-display font-normal">{service.name.toLowerCase()}</em> in {city.name}
                     </h2>
                     <p className="text-white/80 mb-10 text-lg max-w-2xl mx-auto">
-                        See your exact price in seconds. No memberships, no hidden fees.
+                        See your exact price in 2 minutes. Supplies included, nothing added later.
                     </p>
                     <Button variant="secondary" size="lg" asChild className="bg-white text-accent border-transparent hover:bg-white/90">
                         <Link href="/book">Get your price now →</Link>

@@ -45,10 +45,12 @@ export const metadata: Metadata = {
       "Book house cleaning in Seattle. See your price upfront, pick a time, done.",
   },
   other: {
+    // Home base is Tacoma; the service area is the whole metro (see the
+    // LocalBusiness areaServed list). Keep these aligned with the schema.
     "geo.region": "US-WA",
-    "geo.placename": "Seattle",
-    "geo.position": "47.6062;-122.3321",
-    ICBM: "47.6062, -122.3321",
+    "geo.placename": "Tacoma",
+    "geo.position": "47.2529;-122.4443",
+    ICBM: "47.2529, -122.4443",
   },
   alternates: {
     canonical: "https://cleenly.app",
@@ -57,10 +59,11 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const seattle = cities.find(c => c.slug === 'seattle')!;
-  const localBusinessSchema = generateLocalBusinessSchema(seattle);
+  const localBusinessSchema = generateLocalBusinessSchema(seattle, cities);
   const faqSchema = generateFAQSchema([
-    { question: "How much does house cleaning cost in Seattle?", answer: "For a 2-bedroom home, typical estimates: $440–530 for a first or deep clean, $585–705 for move-out, and $190–225 for ongoing recurring visits. You see an upfront estimate; we bill the final price by the hour — $75 per cleaner-hour, $185 minimum — and confirm it before charging." },
+    { question: "How much does house cleaning cost in Seattle?", answer: "For a 2-bedroom home, typical estimates: $440–530 for a first or deep clean, $585–705 for move-out, and $190–225 for ongoing recurring visits. The minimum job is $185. You see an upfront estimate before you book, and the final price never goes above the top of it." },
     { question: "Are your cleaners insured?", answer: "Yes — our cleaners carry liability insurance." },
+    { question: "Will you show up when you said?", answer: "Yes. We book a window and we arrive inside it. If anything shifts, you hear it from us before the window opens." },
     { question: "What if I'm not happy with the clean?", answer: "Tell us within 24 hours and we come back to fix it. No charge." }
   ]);
 

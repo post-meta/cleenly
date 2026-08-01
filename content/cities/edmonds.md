@@ -10,23 +10,23 @@ We work across Downtown Edmonds, Perrinville, Esperance, and Meadowdale. The hom
 
 Regular cleaning in Edmonds keeps a home maintained between bigger resets. We clean kitchens, bathrooms, floors, and the surfaces that collect daily use. For most homes a recurring visit every two or four weeks is enough to stay on top of it. Salt air and marine moisture near the waterfront mean bathrooms and window tracks need steady attention, and older homes near the bowl hold dust in millwork and built-ins that a quick wipe misses.
 
-We serve Downtown Edmonds, Perrinville, Esperance, and Meadowdale. Waterfront condos near Marina Beach Park get their own rhythm — tighter footprints, harder water spotting on glass, and building access to coordinate. Hillside view homes in Meadowdale collect more dust from open sightlines and bigger windows. Recurring visits start from $185. You'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
+We serve Downtown Edmonds, Perrinville, Esperance, and Meadowdale. Waterfront condos near Marina Beach Park get their own rhythm — tighter footprints, harder water spotting on glass, and building access to coordinate. Hillside view homes in Meadowdale collect more dust from open sightlines and bigger windows. Recurring visits start from $185. You'll see a transparent estimate for your home in the booking form before you commit, and the final price never goes above the top of it.
 
 ## Deep Cleaning
 
 Deep cleaning in Edmonds resets a home top to bottom. We get into baseboards, window tracks, inside appliances, behind and under what regular cleaning skips, and the buildup that salt air leaves on frames and sills near the water. Older Edmonds homes around the bowl have detailed trim, picture rails, and original built-ins — we dust and clean those carefully, no rushing through corners. Waterfront condos get extra attention on glass and hard-water film.
 
-A first clean with us is priced as a deep clean, because the first visit always takes longer. Retirees getting a home guest-ready and ferry commuters who'd rather spend a weekend somewhere other than scrubbing both book deep cleans when things have gotten away from them. Estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge.
+A first clean with us is priced as a deep clean, because the first visit always takes longer. Retirees getting a home guest-ready and ferry commuters who'd rather spend a weekend somewhere other than scrubbing both book deep cleans when things have gotten away from them. Estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom, and you see your exact estimate before booking. The final price never goes above the top of that estimate.
 
 ## Move-Out Cleaning
 
 Move-out cleaning in Edmonds is built to pass the inspection. We clean to landlord and buyer standards — inside cabinets, inside appliances, closets, window tracks, and walls spot-cleaned. We help you get your deposit back or hand the place over clean. For condo owners near downtown and the marina, we work around building move-out windows and elevator scheduling when you give us the details.
 
-We serve all of Edmonds, from Downtown Edmonds and Perrinville to Esperance and Meadowdale. Older homes near the bowl often have detailed millwork and original surfaces that take longer to clean properly, and we account for that in the estimate. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280). You'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
+We serve all of Edmonds, from Downtown Edmonds and Perrinville to Esperance and Meadowdale. Older homes near the bowl often have detailed millwork and original surfaces that take longer to clean properly, and we account for that in the estimate. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom. You'll see your exact estimate in the booking form. The final price never goes above the top of it.
 
 ## Why Choose
 
-Edmonds homeowners notice details, and we'd rather meet that than oversell it. We show up when scheduled, we're careful with older woodwork and original finishes, and we price by the hour so you're not paying a padded flat rate. You get an upfront estimate before booking and a final price confirmed before we charge.
+Edmonds homeowners notice details, and we'd rather meet that than oversell it. We show up when scheduled, we're careful with older woodwork and original finishes, and we price the job on what your home actually needs. You get an upfront estimate before booking and a final price confirmed before we charge.
 
 If something isn't right, tell us within 24 hours and we'll come back and re-clean the spot at no charge. That's the whole guarantee — no fine print.
 

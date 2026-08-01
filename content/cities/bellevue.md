@@ -10,23 +10,23 @@ Larger Eastside homes mean more square footage to cover, more bathrooms, and mor
 
 Regular cleaning in Bellevue keeps a home maintained between deeper resets. We clean kitchens, bathrooms, floors, and the surfaces you touch every day. Larger homes in Somerset, Bridle Trails, and Newport take more time than a compact Downtown condo, and our estimate reflects that up front. We serve Downtown Bellevue, Crossroads, Factoria, Somerset, Newport, Eastgate, Bridle Trails, and Wilburton.
 
-Bellevue homes collect dust fast. Big sun-facing windows, high ceilings, and open floor plans give dust a lot of room to settle, and high-traffic condos near Bellevue Square see constant foot traffic in and out. Recurring visits start from $185. You see an upfront estimate in the booking form before you commit, billed by the hour at $75 per cleaner-hour, $185 minimum, and confirmed before we charge.
+Bellevue homes collect dust fast. Big sun-facing windows, high ceilings, and open floor plans give dust a lot of room to settle, and high-traffic condos near Bellevue Square see constant foot traffic in and out. Recurring visits start from $185. You see an upfront estimate in the booking form before you commit. The final price never goes above the top of it.
 
 ## Deep Cleaning
 
 Deep cleaning in Bellevue resets a home top to bottom. We get into baseboards, window tracks, inside appliances, behind furniture, and the corners regular cleaning skips. Larger Eastside homes have more of those corners — more bathrooms, more cabinet fronts, more square footage — so a deep clean here runs longer than in a small apartment. The estimate accounts for the real size of your home before you book.
 
-Tech executives and families in Somerset, Newport, and Bridle Trails book a deep clean when things have gotten away from them, or before they switch to a recurring schedule. Your first cleaning is priced as a deep clean. Estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour, $185 minimum, confirmed before we charge.
+Tech executives and families in Somerset, Newport, and Bridle Trails book a deep clean when things have gotten away from them, or before they switch to a recurring schedule. Your first cleaning is priced as a deep clean. Estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom, and you see your exact estimate before booking. The final price never goes above the top of that estimate.
 
 ## Move-Out Cleaning
 
 Move-out cleaning in Bellevue is built to pass the inspection. We clean inside cabinets, appliances, closets, and window tracks, and we spot-clean walls. Eastside rentals and Downtown condos near Bellevue Square turn over constantly, and property managers hold the line on the final walkthrough. We clean to that standard so you have a real shot at your full deposit.
 
-We serve move-outs across all Bellevue neighborhoods, from Downtown high-rises to Factoria, Eastgate, and Crossroads rentals. Larger homes in Somerset and Newport take longer, and the estimate shows it. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280). You see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour, $185 minimum, and confirmed before we charge.
+We serve move-outs across all Bellevue neighborhoods, from Downtown high-rises to Factoria, Eastgate, and Crossroads rentals. Larger homes in Somerset and Newport take longer, and the estimate shows it. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom. You see your exact estimate in the booking form. The final price never goes above the top of it.
 
 ## Why Choose
 
-CLEENLY is a family business serving the Eastside. We show up when scheduled and price honestly — you see an upfront estimate before we ever charge, and the final price is billed by the hour with no surprise add-ons. Bellevue homes range from an 800 sq ft Downtown condo to a 4,000 sq ft house in Somerset, and we estimate each one for what it actually is.
+CLEENLY is a family business serving the Eastside. We show up when scheduled and price honestly — you see an upfront estimate before we ever charge, and the final price never goes above the top of your estimate. Bellevue homes range from an 800 sq ft Downtown condo to a 4,000 sq ft house in Somerset, and we estimate each one for what it actually is.
 
 If something isn't right, tell us within 24 hours and we come back to fix it. No generic checklist applied the same way to every home. We adapt to the floor plan, the finishes, and the access rules of your building or community.
 
@@ -46,7 +46,7 @@ Yes. We coordinate with the building concierge or front desk for access and park
 
 ### My Somerset home is large. How long will it take?
 
-Larger Eastside homes take more time, and the estimate reflects that before you book. A four-bedroom house runs longer than a Downtown one-bedroom. You see the time and price up front, billed by the hour at $75 per cleaner-hour.
+Larger Eastside homes take more time, and the estimate reflects that before you book. A four-bedroom house runs longer than a Downtown one-bedroom. You see the time and the price up front, and the final price never goes above the top of that estimate.
 
 ### Do you cover all of Bellevue?
 
@@ -54,4 +54,4 @@ Yes. We serve Downtown Bellevue, Crossroads, Factoria, Somerset, Newport, Eastga
 
 ### What if I'm not happy with the cleaning?
 
-Tell us within 24 hours. We come back and fix it. The upfront estimate and hourly billing mean you always know the price before we charge.
+Tell us within 24 hours. We come back and fix it. You always know the price before we charge, and it never goes above the top of your estimate.

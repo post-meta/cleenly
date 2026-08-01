@@ -10,19 +10,19 @@ Kirkland is really several places at once. Juanita and Finn Hill are quieter and
 
 Regular cleaning in Kirkland keeps a home maintained between deeper resets. We handle kitchens, bathrooms, floors, and the surfaces that build up week to week. Homes near the Kirkland Waterfront and Marina Park collect more moisture and lake-area dust; the bigger windows on lakefront homes show every smudge. We keep all of it in check on a schedule that fits your week.
 
-Many Kirkland clients are Google employees and remote workers who would rather not spend a Saturday cleaning. We serve Downtown Kirkland, Juanita, Houghton, Finn Hill, Totem Lake, Kingsgate, and Norkirk. Recurring visits start from $185. You'll see a transparent estimate for your home in the booking form before you commit, and the final price is billed by the hour at $75 per cleaner-hour, confirmed before we charge.
+Many Kirkland clients are Google employees and remote workers who would rather not spend a Saturday cleaning. We serve Downtown Kirkland, Juanita, Houghton, Finn Hill, Totem Lake, Kingsgate, and Norkirk. Recurring visits start from $185. You'll see a transparent estimate for your home in the booking form before you commit, and the final price never goes above the top of it.
 
 ## Deep Cleaning
 
 Deep cleaning in Kirkland resets a home top to bottom. We get into baseboards, window tracks, vents, inside appliances, and the corners regular cleaning skips. Kirkland's housing runs the full range — older homes in Juanita and Finn Hill with original floors and built-ins, newer townhomes near The Village at Totem Lake with modern finishes. We clean both without guessing, matching products and methods to what the surface can take.
 
-Lakefront and downtown homes get the most from a deep clean, since window tracks and sills near the water collect grime fast. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom (from $200), and you see your exact estimate before booking. Final price is billed by the hour at $75 per cleaner-hour ($185 minimum), confirmed before we charge. If something isn't right, tell us within 24 hours and we'll re-clean it.
+Lakefront and downtown homes get the most from a deep clean, since window tracks and sills near the water collect grime fast. A first cleaning is priced as a deep clean — estimates run from around $290 for a one-bedroom up to $825 for a four-bedroom, and you see your exact estimate before booking. The final price never goes above the top of that estimate. If something isn't right, tell us within 24 hours and we'll re-clean it.
 
 ## Move-Out Cleaning
 
 Move-out cleaning in Kirkland is built to pass the inspection. We clean to landlord and property-manager standards — inside cabinets, appliances, closets, window tracks, and walls spot-cleaned. Downtown Kirkland condos and Totem Lake townhomes often have detailed move-out checklists; older Houghton and Norkirk rentals have their own quirks. We work through whatever the lease requires.
 
-We serve all Kirkland neighborhoods, from the waterfront and Downtown Kirkland out to Finn Hill, Kingsgate, and Totem Lake. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom (from $280). You'll see your exact estimate in the booking form, billed by the hour at $75 per cleaner-hour ($185 minimum) and confirmed before we charge.
+We serve all Kirkland neighborhoods, from the waterfront and Downtown Kirkland out to Finn Hill, Kingsgate, and Totem Lake. Estimates run from around $380 for a one-bedroom up to $975 for a four-bedroom. You'll see your exact estimate in the booking form. The final price never goes above the top of it.
 
 ## Why Choose
 

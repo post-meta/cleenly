@@ -19,12 +19,12 @@ const reasons = [
   {
     title: "Price upfront",
     description:
-      "You see a real estimate before you book — no bait pricing, no quote calls.",
+      "You see a real estimate before you book, and the final price stays inside it.",
   },
   {
-    title: "Two ways to book",
+    title: "We show up",
     description:
-      "Book online in 2 minutes — that's the easiest path. Or text us if you'd rather reach a person.",
+      "We arrive in the window we gave you. If anything shifts, you hear it from us first.",
   },
   {
     title: "Easy rescheduling",

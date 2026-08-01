@@ -69,8 +69,11 @@ export const PRICE_DISPLAY = {
     } as Record<string, string>,
   },
   // Honest one-line framing — reuse where copy describes how pricing works.
+  // Public copy leads with the price for the job and the ceiling promise; the
+  // hourly mechanic stays in Terms, the booking wizard's fine print, and the
+  // invoice. Customers shop on what the clean costs, not on a rate per hour.
   framing:
-    "You see an upfront estimate. We bill the final price by the hour — $75 per cleaner-hour, $185 minimum — and confirm it with you before charging.",
+    "You see an upfront estimate before you book. The final price never goes above the top of that estimate, and we confirm it with you before charging.",
 } as const;
 
 // Central estimated cleaner-hours for a FIRST / DEEP clean, by service & size.

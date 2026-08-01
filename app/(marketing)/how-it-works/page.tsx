@@ -6,7 +6,7 @@ import { PRICE_DISPLAY } from "@/lib/pricing";
 
 export const metadata = {
   title: "How It Works | CLEENLY",
-  description: "From dirty to clean in four simple steps. No phone calls, no guesswork, no hassle.",
+  description: "From dirty to clean in four steps: see your price, pick a time, we clean, you pay after.",
   alternates: {
     canonical: "https://cleenly.app/how-it-works",
   },
@@ -22,8 +22,8 @@ const FAQ = [
     answer: "Nope. We bring all supplies and equipment.",
   },
   {
-    question: "How do I know my cleaner is qualified?",
-    answer: "Everyone who cleans for us is background-checked. We're a small team, so most cleanings are done by us personally.",
+    question: "Who actually cleans my home?",
+    answer: "We're a small team, so most cleanings are done by us personally. When the schedule fills up we bring in cleaners we have worked with and trust, and we hold them to the same finish.",
   },
   {
     question: "What if I'm not satisfied?",
@@ -41,7 +41,7 @@ export default function HowItWorksPage() {
             How it <em className="italic text-foreground-soft font-display">works</em>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-foreground-muted leading-relaxed">
-            From dirty to clean in four simple steps. No phone calls, no guesswork, no hassle.
+            From dirty to clean in four steps. See your price, pick a time, we do the rest.
           </p>
         </Container>
       </section>
@@ -59,7 +59,7 @@ export default function HowItWorksPage() {
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Select the type of cleaning you need, enter the number of bedrooms and bathrooms.
-                Know your square footage? Add it for a more accurate quote.
+                Know your square footage? Add it for a more accurate estimate.
               </p>
               <ul className="space-y-4 mb-8">
                 {[
@@ -97,15 +97,15 @@ export default function HowItWorksPage() {
                 See your price <em className="italic text-foreground-soft font-display">instantly</em>
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Our calculator shows you a price range immediately—no waiting for callbacks,
-                no mystery quotes. The final price is based on the actual time it takes,
-                billed by the hour, and we confirm it with you before charging.
+                Our calculator shows you a price range immediately, built from your home&apos;s
+                size, bathrooms, and condition. Your final price stays inside that range, and
+                we confirm it with you before charging.
               </p>
               <ul className="space-y-4">
                 {[
-                  `Billed by the hour: $${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, all supplies included`,
-                  `Estimate range up front, $${PRICE_DISPLAY.minJob} minimum job`,
-                  "Final price confirmed with you before we charge"
+                  "Estimate in the booking form, before you commit to anything",
+                  `Minimum job $${PRICE_DISPLAY.minJob}, all supplies included`,
+                  "Never more than the top of your estimate"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="h-5 w-5 text-foreground shrink-0 mt-0.5" />
@@ -123,14 +123,14 @@ export default function HowItWorksPage() {
         <Container size="narrow" className="text-center">
           <div className="max-w-2xl mx-auto space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg font-medium">
-              <div className="text-muted-foreground md:text-right">One rate, no add-on fees</div>
+              <div className="text-muted-foreground md:text-right">One price for the job</div>
               <div className="text-foreground md:text-left">
-                ${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, supplies included
+                Supplies included, ${PRICE_DISPLAY.minJob} minimum
               </div>
             </div>
             <p className="text-xl font-semibold text-foreground">
-              You get an estimate range up front. The final price is the actual cleaner-hours
-              worked at ${PRICE_DISPLAY.ratePerCleanerHour}/hour (${PRICE_DISPLAY.minJob} minimum), confirmed before we charge.
+              You get an estimate range up front. The final price never goes above the top of
+              it, and we confirm it with you before we charge.
             </p>
           </div>
         </Container>
@@ -190,7 +190,7 @@ export default function HowItWorksPage() {
               </p>
               <ul className="space-y-4">
                 {[
-                  "Background-checked and covered by liability insurance",
+                  "Covered by liability insurance",
                   "We bring all supplies and equipment",
                   "Final price confirmed before we charge",
                   "Something off? Tell us within 24 hours. We come back to fix it, free."
@@ -239,8 +239,8 @@ export default function HowItWorksPage() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-foreground">Honest pricing</h3>
               <p className="text-muted-foreground leading-relaxed">
-                ${PRICE_DISPLAY.ratePerCleanerHour} per cleaner-hour, no hidden fees. You get an upfront
-                estimate, and we confirm the final price before charging.
+                One price for the job, ${PRICE_DISPLAY.minJob} minimum, nothing added later.
+                You get an upfront estimate and the final never goes above it.
               </p>
             </div>
             <div className="p-8 bg-white rounded-xl shadow-sm border border-border">
@@ -249,8 +249,8 @@ export default function HowItWorksPage() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-foreground">Your time matters</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Book online in 2 minutes. No phone calls, no back-and-forth,
-                no guesswork.
+Book online in 2 minutes, at whatever hour suits you. We reply
+                with a confirmed time.
               </p>
             </div>
             <div className="p-8 bg-white rounded-xl shadow-sm border border-border">
@@ -259,8 +259,8 @@ export default function HowItWorksPage() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-foreground">We fix it free</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Background-checked cleaners, full supplies included, and if
-                something's not right we come back within 24 hours.
+Full supplies included, and if something is not right we come
+                back within 24 hours.
               </p>
             </div>
           </div>
@@ -274,10 +274,10 @@ export default function HowItWorksPage() {
             Ready to <em className="italic text-foreground-soft font-display">get started?</em>
           </h2>
           <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-            Get a quote in under a minute. No commitment until you book.
+            See your estimate in 2 minutes. You commit when you book, not before.
           </p>
           <Button size="lg" asChild className="h-16 px-12 text-lg">
-            <Link href="/book">Get Your Quote in 60 Seconds</Link>
+            <Link href="/book">See your price in 2 minutes</Link>
           </Button>
         </Container>
       </section>
