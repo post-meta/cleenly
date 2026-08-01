@@ -1,6 +1,16 @@
 export type ServiceType = "regular" | "deep" | "move_out";
 
-export type TimeSlot = "morning" | "afternoon" | "evening";
+/**
+ * What can sit in preferred_time / scheduled_time.
+ *
+ * "evening" was withdrawn 2026-06-10 and is never offered again — it stays in
+ * the union because rows written before that date still carry it.
+ * "full_day" is a visit too long for either half of the day; the availability
+ * resolver offers it instead of a half-day slot rather than promise a window
+ * the crew cannot keep. Keep this a superset of SlotId in
+ * lib/availability/resolver.ts.
+ */
+export type TimeSlot = "morning" | "afternoon" | "evening" | "full_day";
 
 export type BedroomCount = "studio" | "1" | "2" | "3" | "4" | "5+";
 

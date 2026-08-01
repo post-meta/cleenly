@@ -7,6 +7,7 @@ import { BookingTimeline } from '@/components/dashboard/booking-timeline';
 import { CleanerInfo } from '@/components/dashboard/cleaner-info';
 import { PaymentInfo } from '@/components/dashboard/payment-info';
 import { ReviewForm } from '@/components/dashboard/review-form';
+import { timeSlotLabel } from '@/lib/constants';
 
 function StatusBadge({ status }: { status: string }) {
     const styles = ({
@@ -84,7 +85,7 @@ export default async function BookingDetailsPage({
                             </p>
                             <p className="text-sm">
                                 <span className="text-gray-600">Time:</span>{' '}
-                                <span className="font-medium capitalize">{booking.scheduled_time || booking.preferred_time || 'To be scheduled'}</span>
+                                <span className="font-medium capitalize">{timeSlotLabel(booking.scheduled_time || booking.preferred_time) || 'To be scheduled'}</span>
                             </p>
                             <p className="text-sm">
                                 <span className="text-gray-600">Duration:</span>{' '}

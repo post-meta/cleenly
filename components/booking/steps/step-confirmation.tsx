@@ -13,10 +13,13 @@ const serviceNames: Record<ServiceType, string> = {
   move_out: "Move-Out Cleaning",
 };
 
+// "evening" is here for rows written before 2026-06-10; the slot is not offered.
+// "full_day" has no fixed window — it runs the working day, so it says so.
 const timeSlotLabelsShort: Record<TimeSlot, string> = {
   morning: "8am – 12pm",
   afternoon: "12pm – 4pm",
   evening: "4pm – 7pm",
+  full_day: "All day",
 };
 
 interface StepConfirmationProps {
@@ -24,6 +27,8 @@ interface StepConfirmationProps {
   bookingRef: string;
   estimatedMin: number;
   estimatedMax: number;
+  /** The slot was taken outright, not queued for a human to review. */
+  confirmed?: boolean;
 }
 
 export function StepConfirmation({
@@ -31,6 +36,7 @@ export function StepConfirmation({
   bookingRef,
   estimatedMin,
   estimatedMax,
+  confirmed = false,
 }: StepConfirmationProps) {
   useEffect(() => {
     if (!bookingRef) return;
@@ -70,7 +76,15 @@ export function StepConfirmation({
       </div>
 
       <h2 className="font-display font-normal text-[32px] leading-[1.15] text-foreground">
-        You&apos;re <em className="font-display italic font-normal text-foreground-soft">all set.</em>
+        {confirmed ? (
+          <>
+            You&apos;re <em className="font-display italic font-normal text-foreground-soft">on the calendar.</em>
+          </>
+        ) : (
+          <>
+            You&apos;re <em className="font-display italic font-normal text-foreground-soft">all set.</em>
+          </>
+        )}
       </h2>
       <p className="text-[13px] text-foreground-muted mt-1.5">
         Booking reference:{" "}
@@ -109,7 +123,14 @@ export function StepConfirmation({
 
       {/* Pricing and email message */}
       <div className="mt-[18px] p-[14px_16px] rounded-md bg-surface-warm text-left text-[13px] leading-[1.55]">
-        <p className="text-foreground">We&apos;ll confirm your exact price and cleaner details within 2 hours.</p>
+        <p className="text-foreground">
+          {/* Only claims things that actually happen. The SMS scope is the
+              booking and changes to it — there is no reminder job, so this
+              must not promise one. */}
+          {confirmed
+            ? "Your time is held — this one is booked, not pending."
+            : "We'll confirm your time with you shortly."}
+        </p>
         <p className="mt-1.5 text-foreground-soft">
           The number above is an estimate. Your final price won&apos;t go above
           the top of that range without your OK. If your home needs more than

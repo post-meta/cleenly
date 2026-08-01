@@ -166,6 +166,36 @@ function priceFromHours(hours: number): { min: number; max: number } {
   return { min: Math.round(calc), max: Math.round(calc * 1.2) };
 }
 
+/**
+ * Cleaner-hours for a first/deep/move-out visit.
+ *
+ * Exported because scheduling needs the same number the price is built from.
+ * If availability were estimated separately the two would drift, and a day
+ * would look bookable for a job that cannot fit in it.
+ *
+ * These are CLEANER-hours (man-hours). Wall-clock time is this divided by how
+ * many cleaners are actually free that day — see lib/availability/resolver.ts.
+ */
+export function estimateCleanerHours(
+  serviceType: ServiceType,
+  bedrooms: BedroomCount,
+  bathrooms: BathroomCount,
+  condition: HomeCondition = "average",
+  sqftRange?: SqftRange
+): number {
+  return (
+    baseManHours[serviceType][bedrooms] *
+    bathroomMultiplier[bathrooms] *
+    conditionMultiplier[condition] *
+    (sqftRange ? sqftMultiplier[sqftRange] : 1.0)
+  );
+}
+
+/** Cleaner-hours for an ongoing maintenance visit (visit 2+). */
+export function estimateRecurringCleanerHours(bedrooms: BedroomCount): number {
+  return recurringManHours[bedrooms];
+}
+
 // First/deep clean estimate for a given configuration.
 export function calculatePrice(
   serviceType: ServiceType,
@@ -175,11 +205,13 @@ export function calculatePrice(
   addons: Addon[] = [],
   sqftRange?: SqftRange
 ): PriceEstimate {
-  const hours =
-    baseManHours[serviceType][bedrooms] *
-    bathroomMultiplier[bathrooms] *
-    conditionMultiplier[condition] *
-    (sqftRange ? sqftMultiplier[sqftRange] : 1.0);
+  const hours = estimateCleanerHours(
+    serviceType,
+    bedrooms,
+    bathrooms,
+    condition,
+    sqftRange
+  );
 
   const { min, max } = priceFromHours(hours);
   const addonsTotal = addons.reduce((sum, addon) => sum + addonPrices[addon], 0);

@@ -45,3 +45,24 @@ export const TIME_SLOTS = [
   { id: "morning", label: "Morning", time: "8am – 12pm" },
   { id: "afternoon", label: "Afternoon", time: "12pm – 4pm" },
 ] as const;
+
+// Wording for a stored slot value, lowercase so it drops into a sentence.
+// "evening" only appears on rows written before 2026-06-10. "full_day" is a
+// visit that fills the working day — the resolver offers it when neither half
+// of the day is long enough.
+const TIME_SLOT_WORDS: Record<string, string> = {
+  morning: "morning",
+  afternoon: "afternoon",
+  evening: "evening",
+  full_day: "all day",
+};
+
+/**
+ * Reader-facing wording for whatever is in preferred_time / scheduled_time.
+ * Slot ids become words; an admin-entered clock time ("10:00") comes back
+ * unchanged, so this is safe to wrap around either kind of value.
+ */
+export function timeSlotLabel(value?: string | null): string | null {
+  if (!value) return null;
+  return TIME_SLOT_WORDS[value.trim().toLowerCase()] ?? value;
+}

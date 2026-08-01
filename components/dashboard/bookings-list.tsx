@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { Calendar, MapPin, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { timeSlotLabel } from '@/lib/constants';
 
 type Booking = {
     id: string;
@@ -37,7 +38,7 @@ const SERVICE_LABELS: Record<string, string> = {
 
 function whenLabel(b: Booking): string {
     const d = b.scheduled_date || b.preferred_date;
-    const time = b.scheduled_time || b.preferred_time;
+    const time = timeSlotLabel(b.scheduled_time || b.preferred_time);
     if (!d) return 'To be scheduled';
     const datePart = format(new Date(d), 'MMM d, yyyy');
     return time ? `${datePart} • ${time}` : datePart;

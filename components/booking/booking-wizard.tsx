@@ -87,6 +87,9 @@ export function BookingWizard({
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Whether the server took the slot outright. Drives the confirmation
+  // copy: a confirmed visit must not be told it is still being reviewed.
+  const [confirmed, setConfirmed] = useState(false);
   const [bookingRef, setBookingRef] = useState<string>("");
   const [estimatedMin, setEstimatedMin] = useState(0);
   const [estimatedMax, setEstimatedMax] = useState(0);
@@ -239,6 +242,7 @@ export function BookingWizard({
       const result = await response.json().catch(() => null);
       const serverMin = result?.booking?.estimated_min;
       const serverMax = result?.booking?.estimated_max;
+      setConfirmed(result?.confirmed === true);
 
       const ref = generateBookingRef();
       setBookingRef(ref);
@@ -337,6 +341,7 @@ export function BookingWizard({
         <StepConfirmation
           data={formData as BookingFormData}
           bookingRef={bookingRef}
+          confirmed={confirmed}
           estimatedMin={estimatedMin}
           estimatedMax={estimatedMax}
         />

@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { SUPPORT_EMAIL, SITE_URL } from "@/lib/constants";
+import { SUPPORT_EMAIL, SITE_URL, timeSlotLabel } from "@/lib/constants";
 
 const ADMIN_TELEGRAM_CHAT_ID = process.env.ADMIN_TELEGRAM_CHAT_ID || "";
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
@@ -99,6 +99,8 @@ type BookingNotification = {
   recurring_max?: number | null;
   special_requests?: string | null;
   addons?: string[];
+  /** True when the availability resolver confirmed the visit without a human. */
+  auto_confirmed?: boolean;
 };
 
 type ApplicationNotification = {
@@ -171,14 +173,19 @@ export async function notifyNewBooking(b: BookingNotification) {
   const recurringRange = hasRecurring
     ? `${fmtPrice(b.recurring_min!)}-${fmtPrice(b.recurring_max!)}`
     : null;
+  const slot = timeSlotLabel(b.preferred_time);
   const schedule = b.preferred_date
-    ? `${b.preferred_date}${b.preferred_time ? ` (${b.preferred_time})` : ""}`
+    ? `${b.preferred_date}${slot ? ` (${slot})` : ""}`
     : "Not specified";
   const addons = b.addons && b.addons.length ? b.addons.join(", ") : "—";
   const home = `${b.bedrooms} bd / ${b.bathrooms} ba${b.sqft_range ? ` / ${b.sqft_range} sqft` : ""}${b.condition ? ` / ${b.condition}` : ""}`;
+  // Says whether the slot is already promised to the customer or still waiting
+  // on a human. Everything below reads differently depending on this line.
+  const confirmation = b.auto_confirmed ? "AUTO-CONFIRMED" : "needs confirmation";
 
   const tg = [
     `<b>New booking — ${priceRange}</b>`,
+    `<b>${confirmation}</b>`,
     ``,
     `<b>${b.name}</b>`,
     `📞 ${b.phone}`,
@@ -200,7 +207,8 @@ export async function notifyNewBooking(b: BookingNotification) {
 
   const emailHtml = `
     <div style="font-family: -apple-system, sans-serif; max-width: 600px;">
-      <h2 style="margin: 0 0 16px;">New booking — ${priceRange}</h2>
+      <h2 style="margin: 0 0 4px;">New booking — ${priceRange}</h2>
+      <p style="margin: 0 0 16px;"><strong>${confirmation}</strong></p>
       <p style="margin: 0 0 8px;"><strong>${b.name}</strong></p>
       <p style="margin: 0 0 4px;">📞 <a href="tel:${b.phone}">${b.phone}</a></p>
       <p style="margin: 0 0 16px;">✉️ <a href="mailto:${b.email}">${b.email}</a></p>
@@ -246,8 +254,9 @@ export async function notifyCustomerBookingReceived(b: BookingNotification) {
     ? `${fmtPrice(b.recurring_min!)}–${fmtPrice(b.recurring_max!)}`
     : null;
   const firstName = b.name.trim().split(/\s+/)[0] || "there";
+  const slot = timeSlotLabel(b.preferred_time);
   const schedule = b.preferred_date
-    ? `${b.preferred_date}${b.preferred_time ? `, ${b.preferred_time}` : ""}`
+    ? `${b.preferred_date}${slot ? `, ${slot}` : ""}`
     : "—";
   const home = `${b.bedrooms} bd / ${b.bathrooms} ba`;
 
@@ -299,9 +308,10 @@ type CancellationNotification = {
 };
 
 export async function notifyBookingCancelled(b: CancellationNotification) {
+  const slot = timeSlotLabel(b.preferred_time);
   const when =
     b.scheduled_date || b.preferred_date
-      ? `${b.scheduled_date || b.preferred_date}${b.preferred_time ? ` (${b.preferred_time})` : ""}`
+      ? `${b.scheduled_date || b.preferred_date}${slot ? ` (${slot})` : ""}`
       : "Not scheduled";
 
   const tg = [

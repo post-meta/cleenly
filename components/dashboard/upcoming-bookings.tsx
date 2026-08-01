@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { timeSlotLabel } from '@/lib/constants';
 
 export function UpcomingBookings({ bookings }: { bookings: any[] }) {
     return (
@@ -38,7 +39,9 @@ export function UpcomingBookings({ bookings }: { bookings: any[] }) {
                                     {booking.scheduled_date || booking.preferred_date
                                         ? format(new Date(booking.scheduled_date || booking.preferred_date), 'MMM d')
                                         : 'TBD'}
-                                    {(booking.scheduled_time || booking.preferred_time) && ` • ${booking.scheduled_time || booking.preferred_time}`}
+                                    {timeSlotLabel(booking.scheduled_time || booking.preferred_time)
+                                        ? ` • ${timeSlotLabel(booking.scheduled_time || booking.preferred_time)}`
+                                        : ''}
                                 </span>
                             </div>
                             <div className="flex items-center gap-2">

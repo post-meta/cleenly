@@ -20,6 +20,7 @@ export default async function AdminLayout({
                         <Link href="/admin" className="font-bold text-xl">Cleenly Admin</Link>
                         <nav className="flex gap-6 text-sm font-medium text-muted-foreground">
                             <Link href="/admin/bookings" className="hover:text-foreground transition-colors">Bookings</Link>
+                            <Link href="/admin/availability" className="hover:text-foreground transition-colors">Availability</Link>
                             <Link href="/admin/finance" className="hover:text-foreground transition-colors">Finance</Link>
                             <Link href="/admin/sms" className="hover:text-foreground transition-colors">SMS</Link>
                         </nav>

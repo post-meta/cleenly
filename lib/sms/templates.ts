@@ -29,13 +29,28 @@ export function formatSmsDate(date?: string | null): string | null {
 }
 
 /**
- * Time wording. Accepts either a slot ("morning" / "afternoon") or a clock time
- * ("10:00", "10:00:00"). Anything else is dropped rather than shown raw.
+ * Slot values that read as a phrase rather than a clock time. "full_day" is
+ * stored by the availability resolver for a visit that fills the working day;
+ * without this it would fall through and the text would lose the time entirely.
+ * "evening" is only on rows written before the slot was withdrawn.
+ */
+const SLOT_WORDS: Record<string, string> = {
+  morning: "morning",
+  afternoon: "afternoon",
+  evening: "evening",
+  full_day: "all day",
+};
+
+/**
+ * Time wording. Accepts either a slot ("morning" / "afternoon" / "full_day")
+ * or a clock time ("10:00", "10:00:00"). Anything else is dropped rather than
+ * shown raw.
  */
 export function formatSmsTime(time?: string | null): string | null {
   if (!time) return null;
   const value = time.trim().toLowerCase();
-  if (value === "morning" || value === "afternoon") return value;
+  const word = SLOT_WORDS[value];
+  if (word) return word;
 
   const clock = /^(\d{1,2}):(\d{2})/.exec(value);
   if (!clock) return null;
@@ -49,6 +64,8 @@ export function formatSmsTime(time?: string | null): string | null {
     : `${display}:${minute} ${suffix}`;
 }
 
+const SLOT_PHRASES = new Set(Object.values(SLOT_WORDS));
+
 /** "Tue, Jul 28 at 10 AM" / "Tue, Jul 28, morning" / "Tue, Jul 28" / null */
 export function formatWhen(
   date?: string | null,
@@ -58,9 +75,8 @@ export function formatWhen(
   if (!day) return null;
   const when = formatSmsTime(time);
   if (!when) return day;
-  return when === "morning" || when === "afternoon"
-    ? `${day}, ${when}`
-    : `${day} at ${when}`;
+  // A slot names a part of the day, a clock time names a moment in it.
+  return SLOT_PHRASES.has(when) ? `${day}, ${when}` : `${day} at ${when}`;
 }
 
 type BookingWhen = {

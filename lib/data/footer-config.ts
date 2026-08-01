@@ -14,6 +14,10 @@ export const footerConfig = {
         { name: 'About', href: '/about' },
         { name: 'Pricing', href: '/pricing' },
         { name: 'FAQ', href: '/faq' },
+        // /blog had no inbound internal link anywhere on the site, so Google
+        // never crawled the hub (Discovered — currently not indexed, last
+        // crawl: never) even though the posts themselves rank on page one.
+        { name: 'Blog', href: '/blog' },
         { name: 'For Cleaners', href: '/join' },
     ],
 

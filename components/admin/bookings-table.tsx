@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { MapPin, User } from 'lucide-react';
+import { timeSlotLabel } from '@/lib/constants';
 
 interface Booking {
     id: string;
@@ -112,7 +113,7 @@ function BookingRow({ booking }: { booking: Booking }) {
                     : '-'}
                 {booking.scheduled_time && (
                     <span className="block text-xs text-gray-400">
-                        {booking.scheduled_time}
+                        {timeSlotLabel(booking.scheduled_time)}
                     </span>
                 )}
             </td>
