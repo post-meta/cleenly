@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, FormEvent } from "react";
+import { useState, useRef, useEffect, FormEvent, CSSProperties } from "react";
+import { usePathname } from "next/navigation";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 
 interface Message {
@@ -18,13 +19,59 @@ export function ChatWidget() {
     const [input, setInput] = useState("");
     const [streaming, setStreaming] = useState(false);
     const [violations, setViolations] = useState(0);
-    const [pathname, setPathname] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
+    const [panelStyle, setPanelStyle] = useState<CSSProperties | undefined>(undefined);
+    const pathname = usePathname() || "/";
     const scrollRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        setPathname(window.location.pathname);
+        const mq = window.matchMedia("(max-width: 767px)");
+        const update = () => setIsMobile(mq.matches);
+        update();
+        mq.addEventListener("change", update);
+        return () => mq.removeEventListener("change", update);
     }, []);
+
+    // On mobile the panel is sized and positioned from the visual viewport, not
+    // from vh/bottom-0. Otherwise the on-screen keyboard (and the browser's own
+    // bottom toolbar) covers the input row and the message can't be typed.
+    useEffect(() => {
+        if (!isOpen || !isMobile) {
+            setPanelStyle(undefined);
+            return;
+        }
+
+        const vv = window.visualViewport;
+
+        const update = () => {
+            const height = vv?.height ?? window.innerHeight;
+            const inset = vv
+                ? Math.max(0, window.innerHeight - vv.height - vv.offsetTop)
+                : 0;
+            setPanelStyle({ height: `${Math.round(height)}px`, bottom: `${Math.round(inset)}px` });
+        };
+
+        update();
+        vv?.addEventListener("resize", update);
+        vv?.addEventListener("scroll", update);
+        window.addEventListener("resize", update);
+        return () => {
+            vv?.removeEventListener("resize", update);
+            vv?.removeEventListener("scroll", update);
+            window.removeEventListener("resize", update);
+        };
+    }, [isOpen, isMobile]);
+
+    // Full-screen sheet on mobile — stop the page behind it from scrolling.
+    useEffect(() => {
+        if (!isOpen || !isMobile) return;
+        const previous = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = previous;
+        };
+    }, [isOpen, isMobile]);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -32,15 +79,14 @@ export function ChatWidget() {
         }
     }, [messages, streaming]);
 
+    // Desktop only: autofocus on mobile fights the keyboard and scrolls the page.
     useEffect(() => {
-        if (isOpen && inputRef.current && !streaming) {
-            inputRef.current.focus();
-        }
-    }, [isOpen, streaming]);
+        if (isMobile || !isOpen || streaming) return;
+        inputRef.current?.focus({ preventScroll: true });
+    }, [isOpen, streaming, isMobile]);
 
     const locked = violations >= MAX_VIOLATIONS_BEFORE_LOCK;
     const shouldHide = HIDE_ON_PREFIXES.some(p => pathname.startsWith(p));
-    if (shouldHide) return null;
 
     async function send(e: FormEvent) {
         e.preventDefault();
@@ -124,6 +170,8 @@ export function ChatWidget() {
         }
     }
 
+    if (shouldHide) return null;
+
     return (
         <>
             {/* Floating button */}
@@ -139,9 +187,12 @@ export function ChatWidget() {
 
             {/* Chat panel */}
             {isOpen && (
-                <div className="fixed inset-x-0 bottom-0 md:inset-x-auto md:bottom-6 md:right-6 z-50 flex h-[80vh] md:h-[600px] w-full md:w-[400px] flex-col overflow-hidden rounded-t-2xl md:rounded-2xl bg-background border border-border shadow-2xl">
+                <div
+                    style={panelStyle}
+                    className="fixed inset-x-0 bottom-0 md:inset-x-auto md:bottom-6 md:right-6 z-50 flex h-[100dvh] md:h-[600px] w-full md:w-[400px] max-w-full flex-col overflow-hidden md:rounded-2xl bg-background border border-border shadow-2xl"
+                >
                     {/* Header */}
-                    <div className="flex items-center justify-between bg-accent px-5 py-4">
+                    <div className="flex shrink-0 items-center justify-between bg-accent px-5 py-4">
                         <div>
                             <div className="flex items-center gap-2">
                                 <span className="font-semibold text-background">CLEENLY</span>
@@ -158,18 +209,21 @@ export function ChatWidget() {
                         <button
                             onClick={() => setIsOpen(false)}
                             aria-label="Close chat"
-                            className="text-background/80 hover:text-background"
+                            className="-mr-2 flex h-10 w-10 items-center justify-center text-background/80 hover:text-background"
                         >
                             <X className="h-5 w-5" />
                         </button>
                     </div>
 
                     {/* Messages */}
-                    <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
+                    <div
+                        ref={scrollRef}
+                        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 space-y-4"
+                    >
                         {messages.length === 0 && (
                             <div className="text-sm text-muted-foreground space-y-3">
                                 <p>Ask about our services, pricing, booking, or service areas.</p>
-                                <p className="text-xs">Examples: <span className="italic">"How much for a 2-bedroom deep clean?"</span> · <span className="italic">"Do you serve Capitol Hill?"</span></p>
+                                <p className="text-xs">Examples: <span className="italic">&ldquo;How much for a 2-bedroom deep clean?&rdquo;</span> · <span className="italic">&ldquo;Do you serve Capitol Hill?&rdquo;</span></p>
                             </div>
                         )}
                         {messages.map((m, i) => (
@@ -178,7 +232,7 @@ export function ChatWidget() {
                                 className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                             >
                                 <div
-                                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                                    className={`max-w-[85%] break-words rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                                         m.role === "user"
                                             ? "bg-foreground text-background"
                                             : "bg-muted text-foreground"
@@ -193,31 +247,42 @@ export function ChatWidget() {
                     </div>
 
                     {/* Input */}
-                    <form onSubmit={send} className="border-t border-border px-4 py-3">
+                    <form
+                        onSubmit={send}
+                        className="shrink-0 border-t border-border px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] md:pb-3"
+                    >
                         {locked ? (
                             <div className="text-center py-2 text-xs text-muted-foreground">
                                 Chat session ended. For booking text (206) 641-4739 or visit{" "}
                                 <a href="/book" className="underline">cleenly.app/book</a>.
                             </div>
                         ) : (
-                            <div className="flex gap-2">
+                            <div className="flex items-center gap-2">
                                 <input
                                     ref={inputRef}
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value.slice(0, MAX_INPUT))}
-                                    placeholder={streaming ? "..." : "Ask about CLEENLY"}
-                                    disabled={streaming}
-                                    className="flex-1 rounded-full border border-border bg-background px-4 py-2 text-sm focus:border-foreground focus:outline-none disabled:opacity-50"
+                                    placeholder="Ask about CLEENLY"
+                                    enterKeyHint="send"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    /* 16px on mobile — anything smaller makes iOS Safari
+                                       zoom in on focus and push the field off-screen. */
+                                    className="min-w-0 flex-1 rounded-full border border-border bg-background px-4 py-2.5 text-base md:text-sm focus:border-foreground focus:outline-none"
                                     maxLength={MAX_INPUT}
                                 />
                                 <button
                                     type="submit"
                                     disabled={streaming || !input.trim()}
                                     aria-label="Send"
-                                    className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background disabled:opacity-30 hover:bg-foreground/90 transition-colors"
+                                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-foreground text-background disabled:opacity-30 hover:bg-foreground/90 transition-colors"
                                 >
-                                    <Send className="h-4 w-4" />
+                                    {streaming ? (
+                                        <Loader2 className="h-4 w-4 animate-spin" />
+                                    ) : (
+                                        <Send className="h-4 w-4" />
+                                    )}
                                 </button>
                             </div>
                         )}
