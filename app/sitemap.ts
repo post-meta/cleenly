@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { getIndexableCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 import { blogPosts } from '@/lib/data/blog-posts';
+import { HIRING_OPEN } from '@/lib/hiring';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://cleenly.app';
@@ -16,7 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/faq', priority: 0.7 },
         { path: '/how-it-works', priority: 0.8 },
         { path: '/blog', priority: 0.7 },
-        { path: '/join', priority: 0.6 },
+        // Recruitment is only declared while we are actually hiring.
+        ...(HIRING_OPEN ? [{ path: '/join', priority: 0.6 }] : []),
         { path: '/locations', priority: 0.6 },
         { path: '/privacy', priority: 0.3 },
         { path: '/terms', priority: 0.3 },

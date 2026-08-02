@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/shared/json-ld";
+import { HIRING_OPEN } from "@/lib/hiring";
 
 export const metadata: Metadata = {
   title: "About CLEENLY | Greater Seattle House Cleaning",
@@ -275,22 +276,24 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* Cleaner recruitment teaser */}
-          <section className="mt-16">
-            <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
-              Want to <em className="italic text-foreground-soft font-display font-normal">clean with us?</em>
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              We&apos;re always interested in hearing from reliable cleaners in
-              the Greater Seattle area. If you do good work and want steady
-              hours, get in touch.
-            </p>
-            <div className="mt-8">
-              <Button asChild>
-                <Link href="/join">Apply to join our team</Link>
-              </Button>
-            </div>
-          </section>
+          {/* Cleaner recruitment teaser — only while we are actually hiring. */}
+          {HIRING_OPEN && (
+            <section className="mt-16">
+              <h2 className="font-display font-normal text-[32px] md:text-[40px] tracking-[-0.015em] text-foreground mb-6">
+                Want to <em className="italic text-foreground-soft font-display font-normal">clean with us?</em>
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                We&apos;re always interested in hearing from reliable cleaners in
+                the Greater Seattle area. If you do good work and want steady
+                hours, get in touch.
+              </p>
+              <div className="mt-8">
+                <Button asChild>
+                  <Link href="/join">Apply to join our team</Link>
+                </Button>
+              </div>
+            </section>
+          )}
 
           {/* Contact */}
           <section className="mt-16">

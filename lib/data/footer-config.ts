@@ -1,4 +1,5 @@
 import { getCityBySlug } from './cities';
+import { HIRING_OPEN } from '@/lib/hiring';
 
 export const footerConfig = {
     services: [
@@ -18,7 +19,8 @@ export const footerConfig = {
         // never crawled the hub (Discovered — currently not indexed, last
         // crawl: never) even though the posts themselves rank on page one.
         { name: 'Blog', href: '/blog' },
-        { name: 'For Cleaners', href: '/join' },
+        // Hidden while the crew is not hiring — see lib/hiring.ts.
+        ...(HIRING_OPEN ? [{ name: 'For Cleaners', href: '/join' }] : []),
     ],
 
     legal: [

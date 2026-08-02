@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/shared/json-ld";
 import { FAQAccordion } from "@/components/marketing/faq-accordion";
 import { cleanerFAQItems } from "@/lib/cleaner-faq-data";
+import { HIRING_OPEN, hiringRobots } from "@/lib/hiring";
 
 export const metadata: Metadata = {
+  robots: hiringRobots,
   title: "Cleaning jobs in Greater Seattle | Join CLEENLY",
   description:
     "Join the CLEENLY cleaning team in Greater Seattle. 1099 contractor work with steady bookings, flexible scheduling, and a small team that has your back.",
@@ -241,9 +243,24 @@ export default function JoinPage() {
               </span>
             </div>
             <div className="mt-8">
-              <Button asChild size="lg" className="text-lg">
-                <Link href="/join/apply">Apply now — takes 10 minutes</Link>
-              </Button>
+              {HIRING_OPEN ? (
+                <Button asChild size="lg" className="text-lg">
+                  <Link href="/join/apply">Apply now — takes 10 minutes</Link>
+                </Button>
+              ) : (
+                /* Says where things stand instead of collecting applications we
+                   would have to turn down. The form still works on a direct
+                   link, for people we approached ourselves. */
+                <div className="rounded-md border border-border bg-surface-warm p-5 max-w-xl">
+                  <p className="font-medium text-foreground">
+                    Our crew is full at the moment.
+                  </p>
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    We take people on as the schedule grows, so this changes.
+                    What&apos;s below is what the work looks like when we do.
+                  </p>
+                </div>
+              )}
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               Free to apply. No fees, no subscriptions.
