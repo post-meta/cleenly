@@ -243,11 +243,19 @@ export async function resolveAvailability(job: JobShape): Promise<AvailabilityRe
     bookedByDate.set(date, set);
   }
 
-  // Earliest bookable moment, expressed as a date plus a minute on that date.
-  const leadMinutes = settings.lead_time_hours * 60;
-  const earliestTotal = now.minute + leadMinutes;
-  const earliestDate = addDays(now.date, Math.floor(earliestTotal / 1440));
-  const earliestMinuteOnDate = earliestTotal % 1440;
+  // Lead time is measured in whole days, not as a rolling clock.
+  //
+  // A literal 24-hour horizon looked correct and read as broken: at 2:53pm it
+  // offered tomorrow as "2:53 PM - 6 PM", and the window crawled across the
+  // clock as the day went on. Notice periods are understood in days — "we need
+  // a day's notice" means tomorrow, all of it — so round up to whole days and
+  // offer the earliest eligible day in full.
+  //
+  // Today is the exception: when lead time is zero, today is bookable and the
+  // current clock legitimately cuts into it, because hours already gone cannot
+  // be sold.
+  const leadDays = Math.ceil(settings.lead_time_hours / 24);
+  const earliestDate = addDays(now.date, leadDays);
 
   const days: DayOffer[] = [];
 
@@ -284,8 +292,8 @@ export async function resolveAvailability(job: JobShape): Promise<AvailabilityRe
     const dayWindow: Interval = { start: rule.start_minute, end: rule.end_minute };
     const needed = wallClockMinutes(cleanerHours, crew);
 
-    // Lead time can cut into today (or the lead-time boundary day).
-    const floor = date === earliestDate ? earliestMinuteOnDate : 0;
+    // Only the current day is clipped by the clock; future days open in full.
+    const floor = date === now.date ? now.minute : 0;
     const openWindow = clipTo(dayWindow, { start: floor, end: 1440 });
     if (!openWindow) continue;
 
