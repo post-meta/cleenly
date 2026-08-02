@@ -134,6 +134,29 @@ export default async function BlogPostPage({ params }: PageProps) {
                         ))}
                     </div>
 
+                    {/* Where a convinced reader goes next. Also the post's only
+                        outbound internal links — the blog used to point nowhere,
+                        which is part of why Google never crawled the hub. */}
+                    {post.related && post.related.length > 0 && (
+                        <div className="mt-14 rounded-lg border border-border bg-surface-warm p-6">
+                            <div className="text-xs uppercase tracking-widest text-foreground-muted mb-3">
+                                Read next
+                            </div>
+                            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                                {post.related.map((r) => (
+                                    <li key={r.href}>
+                                        <Link
+                                            href={r.href}
+                                            className="text-[15px] font-medium text-accent hover:underline"
+                                        >
+                                            {r.label} →
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
                     {/* Author block (per Eugene's blog UX convention: author at the bottom) */}
                     <div className="mt-16 pt-8 border-t border-border">
                         <div className="text-xs uppercase tracking-widest text-gray-500 mb-2">Written by</div>

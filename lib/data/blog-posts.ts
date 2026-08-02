@@ -1,5 +1,16 @@
-// Blog post data. Educational content with no company-specific claims —
-// safe to publish before competitive positioning is finalized.
+// Blog post data.
+//
+// Topic selection is not editorial taste. Each of the posts added 2026-08-01
+// targets a cluster where GSC already shows impressions and no clicks — the
+// frequency cluster alone carries 575 impressions at an average position of 40
+// across 61 queries. The posts are the informational front door to those
+// commercial queries, and `related` points out of each one into the page that
+// closes the question.
+//
+// Rule for anything added here: no claim about our own volume, history, or
+// customers. Six invented specifics were removed from the first three posts on
+// 2026-07-31 ("hundreds of move-out cleanings", "most-cited deposit
+// deduction"). Prices come from lib/pricing.ts and nowhere else.
 //
 // Each post has structured sections (no markdown parser needed).
 // Add a post by appending an entry; it auto-appears on /blog and gets
@@ -11,6 +22,12 @@ export interface BlogSection {
     bullets?: string[];
 }
 
+/** A pointer out of the post into the page that answers it. */
+export interface BlogLink {
+    label: string;
+    href: string;
+}
+
 export interface BlogPost {
     slug: string;
     title: string;
@@ -19,6 +36,12 @@ export interface BlogPost {
     readingMinutes: number;
     shortVersion: string;
     sections: BlogSection[];
+    /**
+     * Where a reader who is convinced should go next. Also the only internal
+     * links these posts have: until 2026-08-01 the blog pointed nowhere, and
+     * Google had never even crawled the hub.
+     */
+    related?: BlogLink[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -198,6 +221,332 @@ export const blogPosts: BlogPost[] = [
                 paragraphs: [
                     "If you have pets, add one line to your booking notes: \"please use a rubber tool on the couch and rug.\" It gets the right tool in the door instead of leaving it to chance.",
                 ],
+            },
+        ],
+    },
+    {
+        slug: "how-often-should-you-have-your-house-cleaned",
+        title: "How often should you have your house cleaned?",
+        excerpt: "Weekly, every two weeks, monthly, or just once. The interval comes from four things about your household — not from what a cleaning company would rather sell you.",
+        publishedAt: "2026-08-01",
+        readingMinutes: 6,
+        shortVersion: "Every two weeks is the interval this work is built around. Weekly earns its cost when you have pets, small children, or someone home all day. Monthly works for one or two tidy people, but each visit has to be longer to make up the gap. Pick the interval from how fast your kitchen and bathrooms turn, and change it once you see how the house holds.",
+        sections: [
+            {
+                paragraphs: [
+                    "There is no correct interval. There is only how fast your particular home goes from clean to not-clean, and that varies more between two houses on the same street than between two neighbourhoods.",
+                    "The useful way to decide is to stop thinking about a schedule and start thinking about two rooms. Kitchens and bathrooms set the pace. Bedrooms and living rooms tolerate a long gap; a shower does not. If you know how those two rooms behave in your house, you know your interval.",
+                ],
+            },
+            {
+                heading: "Four things that set the pace",
+                paragraphs: [
+                    "These four account for most of the difference between two homes of the same size. Count yours before you pick a frequency.",
+                ],
+                bullets: [
+                    "People and pets per square foot. Four people in 1,100 square feet generate more than two people in 2,400. A shedding dog counts roughly like an extra person.",
+                    "Whether shoes come off at the door. This one is close to a switch. A shoes-off house keeps floors presentable two to three times longer, and Pacific Northwest streets are wet most of the year.",
+                    "Whether the house is occupied during the day. A home office in daily use means a kitchen used three times a day instead of once, and a bathroom used all day rather than twice.",
+                    "Hard floors versus carpet. Hard floors show dust sooner and clean faster. Carpet hides it and holds it. The one that looks dirty first is not the one that is dirty first.",
+                ],
+            },
+            {
+                heading: "Every two weeks",
+                paragraphs: [
+                    "This is the interval the work is designed around, and it is the sensible place to start. Two weeks is short enough that nothing has time to bond to a surface — soap film wipes off instead of needing to be dissolved, kitchen grease is still soft, grout has not started to shade.",
+                    "The practical test: if your bathroom looks fine on day ten and questionable on day fourteen, every two weeks is your answer. You are cleaning just before the point where it gets harder.",
+                ],
+            },
+            {
+                heading: "Weekly",
+                paragraphs: [
+                    "Weekly is not twice the cleaning. It is a different relationship with the house. Nothing accumulates, so each visit is lighter, and the home stays at a level that a fortnightly schedule touches only on the day itself.",
+                    "It earns the difference in three situations: a shedding pet, children under about six, or a household where someone is home all day. In all three the load is continuous rather than occasional, and two weeks is long enough for it to become work rather than upkeep.",
+                ],
+            },
+            {
+                heading: "Monthly",
+                paragraphs: [
+                    "Monthly is a real option and it suits a specific household: one or two adults, out most of the day, no pets, shoes off. Under those conditions thirty days does less damage than you would think.",
+                    "The honest part is that a monthly visit cannot be a lighter visit. Thirty days puts down a film in the kitchen and hard-water marks in the shower that fourteen days does not, and both take longer to remove than to prevent. A monthly clean that is priced and scheduled like a fortnightly one will leave you disappointed at the edges.",
+                ],
+            },
+            {
+                heading: "Not on a schedule at all",
+                paragraphs: [
+                    "Sometimes the interval is the wrong question. A one-off makes more sense when the trigger is an event rather than a rhythm — before family arrives, after a renovation, at the end of a lease, or when a house has simply got away from you and needs a reset before any schedule would help.",
+                    "In that case book the reset first and decide about a rhythm afterwards, once you can see what the house looks like maintained.",
+                ],
+            },
+            {
+                heading: "What it costs to guess wrong",
+                paragraphs: [
+                    "Very little, which is the point. Recurring visits with us start at $185, the first visit is priced as a deep clean because it is heavier, and you can reschedule or cancel free up to 24 hours before a visit.",
+                    "Start at every two weeks. After three visits you will know whether the house is arriving at each one already tired, which means go weekly, or still looking fine, which means you can stretch. That is a better answer than any rule of thumb, including this one.",
+                ],
+            },
+        ],
+        related: [
+            {
+                label: "Bi-weekly service",
+                href: "/services/bi-weekly-service",
+            },
+            {
+                label: "Regular cleaning",
+                href: "/services/regular-cleaning",
+            },
+            {
+                label: "See your price",
+                href: "/book",
+            },
+        ],
+    },
+    {
+        slug: "monthly-cleaning-what-it-holds",
+        title: "Monthly cleaning: what it holds, and when it stops being enough",
+        excerpt: "Thirty days is a long time in a kitchen. What a monthly clean can realistically keep on top of, the three signs it has stopped working, and why the visit has to be longer than a fortnightly one.",
+        publishedAt: "2026-08-01",
+        readingMinutes: 6,
+        shortVersion: "Monthly suits one or two adults who are out during the day, with no pets and shoes off at the door. It stops working when the shower needs scrubbing rather than wiping, when the kitchen has a film you can feel, or when the visit keeps running long. A monthly visit takes longer than a fortnightly one, because thirty days lets things bond that fourteen days does not.",
+        sections: [
+            {
+                paragraphs: [
+                    "Monthly is the cheapest schedule that still counts as having a cleaner, which is why it is the one people hope will work. For the right household it does.",
+                    "It also has a clear failure mode, and it is worth knowing what that looks like before you are in it rather than after.",
+                ],
+            },
+            {
+                heading: "What thirty days does that fourteen does not",
+                paragraphs: [
+                    "The difference is not quantity. It is chemistry. Most household soil is easy to remove while it is still loose and difficult once it has bonded to the surface, and the crossover happens somewhere in the third and fourth week.",
+                ],
+                bullets: [
+                    "Kitchen: airborne cooking grease settles on cabinet fronts and the wall behind the range as a film. At two weeks it wipes off. At four it needs a degreaser and a second pass.",
+                    "Shower: soap and minerals from hard water build in layers. Early it is a wipe. Later it is a scrub, and later still it stops coming off entirely and becomes etching.",
+                    "Toilet and sink: the mineral ring at the waterline is the clearest thirty-day marker in the house. It does not appear at two weeks.",
+                    "Floors: grit gets walked into hard floors and ground in. What would have been a mop becomes a mop plus edges and corners.",
+                    "Dust: not really a timing problem. Dust behaves about the same at two weeks and four. It is the only thing on this list that does not punish you for waiting.",
+                ],
+            },
+            {
+                heading: "Three signs monthly has stopped being enough",
+                paragraphs: [
+                    "Any one of these on its own is worth acting on. Two together means the interval is fighting you.",
+                ],
+                bullets: [
+                    "The shower needs scrubbing rather than wiping. This is the earliest reliable signal, and the one that costs the most to ignore, because mineral buildup eventually stops being reversible.",
+                    "You can feel a film on the kitchen cabinet doors near the range. Sight is a poor test here; touch is accurate.",
+                    "You find yourself tidying properly the night before the cleaner comes — not putting things away, but actually cleaning. That means the visit is no longer covering the gap, and you have quietly become the person filling it.",
+                ],
+            },
+            {
+                heading: "Why a monthly visit costs more than a fortnightly one",
+                paragraphs: [
+                    "Per visit, not per month. A home cleaned every two weeks arrives at each visit already close to where it should be, so the visit is maintenance. A home cleaned every thirty days needs part of every visit spent undoing the extra sixteen days before any maintenance starts.",
+                    "This is also why the arithmetic rarely favours monthly as strongly as it looks. Two lighter visits and one longer visit can land closer together than people expect, and the fortnightly home spends the whole month in better condition rather than half of it.",
+                ],
+            },
+            {
+                heading: "Who monthly genuinely suits",
+                paragraphs: [
+                    "One or two adults, out of the house during the working day, no pets, shoes off at the door, and a preference for hard floors over carpet. Under those conditions the house generates slowly enough that thirty days is inside the easy window rather than past it.",
+                    "It also suits a second home, a property between tenancies, or any house that is simply not being lived in hard. Occupancy matters more than square footage.",
+                ],
+            },
+            {
+                heading: "A third option",
+                paragraphs: [
+                    "If monthly is nearly working, the fix is usually not to jump to fortnightly. It is to keep the monthly rhythm and let one visit a year be a proper deep clean — the one that resets the shower, the inside of the oven, the baseboards, and everything else that a maintenance visit is not scoped to reach.",
+                    "That keeps the running cost close to where you wanted it while stopping the slow accumulation that eventually makes monthly untenable. Recurring visits start at $185; a deep clean starts at $290 and is priced by the size and condition of the home.",
+                ],
+            },
+        ],
+        related: [
+            {
+                label: "Regular cleaning",
+                href: "/services/regular-cleaning",
+            },
+            {
+                label: "Deep cleaning",
+                href: "/services/deep-cleaning",
+            },
+            {
+                label: "Prices",
+                href: "/pricing",
+            },
+        ],
+    },
+    {
+        slug: "why-the-first-cleaning-costs-more",
+        title: "Why the first cleaning costs more than the ones after it",
+        excerpt: "Nearly every cleaning company charges more for the first visit, and the reason is simpler than it looks. What the first clean reaches, what it costs, and when it isn't heavier at all.",
+        publishedAt: "2026-08-01",
+        readingMinutes: 5,
+        shortVersion: "The first visit is priced as a deep clean because it is one. It reaches the places a maintenance visit is not scoped to touch — inside appliances, baseboards, window tracks, behind furniture — and those have been accumulating for as long as the house has gone without them. First and deep cleans start at $290. Recurring visits after that start at $185.",
+        sections: [
+            {
+                paragraphs: [
+                    "You get a quote for a recurring clean, and the first visit is noticeably more than the number you were expecting to pay every two weeks. It reads like a setup fee, or like the price will keep moving.",
+                    "It is neither. The first visit is a different job, and it is worth understanding the difference, because it also tells you what you are buying afterwards.",
+                ],
+            },
+            {
+                heading: "Maintenance assumes a starting point",
+                paragraphs: [
+                    "A recurring clean is priced on the assumption that the home is already close to where it should be. It keeps a line that has already been drawn. That is what makes it quick and what makes it affordable.",
+                    "The first visit has no such starting point. Whatever the house has accumulated since the last thorough clean — six months, two years, since it was built — is still there, and it has to be dealt with once before maintenance means anything. Cleaning a maintained home and resetting an unmaintained one are not the same task with different amounts of effort. They are different tasks.",
+                ],
+            },
+            {
+                heading: "What the first visit reaches",
+                paragraphs: [
+                    "These are the areas a maintenance visit does not include, and where nearly all of the extra time goes.",
+                ],
+                bullets: [
+                    "Inside the oven, the refrigerator, and the microwave",
+                    "Baseboards throughout, which are slow because they are hand work at floor level",
+                    "Window sills and the tracks, which hold grit and, in this climate, damp",
+                    "Door frames and the tops of doors",
+                    "Light fixtures and ceiling fan blades",
+                    "Behind and under furniture that can be moved",
+                    "Cabinet fronts, properly, rather than a pass",
+                ],
+            },
+            {
+                heading: "The numbers",
+                paragraphs: [
+                    "A first or deep clean starts at $290 and is estimated from the size of the home, the number of bathrooms, the square footage, and the condition it is in. A one-bedroom runs $290–350; a three-bedroom runs $545–650.",
+                    "Recurring visits from the second one onward start at $185, and most homes sit between $185 and $305 depending on size. The gap between the two numbers is the whole point: you pay once to draw the line, then pay less to hold it.",
+                    "You see the estimate before you book, and the final price never goes above the top of it.",
+                ],
+            },
+            {
+                heading: "When the first visit is not heavier",
+                paragraphs: [
+                    "Sometimes it genuinely is not, and it is worth saying so before you book rather than after.",
+                ],
+                bullets: [
+                    "The home was deep cleaned recently by someone else and has been maintained since.",
+                    "It is new construction that has already had its post-construction clean.",
+                    "It is a small, lightly occupied space — a studio used a few nights a week does not accumulate like a family home.",
+                    "You are moving out rather than starting a schedule. That is a move-out clean, priced from $380, and a different scope again: it includes the insides of cabinets and closets, because the unit is being handed back empty.",
+                ],
+            },
+            {
+                heading: "What this means when you book",
+                paragraphs: [
+                    "Tell the truth about the condition of the home in the booking form. Under-describing it does not make the visit cheaper — it makes the estimate wrong, and an estimate that is wrong helps nobody.",
+                    "If the home turns out to need more than described, we call before we start rather than after we finish. And the price you were shown is a ceiling, not an opening position.",
+                ],
+            },
+        ],
+        related: [
+            {
+                label: "Deep cleaning",
+                href: "/services/deep-cleaning",
+            },
+            {
+                label: "How pricing works",
+                href: "/pricing",
+            },
+            {
+                label: "See your price",
+                href: "/book",
+            },
+        ],
+    },
+    {
+        slug: "airbnb-turnover-same-day-changeover",
+        title: "Airbnb turnover: what a same-day changeover actually needs",
+        excerpt: "Checkout at 11, check-in at 3. What fits in that window, why laundry decides everything, and how to brief a cleaner so nothing needs a second trip.",
+        publishedAt: "2026-08-01",
+        readingMinutes: 6,
+        shortVersion: "A same-day changeover is a deadline with a cleaning job inside it. Laundry is almost always the binding constraint, not the cleaning — which is why two sets of linens per bed is the single highest-value thing a host can buy. Brief the cleaner on the restock list and the check-in time, not on the cleaning.",
+        sections: [
+            {
+                paragraphs: [
+                    "Turnover cleaning gets described as regular cleaning done faster. It is not. A guest-ready unit has requirements a lived-in home does not — nothing personal left behind, consumables restocked, linens fresh, and every surface photographable — and all of it has to happen inside a fixed window that someone else set.",
+                    "Miss the window and the cost is not a rescheduled visit. It is a guest standing outside.",
+                ],
+            },
+            {
+                heading: "The window is shorter than it looks",
+                paragraphs: [
+                    "Checkout at 11 and check-in at 3 reads like four hours. It is not. Subtract travel in, the walk-through, travel out, and the buffer you need in case the previous guest left late, and the real working window is closer to two and a half hours.",
+                    "That is enough for a one or two bedroom unit cleaned by two people, provided nothing goes wrong. It is not enough to also discover that you are short a fitted sheet.",
+                ],
+            },
+            {
+                heading: "Laundry is the constraint, not the cleaning",
+                paragraphs: [
+                    "This is the part that is easy to underestimate. The cleaning itself is predictable and compresses well. Laundry does not compress at all — a wash plus a dry cycle runs most of the available window, and it runs at the same speed whether one person or three is standing next to the machine.",
+                    "There are only three ways out of it, and the first is much better than the other two.",
+                ],
+                bullets: [
+                    "Keep two full sets of linens per bed and two sets of towels per bathroom. The dirty set leaves with the cleaner or goes in the machine unattended; the fresh set goes straight on. The window stops depending on a dryer.",
+                    "Use an off-site laundry service on a fixed collection rhythm. Works well above a certain number of units, adds a dependency below it.",
+                    "Run the laundry during the clean and hope the dryer finishes. This is the default, and it is the one that fails on the day a guest checks out late.",
+                ],
+            },
+            {
+                heading: "The restock list is the part that gets forgotten",
+                paragraphs: [
+                    "Cleaning is visible, so it gets attention. Consumables are invisible until a guest needs one at midnight. Write the list down once, keep the stock in one cupboard, and make checking it part of the changeover rather than something you remember on the drive home.",
+                ],
+                bullets: [
+                    "Toilet paper: one on the holder, two visible spares per bathroom",
+                    "Hand soap, dish soap, dishwasher tablets, a sponge that is not the previous guest's sponge",
+                    "Bin liners in every bin, including the bathroom",
+                    "Coffee, tea, salt, pepper, oil — whatever your listing photos imply",
+                    "Anything the listing explicitly promises. A photographed welcome basket is a promise.",
+                ],
+            },
+            {
+                heading: "What guests actually photograph",
+                paragraphs: [
+                    "A guest who is annoyed does not write a paragraph. They take a picture of one thing and attach it to a review. The candidates are all geometry — places a fast pass misses because they are awkward to reach, not because they are hard to clean.",
+                ],
+                bullets: [
+                    "Hair. Bathroom floor edges, the shower drain, the corner behind the toilet. Hair is the hardest thing on this list to remove completely and the easiest for a guest to photograph.",
+                    "The inside of the microwave and the kettle or coffee machine",
+                    "Under the bed, and the gap between the mattress and the headboard",
+                    "The bin, if the previous liner was reused",
+                    "The kitchen sink and the tap, which show water spots in every photograph taken with a flash",
+                ],
+            },
+            {
+                heading: "How to brief a cleaner",
+                paragraphs: [
+                    "Do not brief on cleaning. Brief on the constraints, because those are the things a cleaner cannot infer from the unit.",
+                ],
+                bullets: [
+                    "The check-in time, not the checkout time. The deadline is what matters.",
+                    "Where the linens, towels, and consumables live, and how many should be out at the end.",
+                    "Which door, which code, and where to park. A cleaner circling for a space is a changeover that starts late.",
+                    "Who to contact if something is broken or missing, and whether they should proceed or wait.",
+                    "Whether to photograph the finished unit. Worth asking for if you are not going to see it yourself.",
+                ],
+            },
+            {
+                heading: "Booking it",
+                paragraphs: [
+                    "We cover turnovers across Greater Seattle, from Everett down through Seattle and the Eastside to Tacoma and Gig Harbor. Give us the checkout and check-in times in the booking form and we work to the window you set.",
+                    "You see the estimate before you book, supplies are included, and the final price never goes above the top of your estimate.",
+                ],
+            },
+        ],
+        related: [
+            {
+                label: "Airbnb turnover",
+                href: "/services/airbnb-turnover",
+            },
+            {
+                label: "Where we work",
+                href: "/locations",
+            },
+            {
+                label: "See your price",
+                href: "/book",
             },
         ],
     },
