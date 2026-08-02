@@ -5,6 +5,10 @@ import { cities } from "./lib/data/cities";
 // Add an entry when a service slug changes — preserves SEO and external links.
 const SERVICE_SLUG_REDIRECTS: Array<{ from: string; to: string }> = [
   { from: "post-emergency", to: "restorative-cleaning" },
+  // 2026-08-02: the jobsite version of this service was never something the
+  // crew could deliver. Reframed to what they actually do — make-ready turns
+  // for renovated multifamily units — so the slug had to follow the content.
+  { from: "post-construction", to: "make-ready-cleaning" },
 ];
 
 function buildServiceRedirects() {

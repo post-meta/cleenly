@@ -97,7 +97,7 @@ SERVICES (10 total)
 9. Airbnb Turnover — $125–$210, 1–2 hours
    Quick turnaround between guests. Linen change, sanitize bathroom and kitchen, restock amenities, damage check. Same-day service available.
 
-10. Post-Construction — $420–$950, 5–10 hours
+10. Make-Ready Cleaning — $380–$1,295 per unit, 4–6 hours
    Heavy-duty after renovation. HEPA vacuuming, wall dusting, inside cabinets, fixture sticker removal. NOT included: hauling heavy debris, exterior pressure washing.
 
 PRICING LOGIC

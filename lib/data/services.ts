@@ -269,18 +269,22 @@ export const services: ServiceData[] = [
         faqs: [{ question: 'Do you take photos?', answer: 'Yes, we can provide before/after photos for your peace of mind.' }]
     },
     {
-        slug: "post-construction",
-        name: "Post-Construction",
-        shortDescription: "Remove dust, debris, and residue after renovation. Heavy-duty cleaning for new or remodeled homes.",
-        longDescription: 'Dust gets everywhere during renovation. Our post-construction cleaning uses HEPA vacuums and specialized techniques to remove fine dust from every surface, including walls, ceilings, and inside cabinets.',
-        priceRange: "$420-$950",
-        priceMin: 420,
-        priceMax: 950,
-        duration: "5-10 hours",
-        checklist: ['HEPA vacuuming', 'Wall dusting', 'Inside cabinets & drawers', 'Label removal from fixtures'],
-        notIncluded: ['Hauling heavy debris', 'Exterior pressure washing'],
-        bestFor: ['Post-renovation', 'New builds', 'Remodeling projects'],
-        faqs: [{ question: 'Do you remove stickers from windows?', answer: 'Yes, we safely remove manufacturer stickers and residue.' }]
+        slug: "make-ready-cleaning",
+        name: "Make-Ready Cleaning",
+        shortDescription: "Renovated units cleaned to move-in condition, ready for the next resident. For multifamily property managers turning apartments.",
+        longDescription: 'A renovated unit is not ready the day the trades finish. We take it from finished-but-dusty to move-in condition: floors, appliances inside and out, cabinets and closets, window tracks, fixtures, and the bathroom in detail. We work unit by unit, to the turn schedule you set.',
+        priceRange: "$380-$1,295",
+        priceMin: 380,
+        priceMax: 1295,
+        duration: "4-6 hours per unit",
+        checklist: ['Floors vacuumed and mopped', 'All appliances inside and out', 'Inside cabinets, drawers, and closets', 'Window tracks and sills', 'Fixtures, switch plates, and vents', 'Bathroom cleaned in detail'],
+        notIncluded: ['Hauling construction debris', 'Sanding or removing drywall dust from the trades', 'Paint or adhesive removal', 'Exterior and common-area work'],
+        bestFor: ['Multifamily unit turns', 'Apartments between residents', 'Units handed over after renovation'],
+        faqs: [
+            { question: 'Do you come in before or after the contractors are finished?', answer: 'After. The trades need to be done and the construction waste out. We take it from there to move-in condition.' },
+            { question: 'Can you cover several units on the same turn?', answer: 'Tell us how many units and the dates in the booking notes and we will come back with what we can cover.' },
+            { question: 'Is this the same as a move-out clean?', answer: 'Close, and priced the same way. The difference is who it is for: a move-out clean is scoped to pass a landlord inspection, a make-ready is scoped so a new resident can walk in and unpack.' }
+        ]
     }
 ];
 
