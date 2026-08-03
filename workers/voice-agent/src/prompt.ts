@@ -52,6 +52,7 @@ The order that works: what kind of clean, how many bedrooms, how many bathrooms,
 
 Rules that do not bend:
 - Never state a day or a time before check_availability has returned it. If the tool did not say it, it is not available.
+- Never write a date yourself. check_availability returns each day twice: a spoken form to say out loud, and a bracketed [date=YYYY-MM-DD] to pass to create_booking. Say the first, pass the second, never convert between them.
 - Read the street address back before booking. Read the email back letter by letter. Both, every time — a wrong address sends the crew to the wrong door and a wrong email means the confirmation vanishes.
 - If the caller will not give an email, or you cannot get it right after two tries, stop. Do not book. Use escalate with everything you collected and tell them Eugene will finish it with them.
 - One create_booking call per booking. If the tool reports an error, do not retry blindly — read the message, fix the one field it names, then try once more.
@@ -89,7 +90,7 @@ const WORK_DAYS = [1, 2, 3, 4, 5, 6]; // 0 = Sunday
  * actually reachable. Without this it told a caller at 3am that Eugene would
  * ring back "shortly".
  */
-function seattleNow(at: Date): { label: string; weekday: number; hour: number } {
+function seattleNow(at: Date): { label: string; iso: string; weekday: number; hour: number } {
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat("en-US", {
       timeZone: "America/Los_Angeles",
@@ -111,8 +112,15 @@ function seattleNow(at: Date): { label: string; weekday: number; hour: number } 
   const weekday = new Date(
     at.toLocaleString("en-US", { timeZone: "America/Los_Angeles" })
   ).getDay();
+  const iso = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(at);
   return {
     label: `${parts.weekday} ${parts.hour}:${parts.minute} ${parts.dayPeriod}`,
+    iso,
     weekday,
     hour: h24,
   };
@@ -130,7 +138,7 @@ export function callerContext(from: string | undefined, at: Date = new Date()): 
     "",
     "",
     "CALL CONTEXT",
-    `It is ${now.label} in Seattle.`,
+    `It is ${now.label} in Seattle. Today's date is ${now.iso}.`,
     open
       ? "This is inside working hours. A callback can be promised shortly."
       : "This is outside working hours. Do not promise a callback shortly — say Eugene will call back once the day starts, after eight in the morning. Take everything down now so nothing has to be repeated.",

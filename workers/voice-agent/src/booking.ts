@@ -111,17 +111,21 @@ export async function checkAvailability(
   if (wantedDate) {
     const hit = days.find((d) => d.date === wantedDate);
     if (hit) {
-      return `${speakDate(hit.date)} is open: ${speakSlots(hit.slots)}. Offer those and ask which suits them.`;
+      return `${speakDate(hit.date)} [date=${hit.date}] is open: ${speakSlots(hit.slots)}. Say the day out loud, pass the bracketed date to create_booking.`;
     }
-    const alt = days.slice(0, 2).map((d) => `${speakDate(d.date)} (${speakSlots(d.slots)})`);
+    const alt = days.slice(0, 2).map((d) => `${speakDate(d.date)} [date=${d.date}] (${speakSlots(d.slots)})`);
     return `${speakDate(wantedDate)} is taken. The nearest open days are ${alt.join(" and ")}. Offer those.`;
   }
 
   const spoken = days
     .slice(0, SPOKEN_DAYS)
-    .map((d) => `${speakDate(d.date)}: ${speakSlots(d.slots)}`);
+    .map((d) => `${speakDate(d.date)} [date=${d.date}]: ${speakSlots(d.slots)}`);
   const more = days.length > SPOKEN_DAYS ? ` There are ${days.length} open days in total if none of those work.` : "";
-  return `Open soonest — ${spoken.join("; ")}.${more} Offer the first two and let the caller choose. Do not read the whole list.`;
+  return (
+    `Open soonest — ${spoken.join("; ")}.${more} Offer the first two out loud and let the caller choose. ` +
+    `Never read the bracketed date aloud — it exists so you can pass the exact value to create_booking. ` +
+    `Never build a date yourself.`
+  );
 }
 
 export interface BookingArgs extends JobArgs {
@@ -144,6 +148,36 @@ export interface BookingArgs extends JobArgs {
  * The customer still gets the confirmation email. Revisit only with the owner.
  */
 export async function createBooking(_env: Env, a: BookingArgs): Promise<string> {
+  // Re-check the date against the calendar before writing.
+  //
+  // A model that has been handed a spoken date ("Monday the 4th") will happily
+  // invent an ISO string to go with it — the first phone booking landed on
+  // 2025-01-03, nineteen months in the past. The tool that owns the write is
+  // the right place to refuse, because it is the only one that cannot be
+  // talked out of it.
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(a.date)) {
+    return "That date is not in YYYY-MM-DD form. Call check_availability again and use the bracketed value it returns.";
+  }
+  try {
+    const res = await post(`${SITE}/api/availability`, {
+      serviceType: a.service_type,
+      bedrooms: a.bedrooms,
+      bathrooms: a.bathrooms,
+      condition: a.condition,
+      sqftRange: a.sqft_range,
+    });
+    if (res.ok) {
+      const av = (await res.json()) as AvailabilityResponse;
+      const days = av.days ?? [];
+      if (days.length > 0 && !days.some((d) => d.date === a.date)) {
+        const near = days.slice(0, 2).map((d) => `${speakDate(d.date)} [date=${d.date}]`).join(" or ");
+        return `${a.date} is not an open day, so nothing was booked. Offer ${near} instead and call create_booking again with one of those.`;
+      }
+    }
+  } catch {
+    // Calendar unreachable — fall through and let the booking route decide.
+  }
+
   const payload = {
     name: a.name,
     phone: a.phone,
