@@ -16,7 +16,9 @@ VOICE STYLE
 WHAT YOU CAN DO
 - Look up the caller's most recent booking with the lookup_booking tool (status, date, estimate). Use the caller's own phone number unless they give a different one.
 - Answer pricing and policy questions from the facts below.
-- Escalate to Eugene, the owner, with the escalate tool. After escalating, tell the caller: "Eugene will call you back shortly."
+- Escalate to Eugene, the owner, with the escalate tool. What you say after escalating depends on the time, which is given to you in CALL CONTEXT:
+  - Inside working hours: "Eugene will call you back shortly."
+  - Outside working hours: name the next opening instead of promising speed — for example "Eugene will call you back in the morning, after eight." Never say "shortly" at night; a callback that does not come when promised is worse than an honest wait.
 
 PRICING FACTS (estimates, not quotes — keep in sync with lib/pricing.ts PRICE_DISPLAY)
 - Minimum job is $185. Quote the price for the job, never a rate per hour — if the caller asks how the number is built, say it reflects the size and condition of their home.
@@ -29,6 +31,7 @@ PRICING FACTS (estimates, not quotes — keep in sync with lib/pricing.ts PRICE_
 POLICY FACTS
 - 24-hour re-clean guarantee: if something isn't right, tell us within 24 hours and we come back free.
 - Cancel or reschedule free up to 24 hours before the visit.
+- Cleanings happen Monday to Saturday, 8am to 6pm. The phone is answered around the clock — this line is always open — but nobody is sent to a home outside those hours. If a caller asks whether we are open, the honest answer is that they have reached us and we can take everything down now; the visit itself gets scheduled inside those hours.
 - We bring all supplies and equipment.
 - We invoice after the cleaning — no payment is taken at booking.
 - Residential homes only — no commercial or office cleaning.
@@ -55,8 +58,71 @@ ENDING THE CALL
 - Say one short closing line first, then call end_call. For a finished call: "Thanks for calling Cleenly, take care." For off-topic or abuse: "I can only help with Cleenly cleaning — take care." Keep it to one sentence.
 - Never call end_call while the caller still has a genuine cleaning question. When in doubt, keep helping or escalate instead.`;
 
+// Crew hours, mirrored from the availability_rules table (Mon-Sat 08:00-18:00,
+// Sunday off). The worker has no database, so this is a manual mirror like the
+// prices above. If the owner changes the working window in /admin/availability,
+// change it here too.
+const WORK_START_HOUR = 8;
+const WORK_END_HOUR = 18;
+const WORK_DAYS = [1, 2, 3, 4, 5, 6]; // 0 = Sunday
+
+/**
+ * Seattle wall-clock for the moment the call is happening.
+ *
+ * The agent answers around the clock, so it has to know whether anyone is
+ * actually reachable. Without this it told a caller at 3am that Eugene would
+ * ring back "shortly".
+ */
+function seattleNow(at: Date): { label: string; weekday: number; hour: number } {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles",
+      weekday: "long",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+      .formatToParts(at)
+      .map((p) => [p.type, p.value])
+  );
+  const h24 = Number(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles",
+      hour: "numeric",
+      hourCycle: "h23",
+    }).format(at)
+  );
+  const weekday = new Date(
+    at.toLocaleString("en-US", { timeZone: "America/Los_Angeles" })
+  ).getDay();
+  return {
+    label: `${parts.weekday} ${parts.hour}:${parts.minute} ${parts.dayPeriod}`,
+    weekday,
+    hour: h24,
+  };
+}
+
 /** Per-call addendum (appended to the system prompt after `setup`). */
-export function callerContext(from: string | undefined): string {
-  if (!from) return "";
-  return `\n\nCALL CONTEXT\nThe caller's phone number is ${from}. Use it for lookup_booking and as the default callback number for escalate.`;
+export function callerContext(from: string | undefined, at: Date = new Date()): string {
+  const now = seattleNow(at);
+  const open =
+    WORK_DAYS.includes(now.weekday) &&
+    now.hour >= WORK_START_HOUR &&
+    now.hour < WORK_END_HOUR;
+
+  const lines = [
+    "",
+    "",
+    "CALL CONTEXT",
+    `It is ${now.label} in Seattle.`,
+    open
+      ? "This is inside working hours. A callback can be promised shortly."
+      : "This is outside working hours. Do not promise a callback shortly — say Eugene will call back once the day starts, after eight in the morning. Take everything down now so nothing has to be repeated.",
+  ];
+  if (from) {
+    lines.push(
+      `The caller's phone number is ${from}. Use it for lookup_booking and as the default callback number for escalate.`
+    );
+  }
+  return lines.join("\n");
 }

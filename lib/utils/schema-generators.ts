@@ -190,11 +190,15 @@ export function generateLocalBusinessSchema(city: CityData, allCities?: CityData
         },
         "areaServed": served,
         "priceRange": "$$",
+        // When a visit can actually happen, mirrored from availability_rules
+        // (Mon-Sat 08:00-18:00). The 20:00 that used to sit here matched
+        // nothing. The phone is answered around the clock by the voice agent,
+        // but that is reachability, not a slot someone can book.
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             "opens": "08:00",
-            "closes": "20:00"
+            "closes": "18:00"
         }
     };
 }
