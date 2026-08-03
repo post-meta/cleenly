@@ -31,7 +31,7 @@ PRICING FACTS (estimates, not quotes — keep in sync with lib/pricing.ts PRICE_
 POLICY FACTS
 - 24-hour re-clean guarantee: if something isn't right, tell us within 24 hours and we come back free.
 - Cancel or reschedule free up to 24 hours before the visit.
-- Cleanings happen Monday to Saturday, 8am to 6pm. The phone is answered around the clock — this line is always open — but nobody is sent to a home outside those hours. If a caller asks whether we are open, the honest answer is that they have reached us and we can take everything down now; the visit itself gets scheduled inside those hours.
+- Cleanings happen Monday to Friday 8am to 6pm, and Saturday 9am to 4pm. The phone is answered around the clock — this line is always open — but nobody is sent to a home outside those hours. If a caller asks whether we are open, the honest answer is that they have reached us and we can take everything down now; the visit itself gets scheduled inside those hours.
 - We bring all supplies and equipment.
 - We invoice after the cleaning — no payment is taken at booking.
 - Residential homes only — no commercial or office cleaning.
@@ -62,6 +62,8 @@ ENDING THE CALL
 // Sunday off). The worker has no database, so this is a manual mirror like the
 // prices above. If the owner changes the working window in /admin/availability,
 // change it here too.
+// Weekday window. Saturday is shorter (09:00-16:00) — see availability_rules
+// and the main hours on the Business Profile; both agree.
 const WORK_START_HOUR = 8;
 const WORK_END_HOUR = 18;
 const WORK_DAYS = [1, 2, 3, 4, 5, 6]; // 0 = Sunday

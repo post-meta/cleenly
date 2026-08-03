@@ -190,15 +190,27 @@ export function generateLocalBusinessSchema(city: CityData, allCities?: CityData
         },
         "areaServed": served,
         "priceRange": "$$",
-        // When a visit can actually happen, mirrored from availability_rules
-        // (Mon-Sat 08:00-18:00). The 20:00 that used to sit here matched
-        // nothing. The phone is answered around the clock by the voice agent,
-        // but that is reachability, not a slot someone can book.
-        "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "opens": "08:00",
-            "closes": "18:00"
-        }
+        // When a visit can actually happen. Mirrored from availability_rules,
+        // which in turn matches the main hours on the Google Business Profile —
+        // Saturday really is shorter. The 08:00-20:00 seven-day block that used
+        // to sit here matched none of them.
+        //
+        // The phone is answered around the clock by the voice agent, and the
+        // profile states that separately under "online service hours". That is
+        // reachability, not a slot someone can book, so it does not belong here.
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "08:00",
+                "closes": "18:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Saturday"],
+                "opens": "09:00",
+                "closes": "16:00"
+            }
+        ]
     };
 }
