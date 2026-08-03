@@ -101,6 +101,8 @@ type BookingNotification = {
   addons?: string[];
   /** True when the availability resolver confirmed the visit without a human. */
   auto_confirmed?: boolean;
+  /** "voice" when the booking came in over the phone. */
+  utm_source?: string | null;
 };
 
 type ApplicationNotification = {
@@ -121,32 +123,52 @@ function fmtPrice(cents: number) {
   return `$${Math.round(cents / 100)}`;
 }
 
+/**
+ * Split "a, b c" into ["a","b","c"].
+ *
+ * Both ADMIN_TELEGRAM_CHAT_ID and ADMIN_EMAIL accept a list so a second person
+ * can be added by editing one environment variable, with no deploy and no code
+ * change. A single value still works exactly as before.
+ */
+function recipients(raw: string): string[] {
+  return raw
+    .split(/[,\s]+/)
+    .map((x) => x.trim())
+    .filter(Boolean);
+}
+
 async function sendTelegram(text: string) {
-  if (!TELEGRAM_BOT_TOKEN || !ADMIN_TELEGRAM_CHAT_ID) {
+  const chats = recipients(ADMIN_TELEGRAM_CHAT_ID);
+  if (!TELEGRAM_BOT_TOKEN || chats.length === 0) {
     console.warn("[notify] Telegram skipped: missing TELEGRAM_BOT_TOKEN or ADMIN_TELEGRAM_CHAT_ID");
     return;
   }
-  try {
-    const res = await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: ADMIN_TELEGRAM_CHAT_ID,
-          text,
-          parse_mode: "HTML",
-          disable_web_page_preview: true,
-        }),
+  // One recipient failing must not silence the others — a blocked bot on one
+  // account should never cost the owner a lead notification.
+  await Promise.allSettled(
+    chats.map(async (chat_id) => {
+      try {
+        const res = await fetch(
+          `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id,
+              text,
+              parse_mode: "HTML",
+              disable_web_page_preview: true,
+            }),
+          }
+        );
+        if (!res.ok) {
+          console.error("[notify] Telegram error:", chat_id, res.status, await res.text());
+        }
+      } catch (err) {
+        console.error("[notify] Telegram exception:", chat_id, err);
       }
-    );
-    if (!res.ok) {
-      const body = await res.text();
-      console.error("[notify] Telegram error:", res.status, body);
-    }
-  } catch (err) {
-    console.error("[notify] Telegram exception:", err);
-  }
+    })
+  );
 }
 
 async function sendAdminEmail(subject: string, html: string) {
@@ -158,7 +180,7 @@ async function sendAdminEmail(subject: string, html: string) {
     const resend = new Resend(RESEND_API_KEY);
     await resend.emails.send({
       from: "CLEENLY Leads <noreply@cleenly.app>",
-      to: ADMIN_EMAIL,
+      to: recipients(ADMIN_EMAIL),
       subject,
       html,
     });
@@ -181,11 +203,17 @@ export async function notifyNewBooking(b: BookingNotification) {
   const home = `${b.bedrooms} bd / ${b.bathrooms} ba${b.sqft_range ? ` / ${b.sqft_range} sqft` : ""}${b.condition ? ` / ${b.condition}` : ""}`;
   // Says whether the slot is already promised to the customer or still waiting
   // on a human. Everything below reads differently depending on this line.
-  const confirmation = b.auto_confirmed ? "AUTO-CONFIRMED" : "needs confirmation";
+  // Two people read these now, and the first line has to answer "do I need to
+  // do something?" without opening anything.
+  const confirmation = b.auto_confirmed
+    ? "✅ CONFIRMED — already on the calendar"
+    : "⏳ PRELIMINARY — needs someone to confirm the time";
+  const origin = b.utm_source === "voice" ? "📞 booked over the phone" : "🌐 booked on the site";
 
   const tg = [
     `<b>New booking — ${priceRange}</b>`,
     `<b>${confirmation}</b>`,
+    origin,
     ``,
     `<b>${b.name}</b>`,
     `📞 ${b.phone}`,
@@ -208,7 +236,8 @@ export async function notifyNewBooking(b: BookingNotification) {
   const emailHtml = `
     <div style="font-family: -apple-system, sans-serif; max-width: 600px;">
       <h2 style="margin: 0 0 4px;">New booking — ${priceRange}</h2>
-      <p style="margin: 0 0 16px;"><strong>${confirmation}</strong></p>
+      <p style="margin: 0 0 4px;"><strong>${confirmation}</strong></p>
+      <p style="margin: 0 0 16px; color:#6b7280;">${origin}</p>
       <p style="margin: 0 0 8px;"><strong>${b.name}</strong></p>
       <p style="margin: 0 0 4px;">📞 <a href="tel:${b.phone}">${b.phone}</a></p>
       <p style="margin: 0 0 16px;">✉️ <a href="mailto:${b.email}">${b.email}</a></p>

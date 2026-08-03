@@ -334,6 +334,7 @@ export async function POST(request: NextRequest) {
       special_requests: data.special_requests,
       addons: data.addons,
       auto_confirmed: confirmed,
+      utm_source: attribution.utm_source ?? null,
     };
     // Await both notifications before responding. On Vercel serverless the
     // function is frozen once the response is sent, so fire-and-forget sends
