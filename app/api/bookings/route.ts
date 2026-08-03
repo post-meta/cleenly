@@ -91,6 +91,32 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Invalid addons" }, { status: 400 });
       }
     }
+    // A date has to be a real, future date, whoever sent it.
+    //
+    // The first phone booking came in for 2025-01-03 — nineteen months in the
+    // past — because the voice agent was handed a spoken date and invented the
+    // ISO string to match. The agent was fixed, but the rule belongs here too:
+    // this route is the only thing every booking passes through, and nothing
+    // downstream can undo a visit scheduled into the past.
+    if (body.preferred_date) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(body.preferred_date)) {
+        return NextResponse.json({ error: "Invalid date format" }, { status: 400 });
+      }
+      const today = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date());
+      if (body.preferred_date < today) {
+        return NextResponse.json({ error: "That date has already passed" }, { status: 400 });
+      }
+      const [thisYear] = today.split("-").map(Number);
+      if (Number(body.preferred_date.slice(0, 4)) > thisYear + 1) {
+        return NextResponse.json({ error: "That date is too far ahead" }, { status: 400 });
+      }
+    }
+
     if (body.preferred_time !== undefined && body.preferred_time !== null && !isOneOf(body.preferred_time, VALID_TIME_SLOTS)) {
       return NextResponse.json({ error: "Invalid time slot" }, { status: 400 });
     }
