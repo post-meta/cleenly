@@ -74,6 +74,9 @@ export interface Booking {
 }
 
 export interface BookingFormData {
+  /** Set by server-to-server callers (the voice agent) that have no cookie. */
+  utm_source?: string;
+  utm_medium?: string;
   // Step 1
   service_type?: ServiceType;
   // Step 2

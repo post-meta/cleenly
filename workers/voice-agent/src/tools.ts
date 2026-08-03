@@ -1,5 +1,6 @@
 import type { Env, ToolDefinition } from "./types";
 import { sendTelegram } from "./telegram";
+import { checkAvailability, createBooking } from "./booking";
 
 export const TOOL_DEFINITIONS: ToolDefinition[] = [
   {
@@ -45,6 +46,52 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
   // blocked by A2P 10DLC vetting (error 30034); email (email_booking_link)
   // works but spoken emails transcribe poorly. Both implementations + their
   // runTool cases stay below; re-enable SMS as the primary once A2P verifies.
+  {
+    name: "check_availability",
+    description:
+      "Find out which days and time slots the crew can actually take for this job. " +
+      "Call this as soon as you know the service, bedrooms and bathrooms — before you promise any date. " +
+      "Never guess availability and never invent a date; this tool is the only source. " +
+      "Pass wanted_date only when the caller named a specific day.",
+    input_schema: {
+      type: "object",
+      properties: {
+        service_type: { type: "string", description: "One of: regular, deep, move_out, move_in." },
+        bedrooms: { type: "string", description: "One of: studio, 1, 2, 3, 4, 5+." },
+        bathrooms: { type: "string", description: "One of: 1, 1.5, 2, 2.5, 3, 3.5+." },
+        condition: { type: "string", description: "One of: clean, average, needs_work. Default average." },
+        sqft_range: { type: "string", description: "One of: under_800, 800_1200, 1200_1800, 1800_2500, 2500_3500, over_3500, not_sure." },
+        wanted_date: { type: "string", description: "YYYY-MM-DD, only if the caller asked for a specific day." },
+      },
+      required: ["service_type", "bedrooms", "bathrooms"],
+    },
+  },
+  {
+    name: "create_booking",
+    description:
+      "Place the booking. Only call this after check_availability returned the day you are booking, " +
+      "and after you have read the address and the email back to the caller and they confirmed both. " +
+      "Everything here is written to the real calendar and emails the customer, so never call it with a guess.",
+    input_schema: {
+      type: "object",
+      properties: {
+        name: { type: "string", description: "Caller's full name." },
+        phone: { type: "string", description: "Callback number — use the one from the call context unless they give another." },
+        email: { type: "string", description: "Email, confirmed by reading it back letter by letter." },
+        address: { type: "string", description: "Street address including unit, confirmed by reading it back." },
+        city: { type: "string", description: "City name, e.g. Tacoma." },
+        service_type: { type: "string", description: "One of: regular, deep, move_out, move_in." },
+        bedrooms: { type: "string", description: "One of: studio, 1, 2, 3, 4, 5+." },
+        bathrooms: { type: "string", description: "One of: 1, 1.5, 2, 2.5, 3, 3.5+." },
+        condition: { type: "string", description: "One of: clean, average, needs_work." },
+        sqft_range: { type: "string", description: "One of: under_800, 800_1200, 1200_1800, 1800_2500, 2500_3500, over_3500, not_sure." },
+        date: { type: "string", description: "YYYY-MM-DD, taken from check_availability." },
+        time_slot: { type: "string", description: "One of: morning, afternoon, full_day — taken from check_availability." },
+        notes: { type: "string", description: "Anything the caller asked for: pets, parking, entry instructions." },
+      },
+      required: ["name", "phone", "email", "address", "city", "service_type", "bedrooms", "bathrooms", "date", "time_slot"],
+    },
+  },
   {
     name: "end_call",
     description:
@@ -238,6 +285,40 @@ export async function runTool(
       case "email_booking_link": {
         const email = typeof input.email === "string" ? input.email : "";
         return { result: await sendBookingLinkEmail(env, email), isError: false };
+      }
+      case "check_availability": {
+        const job = {
+          service_type: String(input.service_type ?? ""),
+          bedrooms: String(input.bedrooms ?? ""),
+          bathrooms: String(input.bathrooms ?? ""),
+          condition: input.condition ? String(input.condition) : undefined,
+          sqft_range: input.sqft_range ? String(input.sqft_range) : undefined,
+        };
+        const wanted = typeof input.wanted_date === "string" ? input.wanted_date : undefined;
+        return { result: await checkAvailability(env, job, wanted), isError: false };
+      }
+      case "create_booking": {
+        const req = ["name", "phone", "email", "address", "city", "service_type", "bedrooms", "bathrooms", "date", "time_slot"];
+        const missing = req.filter((k) => !input[k] || String(input[k]).trim() === "");
+        if (missing.length) {
+          return {
+            result: `Still missing: ${missing.join(", ")}. Ask the caller for those before booking.`,
+            isError: true,
+          };
+        }
+        return {
+          result: await createBooking(env, {
+            name: String(input.name), phone: String(input.phone), email: String(input.email),
+            address: String(input.address), city: String(input.city),
+            service_type: String(input.service_type), bedrooms: String(input.bedrooms),
+            bathrooms: String(input.bathrooms),
+            condition: input.condition ? String(input.condition) : undefined,
+            sqft_range: input.sqft_range ? String(input.sqft_range) : undefined,
+            date: String(input.date), time_slot: String(input.time_slot),
+            notes: input.notes ? String(input.notes) : undefined,
+          }),
+          isError: false,
+        };
       }
       case "escalate": {
         const summary = typeof input.summary === "string" ? input.summary : "(no summary)";

@@ -207,8 +207,24 @@ export async function POST(request: NextRequest) {
     };
 
     // First-touch campaign attribution from the cleenly_attr cookie. Empty for
-    // direct, organic and phone-led bookings, which is most of them.
-    const attribution = readAttribution(request);
+    // direct and organic bookings, which is most of them.
+    //
+    // A phone booking has no cookie — the voice agent posts here server to
+    // server — so it names its own source in the body. The cookie still wins
+    // when both are present. This is forgeable, and that is fine for the same
+    // reason the cookie is: these columns only ever label a marketing report.
+    const cookieAttribution = readAttribution(request);
+    const attribution =
+      Object.keys(cookieAttribution).length > 0
+        ? cookieAttribution
+        : {
+            ...(typeof body.utm_source === "string" && body.utm_source
+              ? { utm_source: body.utm_source.slice(0, 200) }
+              : {}),
+            ...(typeof body.utm_medium === "string" && body.utm_medium
+              ? { utm_medium: body.utm_medium.slice(0, 200) }
+              : {}),
+          };
 
     let { data, error } = await supabase
       .from("bookings")
