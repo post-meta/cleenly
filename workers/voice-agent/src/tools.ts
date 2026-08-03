@@ -1,6 +1,7 @@
 import type { Env, ToolDefinition } from "./types";
 import { sendTelegram } from "./telegram";
 import { checkAvailability, createBooking } from "./booking";
+import { readCallerText } from "./inbound";
 
 export const TOOL_DEFINITIONS: ToolDefinition[] = [
   {
@@ -90,6 +91,23 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
         notes: { type: "string", description: "Anything the caller asked for: pets, parking, entry instructions." },
       },
       required: ["name", "phone", "email", "address", "city", "service_type", "bedrooms", "bathrooms", "date", "time_slot"],
+    },
+  },
+  {
+    name: "read_caller_text",
+    description:
+      "Read a text the caller just sent to this same number. Use it whenever a detail is hard to catch — " +
+      "the street name, the email, an unusual surname. Ask them to text it, wait for them to say they have sent it, " +
+      "then call this. What it returns is more reliable than anything you heard, so prefer it over your own transcription.",
+    input_schema: {
+      type: "object",
+      properties: {
+        phone: {
+          type: "string",
+          description: "The caller's number from the call context.",
+        },
+      },
+      required: ["phone"],
     },
   },
   {
@@ -319,6 +337,10 @@ export async function runTool(
           }),
           isError: false,
         };
+      }
+      case "read_caller_text": {
+        const phone = typeof input.phone === "string" ? input.phone : "";
+        return { result: await readCallerText(env, phone), isError: false };
       }
       case "escalate": {
         const summary = typeof input.summary === "string" ? input.summary : "(no summary)";

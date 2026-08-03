@@ -1,6 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { syncAllFeeds } from "@/lib/availability/sync";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 // Vercel Cron hits this every 15 minutes (see vercel.json). Nothing about the
 // response may be cached — a cached "ok" would hide a feed that stopped.
@@ -32,7 +33,19 @@ export async function GET(request: NextRequest) {
   // Past this point the answer is always 200 with a per-feed verdict: a broken
   // feed is a fact to read, not an error to retry blindly.
   try {
-    const feeds = await syncAllFeeds();
+    const feeds = await syncAllFeeds()
+
+  // Inbound texts are working memory for a call in progress — they hold the
+  // addresses and emails customers typed instead of spelling. Keeping them is
+  // a liability with no upside, so they live for a day and then go.
+  try {
+    const supabase = createAdminClient();
+    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const { error } = await supabase.from("inbound_sms").delete().lt("received_at", cutoff);
+    if (error) console.warn("[cron] inbound_sms prune failed:", error.message);
+  } catch (err) {
+    console.warn("[cron] inbound_sms prune error:", err);
+  };
     return NextResponse.json({
       ok: feeds.every((f) => f.ok),
       feeds,

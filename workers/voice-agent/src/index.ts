@@ -12,6 +12,7 @@
  */
 import { handleRelayUpgrade } from "./relay";
 import { sendTelegram } from "./telegram";
+import { storeInboundSms } from "./inbound";
 import {
   connectRelayTwiml,
   fallbackTwiml,
@@ -126,6 +127,13 @@ async function handleSms(
   const from = params.From ?? "unknown";
   const body = (params.Body ?? "").trim();
   ctx.waitUntil(sendTelegram(env, `💬 SMS на номер Cleenly\nОт: ${from}\n———\n${body || "(пусто)"}`));
+
+  // Also stash it, so a caller who is mid-conversation can type the thing the
+  // line keeps mangling — a street name, an email — and the agent can read it
+  // back correctly instead of guessing at a spelling.
+  if (body) {
+    ctx.waitUntil(storeInboundSms(env, from, body, params.MessageSid ?? params.SmsSid));
+  }
 
   // Empty TwiML — no auto-reply; Eugene answers from his phone if needed.
   return twimlResponse("");
