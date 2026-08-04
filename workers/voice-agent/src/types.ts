@@ -20,6 +20,8 @@ export interface Env {
   RESEND_API_KEY: string;
   /** xAI key for the Grok speech-to-speech socket. */
   XAI_API_KEY: string;
+  /** Voice name from the xAI roster. Changeable without a deploy. */
+  GROK_VOICE?: string;
 }
 
 // ---------------------------------------------------------------------------

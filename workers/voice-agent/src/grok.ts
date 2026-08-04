@@ -49,7 +49,10 @@ function sessionUpdate(env: Env, from: string | undefined) {
     type: "session.update",
     session: {
       instructions: VOICE_SYSTEM_PROMPT + callerContext(from),
-      voice: "eve",
+      // Configurable without a deploy: the roster is 26 voices, none of them
+      // documented, and the only way to judge one is to ring the number. "eve"
+      // turned out markedly British for a Tacoma cleaning company.
+      voice: env.GROK_VOICE || "Ara",
       // Off by default in this API — without it the model never learns that the
       // caller has stopped talking and simply waits.
       turn_detection: {
@@ -80,6 +83,9 @@ export function bridgeCall(env: Env, request: Request): Response {
   let grok: WebSocket | null = null;
   let streamSid = "";
   let from: string | undefined;
+  // Dates this call has already been offered. Lets create_booking skip its own
+  // availability round trip for a date the caller heard from us.
+  const offeredDates = new Set<string>();
   // Queued because Twilio's first media frames can beat the Grok handshake.
   const pending: string[] = [];
   let grokReady = false;
@@ -174,8 +180,14 @@ export function bridgeCall(env: Env, request: Request): Response {
             setTimeout(() => twilio.close(1000, "agent ended call"), 3000);
             return;
           }
-          runTool(env, name, args)
+          runTool(env, name, args, offeredDates)
             .then(({ result }) => {
+              // Remember what we offered, so the booking call can trust it.
+              if (name === "check_availability") {
+                for (const m of result.matchAll(/\[date=(\d{4}-\d{2}-\d{2})\]/g)) {
+                  offeredDates.add(m[1]);
+                }
+              }
               ws.send(
                 JSON.stringify({
                   type: "conversation.item.create",

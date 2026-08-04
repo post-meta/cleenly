@@ -147,7 +147,12 @@ export interface BookingArgs extends JobArgs {
  * registered against; a verbal yes on a phone call is not that same evidence.
  * The customer still gets the confirmation email. Revisit only with the owner.
  */
-export async function createBooking(_env: Env, a: BookingArgs): Promise<string> {
+export async function createBooking(
+  _env: Env,
+  a: BookingArgs,
+  /** True when check_availability already offered this date earlier in the call. */
+  dateAlreadyOffered = false
+): Promise<string> {
   // Re-check the date against the calendar before writing.
   //
   // A model that has been handed a spoken date ("Monday the 4th") will happily
@@ -158,7 +163,10 @@ export async function createBooking(_env: Env, a: BookingArgs): Promise<string> 
   if (!/^\d{4}-\d{2}-\d{2}$/.test(a.date)) {
     return "That date is not in YYYY-MM-DD form. Call check_availability again and use the bracketed value it returns.";
   }
-  try {
+  // Skipped when the caller picked a date this tool already offered. The guard
+  // is a full HTTP round trip, and on a phone call it was 1.8 seconds of the
+  // 3.6 the caller spent listening to nothing.
+  if (!dateAlreadyOffered) try {
     const res = await post(`${SITE}/api/availability`, {
       serviceType: a.service_type,
       bedrooms: a.bedrooms,

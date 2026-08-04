@@ -289,6 +289,8 @@ export async function runTool(
   env: Env,
   name: string,
   input: Record<string, unknown>,
+  /** Dates check_availability already offered on this call, if any. */
+  offeredDates?: Set<string>,
 ): Promise<{ result: string; isError: boolean }> {
   try {
     switch (name) {
@@ -334,7 +336,7 @@ export async function runTool(
             sqft_range: input.sqft_range ? String(input.sqft_range) : undefined,
             date: String(input.date), time_slot: String(input.time_slot),
             notes: input.notes ? String(input.notes) : undefined,
-          }),
+          }, offeredDates?.has(String(input.date)) ?? false),
           isError: false,
         };
       }
