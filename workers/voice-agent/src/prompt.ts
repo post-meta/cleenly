@@ -85,9 +85,9 @@ ENDING THE CALL
 // change it here too.
 // Weekday window. Saturday is shorter (09:00-16:00) — see availability_rules
 // and the main hours on the Business Profile; both agree.
-const WORK_START_HOUR = 8;
-const WORK_END_HOUR = 18;
-const WORK_DAYS = [1, 2, 3, 4, 5, 6]; // 0 = Sunday
+export const WORK_START_HOUR = 8;
+export const WORK_END_HOUR = 18;
+export const WORK_DAYS = [1, 2, 3, 4, 5, 6]; // 0 = Sunday
 
 /**
  * Seattle wall-clock for the moment the call is happening.
@@ -96,7 +96,7 @@ const WORK_DAYS = [1, 2, 3, 4, 5, 6]; // 0 = Sunday
  * actually reachable. Without this it told a caller at 3am that Eugene would
  * ring back "shortly".
  */
-function seattleNow(at: Date): { label: string; iso: string; weekday: number; hour: number } {
+export function seattleNow(at: Date): { label: string; iso: string; weekday: number; hour: number } {
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat("en-US", {
       timeZone: "America/Los_Angeles",

@@ -151,7 +151,9 @@ export async function createBooking(
   _env: Env,
   a: BookingArgs,
   /** True when check_availability already offered this date earlier in the call. */
-  dateAlreadyOffered = false
+  dateAlreadyOffered = false,
+  /** Which channel the booking came through — becomes utm_source on the row. */
+  channel: "voice" | "sms" = "voice"
 ): Promise<string> {
   // Re-check the date against the calendar before writing.
   //
@@ -199,12 +201,12 @@ export async function createBooking(
     sqft_range: a.sqft_range ?? "not_sure",
     preferred_date: a.date,
     preferred_time: a.time_slot,
-    special_requests: a.notes ?? "Booked over the phone.",
+    special_requests: a.notes ?? (channel === "sms" ? "Booked over text." : "Booked over the phone."),
     sms_opt_in: false,
     marketing_sms_opt_in: false,
-    // Marks the call as the origin so phone bookings can be told apart in the
-    // booking_attribution view. There is no cookie on a server-to-server call.
-    utm_source: "voice",
+    // Marks the channel as the origin so phone/text bookings can be told apart
+    // in the booking_attribution view. No cookie on a server-to-server call.
+    utm_source: channel,
     utm_medium: "phone",
   };
 

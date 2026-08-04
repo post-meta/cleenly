@@ -273,15 +273,21 @@ async function sendBookingLinkEmail(env: Env, emailRaw: string): Promise<string>
   return `Booking link emailed to ${email}. Tell the caller: I just emailed you the link — check your inbox, and your spam folder, for a message from Cleenly.`;
 }
 
-async function escalate(env: Env, summary: string, callbackNumber: string): Promise<string> {
-  const ok = await sendTelegram(
-    env,
-    `📞 Эскалация со звонка: ${summary}\nПерезвонить: ${callbackNumber}`,
-  );
+async function escalate(
+  env: Env,
+  summary: string,
+  callbackNumber: string,
+  channel: "voice" | "sms",
+): Promise<string> {
+  const header =
+    channel === "sms"
+      ? `💬 Эскалация из SMS-переписки: ${summary}\nОтветить: ${callbackNumber}`
+      : `📞 Эскалация со звонка: ${summary}\nПерезвонить: ${callbackNumber}`;
+  const ok = await sendTelegram(env, header);
   if (!ok) {
-    return "Could not reach Eugene automatically. Tell the caller to text this number or email hello@cleenly.app and someone will respond shortly.";
+    return "Could not reach Eugene automatically. Tell the customer to email hello@cleenly.app and someone will respond shortly.";
   }
-  return "Eugene has been notified. Tell the caller: Eugene will call you back shortly.";
+  return "Eugene has been notified. Tell the customer Eugene will follow up shortly (adjust for working hours per the context).";
 }
 
 /** Execute a tool call; always returns a string for the tool_result block. */
@@ -291,6 +297,8 @@ export async function runTool(
   input: Record<string, unknown>,
   /** Dates check_availability already offered on this call, if any. */
   offeredDates?: Set<string>,
+  /** Which channel is talking — bookings and escalations are tagged with it. */
+  channel: "voice" | "sms" = "voice",
 ): Promise<{ result: string; isError: boolean }> {
   try {
     switch (name) {
@@ -336,7 +344,7 @@ export async function runTool(
             sqft_range: input.sqft_range ? String(input.sqft_range) : undefined,
             date: String(input.date), time_slot: String(input.time_slot),
             notes: input.notes ? String(input.notes) : undefined,
-          }, offeredDates?.has(String(input.date)) ?? false),
+          }, offeredDates?.has(String(input.date)) ?? false, channel),
           isError: false,
         };
       }
@@ -348,7 +356,7 @@ export async function runTool(
         const summary = typeof input.summary === "string" ? input.summary : "(no summary)";
         const callback =
           typeof input.callback_number === "string" ? input.callback_number : "(unknown)";
-        return { result: await escalate(env, summary, callback), isError: false };
+        return { result: await escalate(env, summary, callback, channel), isError: false };
       }
       case "end_call":
         // Handled by the relay session (it hangs up); this is a defensive

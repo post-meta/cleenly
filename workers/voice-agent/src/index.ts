@@ -6,13 +6,16 @@
  *                       (?fallback=1 → spoken apology; bind as the number's Voice fallback URL)
  *   GET  /relay         ConversationRelay WebSocket (one socket per call)
  *   POST /connect-done  <Connect action> callback when the relay session ends
- *   POST /sms           Inbound SMS webhook → forward to Eugene in Telegram
+ *   POST /sms           Inbound SMS webhook → SMS agent replies via Messaging
+ *                       Service (async); every text is also mirrored to Telegram
+ *                       and stashed for the voice agent's read_caller_text.
  *   GET  /ringback.wav  Ringback tone played by <Play> before the greeting
  *   GET  /health        Plain 200 for monitoring
  */
 import { handleRelayUpgrade } from "./relay";
 import { sendTelegram } from "./telegram";
 import { storeInboundSms } from "./inbound";
+import { hasActiveCall, runSmsAgent } from "./sms-agent";
 import { bridgeCall } from "./grok";
 import {
   connectRelayTwiml,
@@ -135,16 +138,30 @@ async function handleSms(
   // anything that lands here is a real message: forward it to Eugene.
   const from = params.From ?? "unknown";
   const body = (params.Body ?? "").trim();
+  const sid = params.MessageSid ?? params.SmsSid;
   ctx.waitUntil(sendTelegram(env, `💬 SMS на номер Cleenly\nОт: ${from}\n———\n${body || "(пусто)"}`));
 
   // Also stash it, so a caller who is mid-conversation can type the thing the
   // line keeps mangling — a street name, an email — and the agent can read it
   // back correctly instead of guessing at a spelling.
   if (body) {
-    ctx.waitUntil(storeInboundSms(env, from, body, params.MessageSid ?? params.SmsSid));
+    ctx.waitUntil(storeInboundSms(env, from, body, sid));
   }
 
-  // Empty TwiML — no auto-reply; Eugene answers from his phone if needed.
+  // SMS agent answers asynchronously through the Messaging Service — unless
+  // this number is mid-phone-call with us right now, in which case the text is
+  // a street name or an email for the voice agent, not a new conversation.
+  if (body && from !== "unknown") {
+    ctx.waitUntil(
+      (async () => {
+        if (await hasActiveCall(env, from)) return;
+        await runSmsAgent(env, from, body, sid);
+      })(),
+    );
+  }
+
+  // Empty TwiML — the reply (if any) goes out via the REST API instead, which
+  // frees the agent loop from the webhook timeout.
   return twimlResponse("");
 }
 

@@ -1,7 +1,8 @@
 /**
- * Twilio helpers: X-Twilio-Signature validation + TwiML builders.
+ * Twilio helpers: X-Twilio-Signature validation, outbound SMS, TwiML builders.
  * Raw WebCrypto — no dependencies.
  */
+import type { Env } from "./types";
 
 /**
  * Validate X-Twilio-Signature for an application/x-www-form-urlencoded POST.
@@ -57,6 +58,38 @@ export async function readFormParams(request: Request): Promise<Record<string, s
     if (typeof value === "string") params[key] = value;
   }
   return params;
+}
+
+/**
+ * Send one SMS through the Messaging Service (the A2P-registered sender).
+ * Returns false instead of throwing — a failed send is reported to Telegram by
+ * the caller, never allowed to crash a webhook.
+ */
+export async function sendSms(env: Env, to: string, body: string): Promise<boolean> {
+  const url = `https://api.twilio.com/2010-04-01/Accounts/${env.TWILIO_ACCOUNT_SID}/Messages.json`;
+  const auth = btoa(`${env.TWILIO_ACCOUNT_SID}:${env.TWILIO_AUTH_TOKEN}`);
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${auth}`,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        To: to,
+        MessagingServiceSid: env.TWILIO_MESSAGING_SERVICE_SID,
+        Body: body,
+      }),
+    });
+    if (!res.ok) {
+      console.error("sendSms failed:", res.status, await res.text().catch(() => ""));
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("sendSms error:", err);
+    return false;
+  }
 }
 
 // ---------------------------------------------------------------------------
