@@ -13,6 +13,7 @@
 import { handleRelayUpgrade } from "./relay";
 import { sendTelegram } from "./telegram";
 import { storeInboundSms } from "./inbound";
+import { bridgeCall } from "./grok";
 import {
   connectRelayTwiml,
   fallbackTwiml,
@@ -20,6 +21,7 @@ import {
   ringbackResponse,
   twimlResponse,
   validateTwilioSignature,
+  escapeXml,
 } from "./twilio";
 import type { Env } from "./types";
 
@@ -32,6 +34,13 @@ export default {
         return handleVoice(request, env, ctx, url);
       case "/relay":
         return handleRelayUpgrade(request, env, ctx);
+      // Grok speech-to-speech, running alongside ConversationRelay. Which one
+      // answers is decided by the Voice URL on the Twilio number, so switching
+      // back is a field in a console rather than a deploy.
+      case "/voice-grok":
+        return handleVoiceGrok(request, env, url);
+      case "/stream-grok":
+        return handleStreamGrok(request, env);
       case "/connect-done":
         return handleConnectDone(request, env, ctx, url);
       case "/sms":
@@ -137,4 +146,35 @@ async function handleSms(
 
   // Empty TwiML — no auto-reply; Eugene answers from his phone if needed.
   return twimlResponse("");
+}
+
+/** TwiML that hands the raw call audio to the Grok bridge. */
+async function handleVoiceGrok(request: Request, env: Env, url: URL): Promise<Response> {
+  const params = await verifiedParams(request, env, url);
+  if (!params) return new Response("Forbidden", { status: 403 });
+
+  const wsUrl = `wss://${url.host}/stream-grok`;
+  // The caller's number is passed as a Stream parameter — a media stream
+  // carries audio and nothing else, so anything the agent needs to know about
+  // who is calling has to be declared here.
+  const from = params.From ?? "";
+  return twimlResponse(
+    `<Connect>` +
+      `<Stream url="${escapeXml(wsUrl)}">` +
+      `<Parameter name="from" value="${escapeXml(from)}" />` +
+      `</Stream>` +
+      `</Connect>`,
+  );
+}
+
+/** Twilio opens the media stream here. */
+function handleStreamGrok(request: Request, env: Env): Response {
+  if (request.headers.get("Upgrade") !== "websocket") {
+    return new Response("Expected websocket", { status: 426 });
+  }
+  if (!env.XAI_API_KEY) {
+    console.error("/stream-grok: XAI_API_KEY is not set");
+    return new Response("Not configured", { status: 503 });
+  }
+  return bridgeCall(env, request);
 }
