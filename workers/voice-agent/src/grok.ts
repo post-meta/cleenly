@@ -20,7 +20,10 @@ import type { Env } from "./types";
 import { TOOL_DEFINITIONS, runTool } from "./tools";
 import { VOICE_SYSTEM_PROMPT, callerContext } from "./prompt";
 
-const GROK_WS = "wss://api.x.ai/v1/realtime?model=grok-voice-think-fast-2.0";
+// https, not wss: a Worker opens an outbound socket through fetch(), and
+// fetch() only speaks http(s). The Upgrade header is what makes it a
+// WebSocket; a wss:// URL here is simply rejected before it leaves.
+const GROK_WS = "https://api.x.ai/v1/realtime?model=grok-voice-think-fast-2.0";
 
 /** Said before the model gets a turn, so the caller never hears dead air. */
 const GREETING = "Cleenly, this is the front desk. How can I help?";
@@ -96,10 +99,16 @@ export function bridgeCall(env: Env, request: Request): Response {
     });
     const ws = res.webSocket;
     if (!ws) {
-      console.error("grok upgrade failed", res.status, await res.text().catch(() => ""));
+      console.error(
+        "grok upgrade failed",
+        res.status,
+        JSON.stringify(Object.fromEntries(res.headers)),
+        (await res.text().catch(() => "")).slice(0, 300)
+      );
       twilio.close(1011, "upstream");
       return;
     }
+    console.log("grok upgraded", res.status);
     ws.accept();
     grok = ws;
 
@@ -218,8 +227,9 @@ export function bridgeCall(env: Env, request: Request): Response {
         const s = m.start as TwilioStart;
         streamSid = s.streamSid;
         from = s.customParameters?.from;
+        console.log("twilio start", streamSid, from ?? "(no from)");
         openGrok().catch((err) => {
-          console.error("grok open failed", err);
+          console.error("grok open failed", String(err));
           twilio.close(1011, "upstream");
         });
         break;
