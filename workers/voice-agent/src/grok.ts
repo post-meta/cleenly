@@ -16,9 +16,10 @@
  * not a deploy.
  */
 
-import type { Env } from "./types";
+import type { Env, TranscriptEntry } from "./types";
 import { TOOL_DEFINITIONS, runTool } from "./tools";
 import { VOICE_SYSTEM_PROMPT, callerContext } from "./prompt";
+import { sendTelegram } from "./telegram";
 
 // https, not wss: a Worker opens an outbound socket through fetch(), and
 // fetch() only speaks http(s). The Upgrade header is what makes it a
@@ -75,7 +76,7 @@ function sessionUpdate(env: Env, from: string | undefined) {
  *
  * Returns the client half of the WebSocket pair for Twilio to hold.
  */
-export function bridgeCall(env: Env, request: Request): Response {
+export function bridgeCall(env: Env, request: Request, ctx: ExecutionContext): Response {
   const pair = new WebSocketPair();
   const twilio = pair[1];
   twilio.accept();
@@ -86,6 +87,31 @@ export function bridgeCall(env: Env, request: Request): Response {
   // Dates this call has already been offered. Lets create_booking skip its own
   // availability round trip for a date the caller heard from us.
   const offeredDates = new Set<string>();
+  // Everything worth reporting after the call. Transcript events are captured
+  // when the API emits them; tool calls are logged always, so even a call with
+  // no transcript still reports what actually happened (booking, escalation).
+  const transcript: TranscriptEntry[] = [];
+  const startedAt = Date.now();
+  let summarySent = false;
+
+  const sendSummary = () => {
+    if (summarySent) return;
+    summarySent = true;
+    const durationSec = Math.round((Date.now() - startedAt) / 1000);
+    const lines = transcript.map((e) => {
+      const label = e.role === "caller" ? "Caller" : e.role === "agent" ? "Agent" : "·";
+      return `${label}: ${e.text}`;
+    });
+    ctx.waitUntil(
+      sendTelegram(
+        env,
+        `📞 Звонок завершён (Grok)\n` +
+          `От: ${from ?? "unknown"}\n` +
+          `Длительность: ~${durationSec}s\n———\n` +
+          (lines.length > 0 ? lines.join("\n") : "(транскрипт недоступен — звонок без распознанных реплик и инструментов)"),
+      ),
+    );
+  };
   // Queued because Twilio's first media frames can beat the Grok handshake.
   const pending: string[] = [];
   let grokReady = false;
@@ -156,6 +182,22 @@ export function bridgeCall(env: Env, request: Request): Response {
           }
           break;
 
+        // Text mirrors of the audio, for the after-call report. Both spellings
+        // are listened for — the realtime event names differ between API
+        // generations, and an unrecognized name just means no transcript line.
+        case "response.output_audio_transcript.done":
+        case "response.audio_transcript.done":
+          if (typeof e.transcript === "string" && e.transcript.trim()) {
+            transcript.push({ role: "agent", text: e.transcript.trim() });
+          }
+          break;
+        case "conversation.item.input_audio_transcription.completed":
+        case "conversation.item.audio_transcription.completed":
+          if (typeof e.transcript === "string" && e.transcript.trim()) {
+            transcript.push({ role: "caller", text: e.transcript.trim() });
+          }
+          break;
+
         // The caller started talking over the agent. Twilio has already been
         // handed audio it has not played yet; without clearing it the agent
         // keeps talking for seconds after being interrupted.
@@ -177,11 +219,13 @@ export function bridgeCall(env: Env, request: Request): Response {
           }
           // Hanging up is the session's business, not a tool's.
           if (name === "end_call") {
+            transcript.push({ role: "system", text: `[call ended by agent: ${String(args.reason ?? "?")}]` });
             setTimeout(() => twilio.close(1000, "agent ended call"), 3000);
             return;
           }
           runTool(env, name, args, offeredDates)
             .then(({ result }) => {
+              transcript.push({ role: "system", text: `[tool ${name} → ${result.slice(0, 300)}]` });
               // Remember what we offered, so the booking call can trust it.
               if (name === "check_availability") {
                 for (const m of result.matchAll(/\[date=(\d{4}-\d{2}-\d{2})\]/g)) {
@@ -257,7 +301,10 @@ export function bridgeCall(env: Env, request: Request): Response {
     }
   });
 
-  twilio.addEventListener("close", () => grok?.close(1000, "twilio closed"));
+  twilio.addEventListener("close", () => {
+    grok?.close(1000, "twilio closed");
+    sendSummary();
+  });
 
   return new Response(null, { status: 101, webSocket: pair[0] });
 }

@@ -42,10 +42,11 @@ const FALLBACK_REPLY =
   "Thanks for your message! We'll get back to you shortly. — Cleenly";
 
 // The text channel drops the voice-only tools: read_caller_text is meaningless
-// (the customer is already typing into this conversation) and end_call has no
-// line to hang up — the agent simply stops replying.
+// (the customer is already typing into this conversation), end_call has no
+// line to hang up, and send_booking_link would send a second SMS when the
+// agent can simply paste the link into its reply.
 const SMS_TOOLS = TOOL_DEFINITIONS.filter(
-  (t) => t.name !== "read_caller_text" && t.name !== "end_call",
+  (t) => t.name !== "read_caller_text" && t.name !== "end_call" && t.name !== "send_booking_link",
 );
 
 interface ThreadRow {

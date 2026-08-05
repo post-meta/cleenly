@@ -43,7 +43,7 @@ export default {
       case "/voice-grok":
         return handleVoiceGrok(request, env, url);
       case "/stream-grok":
-        return handleStreamGrok(request, env);
+        return handleStreamGrok(request, env, ctx);
       case "/connect-done":
         return handleConnectDone(request, env, ctx, url);
       case "/sms":
@@ -185,7 +185,7 @@ async function handleVoiceGrok(request: Request, env: Env, url: URL): Promise<Re
 }
 
 /** Twilio opens the media stream here. */
-function handleStreamGrok(request: Request, env: Env): Response {
+function handleStreamGrok(request: Request, env: Env, ctx: ExecutionContext): Response {
   if (request.headers.get("Upgrade") !== "websocket") {
     return new Response("Expected websocket", { status: 426 });
   }
@@ -193,5 +193,5 @@ function handleStreamGrok(request: Request, env: Env): Response {
     console.error("/stream-grok: XAI_API_KEY is not set");
     return new Response("Not configured", { status: 503 });
   }
-  return bridgeCall(env, request);
+  return bridgeCall(env, request, ctx);
 }

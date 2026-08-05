@@ -42,11 +42,27 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
       required: ["summary", "callback_number"],
     },
   },
-  // Booking-link delivery is DORMANT — the agent reads the URL aloud to new
-  // callers (product decision: wait for SMS). SMS (send_booking_link) is
-  // blocked by A2P 10DLC vetting (error 30034); email (email_booking_link)
-  // works but spoken emails transcribe poorly. Both implementations + their
-  // runTool cases stay below; re-enable SMS as the primary once A2P verifies.
+  // send_booking_link re-enabled 2026-08-04: the A2P campaign verified on
+  // 07-27, so the 30034 block is history. email_booking_link stays dormant —
+  // spoken emails transcribe poorly; its implementation and runTool case
+  // remain below.
+  {
+    name: "send_booking_link",
+    description:
+      "Text the caller a link to see their estimate and book on the site. " +
+      "Use it when a link serves the caller better than more talking — they want to browse prices quietly, " +
+      "book later, or show it to someone. Confirm which number to text first; it is usually the one they are calling from.",
+    input_schema: {
+      type: "object",
+      properties: {
+        phone: {
+          type: "string",
+          description: "Number to text — usually the caller's own number from the call context.",
+        },
+      },
+      required: ["phone"],
+    },
+  },
   {
     name: "check_availability",
     description:
@@ -198,8 +214,11 @@ async function lookupBooking(env: Env, phoneRaw: string): Promise<string> {
 }
 
 const BOOKING_URL = "https://cleenly.app/book";
+// The texted link carries voice attribution: it exists because of a phone call,
+// and if the booking happens through it, the call should get the credit.
+const BOOKING_LINK_UTM = `${BOOKING_URL}?utm_source=voice&utm_medium=phone`;
 const BOOKING_SMS_BODY =
-  `CLEENLY: Here's your link to see your cleaning estimate and pick a time — ${BOOKING_URL}. ` +
+  `CLEENLY: Here's your link to see your cleaning estimate and pick a time — ${BOOKING_LINK_UTM} ` +
   `Questions? Just reply. Reply STOP to opt out.`;
 
 /** Text the caller the booking link via the Twilio Messaging Service. */
